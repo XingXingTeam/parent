@@ -142,6 +142,7 @@
      {
          NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
 //         NSLog(@"===============responseObject===========%@==========%ld",dict,(long)page);
+         NSLog(@"测试代码");
          
          if([[NSString stringWithFormat:@"%@",dict[@"code"]] isEqualToString:@"1"] ){
              //头视图信息
