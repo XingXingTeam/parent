@@ -58,6 +58,9 @@
 #import "APOpenAPIObject.h"
 #import "FirstLaunchViewController.h"
 
+#import "XXETabBarViewController.h"
+#import "XXEUserInfo.h"
+
 #import"PayMannerViewController.h"
 @interface AppDelegate ()
 
@@ -73,11 +76,16 @@
     BOOL isNotFirstLauch = [[NSUserDefaults standardUserDefaults] boolForKey:kAppFirstLoadKey];
     if (isNotFirstLauch) {
         
-        LandingpageViewController *login=[[LandingpageViewController alloc]init];
-        //ceshi        
-        UINavigationController *navi=[[UINavigationController alloc]initWithRootViewController:login];
-        self.window.rootViewController=navi;
-        
+        if ([XXEUserInfo user].login) {
+            // 设置窗口的根控制器
+            self.window.rootViewController = [[XXETabBarViewController alloc] init];
+        }else {
+            
+            LandingpageViewController *login=[[LandingpageViewController alloc]init];
+            self.window.rootViewController = login;
+            
+        }
+ 
     }
     else{
         isNotFirstLauch = !isNotFirstLauch;

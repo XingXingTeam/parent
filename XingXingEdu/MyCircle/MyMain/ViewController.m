@@ -57,9 +57,6 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self downLoadData:1 isLoadMore:NO];
-    
     self.tabBarItem.badgeValue = nil;
     self.navigationController.navigationBarHidden =NO;
 }
@@ -68,6 +65,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self downLoadData:1 isLoadMore:NO];
     _pageNumber = 1;
 }
 
@@ -141,8 +139,7 @@
     [mgr POST:urlStr parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-//         NSLog(@"===============responseObject===========%@==========%ld",dict,(long)page);
-         NSLog(@"测试代码");
+         NSLog(@"%@",dict);
          
          if([[NSString stringWithFormat:@"%@",dict[@"code"]] isEqualToString:@"1"] ){
              //头视图信息
@@ -177,6 +174,8 @@
              //朋友圈信息 添加数据 待完善
              _listArr = dict[@"data"][@"list"];
              
+             
+             
              if (_listArr.count > 0) {
                  for (int i=0; i<_listArr.count; i++) {
                      //时间
@@ -204,6 +203,8 @@
                      [_goodArr addObject:[_listArr[i] objectForKey:@"good"]];
                      //评论信息
                      [_comment_group addObject:[_listArr[i] objectForKey:@"comment_group"]];
+
+                     NSLog(@"_comment_group评论的信息 :%@",_comment_group);
                  }
              }
          }else{

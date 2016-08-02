@@ -148,7 +148,6 @@
 		044412DA1D38F95500314884 /* WZYSearchSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044412D91D38F95500314884 /* WZYSearchSchoolViewController.m */; };
 		044412DD1D38FD1800314884 /* ClassTelephoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044412DC1D38FD1800314884 /* ClassTelephoneViewController.m */; };
 		044412E31D39004A00314884 /* WZYHistoryClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044412E21D39004A00314884 /* WZYHistoryClassesViewController.m */; };
-		044699F81D40D81B0067615D /* LandingpageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044699F71D40D81B0067615D /* LandingpageViewController.m */; };
 		04469A541D40DE9C0067615D /* MMDrawerBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 04469A121D40DE9B0067615D /* MMDrawerBarButtonItem.m */; };
 		04469A551D40DE9C0067615D /* MMDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04469A151D40DE9B0067615D /* MMDrawerController.m */; };
 		04469A561D40DE9C0067615D /* MMDrawerVisualState.m in Sources */ = {isa = PBXBuildFile; fileRef = 04469A171D40DE9B0067615D /* MMDrawerVisualState.m */; };
@@ -1614,6 +1613,10 @@
 		9E0546381C48D57200950C23 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0546371C48D57200950C23 /* AddressBook.framework */; };
 		9E05463A1C48D57A00950C23 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0546391C48D57A00950C23 /* AddressBookUI.framework */; };
 		9E2966661CC4914700580776 /* NetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2966651CC4914700580776 /* NetManager.m */; };
+		9E4813721D50439600C614AC /* XXEUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E48136E1D50439600C614AC /* XXEUserInfo.m */; };
+		9E4813731D50439600C614AC /* YTKKeyValueStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E48136F1D50439600C614AC /* YTKKeyValueStore.m */; };
+		9E4813751D5043F500C614AC /* LandingpageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4813741D5043F500C614AC /* LandingpageViewController.m */; };
+		9E4813E61D50A17500C614AC /* XXETabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4813E51D50A17500C614AC /* XXETabBarViewController.m */; };
 		9E9D80861CB5F500004B3DFC /* jpush-ios-2.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9D80841CB5F500004B3DFC /* jpush-ios-2.1.0.a */; };
 		9E9D80881CB5F53B004B3DFC /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9D80871CB5F53B004B3DFC /* CFNetwork.framework */; };
 		9E9D808A1CB5F567004B3DFC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9D80891CB5F567004B3DFC /* CoreTelephony.framework */; };
@@ -1847,7 +1850,6 @@
 		044412E11D39004A00314884 /* WZYHistoryClassesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZYHistoryClassesViewController.h; sourceTree = "<group>"; };
 		044412E21D39004A00314884 /* WZYHistoryClassesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZYHistoryClassesViewController.m; sourceTree = "<group>"; };
 		044699F61D40D81B0067615D /* LandingpageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LandingpageViewController.h; path = XingXingEdu/LandingpageViewController.h; sourceTree = SOURCE_ROOT; };
-		044699F71D40D81B0067615D /* LandingpageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LandingpageViewController.m; path = XingXingEdu/LandingpageViewController.m; sourceTree = SOURCE_ROOT; };
 		04469A111D40DE9B0067615D /* MMDrawerBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDrawerBarButtonItem.h; sourceTree = "<group>"; };
 		04469A121D40DE9B0067615D /* MMDrawerBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDrawerBarButtonItem.m; sourceTree = "<group>"; };
 		04469A131D40DE9B0067615D /* MMDrawerController+Subclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMDrawerController+Subclass.h"; sourceTree = "<group>"; };
@@ -3711,6 +3713,13 @@
 		9E0546391C48D57A00950C23 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		9E2966641CC4914700580776 /* NetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetManager.h; sourceTree = "<group>"; };
 		9E2966651CC4914700580776 /* NetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetManager.m; sourceTree = "<group>"; };
+		9E48136E1D50439600C614AC /* XXEUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEUserInfo.m; sourceTree = "<group>"; };
+		9E48136F1D50439600C614AC /* YTKKeyValueStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKKeyValueStore.m; sourceTree = "<group>"; };
+		9E4813701D50439600C614AC /* XXEUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEUserInfo.h; sourceTree = "<group>"; };
+		9E4813711D50439600C614AC /* YTKKeyValueStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKKeyValueStore.h; sourceTree = "<group>"; };
+		9E4813741D5043F500C614AC /* LandingpageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LandingpageViewController.m; path = XingXingEdu/LandingpageViewController.m; sourceTree = SOURCE_ROOT; };
+		9E4813E41D50A17500C614AC /* XXETabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXETabBarViewController.h; sourceTree = "<group>"; };
+		9E4813E51D50A17500C614AC /* XXETabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXETabBarViewController.m; sourceTree = "<group>"; };
 		9E9D80841CB5F500004B3DFC /* jpush-ios-2.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.0.a"; sourceTree = "<group>"; };
 		9E9D80851CB5F500004B3DFC /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		9E9D80871CB5F53B004B3DFC /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -3748,6 +3757,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				685073281C8C4D34005C31E4 /* libsqlite3.tbd in Frameworks */,
 				9E9D80961CB5F5C2004B3DFC /* Security.framework in Frameworks */,
 				9E9D80941CB5F5B0004B3DFC /* UIKit.framework in Frameworks */,
 				9E9D80921CB5F5A9004B3DFC /* Foundation.framework in Frameworks */,
@@ -3756,7 +3766,6 @@
 				9E9D808C1CB5F573004B3DFC /* CoreFoundation.framework in Frameworks */,
 				9E9D808A1CB5F567004B3DFC /* CoreTelephony.framework in Frameworks */,
 				9E9D80881CB5F53B004B3DFC /* CFNetwork.framework in Frameworks */,
-				685073281C8C4D34005C31E4 /* libsqlite3.tbd in Frameworks */,
 				6844E7151CAD440C0054B8C5 /* libWeiboSDK.a in Frameworks */,
 				685073261C8C4D1F005C31E4 /* ImageIO.framework in Frameworks */,
 				9E9D80861CB5F500004B3DFC /* jpush-ios-2.1.0.a in Frameworks */,
@@ -6707,6 +6716,8 @@
 				68C420761CC9CA310011552E /* SchoolInfoViewController.m */,
 				68C420781CC9F8E70011552E /* MyTabBarController.h */,
 				68C420791CC9F8E70011552E /* MyTabBarController.m */,
+				9E4813E41D50A17500C614AC /* XXETabBarViewController.h */,
+				9E4813E51D50A17500C614AC /* XXETabBarViewController.m */,
 			);
 			path = LoginInfo;
 			sourceTree = "<group>";
@@ -7337,8 +7348,12 @@
 				68E2A9241C46227F00EA8DF3 /* Resources */,
 				68E2A8F41C45F67300EA8DF3 /* AppDelegate.h */,
 				68BAD2101CEDCD660008DDA6 /* AppDelegate.m */,
+				9E4813701D50439600C614AC /* XXEUserInfo.h */,
+				9E48136E1D50439600C614AC /* XXEUserInfo.m */,
+				9E4813711D50439600C614AC /* YTKKeyValueStore.h */,
+				9E48136F1D50439600C614AC /* YTKKeyValueStore.m */,
 				044699F61D40D81B0067615D /* LandingpageViewController.h */,
-				044699F71D40D81B0067615D /* LandingpageViewController.m */,
+				9E4813741D5043F500C614AC /* LandingpageViewController.m */,
 				045FC56B1D4B76E200DF1E26 /* HomepageViewController.h */,
 				045FC56C1D4B76E200DF1E26 /* HomepageViewController.m */,
 				68E2A8FA1C45F67300EA8DF3 /* Main.storyboard */,
@@ -9047,6 +9062,7 @@
 				044412861D38F2C400314884 /* JXPersonInfo.m in Sources */,
 				045FC1BA1D48C0B800DF1E26 /* ContactPersonViewController.m in Sources */,
 				6844E8F21CAD45150054B8C5 /* MXSCycleScrollView.m in Sources */,
+				9E4813731D50439600C614AC /* YTKKeyValueStore.m in Sources */,
 				6882C5091D0124E900B0D9A3 /* WZYHttpTool.m in Sources */,
 				044776B01D2A76CC0018A459 /* WhoSeeCell.m in Sources */,
 				045FC2211D48C1C100DF1E26 /* CourseViewController.m in Sources */,
@@ -9082,6 +9098,7 @@
 				044412DD1D38FD1800314884 /* ClassTelephoneViewController.m in Sources */,
 				044412891D38F2C400314884 /* WMConversationListViewController.m in Sources */,
 				044777111D2A76CC0018A459 /* ClassRoomOrderDidPayTableViewController.m in Sources */,
+				9E4813721D50439600C614AC /* XXEUserInfo.m in Sources */,
 				045FC1C01D48C0B800DF1E26 /* KTCharactersCell.m in Sources */,
 				04469A7C1D40DE9C0067615D /* CommentsRecordTableViewCell.m in Sources */,
 				68CD03071CF8393300AE7251 /* AddAccountViewController.m in Sources */,
@@ -9185,6 +9202,7 @@
 				6844EA4D1CAD45390054B8C5 /* SSVideoPlayer.m in Sources */,
 				04F100B31D45C0E400CBED22 /* SchoolRecipeInfoViewController.m in Sources */,
 				045FC5631D4B758500DF1E26 /* CommentsRootTabbarViewController.m in Sources */,
+				9E4813E61D50A17500C614AC /* XXETabBarViewController.m in Sources */,
 				044412B71D38F2C400314884 /* WZYAddressBookViewController.m in Sources */,
 				044777A71D2A76CC0018A459 /* StoreCollectTableViewController.m in Sources */,
 				6844E8451CAD45150054B8C5 /* HeadView.m in Sources */,
@@ -9212,7 +9230,6 @@
 				045FC1BE1D48C0B800DF1E26 /* WZYCoureseCollectionViewController.m in Sources */,
 				044777BF1D2A76CC0018A459 /* NSObject+MJKeyValue.m in Sources */,
 				04F100CA1D45D6A000CBED22 /* HomeWorkCell.m in Sources */,
-				044699F81D40D81B0067615D /* LandingpageViewController.m in Sources */,
 				6844E8F11CAD45150054B8C5 /* ClassSubjectTimeTableViewController.m in Sources */,
 				044776E71D2A76CC0018A459 /* DFLikeCommentView.m in Sources */,
 				044776D71D2A76CC0018A459 /* DFBaseUserLineCell.m in Sources */,
@@ -9293,6 +9310,7 @@
 				6844E8481CAD45150054B8C5 /* CoursesViewController.m in Sources */,
 				04D758771D3F0C83005499ED /* AddBabyViewController.m in Sources */,
 				0499F0851D2FACBF00EFF631 /* OtherPeopleViewController.m in Sources */,
+				9E4813751D5043F500C614AC /* LandingpageViewController.m in Sources */,
 				044777161D2A76CC0018A459 /* ClassRoomOrderViewController.m in Sources */,
 				045FC1811D48BEBB00DF1E26 /* KTelephoneCell.m in Sources */,
 				0492ECC11D499A6B003E06D7 /* YSProgressView.m in Sources */,

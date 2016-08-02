@@ -355,9 +355,11 @@
          
          if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
          {
+             label.text = @"";
              label.frame =CGRectMake(0, 0, 0, 0);
             
              [label removeFromSuperview];
+             NSLog(@"%@",label.text);
             
              [_commentLabels removeObject:label];
              

@@ -29,6 +29,7 @@
 #import "HHControl.h"
 #import "MyTabBarController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "XXEUserInfo.h"
 
 @interface LandingpageViewController ()<UIViewControllerTransitioningDelegate,UITextFieldDelegate,CLLocationManagerDelegate>
 
@@ -902,12 +903,10 @@ self.navigationController.navigationBarHidden =NO;
         request.timeoutInterval =10;
         request.HTTPMethod = @"POST";
         //设置请求体 @"user_lng":@"121.616636",
-//    NSString *parm = [NSString stringWithFormat:@"appkey=%@&backtype=%@&login_type=%d&account=%@&pass=%@&lng=%@&lat=%@",@"U3k8Dgj7e934bh5Y",@"json",1,user.text,pwd.text,longitudeKT,latitudeKT];
     NSString *parm = [NSString stringWithFormat:@"appkey=%@&backtype=%@&login_type=%d&account=%@&pass=%@&lng=%@&lat=%@",@"U3k8Dgj7e934bh5Y",@"json",1,user.text,pwd.text,@"",@""];
       //NSString --> NSData
         request.HTTPBody =[parm dataUsingEncoding:NSUTF8StringEncoding];
         // 发送一个同步请求(在主线程发送请求)
-        // queue ：存放completionHandler这个任务
         NSOperationQueue *queue =[NSOperationQueue mainQueue];
         [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
             if (connectionError || data ==nil) {
@@ -915,29 +914,9 @@ self.navigationController.navigationBarHidden =NO;
             }
             
             NSDictionary *dict =[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-//            NSLog(@"dict:%@",dict);
-//              NSLog(@"dict:%@",dict[@"msg"]);
-//           NSLog(@"dict:%@",dict[@"code"]);
-          
-            /*
-             dict:{
-             msg = Success!登陆成功!,
-             data = {
-             token = lJELO79GiykHxvqdSxvKcJQEwCVP7+PYbY08BpzgYl48DKZh/HyFQH3WEkDs8QQy/DibEI+T5ZwHAuk3NAfi1Hij3+TGVQ+r,
-             login_times = 2,
-             user_id = 2,
-             user_head_img = http://www.xingxingedu.cn/Public/app_upload/text/aisi3.jpg,
-             nickname = 大熊猫,
-             xid = 18886064
-             account = 18221082692,
-             },
-             code = 1
-             }
-             */
             
             NSString *codeStr = [NSString stringWithFormat:@"%@", dict[@"code"]];
             
-            //            if ([dict[@"msg"] isEqualToString:@"Error!账号或密码错误!"]) {
             if (![codeStr isEqualToString:@"1"]) {
                 [SVProgressHUD showInfoWithStatus:@"账号或密码错误!"];
                 [landBtn ErrorRevertAnimationCompletion:^{
@@ -948,40 +927,32 @@ self.navigationController.navigationBarHidden =NO;
                 
                 [SVProgressHUD showSuccessWithStatus:@"登录成功"];
                 
-                //保存默认用户
+                NSDictionary * dic = [dict objectForKey:@"data"];
                 
-                //用户名
-                //                [DEFAULTS setObject:userName forKey:@"userName"];
-                //密码
-                //                [DEFAULTS setObject:password forKey:@"userPwd"];
+                NSString *account = [dic objectForKey:@"account"];
+                NSString *login_times = [dic objectForKey:@"login_times"];
+                NSString *nickname = [dic objectForKey:@"nickname"];
+                NSString *token = [dic objectForKey:@"token"];
+                NSString *user_type = [dic objectForKey:@"user_type"];
+                NSString *user_head_img = [dic objectForKey:@"user_head_img"];
                 
-                //                NSLog(@" token===---/// %@", dict[@"data"][@"token"]);
-                //                NSLog(@" nickname===---/// %@", dict[@"data"][@"nickname"]);
-                //                NSLog(@" xid===---/// %@", dict[@"data"][@"xid"]);
-                //                NSLog(@" user_head_img===---/// %@", dict[@"data"][@"user_head_img"]);
-                //                NSLog(@" user_id===---/// %@", dict[@"data"][@"user_id"]);
+                NSString *user_id = [dic objectForKey:@"user_id"];
+                NSString *xid = [dic objectForKey:@"xid"];
+                [XXEUserInfo user].login = YES;
                 
+                NSLog(@"account:%@ ,login_times:%@ ,nickname:%@ token:%@ ,user_head_img:%@ ,user_id:%@ xid:%@ ,user_type:%@",account,login_times,nickname,token,user_head_img,user_id,xid,user_type);
                 
-                //RCUserToken
-                [DEFAULTS setObject:[NSString stringWithFormat:@"%@", dict[@"data"][@"token"]] forKey:@"RCUserToken"];
-                
-                //RCUserNickName
-                [DEFAULTS setObject:[NSString stringWithFormat:@"%@", dict[@"data"][@"nickname"]] forKey:@"RCUserNickName"];
-                
-                //RCUserId
-                [DEFAULTS setObject:[NSString stringWithFormat:@"%@", dict[@"data"][@"xid"]] forKey:@"RCUserId"];
-                
-                //RCUserPortraitUri
-                [DEFAULTS setObject:[NSString stringWithFormat:@"%@", dict[@"data"][@"user_head_img"]] forKey:@"RCUserPortraitUri"];
-                
-                //userId  保存 后台 自动生成的 userId
-                [DEFAULTS setObject:[NSString stringWithFormat:@"%@", dict[@"data"][@"user_id"]] forKey:@"UserId"];
-                
-                //账号 即手机号
-                [DEFAULTS setObject:[NSString stringWithFormat:@"%@", dict[@"data"][@"account"]] forKey:@"account"];
-                
-                
-                [DEFAULTS synchronize];
+                NSDictionary *userInfo = @{@"account":account,
+                                           @"login_times":login_times,
+                                           @"nickname":nickname,
+                                           @"token":token,
+                                           @"user_head_img":user_head_img,
+                                           @"loginStatus":[NSNumber numberWithBool:YES],
+                                           @"user_id":user_id,
+                                           @"xid":xid
+                                           };
+                [[XXEUserInfo user] setupUserInfoWithUserInfo:userInfo];
+                NSLog(@"%@",[XXEUserInfo user].token);
                 
                 [landBtn ExitAnimationCompletion:^{
                   [self LoginButton];
