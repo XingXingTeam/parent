@@ -1,0 +1,45 @@
+//
+//  xingxingEdu-Prefix.pch
+//  XingXingEdu
+//
+//  Created by keenteam on 16/1/14.
+//  Copyright © 2016年 xingxingEdu. All rights reserved.
+//
+
+#ifndef xingxingEdu_Prefix_pch
+#define xingxingEdu_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifndef __OPTIMIZE__
+#define NSLog(...) NSLog(__VA_ARGS__)
+#else
+#define NSLog(...){}
+
+#endif
+#import <UIKit/UIKit.h>
+#import<Foundation/Foundation.h>
+#import "Constants.h"
+#import <UIImageView+WebCache.h>
+#import "AFNetworking.h"
+#import "SVProgressHUD.h"
+#import "CodeDingUtil.h"
+#import "UIView+MJ.h"
+#import "HHControl.h"
+#import "WZYHttpTool.h"
+#import "Masonry.h"
+#import "WZYTool.h"
+#import "UIViewExt.h"
+#import "MJRefresh.h"
+
+#import "YSProgressView.h"
+#import "XXEUserInfo.h"
+#import <RongIMKit/RongIMKit.h>
+
+#import "XXEHeaderApi.h"
+#import "XXETool.h"
+#import "MacroDefine.h"
+#import "FriendCircleHeader.h"
+
+#endif

@@ -1,0 +1,6 @@
+dependencies: \
+  /Users/mac/Desktop/工作/xingxingedu-parent\ 11-23/XingXingEdu/XingXingEdu/WZYClassAlbumViewController/WZYAlbumDateISectionViewController.m \
+  /Users/mac/Desktop/工作/xingxingedu-parent\ 11-23/XingXingEdu/XingXingEdu/WZYClassAlbumViewController/WZYAlbumDateISectionViewController.h \
+  /Users/mac/Desktop/工作/xingxingedu-parent\ 11-23/XingXingEdu/XingXingEdu/WZYLogoDetail\ /View/AlbumCollectionViewCell.h \
+  /Users/mac/Desktop/工作/xingxingedu-parent\ 11-23/XingXingEdu/XingXingEdu/WZYClassAlbumViewController/HeaderFooterCollectionReusableView.h \
+  /Users/mac/Desktop/工作/xingxingedu-parent\ 11-23/XingXingEdu/XingXingEdu/ClassInformation/ClassTelephone/OtherTeacherAlbum/UpViewController.h
