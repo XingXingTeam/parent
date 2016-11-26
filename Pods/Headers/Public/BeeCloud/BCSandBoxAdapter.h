@@ -1,1 +1,0 @@
-../../../BeeCloud/BCPaySDK/BeeCloud/SandBox/BCSandBoxAdapter/BCSandBoxAdapter.h
