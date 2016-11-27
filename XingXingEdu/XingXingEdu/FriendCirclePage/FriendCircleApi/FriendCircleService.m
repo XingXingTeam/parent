@@ -30,4 +30,20 @@ static id _instance = nil;
         fail();
     }];
 }
+
+//圈子发布
+-(void)friendCirclePublishRequestWithparameters:(id)parameters succeed:(void (^)(id request))succeed fail:(void (^)())fail{
+    NSString *requestURL = XXEPublishFriendCircleUrl;
+    [[ServiceManager sharedInstance] requestWithURLString:requestURL parameters:parameters type:1 success:^(id responseObject) {
+        if (!responseObject) {
+            fail();
+        }else {
+            succeed(responseObject);
+        }
+    } failure:^(NSError *error) {
+        fail();
+    }];
+}
+
+
 @end

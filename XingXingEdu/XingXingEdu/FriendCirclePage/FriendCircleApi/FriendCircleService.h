@@ -12,4 +12,6 @@
 + (instancetype)sharedInstance;
 
 -(void)friendCircleListRequestWithparameters:(id)parameters succeed:(void (^)(id))succeed fail:(void (^)())fail;
+
+-(void)friendCirclePublishRequestWithparameters:(id)parameters succeed:(void (^)(id request))succeed fail:(void (^)())fail;
 @end

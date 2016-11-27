@@ -26,4 +26,6 @@
  */
 @property (nonatomic, copy) NSString *mimeType;
 
+- (void)configureWithData:(NSData*)data name:(NSString*)name filename:(NSString*)filename mimetype:(NSString*)mimetype;
+
 @end

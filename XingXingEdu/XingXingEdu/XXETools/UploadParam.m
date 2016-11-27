@@ -9,5 +9,10 @@
 #import "UploadParam.h"
 
 @implementation UploadParam
-
+- (void)configureWithData:(NSData*)data name:(NSString*)name filename:(NSString*)filename mimetype:(NSString*)mimetype {
+    self.data = data;
+    self.name = name;
+    self.filename = filename;
+    self.mimeType = mimetype;
+}
 @end
