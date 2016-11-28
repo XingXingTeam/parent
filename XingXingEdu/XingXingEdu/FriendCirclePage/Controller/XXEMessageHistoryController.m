@@ -13,6 +13,7 @@
 #import "MessageListDetailController.h"
 #import "XXENewMessageApi.h"
 #import "XingXingEdu-swift.h"
+#import "FriendCircleService.h"
 
 @interface XXEMessageHistoryController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -121,13 +122,13 @@ static NSString *const IdentifierHistory = @"messageHistoryCell";
 {
 
      [self.messageDatasource removeAllObjects];
-    XXENewMessageApi *newMessageApi = [[XXENewMessageApi alloc]initWithNewMeesageHistoryUserXid:parameterXid UserId:parameterUser_Id];
-    [newMessageApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-//        NSLog(@"xiaoxi %@",request.responseJSONObject);
-        NSLog(@"%@",[request.responseJSONObject objectForKey:@"msg"]);
-        NSString *code = [request.responseJSONObject objectForKey:@"code"];
+    
+    [[FriendCircleService sharedInstance] friendCircleNewMeesageHistoryUserXid:parameterXid UserId:parameterUser_Id succeed:^(id request) {
+        //        NSLog(@"xiaoxi %@",request.responseJSONObject);
+        NSLog(@"%@",[request objectForKey:@"msg"]);
+        NSString *code = [request objectForKey:@"code"];
         if([code integerValue]==1) {
-            NSArray *data = [request.responseJSONObject objectForKey:@"data"];
+            NSArray *data = [request objectForKey:@"data"];
             for (int i=0; i<data.count; i++) {
                 XXEMessageHistoryModel *model = [[XXEMessageHistoryModel alloc]initWithDictionary:data[i] error:nil];
                 [self.messageDatasource addObject:model];
@@ -138,11 +139,34 @@ static NSString *const IdentifierHistory = @"messageHistoryCell";
         }else{
             [self showString:@"获取数据失败" forSecond:1.f];
         }
-//        [RuningXX.sharedInstance dismissWithAnimation];
+        //        [RuningXX.sharedInstance dismissWithAnimation];
         
-    } failure:^(__kindof YTKBaseRequest *request) {
-//        [RuningXX.sharedInstance dismissWithAnimation];
+    } fail:^{
+        
     }];
+    
+//    XXENewMessageApi *newMessageApi = [[XXENewMessageApi alloc]initWithNewMeesageHistoryUserXid:parameterXid UserId:parameterUser_Id];
+//    [newMessageApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+////        NSLog(@"xiaoxi %@",request.responseJSONObject);
+//        NSLog(@"%@",[request.responseJSONObject objectForKey:@"msg"]);
+//        NSString *code = [request.responseJSONObject objectForKey:@"code"];
+//        if([code integerValue]==1) {
+//            NSArray *data = [request.responseJSONObject objectForKey:@"data"];
+//            for (int i=0; i<data.count; i++) {
+//                XXEMessageHistoryModel *model = [[XXEMessageHistoryModel alloc]initWithDictionary:data[i] error:nil];
+//                [self.messageDatasource addObject:model];
+//            }
+//            [self.messageTableView reloadData];
+//        }else if ([code integerValue]==3){
+//            [self showString:@"没有数据" forSecond:1.f];
+//        }else{
+//            [self showString:@"获取数据失败" forSecond:1.f];
+//        }
+////        [RuningXX.sharedInstance dismissWithAnimation];
+//        
+//    } failure:^(__kindof YTKBaseRequest *request) {
+////        [RuningXX.sharedInstance dismissWithAnimation];
+//    }];
     
 }
 

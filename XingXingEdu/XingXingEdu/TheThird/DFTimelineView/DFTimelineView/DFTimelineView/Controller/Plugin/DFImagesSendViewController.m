@@ -87,6 +87,13 @@
     [_mask removeGestureRecognizer:_tapGestureRecognizer];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setBarTintColor:UIColorFromRGB(0, 170, 42)];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+}
 
 -(void)viewDidLoad
 {
@@ -103,7 +110,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     //背景
-    bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth,KScreenHeight)];
+    bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, KScreenWidth,KScreenHeight - 64)];
     bgScrollView.backgroundColor= XXEColorFromRGB(229, 232, 233);
     bgScrollView.pagingEnabled = NO;
     bgScrollView.showsHorizontalScrollIndicator = YES;
@@ -401,9 +408,9 @@
 
 
 #pragma mark - TZImagePickerControllerDelegate
+#pragma mark - TZImagePickerControllerDelegate
 
-- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *) photos sourceAssets:(NSArray *)assets
-{
+-(void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
     NSLog(@"%@", photos);
     
     for (UIImage *image in photos) {
@@ -411,10 +418,9 @@
     }
     
     [self refreshGridImageView];
-    
 }
-- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *) photos sourceAssets:(NSArray *)assets infos:(NSArray<NSDictionary *> *)infos
-{
+
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos {
     
 }
 

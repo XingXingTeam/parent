@@ -16,7 +16,7 @@
 #define APPKEY  @"U3k8Dgj7e934bh5Y"
 #define BACKTYPE @"json"
 #define USER_ID  @"1"
-#define USER_TYPE @"2"
+#define USER_TYPE @"1"
 
 //友盟分享 猩猩教室校园端
 

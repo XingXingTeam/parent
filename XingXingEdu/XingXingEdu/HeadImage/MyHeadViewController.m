@@ -45,7 +45,8 @@
     NSString *head_img_type;
     
     YSProgressView *ysView;
-    
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
 }
 @end
 //
@@ -62,6 +63,15 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
+    
     [self loadNewData];
     [self createTableView];
     [self addHeadView];
@@ -69,10 +79,11 @@
 - (void)loadNewData{
 
     urlStr = @"http://www.xingxingedu.cn/Parent/my_personal_center";
-    NSDictionary *pragm = @{   @"appkey":APPKEY,
+    NSDictionary *pragm = @{
+                            @"appkey":APPKEY,
                                @"backtype":BACKTYPE,
-                               @"xid":XID,
-                               @"user_id":USER_ID,
+                               @"xid":parameterUser_Id,
+                               @"user_id":parameterXid,
                                @"user_type":USER_TYPE,
                                };
     

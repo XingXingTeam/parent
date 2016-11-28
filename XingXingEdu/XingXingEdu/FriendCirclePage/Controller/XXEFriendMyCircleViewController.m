@@ -14,6 +14,7 @@
 #import "XXEGoodUserModel.h"
 #import "XXEInfomationViewController.h"
 #import "XXEMessageHistoryController.h"
+#import "FriendCircleService.h"
 
 @interface XXEFriendMyCircleViewController ()
 
@@ -86,7 +87,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.view.backgroundColor = XXEBackgroundColor;
-    self.tableView.frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight - 64);
+    self.tableView.frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight - 44);
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, -64, 70, 64);
     button.backgroundColor = [UIColor redColor];
@@ -127,8 +128,7 @@
 //    NSString *otherXid = [NSString stringWithFormat:@"%ld",(long)self.otherXid];
     
     NSString *page1 = [NSString stringWithFormat:@"%ld",(long)page];
-    XXEFriendMyCircleApi *friendMyApi = [[XXEFriendMyCircleApi alloc]initWithChechFriendCircleOtherXid:_otherXid page:page1 UserId:homeUserId MyCircleXid:strngXid];
-    [friendMyApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+    [[FriendCircleService sharedInstance] friendCircleCheckOtherCircleWithXid:_otherXid page:page1 UserId:homeUserId MyCircleXid:strngXid succeed:^(id request) {
         
         if (page ==1) {
             [self.circleMyCircleListDatasource removeAllObjects];
@@ -136,11 +136,11 @@
         }
         [self.circleDatasource removeAllObjects];
         
-        NSLog(@"%@",request.responseJSONObject);
-        NSLog(@"%@",[request.responseJSONObject objectForKey:@"msg"]);
-        NSString *code = [request.responseJSONObject objectForKey:@"code"];
+        NSLog(@"%@",request);
+        NSLog(@"%@",[request objectForKey:@"msg"]);
+        NSString *code = [request objectForKey:@"code"];
         if ([code intValue]==1) {// && [[request.responseJSONObject objectForKey:@"data"] isKindOfClass:[NSDictionary class]]
-            NSDictionary *data = [request.responseJSONObject objectForKey:@"data"];
+            NSDictionary *data = [request objectForKey:@"data"];
             NSArray *listSS = [data objectForKey:@"ss"];
             NSLog(@"数组信息%@",listSS);
             NSLog(@"用户信息%@",[data objectForKey:@"user_info"]);
@@ -160,15 +160,58 @@
             //朋友圈的信息列表
             [self myFriendCircleMessage];
             [self.tableView reloadData];
-//            NSLog(@"圈子顶部信息数组信息%@",self.headerMyCircleDatasource);
+            //            NSLog(@"圈子顶部信息数组信息%@",self.headerMyCircleDatasource);
         } else{
             [self hudShowText:@"获取数据错误" second:2.f];
             [self endRefresh];
             [self endLoadMore];
         }
-    } failure:^(__kindof YTKBaseRequest *request) {
+    } fail:^{
         
     }];
+    
+//    XXEFriendMyCircleApi *friendMyApi = [[XXEFriendMyCircleApi alloc]initWithChechFriendCircleOtherXid:_otherXid page:page1 UserId:homeUserId MyCircleXid:strngXid];
+//    [friendMyApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+//        
+//        if (page ==1) {
+//            [self.circleMyCircleListDatasource removeAllObjects];
+//            [self xxe_userRefreshTableViewWithItem:@""];
+//        }
+//        [self.circleDatasource removeAllObjects];
+//        
+//        NSLog(@"%@",request.responseJSONObject);
+//        NSLog(@"%@",[request.responseJSONObject objectForKey:@"msg"]);
+//        NSString *code = [request.responseJSONObject objectForKey:@"code"];
+//        if ([code intValue]==1) {// && [[request.responseJSONObject objectForKey:@"data"] isKindOfClass:[NSDictionary class]]
+//            NSDictionary *data = [request.responseJSONObject objectForKey:@"data"];
+//            NSArray *listSS = [data objectForKey:@"ss"];
+//            NSLog(@"数组信息%@",listSS);
+//            NSLog(@"用户信息%@",[data objectForKey:@"user_info"]);
+//            NSDictionary *userInfo = [data objectForKey:@"user_info"];
+//            [self.items removeAllObjects];
+//            XXECircleUserModel *Usermodel = [[XXECircleUserModel alloc]initWithDictionary:userInfo error:nil];
+//            [self.headerMyCircleDatasource addObject:Usermodel];
+//            //设置顶部视图信息
+//            [self setHeaderMyCircleMessage:Usermodel];
+//            NSLog(@"评论信息的列表的%@",listSS);
+//            for (int i =0; i<listSS.count; i++) {
+//                XXECircleModel *circleModel = [[XXECircleModel alloc]initWithDictionary:listSS[i] error:nil];
+//                [self.circleMyCircleListDatasource addObject:circleModel];
+//                [self.circleDatasource addObject:circleModel];
+//            }
+//            [self endRefresh];
+//            //朋友圈的信息列表
+//            [self myFriendCircleMessage];
+//            [self.tableView reloadData];
+////            NSLog(@"圈子顶部信息数组信息%@",self.headerMyCircleDatasource);
+//        } else{
+//            [self hudShowText:@"获取数据错误" second:2.f];
+//            [self endRefresh];
+//            [self endLoadMore];
+//        }
+//    } failure:^(__kindof YTKBaseRequest *request) {
+//        
+//    }];
 }
 
 /** 朋友圈头部信息 */

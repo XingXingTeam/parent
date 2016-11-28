@@ -50,6 +50,10 @@
 
 @property(nonatomic ,assign) BOOL isMaxLoading;
 
+@property (nonatomic, assign) NSInteger maxPage;
+
+//空试图
+@property(nonatomic ,strong) UIView *emptyBackView;
 
 @end
 
@@ -97,7 +101,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.speakId = @"";
-    
+    self.tableView.hidden = YES;
     self.view.backgroundColor = XXEBackgroundColor;
     if ([XXEUserInfo user].login){
         parameterXid = [XXEUserInfo user].xid;
@@ -117,6 +121,24 @@
     self.delegate = self;
 }
 
+//MARK: - 设置空视图
+-(void)setEmptyView {
+    self.emptyBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight)];
+    self.emptyBackView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.emptyBackView];
+    
+    UIImage *loadingFailImg = [UIImage imageNamed:@"jiazaishiban"];
+    CGFloat imgWidth = loadingFailImg.size.width;
+    CGFloat imgHeight = loadingFailImg.size.height;
+    UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(KScreenWidth/2 - imgWidth/2, KScreenHeight/2 - imgHeight/2, imgWidth, imgHeight)];
+    iv.image = loadingFailImg;
+    [self.emptyBackView addSubview:iv];
+}
+
+//MARK: - 移除空视图
+-(void)removeEmpty {
+    [self.emptyBackView removeFromSuperview];
+}
 
 #pragma mark - 下拉刷新 与上拉加载更多
 - (void)refresh
@@ -156,7 +178,7 @@
     
     NSDictionary *parameters = @{
                                  @"page":pageNum,
-                                 @"xid":[XXEUserInfo user].xid,
+                                 @"xid":parameterXid,
                                  @"appkey":APPKEY,
                                  @"backtype":BACKTYPE,
                                  @"user_id":parameterUser_Id,
@@ -168,7 +190,14 @@
         
         
         NSString *code = [request objectForKey:@"code"];
-        NSInteger maxPage = [[[request objectForKey:@"data"] objectForKey:@"max_page"] integerValue];
+        
+        if (page == 1) {
+            self.maxPage = [[[request objectForKey:@"data"] objectForKey:@"max_page"] integerValue];
+            if (self.emptyBackView) {
+                [self removeEmpty];
+            }
+            self.tableView.hidden = NO;
+        }
         
         if ([code intValue]==1 && [[request objectForKey:@"data"] isKindOfClass:[NSDictionary class]]) {
             [weakSelf detelAllSource];
@@ -189,27 +218,12 @@
                     XXECircleModel *circleModel = [[XXECircleModel alloc]initWithDictionary:list[i] error:nil];
                     [weakSelf.circleListDatasource addObject:circleModel];
                 };
-                
                 [weakSelf friendCircleMessage];
-                //                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                //                    for (int i =0; i<list.count; i++) {
-                //                        XXECircleModel *circleModel = [[XXECircleModel alloc]initWithDictionary:list[i] error:nil];
-                //                        [weakSelf.circleListDatasource addObject:circleModel];
-                //                    }
-                //                    dispatch_async(dispatch_get_main_queue(), ^{
-                //                       [weakSelf friendCircleMessage];
-                //                    });
-                //                });
-                
-                //                NSLog(@"%lu",(unsigned long)self.circleListDatasource.count);
-                //朋友圈的信息列表
-                
             }
             
             [weakSelf endRefresh];
             weakSelf.isMaxLoading = NO;
-            
-            if (weakSelf.page == maxPage) {
+            if (weakSelf.page == self.maxPage) {
                 weakSelf.isMaxLoading = YES;
                 [weakSelf hudShowText:@"已经是最后一条了" second:2.f];
                 [weakSelf endRefresh];
@@ -223,81 +237,20 @@
         }
         [RuningXX.sharedInstance dismissWithAnimation];
     } fail:^{
+        if (self.page == 1) {
+            [self setEmptyView];
+        }
         [RuningXX.sharedInstance dismissWithAnimation];
         [weakSelf endRefresh];
         [weakSelf hudShowText:@"网络连接错误" second:2.f];
     }];
-    
-    
-//    XXEFriendCircleApi *friendCircleApi = [[XXEFriendCircleApi alloc]initWithFriendCircleXid:parameterXid CircleUserId:parameterUser_Id PageNumber:pageNum];
-//    [friendCircleApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-//        NSString *code = [request.responseJSONObject objectForKey:@"code"];
-//        NSInteger maxPage = [[[request.responseJSONObject objectForKey:@"data"] objectForKey:@"max_page"] integerValue];
-//        
-//        if ([code intValue]==1 && [[request.responseJSONObject objectForKey:@"data"] isKindOfClass:[NSDictionary class]]) {
-//            [weakSelf detelAllSource];
-//            NSDictionary *data = [request.responseJSONObject objectForKey:@"data"];
-//            NSDictionary *userInfo = [data objectForKey:@"user_info"];
-//            XXECircleUserModel *Usermodel = [[XXECircleUserModel alloc]initWithDictionary:userInfo error:nil];
-//            [weakSelf.headerDatasource addObject:Usermodel];
-//            [weakSelf setHeaderMessage:Usermodel];
-//            
-//            //判断是否有信息
-//            if ([Usermodel.circle_noread isEqualToString:@"1"]) {
-//                [weakSelf creatNewMessageRemindcircleNoread:Usermodel.circle_noread];
-//            }
-//            
-//            if ([[data objectForKey:@"list"]isKindOfClass:[NSArray class]] ) {
-//                NSArray *list = [data objectForKey:@"list"];
-//                for (int i =0; i<list.count; i++) {
-//                    XXECircleModel *circleModel = [[XXECircleModel alloc]initWithDictionary:list[i] error:nil];
-//                    [weakSelf.circleListDatasource addObject:circleModel];
-//                };
-//                
-//                [weakSelf friendCircleMessage];
-////                dispatch_async(dispatch_get_global_queue(0, 0), ^{
-////                    for (int i =0; i<list.count; i++) {
-////                        XXECircleModel *circleModel = [[XXECircleModel alloc]initWithDictionary:list[i] error:nil];
-////                        [weakSelf.circleListDatasource addObject:circleModel];
-////                    }
-////                    dispatch_async(dispatch_get_main_queue(), ^{
-////                       [weakSelf friendCircleMessage];
-////                    });
-////                });
-//                
-////                NSLog(@"%lu",(unsigned long)self.circleListDatasource.count);
-//                //朋友圈的信息列表
-//                
-//            }
-//            
-//            [weakSelf endRefresh];
-//            weakSelf.isMaxLoading = NO;
-//            
-//            if (weakSelf.page == maxPage) {
-//                weakSelf.isMaxLoading = YES;
-//                [weakSelf hudShowText:@"已经是最后一条了" second:2.f];
-//                [weakSelf endRefresh];
-//                [weakSelf endLoadMore];
-//            }
-//            [weakSelf.tableView reloadData];
-//        }else {
-//            weakSelf.isMaxLoading = YES;
-//            [weakSelf hudShowText:@"获取数据错误" second:2.f];
-//            [weakSelf endRefresh];
-//        }
-//        [RuningXX.sharedInstance dismissWithAnimation];
-//    } failure:^(__kindof YTKBaseRequest *request) {
-//         [RuningXX.sharedInstance dismissWithAnimation];
-//         [weakSelf endRefresh];
-//         [weakSelf hudShowText:@"网络连接错误" second:2.f];
-//    }];
+
 }
 
 /** 朋友圈头部信息 */
 - (void)setHeaderMessage:(XXECircleUserModel *)model
 {
     NSString *cover;
-//    NSLog(@"======%@",model.head_img);
     if ([model.head_img_type isEqualToString:@"0"]){
         cover = [NSString stringWithFormat:@"%@%@",kXXEPicURL,model.head_img];
     }else {
@@ -314,7 +267,6 @@
 /** 朋友圈的信息列表 */
 - (void)friendCircleMessage
 {
-//    NSLog(@"有多少个单元格:%lu",(unsigned long)self.circleListDatasource.count);
     int j=1;
     if (self.circleListDatasource.count != 0) {
         for (int i =0; i<self.circleListDatasource.count; i++) {
@@ -358,12 +310,8 @@
         textImageItem.srcImages = srcSmallImages;
         textImageItem.thumbImages = thumbBigImages;
     }else{
-//        NSLog(@"不包含");
         [srcSmallImages addObject:[NSString stringWithFormat:@"%@%@",kXXEPicURL,circleModel.pic_url ]];
-//        [srcSmallImages addObject:@"哈哈.png"];
-        
         [thumbBigImages addObject:[NSString stringWithFormat:@"%@%@",kXXEPicURL,circleModel.pic_url ]];
-//        [thumbBigImages addObject:@"哈哈.png"];
         textImageItem.srcImages = srcSmallImages;
         textImageItem.thumbImages = thumbBigImages;
     }
@@ -377,15 +325,11 @@
     
     //点赞
     if (circleModel.good_user.count == 0) {
-//        NSLog(@"没有人点赞");
     }else{
-        
         for (int j =0; j<circleModel.good_user.count; j++) {
             XXEGoodUserModel *goodModel = circleModel.good_user[j];
             DFTextImageLineItem *likeItem = [[DFTextImageLineItem alloc]init];
             [likeItem configureWithGoodUser:goodModel];
-//            likeItem.userNick = goodModel.goodNickName;
-//            likeItem.userId = [goodModel.goodXid integerValue];
             [textImageItem.likes addObject:likeItem];
         }
     }
@@ -396,16 +340,8 @@
             DFLineCommentItem *commentItem = [[DFLineCommentItem alloc]init];
             XXECommentModel *commentModel = circleModel.comment_group[k];
             [commentItem configure:commentModel];
-//            commentItem.commentId = [commentModel.commentId integerValue];
-//            commentItem.userId = [commentModel.commentXid integerValue];
-//            commentItem.userNick = commentModel.commentNicknName;
-//            commentItem.replyUserId = [commentModel.to_who_xid integerValue];
-//            commentItem.replyUserNick = commentModel.to_who_nickname;
-//            commentItem.text = commentModel.con;
             [textImageItem.comments addObject:commentItem];
         }
-//        NSLog(@"评论的信息%@",textImageItem.comments);
-        
     }else{
         NSLog(@"数组为空");
     }
@@ -453,34 +389,7 @@
             
         }];
         
-//        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//        [manager POST:XXERegisterUpLoadPicUrl parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//            
-//                NSData *data = UIImageJPEGRepresentation(images[0], 0.5);
-//                NSString *name = [NSString stringWithFormat:@"1.jpeg"];
-//                NSString *formKey = [NSString stringWithFormat:@"file"];
-//                NSString *type = @"image/jpeg";
-//                [formData appendPartWithFileData:data name:formKey fileName:name mimeType:type];
-//            
-//        } success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//            
-////            NSLog(@"%@",responseObject);
-////            NSLog(@"%@",[responseObject objectForKey:@"msg"]);
-//            NSString *code = [responseObject objectForKey:@"code"];
-//            if ([code intValue] == 1) {
-//                NSString *data = [responseObject objectForKey:@"data"];
-//                
-////                NSLog(@"图片的网址:%@",data);
-//                //往服务器传所有的参数
-//                [self publishFriendCircleText:text ImageFile:data Location:location PersonSee:personSee];
-//            }
-//            
-//        } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//            
-//        }];
-        
     }else{
-//    NSLog(@"%@",images);
         NSDictionary *dict = @{@"file_type":@"1",
                            @"page_origin":@"35",
                            @"upload_format":@"2",
@@ -498,7 +407,6 @@
             NSString *type = @"image/jpeg";
             [uploadParam configureWithData:data name:formKey filename:name mimetype:type];
             [uploadParams addObject:uploadParam];
-//            [formData appendPartWithFileData:data name:formKey fileName:name mimeType:type];
         }
     
         [[ServiceManager sharedInstance] uploadWithURLString:XXERegisterUpLoadPicUrl parameters:dict uploadParam:uploadParams success:^(id responseObject) {
@@ -521,38 +429,6 @@
         } failure:^(NSError *error) {
             
         }];
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    [manager POST:XXERegisterUpLoadPicUrl parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//        for (int i = 0; i< images.count; i++) {
-//            NSData *data = UIImageJPEGRepresentation(images[i], 0.5);
-//            NSString *name = [NSString stringWithFormat:@"%d.jpeg",i];
-//            NSString *formKey = [NSString stringWithFormat:@"file%d",i];
-//            NSString *type = @"image/jpeg";
-//            [formData appendPartWithFileData:data name:formKey fileName:name mimeType:type];
-//        }
-//        
-//    } success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        
-//        NSString *code = [responseObject objectForKey:@"code"];
-//        if ([code intValue] == 1) {
-//            NSArray *data = [responseObject objectForKey:@"data"];
-//            NSMutableString *str = [NSMutableString string];
-//            for (int i =0; i< data.count; i++) {
-//                NSString *string = data[i];
-//                if (i != data.count -1) {
-//                    [str appendFormat:@"%@,",string];
-//                }else {
-//                    [str appendFormat:@"%@",string];
-//                }
-//            }
-////            NSLog(@"图片的网址:%@",str);
-//            //往服务器传所有的参数
-//            [self publishFriendCircleText:text ImageFile:str Location:location PersonSee:personSee];
-//        }
-//        
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//        
-//    }];
     }
 }
 
@@ -560,11 +436,6 @@
 
 - (void)publishFriendCircleText:(NSString *)text ImageFile:(NSString *)imageFile Location:(NSString *)location PersonSee:(NSString *)personSee
 {
-//    NSLog(@"图片:%@",imageFile);
-//    NSLog(@"内容:%@",text);
-//    NSLog(@"地点:%@",location);
-//    NSLog(@"谁可见:%@",personSee);
-    
     if ([personSee isEqualToString:@""]) {
         personSee = @"0";
     }else if ([personSee isEqualToString:@"仅自己可见"]){
@@ -592,8 +463,6 @@
                            };
     
     [[FriendCircleService sharedInstance] friendCirclePublishRequestWithparameters:dict succeed:^(id request) {
-        //        NSLog(@"发布内筒%@",request.responseJSONObject);
-        //        NSLog(@"发布%@",[request.responseJSONObject objectForKey:@"msg"]);
         NSString *code = [request objectForKey:@"code"];
         if ([code integerValue]== 1) {
             
@@ -624,7 +493,7 @@
                 }
                 textImageItem.srcImages = srcSmallImages;
                 textImageItem.thumbImages = thumbBigImages;
-                //                 NSLog(@"小%@ 大%@",textImageItem.srcImages,textImageItem.thumbImages);
+
             }else{
                 NSLog(@"不包含");
                 [srcSmallImages addObject:[NSString stringWithFormat:@"%@%@",kXXEPicURL,imageFile ]];
@@ -633,12 +502,11 @@
                 [thumbBigImages addObject:@"哈哈.png"];
                 textImageItem.srcImages = srcSmallImages;
                 textImageItem.thumbImages = thumbBigImages;
-                
-                //                NSLog(@"小图片%@ 大图片%@",srcSmallImages,thumbBigImages);
-                //                NSLog(@"小%@ 大%@",textImageItem.srcImages,textImageItem.thumbImages);
+
             }
             textImageItem.location = location;
             [self addItemTop:textImageItem];
+            [self hudShowText:@"发布成功" second:1.f];
             //获取朋友圈信息
             [self setupFriendCircleMessagePage:1];
         }else{
@@ -651,69 +519,7 @@
         [self endRefresh];
         [self endLoadMore];
     }];
-    
-//    XXEPublishFriendCircleApi *publishFriendApi = [[XXEPublishFriendCircleApi alloc]initWithPublishFriendCirclePosition:location FileType:@"1" Words:text PicGroup:imageFile VideoUrl:@"" CircleSet:personSee UserXid:parameterXid UserId:parameterUser_Id];
-//    
-//    [publishFriendApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-////        NSLog(@"发布内筒%@",request.responseJSONObject);
-////        NSLog(@"发布%@",[request.responseJSONObject objectForKey:@"msg"]);
-//        NSString *code = [request.responseJSONObject objectForKey:@"code"];
-//        if ([code integerValue]== 1) {
-//            
-//            NSDictionary *data = [request.responseJSONObject objectForKey:@"data"];
-//            NSString *head_image = [data objectForKey:@"head_img"];
-//            
-//            DFTextImageLineItem *textImageItem = [[DFTextImageLineItem alloc]init];
-//            textImageItem.itemId = 1;
-//            textImageItem.userId =[parameterXid integerValue];
-//            NSString *avatarImage = [NSString stringWithFormat:@"%@%@",kXXEPicURL,head_image];
-//            textImageItem.userAvatar = avatarImage;
-//            textImageItem.userNick = [data objectForKey:@"nickname"];
-//            textImageItem.title = @"发表了";
-//            textImageItem.text = text;
-//            textImageItem.ts = [[NSDate date] timeIntervalSince1970]*1000;
-//            //处理发布圈子的图片问题
-//            NSMutableArray *srcSmallImages = [NSMutableArray array];
-//            NSMutableArray *thumbBigImages = [NSMutableArray array];
-//            //判断图片的字符串里面有没有逗号
-//            if ([imageFile containsString:@","]) {
-//                NSLog(@"包含");
-//                NSArray *array = [imageFile componentsSeparatedByString:@","];
-//                for (NSString *image in array) {
-//                    [srcSmallImages addObject:[NSString stringWithFormat:@"%@%@",kXXEPicURL,image]];
-//                    [thumbBigImages addObject:[NSString stringWithFormat:@"%@%@",kXXEPicURL,image]];
-//                    NSLog(@"小图片%@ 大图片%@",srcSmallImages,thumbBigImages);
-//                    
-//                }
-//                textImageItem.srcImages = srcSmallImages;
-//                textImageItem.thumbImages = thumbBigImages;
-////                 NSLog(@"小%@ 大%@",textImageItem.srcImages,textImageItem.thumbImages);
-//            }else{
-//                NSLog(@"不包含");
-//                [srcSmallImages addObject:[NSString stringWithFormat:@"%@%@",kXXEPicURL,imageFile ]];
-//                [srcSmallImages addObject:@"哈哈.png"];
-//                [thumbBigImages addObject:[NSString stringWithFormat:@"%@%@",kXXEPicURL,imageFile ]];
-//                [thumbBigImages addObject:@"哈哈.png"];
-//                textImageItem.srcImages = srcSmallImages;
-//                textImageItem.thumbImages = thumbBigImages;
-//                
-////                NSLog(@"小图片%@ 大图片%@",srcSmallImages,thumbBigImages);
-////                NSLog(@"小%@ 大%@",textImageItem.srcImages,textImageItem.thumbImages);
-//            }
-//            textImageItem.location = location;
-//             [self addItemTop:textImageItem];
-//            //获取朋友圈信息
-//            [self setupFriendCircleMessagePage:1];
-//        }else{
-//            [SVProgressHUD showErrorWithStatus:@"获取数据失败"];
-//            [self endRefresh];
-//            [self endLoadMore];
-//        }
-//    } failure:^(__kindof YTKBaseRequest *request) {
-//        [SVProgressHUD showErrorWithStatus:@"获取数据失败"];
-//        [self endRefresh];
-//        [self endLoadMore];
-//    }];
+
 }
 
 #pragma mark - 评论和点赞
@@ -745,13 +551,12 @@
     }else{
         //评论
         //网络请求可以放在这里
-        XXEFriendCircleCommentApi *friendCommentApi = [[XXEFriendCircleCommentApi alloc]initWithFriendCircleCommentUerXid:parameterXid UserID:parameterUser_Id TalkId:self.speakId Com_type:@"1" Con:text To_Who_Xid:otherXid];
         __weak __typeof(self)weakSelf = self;
-        [friendCommentApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        [[FriendCircleService sharedInstance] friendCircleCommentUerXid:parameterXid UserID:parameterUser_Id TalkId:self.speakId Com_type:@"1" Con:text To_Who_Xid:@"" succeed:^(id request) {
             
-            NSLog(@"点赞/评论 数据 --- %@", request.responseJSONObject);
-            NSString *code = [request.responseJSONObject objectForKey:@"code"];
-            NSDictionary *data = [request.responseJSONObject objectForKey:@"data"];
+            NSLog(@"点赞/评论 数据 --- %@", request);
+            NSString *code = [request objectForKey:@"code"];
+            NSDictionary *data = [request objectForKey:@"data"];
             
             if ([code integerValue] == 1) {
                 
@@ -763,10 +568,6 @@
                 
                 DFLineCommentItem *commentItem = [[DFLineCommentItem alloc] init];
                 [commentItem configure:commentModel];
-//                commentItem.commentId = [data[@"id"] intValue];
-//                commentItem.userId = myXId;
-//                commentItem.userNick = weakSelf.userNickName;
-//                commentItem.text = text;
                 [weakSelf addCommentItem:commentItem itemId:itemId replyCommentId:commentId];
                 [weakSelf hudShowText:@"评论成功" second:1.f];
                 
@@ -778,11 +579,11 @@
                 
                 [weakSelf hudShowText:@"评论失败" second:1.f];
             }
-//            NSLog(@"%@",request.responseJSONObject);
-//            NSLog(@"%@",[request.responseJSONObject objectForKey:@"msg"]);
             
-        } failure:^(__kindof YTKBaseRequest *request) {
-            [weakSelf hudShowText:@"网络失败" second:1.f];
+        } fail:^{
+            {
+                [weakSelf hudShowText:@"网络失败" second:1.f];
+            }
         }];
     }
 }
@@ -793,15 +594,11 @@
 //    NSLog(@"%ld",(long)toWhoXid);
 
     NSString *stringToWhoXid = [NSString stringWithFormat:@"%ld",(long)toWhoXid];
-//    NSLog(@"回复人的XID%@,回复人的USERID%@",strngXid,homeUserId);
-//    NSLog(@"回复内容%@ 被回复人的XID%@",self.toWhoComment,stringToWhoXid);
-     XXEFriendCircleCommentApi *friendCommentApi = [[XXEFriendCircleCommentApi alloc]initWithFriendCircleCommentUerXid:parameterXid UserID:parameterUser_Id TalkId:self.speakId Com_type:@"2" Con:self.toWhoComment To_Who_Xid:stringToWhoXid];
     __weak __typeof(self)weakSelf = self;
-    [friendCommentApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        NSString *code = [request.responseJSONObject objectForKey:@"code"];
+    [[FriendCircleService sharedInstance] friendCircleCommentUerXid:parameterXid UserID:parameterUser_Id TalkId:self.speakId Com_type:@"2" Con:self.toWhoComment To_Who_Xid:stringToWhoXid succeed:^(id request) {
+        NSString *code = [request objectForKey:@"code"];
         if ([code integerValue] == 1) {
-             [weakSelf hudShowText:@"回复成功" second:1.f];
-//            [self setupFriendCircleMessagePage:_page];
+            [weakSelf hudShowText:@"回复成功" second:1.f];
             [weakSelf.tableView reloadData];
             
             XXECommentModel *commentModel = [[XXECommentModel alloc] init];
@@ -810,7 +607,7 @@
             commentModel.commentId = commentId;
             commentModel.commentNicknName = [XXEUserInfo user].nickname;
             commentModel.to_who_nickname = replyNickname;
-    
+            
             //刷新本地数据
             XXECircleModel * model = weakSelf.circleListDatasource[(int)itemId - 1];
             [model.comment_group addObject:commentModel];
@@ -819,12 +616,10 @@
         }else{
             [weakSelf hudShowText:@"回复失败" second:1.f];
         }
-//        NSLog(@"%@",request.responseJSONObject);
-//        NSLog(@"%@",[request.responseJSONObject objectForKey:@"msg"]);
-        
-    } failure:^(__kindof YTKBaseRequest *request) {
+    } fail:^{
         [weakSelf hudShowText:@"回复失败" second:1.f];
     }];
+
 }
 
 //删除评论 网络请求
@@ -840,33 +635,19 @@
         XXECircleModel *circleModel = self.circleListDatasource[indexId];
         self.speakId = circleModel.talkId;
     }
-    
-    //    NSLog(@"commentId%lld itemI%lld",commentId, itemId);
-    //    NSLog(@"说说ID%@",self.speakId);
-    //    NSLog(@"CommentId%lld",commentId);
     NSString *commentID = [NSString stringWithFormat:@"%lld",commentId];
-    XXEDeleteCommentApi *commentApi = [[XXEDeleteCommentApi alloc]initWithDeleteCommentEventType:@"3" TalkId:self.speakId CommentId:commentID UserXid:parameterXid UserId:parameterUser_Id];
     __weak __typeof(self)weakSelf = self;
-    [commentApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        //        NSLog(@"%@",request.responseJSONObject);
-        NSString *code = [request.responseJSONObject objectForKey:@"code"];
-        //        NSLog(@":data%@",data);
+    [[FriendCircleService sharedInstance] friendCircleDeleteCommentEventType:@"3" TalkId:self.speakId CommentId:commentID UserXid:parameterXid UserId:parameterUser_Id succeed:^(id request) {
+        NSString *code = [request objectForKey:@"code"];
         if ([code integerValue]==1 || [code integerValue]==5 ) {
-            //            NSLog(@"%@",[request.responseJSONObject objectForKey:@"msg"]);
-            //            NSLog(@"%@",[request.responseJSONObject objectForKey:@"data"]);
-            
             XXECommentModel *commentModel = [[XXECommentModel alloc]init];
             commentModel.commentId = [NSString stringWithFormat:@"%lld", commentId];
             commentModel.commentXid = parameterXid;
             commentModel.commentNicknName = @"";
             commentModel.con = @"";
-             
+            
             DFLineCommentItem *commentItem = [[DFLineCommentItem alloc] init];
             [commentItem configure:commentModel];
-//            commentItem.commentId = commentId;
-//            commentItem.userId = [parameterXid integerValue];
-//            commentItem.userNick = @"";
-//            commentItem.text = @"";
             [self cancelCommentItem:commentItem itemId:itemId replyCommentId:commentId];
             [self hudShowText:@"删除成功" second:1.f];
             [self.tableView reloadData];
@@ -883,15 +664,12 @@
                 
             }
             
-            
-//            [model.comment_group removeObject:model];
             weakSelf.circleListDatasource[(int)itemId - 1] = model;
             
-//            [self setupFriendCircleMessagePage:_page];
         }else{
             [self hudShowText:@"删除失败" second:1.f];
         }
-    } failure:^(__kindof YTKBaseRequest *request) {
+    } fail:^{
         [self hudShowText:@"网络请求失败" second:1.f];
     }];
 
@@ -954,56 +732,104 @@
     }else{
        XXECircleModel *circleModel = self.circleListDatasource[indexId];
         self.speakId = circleModel.talkId;
-//    NSLog(@"说说ID%@ XID%@ UserID%@",self.speakId ,strngXid,homeUserId);
-    XXEFriendCirclegoodApi *friendGoodApi = [[XXEFriendCirclegoodApi alloc]initWithFriendCircleGoodOrCancelUerXid:parameterXid UserID:parameterUser_Id TalkId:self.speakId];
+        
         __weak __typeof(self)weakSelf = self;
-    [friendGoodApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        /*
-         code = 10;    //取消点赞 成功
-         data =     {
-         nickname = summer;
-         xid = 18886394;
-         };
-         msg = "Success!\U53d6\U6d88\U8d5e\U6210\U529f!";
-         */
-        
-//        NSLog(@"zan ===== %@", request.responseJSONObject);
-        
-        NSString *code = [request.responseJSONObject objectForKey:@"code"];
-        NSDictionary *data = [request.responseJSONObject objectForKey:@"data"];
-        
-        XXEGoodUserModel * goodModel = [[XXEGoodUserModel alloc] init];
-        goodModel.goodXid = [data objectForKey:@"xid"];
-        goodModel.goodNickName = [data objectForKey:@"nickname"];
-        DFLineLikeItem *likeItem = [[DFLineLikeItem alloc] init];
-        [likeItem configure:goodModel];
-        
-        //刷新本地数据
-        XXECircleModel * model = weakSelf.circleListDatasource[(int)itemId - 1];
-        
-        if ([code integerValue]==1) {
-            [self addLikeItem:likeItem itemId:itemId isSelet:NO];
-            [self hudShowText:@"点赞成功" second:1.f];
-            [model.good_user addObject:goodModel];
+        [[FriendCircleService sharedInstance] friendCircleGoodOrCancelUserXid:parameterXid UserID:parameterUser_Id TalkId:self.speakId succeed:^(id request) {
+            /*
+             code = 10;    //取消点赞 成功
+             data =     {
+             nickname = summer;
+             xid = 18886394;
+             };
+             msg = "Success!\U53d6\U6d88\U8d5e\U6210\U529f!";
+             */
             
-        }else if ([code integerValue]==10){
+            //        NSLog(@"zan ===== %@", request.responseJSONObject);
             
-            [self addLikeItem:likeItem itemId:itemId isSelet:YES];
-            [self hudShowText:@"取消成功" second:1.f];
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                for (XXEGoodUserModel * good in model.good_user) {
-                    if ([good.goodXid isEqualToString:[XXEUserInfo user].xid]) {
-                        [model.good_user removeObject:good];
-                        break;
+            NSString *code = [request objectForKey:@"code"];
+            NSDictionary *data = [request objectForKey:@"data"];
+            
+            XXEGoodUserModel * goodModel = [[XXEGoodUserModel alloc] init];
+            goodModel.goodXid = [data objectForKey:@"xid"];
+            goodModel.goodNickName = [data objectForKey:@"nickname"];
+            DFLineLikeItem *likeItem = [[DFLineLikeItem alloc] init];
+            [likeItem configure:goodModel];
+            
+            //刷新本地数据
+            XXECircleModel * model = weakSelf.circleListDatasource[(int)itemId - 1];
+            
+            if ([code integerValue]==1) {
+                [self addLikeItem:likeItem itemId:itemId isSelet:NO];
+                [self hudShowText:@"点赞成功" second:1.f];
+                [model.good_user addObject:goodModel];
+                
+            }else if ([code integerValue]==10){
+                
+                [self addLikeItem:likeItem itemId:itemId isSelet:YES];
+                [self hudShowText:@"取消成功" second:1.f];
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    for (XXEGoodUserModel * good in model.good_user) {
+                        if ([good.goodXid isEqualToString:[XXEUserInfo user].xid]) {
+                            [model.good_user removeObject:good];
+                            break;
+                        }
                     }
-                }
-            });
-        }
-        weakSelf.circleListDatasource[(int)itemId - 1] = model;
-    
-    } failure:^(__kindof YTKBaseRequest *request) {
-        [self hudShowText:@"网络不通，请检查网络！" second:1.f];
-    }];
+                });
+            }
+            weakSelf.circleListDatasource[(int)itemId - 1] = model;
+            
+        } fail:^{
+            [self hudShowText:@"网络不通，请检查网络！" second:1.f];
+        }];
+//    NSLog(@"说说ID%@ XID%@ UserID%@",self.speakId ,strngXid,homeUserId);
+//    XXEFriendCirclegoodApi *friendGoodApi = [[XXEFriendCirclegoodApi alloc]initWithFriendCircleGoodOrCancelUerXid:parameterXid UserID:parameterUser_Id TalkId:self.speakId];
+//    [friendGoodApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+//        /*
+//         code = 10;    //取消点赞 成功
+//         data =     {
+//         nickname = summer;
+//         xid = 18886394;
+//         };
+//         msg = "Success!\U53d6\U6d88\U8d5e\U6210\U529f!";
+//         */
+//        
+////        NSLog(@"zan ===== %@", request.responseJSONObject);
+//        
+//        NSString *code = [request.responseJSONObject objectForKey:@"code"];
+//        NSDictionary *data = [request.responseJSONObject objectForKey:@"data"];
+//        
+//        XXEGoodUserModel * goodModel = [[XXEGoodUserModel alloc] init];
+//        goodModel.goodXid = [data objectForKey:@"xid"];
+//        goodModel.goodNickName = [data objectForKey:@"nickname"];
+//        DFLineLikeItem *likeItem = [[DFLineLikeItem alloc] init];
+//        [likeItem configure:goodModel];
+//        
+//        //刷新本地数据
+//        XXECircleModel * model = weakSelf.circleListDatasource[(int)itemId - 1];
+//        
+//        if ([code integerValue]==1) {
+//            [self addLikeItem:likeItem itemId:itemId isSelet:NO];
+//            [self hudShowText:@"点赞成功" second:1.f];
+//            [model.good_user addObject:goodModel];
+//            
+//        }else if ([code integerValue]==10){
+//            
+//            [self addLikeItem:likeItem itemId:itemId isSelet:YES];
+//            [self hudShowText:@"取消成功" second:1.f];
+//            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//                for (XXEGoodUserModel * good in model.good_user) {
+//                    if ([good.goodXid isEqualToString:[XXEUserInfo user].xid]) {
+//                        [model.good_user removeObject:good];
+//                        break;
+//                    }
+//                }
+//            });
+//        }
+//        weakSelf.circleListDatasource[(int)itemId - 1] = model;
+//    
+//    } failure:^(__kindof YTKBaseRequest *request) {
+//        [self hudShowText:@"网络不通，请检查网络！" second:1.f];
+//    }];
     
     }
 }
@@ -1029,109 +855,142 @@
 
 
 //发送视频 目前没有实现填写文字
--(void)onSendVideo:(NSString *)text videoPath:(NSString *)videoPath screenShot:(UIImage *)screenShot name:(NSString *)name fileName:(NSString *)fileName
-{
-    NSData *data = [NSData dataWithContentsOfFile:videoPath];
-//    NSURL *sourceUrl = [NSURL URLWithString:videoPath];
-//    AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:sourceUrl options:nil];
+//-(void)onSendVideo:(NSString *)text videoPath:(NSString *)videoPath screenShot:(UIImage *)screenShot name:(NSString *)name fileName:(NSString *)fileName
+//{
+//    NSData *data = [NSData dataWithContentsOfFile:videoPath];
+////    NSURL *sourceUrl = [NSURL URLWithString:videoPath];
+////    AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:sourceUrl options:nil];
+////    
+////    NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset];
+////    
+////    NSLog(@"%@",compatiblePresets);
+////    
+////    if ([compatiblePresets containsObject:AVAssetExportPresetHighestQuality]) {
+////        
+////        AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:avAsset presetName:AVAssetExportPresetMediumQuality];
+////        
+////        NSDateFormatter *formater = [[NSDateFormatter alloc] init];//用时间给文件全名，以免重复
+////        [formater setDateFormat:@"yyyy-MM-dd-HH:mm:ss"];
+////        
+////        NSString * resultPath = [NSHomeDirectory() stringByAppendingFormat:@"/Documents/output-%@.mp4", [formater stringFromDate:[NSDate date]]];
+////        
+////        NSLog(@"resultPath = %@",resultPath);
+////        
+////        exportSession.outputURL = [NSURL fileURLWithPath:resultPath];
+////        
+////        exportSession.outputFileType = AVFileTypeMPEG4;
+////        
+////        exportSession.shouldOptimizeForNetworkUse = YES;
+////        
+////        [exportSession exportAsynchronouslyWithCompletionHandler:^(void)
+////         
+////         {
+////             
+////             switch (exportSession.status) {
+////                     
+////                 case AVAssetExportSessionStatusUnknown:
+////                     
+////                     NSLog(@"AVAssetExportSessionStatusUnknown");
+////                     
+////                     break;
+////                     
+////                 case AVAssetExportSessionStatusWaiting:
+////                     
+////                     NSLog(@"AVAssetExportSessionStatusWaiting");
+////                     
+////                     break;
+////                     
+////                 case AVAssetExportSessionStatusExporting:
+////                     
+////                     NSLog(@"AVAssetExportSessionStatusExporting");
+////                     
+////                     break;
+////                     
+////                 case AVAssetExportSessionStatusCompleted:
+////                     
+////                     NSLog(@"AVAssetExportSessionStatusCompleted");
+////                     
+////                     break;  
+////                     
+////                 case AVAssetExportSessionStatusFailed:  
+////                     
+////                     NSLog(@"AVAssetExportSessionStatusFailed");  
+////                     
+////                     break;  
+////                     
+////             }  
+////             
+////         }];  
+////        
+////    }
 //    
-//    NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset];
 //    
-//    NSLog(@"%@",compatiblePresets);
+//
+//    DFVideoLineItem *videoItem = [[DFVideoLineItem alloc] init];
+//    videoItem.itemId = 1; //随便设置一个 待服务器生成
+//    videoItem.userId = 10018;
+//    videoItem.userAvatar = @"http://file-cdn.datafans.net/avatar/1.jpeg";
+//    videoItem.userNick = @"富二代";
+//    videoItem.title = @"发表了";
+//    videoItem.text = @"新年过节 哈哈"; //这里需要present一个界面 用户填入文字后再发送 场景和发图片一样
+////    XXEWhoCanLookController *whoVC = [[XXEWhoCanLookController alloc]init];
+////    [self presentViewController:whoVC animated:YES completion:nil];
 //    
-//    if ([compatiblePresets containsObject:AVAssetExportPresetHighestQuality]) {
-//        
-//        AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:avAsset presetName:AVAssetExportPresetMediumQuality];
-//        
-//        NSDateFormatter *formater = [[NSDateFormatter alloc] init];//用时间给文件全名，以免重复
-//        [formater setDateFormat:@"yyyy-MM-dd-HH:mm:ss"];
-//        
-//        NSString * resultPath = [NSHomeDirectory() stringByAppendingFormat:@"/Documents/output-%@.mp4", [formater stringFromDate:[NSDate date]]];
-//        
-//        NSLog(@"resultPath = %@",resultPath);
-//        
-//        exportSession.outputURL = [NSURL fileURLWithPath:resultPath];
-//        
-//        exportSession.outputFileType = AVFileTypeMPEG4;
-//        
-//        exportSession.shouldOptimizeForNetworkUse = YES;
-//        
-//        [exportSession exportAsynchronouslyWithCompletionHandler:^(void)
-//         
-//         {
-//             
-//             switch (exportSession.status) {
-//                     
-//                 case AVAssetExportSessionStatusUnknown:
-//                     
-//                     NSLog(@"AVAssetExportSessionStatusUnknown");
-//                     
-//                     break;
-//                     
-//                 case AVAssetExportSessionStatusWaiting:
-//                     
-//                     NSLog(@"AVAssetExportSessionStatusWaiting");
-//                     
-//                     break;
-//                     
-//                 case AVAssetExportSessionStatusExporting:
-//                     
-//                     NSLog(@"AVAssetExportSessionStatusExporting");
-//                     
-//                     break;
-//                     
-//                 case AVAssetExportSessionStatusCompleted:
-//                     
-//                     NSLog(@"AVAssetExportSessionStatusCompleted");
-//                     
-//                     break;  
-//                     
-//                 case AVAssetExportSessionStatusFailed:  
-//                     
-//                     NSLog(@"AVAssetExportSessionStatusFailed");  
-//                     
-//                     break;  
-//                     
-//             }  
-//             
-//         }];  
-//        
-//    }
-    
-    
+//    videoItem.location = @"广州";
+//    
+//    videoItem.localVideoPath = videoPath;
+//    videoItem.videoUrl = @""; //网络路径
+//    videoItem.thumbUrl = @"";
+//    videoItem.thumbImage = screenShot; //如果thumbImage存在 优先使用thumbImage
+//    [self wwwqqqqqqWithPath:data name:name fileName:fileName dataURL:[NSURL URLWithString:videoPath]];
+////    [self addItemTop:videoItem];
+//    
+//    //接着上传图片 和 请求服务器接口
+//    //请求完成之后 刷新整个界面
+//    
+////    NSDictionary *dict = @{@"file_type":@"2",
+////                           @"page_origin":@"35",
+////                           @"upload_format":@"1",
+////                           @"appkey":APPKEY,
+////                           @"user_type":USER_TYPE,
+////                           @"backtype":BACKTYPE
+////                           };
+////    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+////    [manager POST:XXERegisterUpLoadPicUrl parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+////        [formData appendPartWithFileData:data name:@"video" fileName:@"video.mov" mimeType:@"video/quicktime"];
+////        
+////    } success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+////        
+////        NSLog(@"%@",responseObject);
+//////        NSLog(@"%@",[responseObject objectForKey:@"msg"]);
+////        
+////    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+////        NSLog(@"%@",error);
+////    }];
+//}
 
-    DFVideoLineItem *videoItem = [[DFVideoLineItem alloc] init];
-    videoItem.itemId = 1; //随便设置一个 待服务器生成
-    videoItem.userId = 10018;
-    videoItem.userAvatar = @"http://file-cdn.datafans.net/avatar/1.jpeg";
-    videoItem.userNick = @"富二代";
-    videoItem.title = @"发表了";
-    videoItem.text = @"新年过节 哈哈"; //这里需要present一个界面 用户填入文字后再发送 场景和发图片一样
-//    XXEWhoCanLookController *whoVC = [[XXEWhoCanLookController alloc]init];
-//    [self presentViewController:whoVC animated:YES completion:nil];
-    
-    videoItem.location = @"广州";
-    
-    videoItem.localVideoPath = videoPath;
-    videoItem.videoUrl = @""; //网络路径
-    videoItem.thumbUrl = @"";
-    videoItem.thumbImage = screenShot; //如果thumbImage存在 优先使用thumbImage
-    [self wwwqqqqqqWithPath:data name:name fileName:fileName dataURL:[NSURL URLWithString:videoPath]];
-//    [self addItemTop:videoItem];
-    
-    //接着上传图片 和 请求服务器接口
-    //请求完成之后 刷新整个界面
-    
+
+//测试传视频
+//- (void)wwwqqqqqqWithPath:(NSData *)data1 name:(NSString*)name fileName:(NSString*)fileName dataURL:(NSURL*)dataURL
+//{
 //    NSDictionary *dict = @{@"file_type":@"2",
 //                           @"page_origin":@"35",
 //                           @"upload_format":@"1",
 //                           @"appkey":APPKEY,
 //                           @"user_type":USER_TYPE,
-//                           @"backtype":BACKTYPE
+//                           @"backtype":BACKTYPE,
+//                           @"return_param_all":@"1",
+//                           @"return":@"re"
 //                           };
 //    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 //    [manager POST:XXERegisterUpLoadPicUrl parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//        [formData appendPartWithFileData:data name:@"video" fileName:@"video.mov" mimeType:@"video/quicktime"];
+////        NSString *name = [NSString stringWithFormat:@"video2"];
+////        NSString *formKey = [NSString stringWithFormat:@"video2.mp4"];
+//        NSString *type = @"video/mp4";
+//        NSError *error = nil;
+//        [formData appendPartWithFileURL:dataURL name:name fileName:fileName mimeType:type error:&error];
+//        NSLog(@"%@",error);
+////        [formData appendPartWithFileURL:dataURL name:formKey fileName:name mimeType:type];
 //        
 //    } success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
 //        
@@ -1141,96 +1000,63 @@
 //    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
 //        NSLog(@"%@",error);
 //    }];
-}
-
-
-//测试传视频
-- (void)wwwqqqqqqWithPath:(NSData *)data1 name:(NSString*)name fileName:(NSString*)fileName dataURL:(NSURL*)dataURL
-{
-    NSDictionary *dict = @{@"file_type":@"2",
-                           @"page_origin":@"35",
-                           @"upload_format":@"1",
-                           @"appkey":APPKEY,
-                           @"user_type":USER_TYPE,
-                           @"backtype":BACKTYPE,
-                           @"return_param_all":@"1",
-                           @"return":@"re"
-                           };
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:XXERegisterUpLoadPicUrl parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//        NSString *name = [NSString stringWithFormat:@"video2"];
-//        NSString *formKey = [NSString stringWithFormat:@"video2.mp4"];
-        NSString *type = @"video/mp4";
-        NSError *error = nil;
-        [formData appendPartWithFileURL:dataURL name:name fileName:fileName mimeType:type error:&error];
-        NSLog(@"%@",error);
-//        [formData appendPartWithFileURL:dataURL name:formKey fileName:name mimeType:type];
-        
-    } success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        NSLog(@"%@",responseObject);
-//        NSLog(@"%@",[responseObject objectForKey:@"msg"]);
-        
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        NSLog(@"%@",error);
-    }];
-
-}
-- (void)aaa{
-//    NSDictionary *dict = @{@"file_type":@"2",
-//                           @"page_origin":@"35",
-//                           @"upload_format":@"1",
-//                           @"appkey":APPKEY,
-//                           @"user_type":USER_TYPE,
-//                           @"backtype":BACKTYPE,
-//                           @"return_param_all":@"1",
-//                           @"return": @"return"
-//                           };
-//    AFHTTPRequestSerializer *ser = [[AFHTTPRequestSerializer alloc] init];
-//    NSMutableURLRequest *request = [ser multipartFormRequestWithMethod:@"POST"
-//                                                             URLString:XXERegisterUpLoadPicUrl parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//                                                                 [formData appendPartWithFileURL:fileURL name:@"file" fileName:@"fileName" mimeType:@"video/mp4" error:nil];
-//                                                             } error:nil];
-//    
-//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-//    
-//    NSProgress *progress = nil;
-//    
-//    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-//        if (error) {
-//            NSLog(@"request = %@", request );
-//            //            MyLog(@"response = %@", response );
-//            //            MyLog(@"Error: %@", error );
-//            //            [_hud hide:YES];
-//            //            CXAlertView *alert=[[CXAlertView alloc]initWithTitle:NSLocalizedString(@"Warning", nil)
-//            //                                                         message:NSLocalizedString(@"Upload Failed",nil)
-//            //                                               cancelButtonTitle:NSLocalizedString(@"Iknow", nil)];
-//            //            alert.showBlurBackground = NO;
-//            //            [alert show];
-//        } else {
-//            NSLog(@"%@ %@", response, responseObject);
-//            NSDictionary *backDict=(NSDictionary *)responseObject;
-//            if ([backDict[@"success"] boolValue] != NO) {
-//                //                _hud.labelText = NSLocalizedString(@"Updating", nil);
-//                //                [self UpdateResxDateWithDict:backDict discription:dict[@"discription"]];
-//                //                [_hud hide:YES];
-//            }else{
-//                //                [_hud hide:YES];
-//                //                [MyHelper showAlertWith:nil txt:backDict[@"msg"]];
-//            }
-//        }
-//        //        [progress removeObserver:self
-//        //                      forKeyPath:@"fractionCompleted"
-//        //                         context:@"1"];
-//    }];
-//    
-//    //    [progress addObserver:self
-//    //               forKeyPath:@"fractionCompleted"
-//    //                  options:NSKeyValueObservingOptionNew
-//    //                  context:@"1"];
-//    //    [progress setUserInfoObject:@"someThing" forKey:@"Y.X."];
-//    [uploadTask resume];
-}
+//
+//}
+//- (void)aaa{
+////    NSDictionary *dict = @{@"file_type":@"2",
+////                           @"page_origin":@"35",
+////                           @"upload_format":@"1",
+////                           @"appkey":APPKEY,
+////                           @"user_type":USER_TYPE,
+////                           @"backtype":BACKTYPE,
+////                           @"return_param_all":@"1",
+////                           @"return": @"return"
+////                           };
+////    AFHTTPRequestSerializer *ser = [[AFHTTPRequestSerializer alloc] init];
+////    NSMutableURLRequest *request = [ser multipartFormRequestWithMethod:@"POST"
+////                                                             URLString:XXERegisterUpLoadPicUrl parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+////                                                                 [formData appendPartWithFileURL:fileURL name:@"file" fileName:@"fileName" mimeType:@"video/mp4" error:nil];
+////                                                             } error:nil];
+////    
+////    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+////    
+////    NSProgress *progress = nil;
+////    
+////    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+////        if (error) {
+////            NSLog(@"request = %@", request );
+////            //            MyLog(@"response = %@", response );
+////            //            MyLog(@"Error: %@", error );
+////            //            [_hud hide:YES];
+////            //            CXAlertView *alert=[[CXAlertView alloc]initWithTitle:NSLocalizedString(@"Warning", nil)
+////            //                                                         message:NSLocalizedString(@"Upload Failed",nil)
+////            //                                               cancelButtonTitle:NSLocalizedString(@"Iknow", nil)];
+////            //            alert.showBlurBackground = NO;
+////            //            [alert show];
+////        } else {
+////            NSLog(@"%@ %@", response, responseObject);
+////            NSDictionary *backDict=(NSDictionary *)responseObject;
+////            if ([backDict[@"success"] boolValue] != NO) {
+////                //                _hud.labelText = NSLocalizedString(@"Updating", nil);
+////                //                [self UpdateResxDateWithDict:backDict discription:dict[@"discription"]];
+////                //                [_hud hide:YES];
+////            }else{
+////                //                [_hud hide:YES];
+////                //                [MyHelper showAlertWith:nil txt:backDict[@"msg"]];
+////            }
+////        }
+////        //        [progress removeObserver:self
+////        //                      forKeyPath:@"fractionCompleted"
+////        //                         context:@"1"];
+////    }];
+////    
+////    //    [progress addObserver:self
+////    //               forKeyPath:@"fractionCompleted"
+////    //                  options:NSKeyValueObservingOptionNew
+////    //                  context:@"1"];
+////    //    [progress setUserInfoObject:@"someThing" forKey:@"Y.X."];
+////    [uploadTask resume];
+//}
 #pragma mark - TabelViewDelegate
 
 //-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
