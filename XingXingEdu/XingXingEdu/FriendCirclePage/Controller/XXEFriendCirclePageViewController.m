@@ -26,6 +26,7 @@
 #import <JSONModel/JSONModel.h>
 #import "ServiceManager.h"
 #import "UploadParam.h"
+#import "XXEHeaderApi.h"
 
 @interface XXEFriendCirclePageViewController ()<DFTimeLineViewControllerDelegate, NSCopying>
 {
@@ -102,7 +103,7 @@
     // Do any additional setup after loading the view.
     self.speakId = @"";
     self.tableView.hidden = YES;
-    self.view.backgroundColor = XXEBackgroundColor;
+    self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
     if ([XXEUserInfo user].login){
         parameterXid = [XXEUserInfo user].xid;
         parameterUser_Id = [XXEUserInfo user].user_id;

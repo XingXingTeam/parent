@@ -14,6 +14,7 @@
 		9CD8898D1B732AD900988CA8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CD8898C1B732AD900988CA8 /* Images.xcassets */; };
 		9CD889901B732AD900988CA8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CD8898E1B732AD900988CA8 /* LaunchScreen.xib */; };
 		9CD8899C1B732AD900988CA8 /* WJCommboxDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD8899B1B732AD900988CA8 /* WJCommboxDemoTests.m */; };
+		9CD889AC1B732B9A00988CA8 /* WJCommboxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD889AB1B732B9A00988CA8 /* WJCommboxView.m */; };
 		9CD889AE1B73314600988CA8 /* narrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD889AD1B73314600988CA8 /* narrow@2x.png */; };
 		9CD889B21B73315F00988CA8 /* narrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD889B11B73315F00988CA8 /* narrow@3x.png */; };
 		9CD889B41B7338BE00988CA8 /* wjbox.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9CD889B31B7338BE00988CA8 /* wjbox.gif */; };
@@ -43,6 +44,8 @@
 		9CD889951B732AD900988CA8 /* WJCommboxDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WJCommboxDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD8899A1B732AD900988CA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9CD8899B1B732AD900988CA8 /* WJCommboxDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WJCommboxDemoTests.m; sourceTree = "<group>"; };
+		9CD889AA1B732B9A00988CA8 /* WJCommboxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJCommboxView.h; sourceTree = "<group>"; };
+		9CD889AB1B732B9A00988CA8 /* WJCommboxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJCommboxView.m; sourceTree = "<group>"; };
 		9CD889AD1B73314600988CA8 /* narrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "narrow@2x.png"; sourceTree = "<group>"; };
 		9CD889B11B73315F00988CA8 /* narrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "narrow@3x.png"; sourceTree = "<group>"; };
 		9CD889B31B7338BE00988CA8 /* wjbox.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = wjbox.gif; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				9CD889B31B7338BE00988CA8 /* wjbox.gif */,
+				9CD889A91B732B9A00988CA8 /* WJCommboxView */,
 				9CD889831B732AD900988CA8 /* AppDelegate.h */,
 				9CD889841B732AD900988CA8 /* AppDelegate.m */,
 				9CD889861B732AD900988CA8 /* ViewController.h */,
@@ -126,6 +130,15 @@
 				9CD8899A1B732AD900988CA8 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9CD889A91B732B9A00988CA8 /* WJCommboxView */ = {
+			isa = PBXGroup;
+			children = (
+				9CD889AA1B732B9A00988CA8 /* WJCommboxView.h */,
+				9CD889AB1B732B9A00988CA8 /* WJCommboxView.m */,
+			);
+			path = WJCommboxView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +247,7 @@
 				9CD889881B732AD900988CA8 /* ViewController.m in Sources */,
 				9CD889851B732AD900988CA8 /* AppDelegate.m in Sources */,
 				9CD889821B732AD900988CA8 /* main.m in Sources */,
+				9CD889AC1B732B9A00988CA8 /* WJCommboxView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

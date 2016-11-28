@@ -23,8 +23,9 @@
     MBProgressHUD *HUD;
     NSMutableString * report_name_idStr;
     
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
 
-    
     
 }
 
@@ -39,6 +40,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
     
     seletedIdArray = [[NSMutableArray alloc] init];
    
@@ -56,24 +64,11 @@
 - (void)fetchNetData{
 /*
  【举报列表(两端通用)】
- 
  接口:
  http://www.xingxingedu.cn/Global/report_list
  */
-    
     //路径
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/report_list";
-    
-    //请求参数 无
-    NSString *parameterXid;
-    NSString *parameterUser_Id;
-    if ([XXEUserInfo user].login){
-        parameterXid = [XXEUserInfo user].xid;
-        parameterUser_Id = [XXEUserInfo user].user_id;
-    }else{
-        parameterXid = XID;
-        parameterUser_Id = USER_ID;
-    }
     
     NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE};
     
@@ -83,16 +78,6 @@
         dataArray = [[NSMutableArray alloc] init];
         
 //        NSLog(@"%@", responseObj);
-        /*
-         {
-         msg = Success!,
-         data = [
-         {
-         id = 1,
-         name = 色情低俗
-         }
-         */
-        
         NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
         
         if ([codeStr isEqualToString:@"1"]) {
@@ -197,10 +182,8 @@
 - (void)submit{
     /*
      【举报提交(两端通用)】
-     
      接口:
      http://www.xingxingedu.cn/Global/report_sub
-     
      传参:
      other_xid	//被举报人xid (举报用户时才有此参数)
      report_name_id	//举报内容id , 多个逗号隔开
@@ -218,12 +201,9 @@
     
     //路径
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/report_sub";
-    
     //请求参数
     //获取学校id数组
     //    NSLog(@"已选 id  %@", seletedIdArray);
-    
-    
     NSMutableString *tidStr = [NSMutableString string];
     
     for (int j = 0; j < seletedIdArray.count; j ++) {
@@ -237,17 +217,7 @@
     }
     
     report_name_idStr = tidStr;
-    NSString *parameterXid;
-    NSString *parameterUser_Id;
-    if ([XXEUserInfo user].login){
-        parameterXid = [XXEUserInfo user].xid;
-        parameterUser_Id = [XXEUserInfo user].user_id;
-    }else{
-        parameterXid = XID;
-        parameterUser_Id = USER_ID;
-    }
-    
-    
+
     NSDictionary *params;
     
     if (_other_xidStr == nil) {

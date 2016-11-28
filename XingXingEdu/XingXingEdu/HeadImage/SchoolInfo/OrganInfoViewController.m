@@ -75,7 +75,7 @@
 }
 - (void)bigImage:(UITapGestureRecognizer*)tap{
    
-    NSLog(@"%ld",tap.view.tag);
+    NSLog(@"快快快 ==== %ld",tap.view.tag);
     RedFlowerViewController *redFlowerVC =[[RedFlowerViewController alloc]init];
 //    redFlowerVC.s =(int)tap.view.tag-100+1;
     redFlowerVC.imageArr =imageArr;

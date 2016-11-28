@@ -7,6 +7,7 @@
 //
 
 #import "XXEHomeReportListApi.h"
+#import "XXEHeaderApi.h"
 
 @implementation XXEHomeReportListApi{
     NSString *_userId;

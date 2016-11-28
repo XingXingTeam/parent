@@ -151,13 +151,14 @@
         
         }
         
-        NSLog(@"%@", _dataModelArray);
+//        NSLog(@"%@", _dataModelArray);
         
         [_myTableView reloadData];
         
     } failure:^(NSError *error) {
         //
         NSLog(@"%@", error);
+        [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
     }];
 
 }

@@ -48,6 +48,9 @@
     NSMutableArray * parent_listMArr;
     NSMutableArray * tnameMArr;
     NSMutableArray * idMArr;
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
+    
     
 }
 @property(nonatomic,strong)UISearchBar *searchBar;
@@ -61,6 +64,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
     self.title =@"班级通讯录";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     // Do any additional setup after loading the view.
@@ -82,13 +93,17 @@
 
 
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/fbasket_give_teacher";
+    
+    NSString *schoolID = [DEFAULTS objectForKey:@"SCHOOL_ID"];
+    NSString *classID = [DEFAULTS objectForKey:@"CLASS_ID"];
+    
     NSDictionary *dictKT = @{@"appkey":APPKEY,
                              @"backtype":BACKTYPE,
-                             @"xid":XID,
-                             @"user_id":USER_ID,
+                             @"xid":parameterXid,
+                             @"user_id":parameterUser_Id,
                              @"user_type":USER_TYPE,
-                             @"school_id":@"1",
-                             @"class_id":@"1",
+                             @"school_id":schoolID,
+                             @"class_id":classID,
                              };
     
   [WZYHttpTool post:urlStr params:dictKT success:^(id responseObj) {
@@ -128,24 +143,6 @@
   }];
 
 }
-//- (void)createRightBar{
-//    UIBarButtonItem *searchBar = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"NavBarIconSearch_blue@2x"] style:UIBarButtonItemStylePlain target:self action:@selector(searchB:)];
-//    self.navigationItem.rightBarButtonItem =searchBar;
-//}
-//- (void)searchB:(UIBarButtonItem*)btn{
-//    
-//    _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,20, kWidth, 44)];
-//    UIImage *backgroundImg = [UtilityFunc createImageWithColor:UIColorFromHex(0xf0eaf3) size:_searchBar.frame.size];
-//    [_searchBar setBackgroundImage:backgroundImg];
-//    _searchBar.placeholder =@"输入你想要查询的联系人";
-//    _searchBar.tintColor = [UIColor blackColor];
-//    _searchBar.delegate =self;
-//    _searchDC = [[UISearchController alloc]initWithSearchResultsController:self];
-//    [self.navigationItem.titleView sizeToFit];
-//    [self.navigationController.view addSubview:_searchBar];
-//    _searchBar.showsCancelButton =YES;
-//    
-//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

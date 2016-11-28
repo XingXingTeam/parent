@@ -7,7 +7,7 @@
 //
 
 #import "XXEReportSubmitMessageApi.h"
-
+#import "XXEHeaderApi.h"
 @implementation XXEReportSubmitMessageApi{
     NSString *_userId;
     NSString *_userXid;

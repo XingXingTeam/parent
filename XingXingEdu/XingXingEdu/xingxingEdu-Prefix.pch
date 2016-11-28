@@ -36,10 +36,6 @@
 #import "YSProgressView.h"
 #import "XXEUserInfo.h"
 #import <RongIMKit/RongIMKit.h>
-
-#import "XXEHeaderApi.h"
-#import "XXETool.h"
-#import "MacroDefine.h"
 #import "FriendCircleHeader.h"
 
 #endif

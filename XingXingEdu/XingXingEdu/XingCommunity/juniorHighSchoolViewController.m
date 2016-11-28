@@ -9,7 +9,7 @@
 #import "juniorHighSchoolViewController.h"
 #import "kindergartenTableViewCell.h"
 #import "WebViewController.h"
-@interface juniorHighSchoolViewController ()
+@interface juniorHighSchoolViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
     NSArray * juniorHightImageArray;
     NSArray * juniorHigthLabelArray;

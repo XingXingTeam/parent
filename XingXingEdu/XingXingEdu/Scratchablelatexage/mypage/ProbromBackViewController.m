@@ -9,6 +9,11 @@
 #import "ProbromBackViewController.h"
 #import "SVProgressHUD.h"
 @interface ProbromBackViewController ()<UITextViewDelegate>
+{
+
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *numLbl;
 @property (weak, nonatomic) IBOutlet UITextView *textFid;
@@ -22,28 +27,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title =@"意见反馈";
+    
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
+
     // Do any additional setup after loading the view from its nib.
     _textFid.userInteractionEnabled =YES;
     _textFid.delegate =self;
     
 }
 - (IBAction)submitBtn:(UIButton *)sender {
-    
-//   
-//    [UIView animateWithDuration:2 animations:^{
-//        [SVProgressHUD showSuccessWithStatus:@"提交成功!"];
-//    } completion:^(BOOL finished) {
-//           [self.navigationController popViewControllerAnimated:YES];
-//    }];
-    
+
     /*
      【意见反馈(两端通用)】
-     
      接口类型:2
-     
      接口:
      http://www.xingxingedu.cn/Global/suggestion_sub
-     
      传参:
      con	//反馈内容
      */
@@ -51,20 +55,12 @@
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/suggestion_sub";
     
     //请求参数
-    NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":XID, @"user_id":USER_ID, @"user_type":USER_TYPE, @"con":_textFid.text};
+    NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"con":_textFid.text};
     
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
 //        NSLog(@"反馈 意见  ---  %@", responseObj);
-        /*
-         反馈 意见  ---  {
-         msg = Success!,
-         data = ,
-         code = 1
-         }
-         */
-        
-        
+
         NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
         if ([codeStr isEqualToString:@"1"]) {
             

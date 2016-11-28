@@ -1,0 +1,33 @@
+-x
+objective-c
+-arch
+armv7
+-fretain-comments-from-system-headers
+-std=gnu99
+-fobjc-arc
+-fobjc-weak
+-fmodules
+-gmodules
+-fmodules-cache-path=/Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/ModuleCache
+-fpascal-strings
+-O0
+-fno-common
+-DDEBUG=1
+-DOBJC_OLD_DISPATCH_PROTOTYPES=0
+-isysroot
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.1.sdk
+-miphoneos-version-min=9.2
+-g
+-iquote
+-iquote
+-I/Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Products/Debug-iphoneos/include
+-F/Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Products/Debug-iphoneos
+-F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Frameworks
+-ferror-limit=10
+-working-directory=/Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu
+-Xclang
+-detailed-preprocessing-record
+arm-apple-darwin16.1.0
+"4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.42.1)"
+SDK_PRODUCT_BUILD_VERSION=14B72
+14B72

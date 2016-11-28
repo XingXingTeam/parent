@@ -710,8 +710,8 @@
     NSString *urlStr = @"http://www.xingxingedu.cn/Parent/register";
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *dic = @{@"appkey":@"U3k8Dgj7e934bh5Y",
-                          @"backtype":@"json",
+    NSDictionary *dic = @{@"appkey":APPKEY,
+                          @"backtype":BACKTYPE,
                           @"phone":self.phone,
                           @"pass":self.pwd,
                           @"tname":parentsName.text,

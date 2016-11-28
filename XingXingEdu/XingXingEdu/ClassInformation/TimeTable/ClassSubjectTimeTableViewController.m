@@ -45,6 +45,9 @@
     
     NSInteger _number;
     NSInteger _page;
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
+
 }
 
 @property (nonatomic, strong) UIView *bgView;
@@ -69,6 +72,16 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
+    
+    
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"TT"];
     self.view.backgroundColor = UIColorFromRGB(116,205, 169);
 
@@ -103,8 +116,8 @@
     urlStr = @"http://www.xingxingedu.cn/Parent/schedule_week_date";
     NSDictionary *params = @{@"appkey":APPKEY,
                              @"backtype":BACKTYPE,
-                             @"xid":XID,
-                             @"user_id":USER_ID,
+                             @"xid":parameterXid,
+                             @"user_id":parameterUser_Id,
                              @"user_type":USER_TYPE
                              };
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -133,10 +146,10 @@
     NSDictionary *pragram =@{
                              @"appkey":APPKEY,
                              @"backtype":BACKTYPE,
-                             @"xid":XID,
-                             @"user_id":USER_ID,
+                             @"xid":parameterXid,
+                             @"user_id":parameterUser_Id,
                              @"user_type":USER_TYPE,
-                             @"baby_id":@"3",
+                             @"baby_id":babyId,
                              @"week_date":str
                              };
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -146,7 +159,7 @@
             if ([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"]) {
                 NSArray *dataArr =dict[@"data"];
                 
-//                        NSLog(@"=========str=======%@==========dataArr================%@",str,dataArr);
+//                        NSLog(@"===str=======%@=====dataArr======%@",str,dataArr);
                 
                 nameMArr = [[NSMutableArray alloc]init];
                 
@@ -159,8 +172,6 @@
                     [tmMArr addObject:[dataArr[i] objectForKey:@"tm"]];
                     
                     NSDictionary *dict =[dataArr[i] objectForKey:@"con"];
-                    
-                    
                     [detailMArr addObject:dict[@"monday"]];
                     
                     if ([dict[@"monday"] count]>0) {

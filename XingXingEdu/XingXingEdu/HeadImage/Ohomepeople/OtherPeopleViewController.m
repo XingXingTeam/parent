@@ -19,7 +19,7 @@
 #import "APOpenAPI.h"
 #import "UIImageView+WebCache.h"
 #import "MBProgressHUD.h"
-#import "XXEFriendCirclePageViewController.h"
+#import "XXEFriendMyCircleViewController.h"
 #import "WMConversationViewController.h"
 
 
@@ -48,6 +48,8 @@
     
     //滚动条
     YSProgressView *ysView;
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
 }
 
 @end
@@ -72,6 +74,15 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
+    
     self.title =@"家人";
     // Do any additional setup after loading the view.
      self.view.backgroundColor = UIColorFromRGB(255,163, 195);
@@ -95,27 +106,15 @@
      用于:
      1.首页长按孩子出现的家长,查看家长详情
      2.班级通讯录孩子名下的家长,查看家长详情
-     
      接口:
      http://www.xingxingedu.cn/Parent/parent_detail
-     
      传参:
      baby_id		//孩子id
      parent_id	//家人id
      */
         //路径
         NSString *urlStr = @"http://www.xingxingedu.cn/Parent/parent_detail";
-    
-        //请求参数
-    NSString *parameterXid;
-    NSString *parameterUser_Id;
-    if ([XXEUserInfo user].login){
-        parameterXid = [XXEUserInfo user].xid;
-        parameterUser_Id = [XXEUserInfo user].user_id;
-    }else{
-        parameterXid = XID;
-        parameterUser_Id = USER_ID;
-    }
+
         NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"baby_id": _babyIdStr , @"parent_id":_familyIdStr};
         [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
             //
@@ -424,7 +423,7 @@
     
     NSLog(@"圈子");
     
-    XXEFriendCirclePageViewController *viewVC =[[XXEFriendCirclePageViewController alloc]init];
+    XXEFriendMyCircleViewController *viewVC =[[XXEFriendMyCircleViewController alloc]init];
     [self.navigationController pushViewController:viewVC animated:YES];
 }
 //举报
@@ -466,27 +465,14 @@
 {
     /*
      【收藏】通用于各种收藏
-     
      接口:
      http://www.xingxingedu.cn/Global/collect
-     
      传参:
      collect_id	//收藏id (如果是收藏用户,这里是xid)
      collect_type	//收藏品种类型	1:商品  2:点评  3:用户  4:课程  5:学校  6:花朵
      */
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/collect";
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    
-    NSString *parameterXid;
-    NSString *parameterUser_Id;
-    if ([XXEUserInfo user].login){
-        parameterXid = [XXEUserInfo user].xid;
-        parameterUser_Id = [XXEUserInfo user].user_id;
-    }else{
-        parameterXid = XID;
-        parameterUser_Id = USER_ID;
-    }
-    
     NSDictionary *dict = @{@"appkey":APPKEY,
                            @"backtype":BACKTYPE,
                            @"xid":parameterXid,
@@ -526,25 +512,15 @@
 {
     /*
      【删除/取消收藏】通用于各种收藏
-     
      接口:
      http://www.xingxingedu.cn/Global/deleteCollect
-     
      传参:
      collect_id	//收藏id (如果是收藏用户,这里是xid)
      collect_type	//收藏品种类型	1:商品  2:点评  3:用户  4:课程  5:学校  6:花朵 7:图片
      */
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/deleteCollect";
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    NSString *parameterXid;
-    NSString *parameterUser_Id;
-    if ([XXEUserInfo user].login){
-        parameterXid = [XXEUserInfo user].xid;
-        parameterUser_Id = [XXEUserInfo user].user_id;
-    }else{
-        parameterXid = XID;
-        parameterUser_Id = USER_ID;
-    }
+
     NSDictionary *dict = @{@"appkey":APPKEY,
                            @"backtype":BACKTYPE,
                            @"xid":parameterXid,

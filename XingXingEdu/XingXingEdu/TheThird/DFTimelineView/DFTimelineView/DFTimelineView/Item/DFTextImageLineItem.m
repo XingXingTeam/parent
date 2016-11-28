@@ -26,7 +26,7 @@
     self.userId = [circleModel.xid intValue];
     
     if ([circleModel.head_img_type isEqual: @"0"]) {
-        self.userAvatar = [NSString stringWithFormat:@"%@%@",kXXEPicURL,circleModel.head_img];
+        self.userAvatar = [NSString stringWithFormat:@"%@%@",picURL,circleModel.head_img];
     } else if ([circleModel.head_img_type  isEqual: @"1"]) {
         self.userAvatar = circleModel.head_img;
     }

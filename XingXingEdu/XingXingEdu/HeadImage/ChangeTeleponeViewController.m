@@ -23,6 +23,9 @@
     UINavigationBar *customNavigationBar;
     UIButton *yzButton;
     NSString *urlStr;
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
+    
 }
 
 @property(nonatomic, copy) NSString *oUserPhoneNum;
@@ -38,7 +41,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
+
     self.navigationController.navigationBarHidden = NO;
     self.title=@"更换手机号";
     self.view.backgroundColor=[UIColor colorWithRed:240/255.0f green:240/255.0f blue:240/255.0f alpha:1];
@@ -281,8 +293,8 @@
     urlStr = @"http://www.xingxingedu.cn/Global/limit_phone_verify";
     NSDictionary *pragam = @{ @"appkey":APPKEY,
                               @"backtype":BACKTYPE,
-                              @"xid":XID,
-                              @"user_id":USER_ID,
+                              @"xid":parameterXid,
+                              @"user_id":parameterUser_Id,
                               @"user_type":USER_TYPE,
                               @"action_page":@"3",
                               @"phone":_phone.text
@@ -309,8 +321,8 @@
     urlStr = @"http://www.xingxingedu.cn/Parent/edit_my_info";
     NSDictionary *prag = @{   @"appkey":APPKEY,
                               @"backtype":BACKTYPE,
-                              @"xid":XID,
-                              @"user_id":USER_ID,
+                              @"xid":parameterXid,
+                              @"user_id":parameterUser_Id,
                               @"user_type":USER_TYPE,
                               @"phone":_phone.text
                               

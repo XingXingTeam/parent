@@ -88,10 +88,8 @@
     
     /*
      【孩子个人中心首页】
-     
      接口:
      http://www.xingxingedu.cn/Parent/my_baby_info
-     
      传参:
      baby_id		//孩子id
      */

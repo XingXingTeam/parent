@@ -106,29 +106,6 @@
     _good_numArray = [[NSMutableArray alloc] init];
     //
 //    NSLog(@"%@", responseObj);
-    /*
-     {
-     msg = Success!,
-     data = [
-     {
-     id = 1,
-     url = app_upload/text/school/a.jpg,
-     good_num = 0
-     },
-     {
-     id = 2,
-     url = app_upload/text/school/z1.jpg,
-     good_num = 0
-     },
-     {
-     id = 3,
-     url = app_upload/text/school/z2.jpg,
-     good_num = 0
-     }
-     ],
-     code = 1
-     }
-     */
     
     _dataArray = responseObj[@"data"];
     

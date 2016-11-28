@@ -10,7 +10,6 @@
 //  Copyright © 2016年 xingxingEdu. All rights reserved.
 //
 #define STAG 10000000
-#define kTheme_CONST_ONE_WEEK_WIDTH     7
 #import "ClassSubjectViewController.h"
 #import "SubjectInfoViewController.h"
 #import "LMContainsLMComboxScrollView.h"
@@ -30,7 +29,6 @@
     UIView *classView;
     UIButton *classBtn;
     NSString *babyId;
-    NSString *urlStr;
     NSMutableArray *detailMArr;
     NSMutableDictionary *classDic;
     NSDictionary *headDic;
@@ -45,6 +43,14 @@
     NSInteger weekday;
     NSInteger _number;
     NSInteger _page;
+    
+    //一共几周
+    NSMutableArray *weeksArray;
+    //一共几个月
+    NSMutableArray *monthArray;
+    NSMutableArray *dayArray;
+    NSMutableArray *originalTimeArray;
+    
     NSString *parameterXid;
     NSString *parameterUser_Id;
 }
@@ -54,6 +60,8 @@
 @end
 
 @implementation ClassSubjectViewController
+
+
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [titleCombox.textField removeObserver:self forKeyPath:@"text"];
@@ -81,7 +89,10 @@
         parameterXid = XID;
         parameterUser_Id = USER_ID;
     }
-    
+    weeksArray = [[NSMutableArray alloc] init];
+    dayArray = [[NSMutableArray alloc] init];
+    monthArray = [[NSMutableArray alloc] init];
+    originalTimeArray = [[NSMutableArray alloc] init];
 //    _isTradition = NO;
     if (_isTradition == NO) {
          _number = 0;
@@ -95,23 +106,22 @@
 
     }
 
-    
-    
-    headDic =[[NSDictionary alloc]initWithObjectsAndKeys:@"1",@"本周",@"2",@"第2周",@"3",@"第3周",@"4",@"第4周",@"5",@"第5周",@"6",@"第6周",@"7",@"第7周",@"8",@"第8周",@"9",@"第9周",@"10",@"第10周",@"11",@"第11周",@"12",@"第12周",@"13",@"第13周",@"14",@"第14周",@"15",@"第15周",@"16",@"第16周",@"17",@"第17周",@"18",@"第18周",@"19",@"第19周",@"20",@"第20周",nil];
     _dataDict=[[NSMutableDictionary alloc]init];
     classDic=[[NSMutableDictionary alloc]init];
     weekMArr =[[NSMutableArray alloc]init];
     
-    
     [self createRightBar];
+    //获取一共几周 数据
     [self loadMoreData];
     
 }
+
+#pragma mark ====== 获取 月/日/星期 =============
 - (void)loadMoreData{
     /**
      *  异步加载网络数据
      */
-    urlStr =@"http://www.xingxingedu.cn/Parent/schedule_week_date";
+    NSString *urlStr =@"http://www.xingxingedu.cn/Parent/schedule_week_date";
     NSDictionary *params = @{@"appkey":APPKEY,
                              @"backtype":BACKTYPE,
                              @"xid":parameterXid,
@@ -123,7 +133,25 @@
             NSDictionary *dict =responseObj;
             if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"])
             {
-                weekMArr =dict[@"data"];
+                
+                if ([responseObj[@"data"] count] != 0) {
+                    weekMArr = responseObj[@"data"];
+                    for (int i = 0; i < [weekMArr count]; i++) {
+                        
+                        NSString *str = [WZYTool dateStringFromNumberTimer:weekMArr[i]];
+                        NSArray *arr = [str componentsSeparatedByString:@"-"];
+                        [dayArray addObject:str];
+                        [monthArray addObject:arr[1]];
+                        
+                        if (i == 0) {
+                            [weeksArray addObject:@"本周"];
+                        }else{
+                            NSString *str = [NSString stringWithFormat:@"第%d周",i+1];
+                            [weeksArray addObject:str];
+                        }
+                    }
+                }
+                
             }
             /**
              *  异步加载网络数据
@@ -140,21 +168,23 @@
 - (void)configUI:(NSString*)str{
     
     weekStr = str;
+
+//    NSLog(@"bbbb %@,  babyid  %@", weekStr, babyId);
     
-    urlStr =@"http://www.xingxingedu.cn/Parent/schedule_tradition";
+    NSString *urlStr =@"http://www.xingxingedu.cn/Parent/schedule_tradition";
     NSDictionary *pragram =@{
                              @"appkey":APPKEY,
                              @"backtype":BACKTYPE,
                              @"xid":parameterXid,
                              @"user_id":parameterUser_Id,
                              @"user_type":USER_TYPE,
-                             @"baby_id":@"3",
+                             @"baby_id":babyId,
                              @"week_date":weekStr
                              };
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [WZYHttpTool  post:urlStr params:pragram success:^(id responseObj) {
             NSDictionary *dict =responseObj;
-//                         NSLog(@"===========dataArr=========================%@",dict);
+//        NSLog(@"===========dataArr=====%@",dict);
             if ([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"]) {
                 dataArr =dict[@"data"];
                 
@@ -203,7 +233,6 @@
         } failure:^(NSError *error) {
             
         }];
-        
         
     });
     
@@ -309,7 +338,7 @@
     
     float itemStartY = 0;
     for (int kti=0 ; kti<= classNameArr.count; kti++) {
-        UILabel *monthLbl =[HHControl createLabelWithFrame:CGRectMake(1, 0+itemStartY, 26, 40) Font:10 Text:@"8月"];
+        UILabel *monthLbl =[HHControl createLabelWithFrame:CGRectMake(1, 0+itemStartY, 26, 40) Font:10 Text:[NSString stringWithFormat:@"%@月", monthArray[_number]]];
         monthLbl.backgroundColor =UIColorFromRGB(195, 239, 251);
         [monthLbl setTextAlignment:NSTextAlignmentCenter];
         [_scrollView addSubview:monthLbl];
@@ -343,23 +372,23 @@
     }
     
     NSMutableDictionary *weekDayDic =[[NSMutableDictionary alloc]init];
-    NSDictionary *weekDic =[[NSDictionary alloc]initWithObjectsAndKeys:@"周一",@"1",@"周二",@"2",@"周三",@"3",@"周四",@"4",@"周五",@"5",@"周六",@"6",@"周日",@"7", nil];
+    //水平 周几 标题
+    NSMutableArray *weekArr = [[NSMutableArray alloc] initWithObjects:@"周一", @"周二", @"周三", @"周四", @"周五", @"周六", @"周日" ,nil];
     
-    for (NSUInteger weekday=1 ; weekday<=kTheme_CONST_ONE_WEEK_WIDTH; ++weekday) {
-        
-        NSString *title = [weekDic objectForKey:[NSString stringWithFormat:@"%ld",(unsigned long)weekday]];
-        UILabel *dayLabel =[[UILabel alloc]initWithFrame:CGRectMake(27 + (weekday - 1)*((kWidth - 25)/7), 1,((kWidth - 25)/7) - 2, 30)];
-        dayLabel.text = title;
+    for (int i = 1 ; i <= weekArr.count; i ++) {
+
+        UILabel *dayLabel =[[UILabel alloc]initWithFrame:CGRectMake(27 + (i - 1)*((kWidth - 25)/7), 1,((kWidth - 25)/7) - 2, 30)];
+        dayLabel.text = weekArr[i - 1];
         dayLabel.font = [UIFont systemFontOfSize:10];
         dayLabel.backgroundColor = UIColorFromRGB(195, 239, 251);
         [dayLabel setTextAlignment:NSTextAlignmentCenter];
         [classView addSubview:dayLabel];
-        [weekDayDic setObject:dayLabel forKey:[NSString stringWithFormat:@"%ld",weekday]];
+        [weekDayDic setObject:dayLabel forKey:[NSString stringWithFormat:@"%d",i]];
     }
     weekday = [YZZUtilities queryWeekday];
     weekday = ((weekday -1)==0? 7:(weekday-1));
-    UILabel *weekLabel = [weekDayDic objectForKey:[NSString stringWithFormat:@"%d",weekday]];
-    [weekLabel setBackgroundColor:UIColorFromRGB(255, 163, 195)];
+    UILabel *weekLabel = [weekDayDic objectForKey:[NSString stringWithFormat:@"%ld",weekday]];
+    [weekLabel setBackgroundColor:UIColorFromRGB(0, 170, 42)];
     
     
     for (int j=1; j<=dataArr.count; j++) {
@@ -411,8 +440,8 @@
             
             
             if (weekday==jkt) {
-                
-                [classBtn setBackgroundImage:[UIImage imageNamed:@"科目按钮(H)80x60"] forState:UIControlStateNormal] ;
+                classBtn.backgroundColor = UIColorFromRGB(0, 170, 42);
+//                [classBtn setBackgroundImage:[UIImage imageNamed:@"科目按钮(H)80x60"] forState:UIControlStateNormal] ;
             }
             else{
                 [classBtn setBackgroundImage:[UIImage imageNamed:@"科目按钮灰色80x60"] forState:UIControlStateNormal];

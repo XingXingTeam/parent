@@ -19,6 +19,10 @@
     UITextField * infoText;
     NSString *_weekDataStr;
     NSInteger _weekNumber;
+    NSString *babyId;
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
+    
 }
 
 @property (nonatomic, strong)WJCommboxView *weekBox;
@@ -35,9 +39,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
+    
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.title = @"添加自定义课程";
+    babyId =[DEFAULTS objectForKey:@"BABYID"];
     self.view.userInteractionEnabled = YES;
     self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
     
@@ -220,17 +233,17 @@
 -(void)addNewSubjectNetWorking{
 //    
 //    NSLog(@"=================>%@",_weekDataStr);
-//        NSLog(@"=================>%ld",_weekNumber);
+//    NSLog(@"=================>%ld",_weekNumber);
 //    
     NSString *urlStr = @"http://www.xingxingedu.cn/Parent/schedule_parent_add";
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *dict = @{@"appkey":APPKEY,
                            @"backtype":BACKTYPE,
-                           @"xid":XID,
-                           @"user_id":USER_ID,
+                           @"xid":parameterXid,
+                           @"user_id":parameterUser_Id,
                            @"user_type":USER_TYPE,
-                           @"baby_id":@"3",
+                           @"baby_id":babyId,
                            @"date":_weekDataStr,
                            @"lesson_start_tm":self.upTimeTF.text,
                            @"lesson_end_tm":self.downTimeTF.text,

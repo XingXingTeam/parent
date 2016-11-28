@@ -86,7 +86,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.view.backgroundColor = XXEBackgroundColor;
+    self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
     self.tableView.frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight - 44);
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, -64, 70, 64);

@@ -62,10 +62,8 @@
     
     /*
      【班级相册->班内所有老师最新照片】
-     
      接口:
      http://www.xingxingedu.cn/Parent/class_album_new
-     
      传参:
      school_id	//学校id (测试值:1)
      class_id	//班级id (测试值:1)
@@ -98,41 +96,7 @@
 //        NSLog(@"%@", responseObj);
         
         NSDictionary *dict = responseObj;
-        /*
-         {
-         msg = Success!,
-         data = [
-         {
-         tname = 梁红水,
-         pic_arr = [
-         app_upload/text/class/class_a7.jpg,
-         app_upload/text/class/class_a6.jpg,
-         app_upload/text/class/class_a5.jpg
-         ],
-         teacher_id = 1
-         },
-         {
-         tname = 李小川,
-         pic_arr = [
-         app_upload/text/class/class_d5.jpg,
-         app_upload/text/class/class_d4.jpg,
-         app_upload/text/class/class_d3.jpg
-         ],
-         teacher_id = 2
-         },
-         {
-         tname = 赵大京,
-         pic_arr = [
-         app_upload/text/class/class_d4.jpg,
-         app_upload/text/class/class_d5.jpg,
-         app_upload/text/class/class_b5.jpg
-         ],
-         teacher_id = 3
-         }
-         ],
-         code = 1
-         }
-         */
+
         if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] ){
             for (NSDictionary *dictItem in dict[@"data"]) {
               

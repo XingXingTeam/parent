@@ -25,7 +25,7 @@ static NSString *const IdentifierCell = @"WhoSeeCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.view.backgroundColor = XXEBackgroundColor;
+    self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
     
 }
 /** 这两个方法都可以,改变当前控制器的电池条颜色 */

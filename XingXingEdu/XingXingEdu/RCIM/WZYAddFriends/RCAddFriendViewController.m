@@ -228,7 +228,7 @@
     [cell.imgView sd_setImageWithURL:[NSURL URLWithString:tmp[2]] placeholderImage:[UIImage imageNamed:@"人物头像172x172"]];
 //    cell.imgView.image=[UIImage imageNamed:tmp[2]];
     
-    cell.imgView.layer.cornerRadius = 30;
+    cell.imgView.layer.cornerRadius = cell.imgView.frame.size.width / 2;
     cell.imgView.layer.masksToBounds = YES;
     
     cell.agreeBtn.tag = indexPath.row + 10;

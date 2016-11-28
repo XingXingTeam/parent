@@ -15,7 +15,7 @@
 #import "AuditSetViewController.h"
 #import "MBProgressHUD.h"
 #import "HHControl.h"
-#import "XXEFriendCirclePageViewController.h"
+#import "XXEFriendMyCircleViewController.h"
 // UM
 #import "UMSocial.h"
 #import "UMSocialSinaHandler.h"
@@ -135,7 +135,7 @@
     [self.navigationController pushViewController:personVC animated:YES];
 }
 - (void)lookBtn:(UIButton*)btn{
-    XXEFriendCirclePageViewController *viewVC =[[XXEFriendCirclePageViewController alloc]init];
+    XXEFriendMyCircleViewController *viewVC =[[XXEFriendMyCircleViewController alloc]init];
     [self.navigationController pushViewController:viewVC animated:YES];
     
 }

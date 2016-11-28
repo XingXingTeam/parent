@@ -26,6 +26,9 @@
     NSMutableArray *xidKTMArr;
     NSString *dataKTStr;
     int j;
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
+
 }
 @end
 
@@ -42,6 +45,14 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
     
     dataArray =[[NSMutableArray alloc]init];
     head_imgMArr =[[NSMutableArray alloc]init];
@@ -70,8 +81,8 @@
     
     NSDictionary *dict = @{@"appkey":APPKEY,
                            @"backtype":BACKTYPE,
-                           @"xid":XID,
-                           @"user_id":USER_ID,
+                           @"xid":parameterXid,
+                           @"user_id":parameterUser_Id,
                            @"user_type":USER_TYPE,
                            };
 
@@ -128,8 +139,8 @@
             
             NSDictionary *dict = @{@"appkey":APPKEY,
                                    @"backtype":BACKTYPE,
-                                   @"xid":XID,
-                                   @"user_id":USER_ID,
+                                   @"xid":parameterXid,
+                                   @"user_id":parameterUser_Id,
                                    @"user_type":USER_TYPE,
                                    @"other_xid":dataKTStr,
                                    };

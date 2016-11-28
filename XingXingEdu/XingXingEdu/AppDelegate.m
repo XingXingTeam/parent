@@ -60,8 +60,7 @@
 #import "XXETabBarViewController.h"
 #import "XXEUserInfo.h"
 
-#import"PayMannerViewController.h"
-
+//#import"PayMannerViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -70,8 +69,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    
+  
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
     BOOL isNotFirstLauch = [[NSUserDefaults standardUserDefaults] boolForKey:kAppFirstLoadKey];

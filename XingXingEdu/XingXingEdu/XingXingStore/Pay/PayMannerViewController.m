@@ -432,6 +432,8 @@
     payReq.billTimeOut = 300;//订单超时时间
     payReq.viewController = self; //银联支付和Sandbox环境必填
     payReq.optional = dict;//商户业务扩展参数，会在webhook回调时返回
+    
+    NSLog(@"payReq === %@", payReq);
     [BeeCloud sendBCReq:payReq];
 }
 

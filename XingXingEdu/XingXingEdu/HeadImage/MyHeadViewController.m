@@ -9,7 +9,7 @@
 #import "MyHeadViewController.h"
 #import "MyInfomationViewController.h"
 #import "HHControl.h"
-//#import "ViewController.h"
+#import "ViewController.h"
 #import "ClassRoomOrderViewController.h"
 #import "HFStretchableTableHeaderView.h"
 #import "SaveInfoViewController.h"
@@ -26,7 +26,6 @@
 #import "MainViewController.h"
 #import "FriendsListViewController.h"
 #import "WMConversationListViewController.h"
-#import "XXEFriendCirclePageViewController.h"
 @interface MyHeadViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 {
      UIImageView *icon;
@@ -45,8 +44,7 @@
     NSString *head_img_type;
     
     YSProgressView *ysView;
-    NSString *parameterXid;
-    NSString *parameterUser_Id;
+    
 }
 @end
 //
@@ -63,15 +61,6 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    if ([XXEUserInfo user].login){
-        parameterXid = [XXEUserInfo user].xid;
-        parameterUser_Id = [XXEUserInfo user].user_id;
-    }else{
-        parameterXid = XID;
-        parameterUser_Id = USER_ID;
-    }
-    
     [self loadNewData];
     [self createTableView];
     [self addHeadView];
@@ -79,11 +68,10 @@
 - (void)loadNewData{
 
     urlStr = @"http://www.xingxingedu.cn/Parent/my_personal_center";
-    NSDictionary *pragm = @{
-                            @"appkey":APPKEY,
+    NSDictionary *pragm = @{   @"appkey":APPKEY,
                                @"backtype":BACKTYPE,
-                               @"xid":parameterUser_Id,
-                               @"user_id":parameterXid,
+                               @"xid":XID,
+                               @"user_id":USER_ID,
                                @"user_type":USER_TYPE,
                                };
     
@@ -283,7 +271,7 @@
     }
     else if (indexPath.row ==5){
            //我的圈子
-        XXEFriendCirclePageViewController *viewVC = [XXEFriendCirclePageViewController new];
+        ViewController *viewVC = [ViewController new];
         viewVC.hidesBottomBarWhenPushed =YES;
         [self.navigationController pushViewController:viewVC animated:NO];
         

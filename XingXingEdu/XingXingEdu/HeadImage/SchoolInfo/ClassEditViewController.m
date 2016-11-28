@@ -1033,21 +1033,13 @@
     
     NSString *babyId = [[NSUserDefaults standardUserDefaults] objectForKey:@"BABYID"];
     
-    
     NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"school_id":schoolIdStr, @"sch_type":schoolTypeStr, @"class_id":classIdStr, @"examine_id":auditorIdStr, @"baby_id":babyId};
     NSLog(@" params --  %@", params);
     
 [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
-    //
     
 //    NSLog(@"rrrrrrtttttyyyuiujk---   %@", responseObj);
-    /*
-     {
-     msg = Error!已添加过这个班级!,
-     data = ,
-     code = 5
-     }
-     */
+
     NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
     
     if ([codeStr isEqualToString:@"1"]) {
@@ -1094,11 +1086,8 @@
 
 /*
  【获取省,城市,区】
- 
  接口:
  http://www.xingxingedu.cn/Global/provinces_city_area
- 
- 
  传参:
 	action_type	//执行类型 1:获取省 , 2:获取城市, 3:获取区
 	fatherID	//父级id, 获取市和区需要, 获取省不需要
@@ -1115,12 +1104,6 @@
         provinceIDArray = [[NSMutableArray alloc] init];
         //
 //        NSLog(@"省---responseObj --- %@", responseObj);
-        /*
-         {
-         provinceID = 820000,
-         province = 澳门特别行政区
-         }
-         */
         NSArray *dataSource = responseObj[@"data"];
         
         NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
@@ -1158,11 +1141,8 @@
 
     /*
      【获取省,城市,区】
-     
      接口:
      http://www.xingxingedu.cn/Global/provinces_city_area
-     
-     
      传参:
      action_type	//执行类型 1:获取省 , 2:获取城市, 3:获取区
      fatherID	//父级id, 获取市和区需要, 获取省不需要
@@ -1171,7 +1151,6 @@
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/provinces_city_area";
     
     //请求参数
-    
     NSUInteger index;
     NSString *fatherID;
     
@@ -1188,13 +1167,6 @@
         cityIDArray = [[NSMutableArray alloc] init];
         //
 //        NSLog(@"市----responseObj --- %@", responseObj);
-        /*
-         {
-         cityID = 110200,
-         city = 县
-         }
-  
-         */
         NSArray *dataSource = responseObj[@"data"];
         
         NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
@@ -1235,11 +1207,8 @@
 
 //    /*
 //     【获取省,城市,区】
-//     
 //     接口:
 //     http://www.xingxingedu.cn/Global/provinces_city_area
-//     
-//     
 //     传参:
 //     action_type	//执行类型 1:获取省 , 2:获取城市, 3:获取区
 //     fatherID	//父级id, 获取市和区需要, 获取省不需要
@@ -1262,12 +1231,6 @@
         areaIDArray = [[NSMutableArray alloc] init];
         //
 //                NSLog(@"区---responseObj --- %@", responseObj);
-        /*
-         {
-         areaID = 120110,
-         area = 东丽区
-         },
-         */
         NSArray *dataSource = responseObj[@"data"];
         
         NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
@@ -1387,20 +1350,6 @@
        courseIdArray  = [[NSMutableArray alloc] init];
         //
 //        NSLog(@"学校 id -responseObj --- %@", responseObj);
-        /*
-         {
-         grade = 三年级,
-         school_id = 1,
-         course_id = 0
-         }
-
-         {
-         grade = 小班,
-         school_id = 3,
-         course_id = 0
-         },
-
-         */
         NSArray *dataSource = responseObj[@"data"];
         
         NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
@@ -1446,11 +1395,8 @@
     
     /*
      【通过年级获取班级】
-     
      接口:
      http://www.xingxingedu.cn/Global/give_grade_get_class
-     
-     
      传参:
      school_id	//学校id
      grade 		//年级
@@ -1467,12 +1413,6 @@
         _classNameArr = [[NSMutableArray alloc] init];
         classIdArray  = [[NSMutableArray alloc] init];
 //                NSLog(@"班级 -responseObj --- %@", responseObj);
-        /*
-         {
-         class = 五班,
-         class_id = 10
-         }
-         */
         NSArray *dataSource = responseObj[@"data"];
         
         NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
@@ -1503,12 +1443,9 @@
 
 - (void)fetchAuditData{
     /*
-     
      【获取审核老师】
-     
      接口:
      http://www.xingxingedu.cn/Parent/get_examine_teacher
-     
      传参:
      school_id 	//学校id
      class_id	//班级id
@@ -1523,12 +1460,6 @@
         auditorIdArray = [[NSMutableArray alloc] init];
         auditorNameArray  = [[NSMutableArray alloc] init];
 //            NSLog(@"审核 人员 -responseObj --- %@", responseObj);
-        /*
-         {
-         id = 16,
-         tname = 成小青
-         }
-         */
         NSArray *dataSource = responseObj[@"data"];
         
         NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
@@ -1559,25 +1490,18 @@
 {
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    //    [self.provinceCombox.textField addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:@"10"];
     [self.provinceCombox.textField removeObserver:self forKeyPath:@"text"];
     
-    //    [self.cityCombox.textField addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:@"11"];
     [self.cityCombox.textField removeObserver:self forKeyPath:@"text"];
     
-    //    [self.areaCombox.textField addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:@"12"];
     [self.areaCombox.textField removeObserver:self forKeyPath:@"text"];
     
-    //    [self.schoolTypeCombox.textField addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:@"13"];
     [self.schoolTypeCombox.textField removeObserver:self forKeyPath:@"text"];
     
-    //    [self.schoolNameCombox.textField addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:@"14"];
     [self.schoolNameCombox.textField removeObserver:self forKeyPath:@"text"];
     
-    //    [self.gradeNameCombox.textField addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:@"15"];
     [self.gradeNameCombox.textField removeObserver:self forKeyPath:@"text"];
     
-    //    [self.classNameCombox.textField addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:@"16"];
     [self.classNameCombox.textField removeObserver:self forKeyPath:@"text"];
     
   

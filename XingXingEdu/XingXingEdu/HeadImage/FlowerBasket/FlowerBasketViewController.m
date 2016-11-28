@@ -25,6 +25,10 @@
     UILabel *leftLb;
     UILabel *overLb;
     NSString *flowersNum;
+    //没有数据的时候 占位图
+    UIImageView *placeholderImageView;
+    
+    NSInteger page;
     NSString *parameterXid;
     NSString *parameterUser_Id;
     
@@ -33,29 +37,17 @@
 
 @implementation FlowerBasketViewController
 - (void)viewWillAppear:(BOOL)animated{
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    
-    [self initUI];
-    
-    [self createHeadView];
+    [super viewWillAppear:animated];
     
     [_tableView reloadData];
     [_tableView.header beginRefreshing];
     
 }
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    
-}
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = UIColorFromRGB(196, 213, 255);
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     if ([XXEUserInfo user].login){
         parameterXid = [XXEUserInfo user].xid;
         parameterUser_Id = [XXEUserInfo user].user_id;
@@ -63,11 +55,15 @@
         parameterXid = XID;
         parameterUser_Id = USER_ID;
     }
-    
+    page = 0;
     self.title =@"花篮";
-    self.view.backgroundColor = UIColorFromRGB(196, 213, 255);
     
-    [self initData];
+    //获取 花篮赠送/购买 数据
+    [self fetchBasketInfo];
+    
+//    [self createHeadView];
+    
+     [self fetchNetData];
     
      [self createTableView];
     // Do any additional setup after loading the view.
@@ -110,8 +106,7 @@
     
 }
 
-- (void)initUI{
-    
+- (void)fetchBasketInfo{
     
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/getUserGlobalInfo";
     NSDictionary *dict = @{@"appkey":APPKEY,
@@ -124,7 +119,7 @@
     
     [WZYHttpTool post:urlStr params:dict success:^(id responseObj) {
         
-        
+//        NSLog(@"花篮kkk  == %@", responseObj);
         
         NSDictionary *dict =responseObj;
         
@@ -134,17 +129,21 @@
             flowersNum =[NSString stringWithFormat:@"%ld", [[dict[@"data"] objectForKey:@"fbasket_able"] integerValue]];
             overLb.text =[NSString stringWithFormat:@"已赠花篮数: %ld",[[dict[@"data"] objectForKey:@"fbasket_total"] integerValue] -[[dict[@"data"] objectForKey:@"fbasket_able"] integerValue]];
             
-            [_tableView reloadData];
+//            [_tableView reloadData];
         }
-    } failure:^(NSError *error) {
+        [self createHeadView];
         
+    } failure:^(NSError *error) {
+        [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
     }];
     
-    
 }
-- (void)initData{
+
+- (void)fetchNetData{
 
     _dateMArr = [NSMutableArray array];
+    
+    NSString *pageStr = [NSString stringWithFormat:@"%ld", page];
     //teacher
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/fbasket_record";
     NSDictionary *dict = @{@"appkey":APPKEY,
@@ -152,18 +151,21 @@
                            @"xid":parameterXid,
                            @"user_id":parameterUser_Id,
                            @"user_type":USER_TYPE,
+                           @"page": pageStr
                            };
     
     [WZYHttpTool post:urlStr params:dict success:^(id responseObj) {
         
         NSDictionary *dict =responseObj;
         
+//        NSLog(@"花篮 == %@", responseObj);
+        
+        
         if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
         {
             
             x =[dict[@"data"] count];
             for (int i=0; i<[dict[@"data"] count]; i++) {
-                
                 
                 NSString *con = [dict[@"data"][i] objectForKey:@"con"];
                 NSString *date_tm = [dict[@"data"][i] objectForKey:@"date_tm"];
@@ -178,30 +180,89 @@
         
             }
             
-            [_tableView reloadData];
-            [_tableView.header endRefreshing];
+//            [_tableView reloadData];
         }
         
-    } failure:^(NSError *error) {
+        [self customContent];
         
+    } failure:^(NSError *error) {
+        [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
     }];
     
 }
+
+// 有数据 和 无数据 进行判断
+- (void)customContent{
+    // 如果 有占位图 先 移除
+    [self removePlaceholderImageView];
+    
+    if (_dateMArr.count == 0) {
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        // 1、无数据的时候
+        [self createPlaceholderView];
+        
+    }else{
+        //2、有数据的时候
+//        [AppDelegate shareAppDelegate].friendsArray = self.friendListDatasource;
+    }
+    
+    [_tableView reloadData];
+    
+}
+
+
+//没有 数据 时,创建 占位图
+- (void)createPlaceholderView{
+    // 1、无数据的时候
+    UIImage *myImage = [UIImage imageNamed:@"人物"];
+    CGFloat myImageWidth = myImage.size.width;
+    CGFloat myImageHeight = myImage.size.height;
+    
+    placeholderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth / 2 - myImageWidth / 2, (kHeight - 64 - 49) / 2 - myImageHeight / 2, myImageWidth, myImageHeight)];
+    placeholderImageView.image = myImage;
+    [self.view addSubview:placeholderImageView];
+}
+
+//去除 占位图
+- (void)removePlaceholderImageView{
+    if (placeholderImageView != nil) {
+        [placeholderImageView removeFromSuperview];
+    }
+}
+
+
 - (void)createTableView{
     
     _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 0, kWidth, kHeight) style:UITableViewStyleGrouped];
     _tableView.delegate =self;
     _tableView.dataSource =self;
     [self.view addSubview:_tableView];
+
     _tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     
+    _tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadFooterNewData)];
+    
 }
+
 -(void)loadNewData{
+    page ++;
     
+    [self fetchNetData];
+    [ _tableView.header endRefreshing];
+}
+-(void)endRefresh{
+    [_tableView.header endRefreshing];
+    [_tableView.footer endRefreshing];
+}
+
+- (void)loadFooterNewData{
+    page ++ ;
     
-    [self initData];
+    [self fetchNetData];
+    [ _tableView.footer endRefreshing];
     
 }
+
 
 - (void)sent:(UIButton*)btn{
     FlowersPresentViewController *flowersPresentVC =[[FlowersPresentViewController alloc]init];

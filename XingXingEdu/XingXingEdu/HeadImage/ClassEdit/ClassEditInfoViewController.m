@@ -103,17 +103,14 @@
 /*
  
  【编辑班级列表】
- 
  接口:
  http://www.xingxingedu.cn/Parent/edit_class_list
- 
  传参:
 	baby_id		//孩子id
  */
 
     NSString *urlStr = @"http://www.xingxingedu.cn/Parent/edit_class_list";
     
-    //[[NSUserDefaults standardUserDefaults]setObject:baby_id1 forKey:@"BABYID"];
     NSString *babyId = [[NSUserDefaults standardUserDefaults] objectForKey:@"BABYID"];
     
     //传参

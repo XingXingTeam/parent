@@ -14,6 +14,7 @@
 #import "XXECircleModel.h"
 #import "XXEFriendCirclegoodApi.h"
 #import "XXEDeleteCommentApi.h"
+#import "XXETool.h"
 
 @interface XXEInfomationViewController ()<UIActionSheetDelegate,UIScrollViewDelegate,UMSocialUIDelegate>
 {
@@ -109,7 +110,7 @@
         NSLog(@"图片数组%@",arrayImage);
         for (int i=0; i< arrayImage.count; i++) {
             UIImageView *imV = [[UIImageView alloc]initWithFrame:CGRectMake(KScreenWidth*i, 0, KScreenWidth, KScreenHeight-113)];
-            NSString *imageUrl = [NSString stringWithFormat:@"%@%@",kXXEPicURL,arrayImage[i]];
+            NSString *imageUrl = [NSString stringWithFormat:@"%@%@",picURL,arrayImage[i]];
             NSURL *url =[NSURL URLWithString:imageUrl];
             
 //            [imV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@""]];
@@ -129,7 +130,7 @@
     }else{
         NSLog(@"图片数组%@",_imagesArr);
         UIImageView *imV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight-113)];
-        NSString *imageUrl = [NSString stringWithFormat:@"%@%@",kXXEPicURL,_imagesArr];
+        NSString *imageUrl = [NSString stringWithFormat:@"%@%@",picURL,_imagesArr];
         NSLog(@"图片地址%@",imageUrl);
         NSURL *url =[NSURL URLWithString:imageUrl];
         [imV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -243,9 +244,9 @@
     arrayImage = nil;
     if ([_imagesArr containsString:@","]) {
         arrayImage = [_imagesArr componentsSeparatedByString:@","];
-        imageStringUrl = [NSString stringWithFormat:@"%@%@",kXXEPicURL,arrayImage[self.indexImage]];
+        imageStringUrl = [NSString stringWithFormat:@"%@%@",picURL,arrayImage[self.indexImage]];
     }else{
-        imageStringUrl = [NSString stringWithFormat:@"%@%@",kXXEPicURL,self.imagesArr];
+        imageStringUrl = [NSString stringWithFormat:@"%@%@",picURL,self.imagesArr];
     }
     NSURL *url = [NSURL URLWithString:imageStringUrl];
     NSData *data = [NSData dataWithContentsOfURL:url];

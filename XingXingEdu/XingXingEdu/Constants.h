@@ -22,6 +22,14 @@
 
 #define WinWidth [UIScreen mainScreen].bounds.size.width
 #define WinHeight [UIScreen mainScreen].bounds.size.height
+
+#define KScreenWidth [UIScreen mainScreen].bounds.size.width
+#define KScreenHeight [UIScreen mainScreen].bounds.size.height
+
+#define kScreenRatioHeight  WinWidth/667
+#define kScreenRatioWidth  WinHeight/375
+
+
 #define W(x) WinWidth*(x)/375.0
 #define H(y) WinHeight*(y)/667.0
 
@@ -35,10 +43,16 @@
 
 #define DEFAULTS [NSUserDefaults standardUserDefaults]
 
+#define UMSocialAppKey @"57c01a13f43e48118e000e55"
+
+#define kXXEPicURL @"http://www.xingxingedu.cn/Public/"
+
 /**
  *  第一次启动App的Key
  */
 #define kAppFirstLoadKey @"kAppFirstLoadKey"
+
+#define XXEBackgroundColor [[UIColor colorWithRed:229.0/255.0f green:232.0/255.0f blue:233.0/255.0f alpha:1]]
 
 /**
  *  颜色:粉红色

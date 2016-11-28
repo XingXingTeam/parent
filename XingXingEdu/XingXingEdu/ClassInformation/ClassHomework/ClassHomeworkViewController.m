@@ -140,21 +140,16 @@
 - (void)createData{
     /*
      【班级作业】
-     
      接口:
      http://www.xingxingedu.cn/Parent/class_homework_list
-     
      传参:
      school_id	//学校id (测试值:1)
      class_id		//班级 (测试值:1)
      page		//页码(加载更多,不传值默认1,测试时每页加载6个)
      teach_course	//科目,筛选用,例如:英语
      month		//月份,筛选用,例如:3
-     
      注:筛选时,学校id,年级,班级3个传参都不能少
      */
-    
-    
     urlStr = @"http://www.xingxingedu.cn/Parent/class_homework_list";
     
     NSString *class_idStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"CLASS_ID"];

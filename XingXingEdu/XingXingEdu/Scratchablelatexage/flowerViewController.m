@@ -199,12 +199,9 @@
 - (void)fetchNetData{
     /*
      【获得小红花赠送赠言记录】(详情页没有做接口,由前端页面之间传递)
-     
      接口:
      http://www.xingxingedu.cn/Parent/take_flower_msg
-     
      传参:
-     
      baby_id		//孩子id
      school_type	//学校类型 0:查询所有 1:公立学校,2:机构
      */

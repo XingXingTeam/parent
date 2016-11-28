@@ -214,9 +214,9 @@
 - (void)createMenu{
     
     //三级类目
-    menu = [[WJDropdownMenu alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
+    menu = [[WJDropdownMenu alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 40)];
     menu.delegate = self;
-//    menu.backgroundColor = [UIColor redColor];
+    
     //  设置代理
     [self.view addSubview:menu];
     
@@ -233,7 +233,7 @@
 }
 
 - (void)createTableView{
-    myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, kWidth, kHeight - 64 - 44) style:UITableViewStyleGrouped];
+    myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, kWidth, kHeight - 49 - 44) style:UITableViewStyleGrouped];
     myTableView.delegate = self;
     myTableView.dataSource = self;
     [self.view addSubview:myTableView];
@@ -485,31 +485,6 @@
         //
         [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
     }];
-//    XXEXingClassRoomTeacherListApi *xingClassRoomTeacherListApi = [[XXEXingClassRoomTeacherListApi alloc] initWithXid:parameterXid user_id:parameterUser_Id page:_teacherPage user_lng:_longitudeString user_lat:_latitudeString filter_distance:_filter_distance appoint_order:_appoint_order class_str:_class_str search_words:_search_words];
-//    
-//    [xingClassRoomTeacherListApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-//        
-////        NSLog(@"老师   %@", request.responseJSONObject);
-//        
-////        NSLog(@"个数  %ld", [request.responseJSONObject[@"data"] count]);
-//        
-//        NSString *codeStr = [NSString stringWithFormat:@"%@", request.responseJSONObject[@"code"]];
-//        
-//        if ([codeStr isEqualToString:@"1"]) {
-//            NSArray *modelArray = [XXEXingClassRoomTeacherListModel parseResondsData:request.responseJSONObject[@"data"]];
-//            
-//            [teacherModelArray addObjectsFromArray:modelArray];
-//            
-//        }else{
-//            
-//        }
-//        [self customContent:teacherModelArray];
-//    } failure:^(__kindof YTKBaseRequest *request) {
-//        
-//        [self showString:@"数据请求失败" forSecond:1.f];
-//    }];
-
-
 }
 
 - (void)fetchCourseInfo{
@@ -538,7 +513,7 @@
                              };
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
-        NSLog(@"jjjj %@", responseObj);
+//        NSLog(@"jjjj %@", responseObj);
         
         if ([responseObj[@"code"] integerValue] == 1) {
             NSArray *modelArray = [[NSArray alloc] init];
@@ -551,28 +526,6 @@
         //
         [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
     }];
-
-//    XXEXingClassRoomCourseListApi *xingClassRoomCourseListApi = [[XXEXingClassRoomCourseListApi alloc] initWithXid:parameterXid user_id:parameterUser_Id page:_coursePage user_lng:_longitudeString user_lat:_latitudeString filter_distance:_filter_distance appoint_order:_appoint_order class_str:_class_str search_words:_search_words];
-//    
-//    [xingClassRoomCourseListApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-//
-////                NSLog(@"课程   %@", request.responseJSONObject);
-//        
-//        NSString *codeStr = [NSString stringWithFormat:@"%@", request.responseJSONObject[@"code"]];
-//        
-//        if ([codeStr isEqualToString:@"1"]) {
-//
-//            NSArray *modelArray = [XXEXingClassRoomCourseListModel parseResondsData:request.responseJSONObject[@"data"]];
-//            
-//            [courseModelArray addObjectsFromArray:modelArray];
-//        }else{
-//            
-//        }
-//        [self customContent:courseModelArray];
-//    } failure:^(__kindof YTKBaseRequest *request) {
-//        
-//        [self showString:@"数据请求失败" forSecond:1.f];
-//    }];
 }
 
 
@@ -612,29 +565,6 @@
         //
         [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
     }];
-
-//    XXEXingClassRoomSchoolListApi *xingClassRoomSchoolListApi = [[XXEXingClassRoomSchoolListApi alloc] initWithXid:parameterXid user_id:parameterUser_Id page:_schoolPage user_lng:_longitudeString user_lat:_latitudeString filter_distance:_filter_distance appoint_order:_appoint_order class_str:_class_str search_words:_search_words];
-//    
-//    [xingClassRoomSchoolListApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-//
-////                NSLog(@"学校   %@", request.responseJSONObject);
-//        
-//        NSString *codeStr = [NSString stringWithFormat:@"%@", request.responseJSONObject[@"code"]];
-//        
-//        if ([codeStr isEqualToString:@"1"]) {
-//            NSArray *modelArray = [[NSArray alloc] init];
-//            modelArray = [XXEXingClassRoomSchoolListModel parseResondsData:request.responseJSONObject[@"data"]];
-//            
-//            [schoolModelArray addObjectsFromArray:modelArray];
-//            
-//        }else{
-//            
-//        }
-//        [self customContent:schoolModelArray];
-//    } failure:^(__kindof YTKBaseRequest *request) {
-//        
-//        [self showString:@"数据请求失败" forSecond:1.f];
-//    }];
 
     
 }
@@ -734,7 +664,7 @@
                              };
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
-        NSLog(@"vvv %@", responseObj);
+//        NSLog(@"vvv %@", responseObj);
         
         classGroupArray1 = [[NSMutableArray alloc] init];
         classGroupDic2 = [[NSMutableDictionary alloc] init];
@@ -752,34 +682,7 @@
         //
         [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
     }];
-//    XXECourseManagerCourseCategoryApi *courseManagerCourseCategoryApi = [[XXECourseManagerCourseCategoryApi alloc] initWithXid:parameterXid user_id:parameterUser_Id];
-//    
-//    [courseManagerCourseCategoryApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-//        classGroupArray1 = [[NSMutableArray alloc] init];
-//        classGroupDic2 = [[NSMutableDictionary alloc] init];
-//        classGroupDic3 = [[NSMutableDictionary alloc] init];
-//        //        NSLog(@"111   %@", request.responseJSONObject);
-//        
-//        NSString *codeStr = [NSString stringWithFormat:@"%@", request.responseJSONObject[@"code"]];
-//        
-//        if ([codeStr isEqualToString:@"1"]) {
-//            NSArray *classModelArr1 = [[NSArray alloc] init];
-//            classModelArr1 = [XXECourseManagerClassModel1 parseResondsData:request.responseJSONObject[@"data"][@"class1_group"]];
-//            [classGroupArray1 addObjectsFromArray:classModelArr1];
-//            
-//            classGroupDic2 = request.responseJSONObject[@"data"][@"class2_group"];
-//            classGroupDic3 = request.responseJSONObject[@"data"][@"class3_group"];
-//            
-//        }else{
-//            
-//        }
-//        [self updateDataFirstArr1];
-//        
-//    } failure:^(__kindof YTKBaseRequest *request) {
-//        
-//        [self showString:@"数据请求失败" forSecond:1.f];
-//    }];
-    
+
 }
 
 - (void)updateDataFirstArr1{
@@ -1043,38 +946,6 @@
         }
         return cell;
         
-        
-//        if ([model.teacher_tname_group count] != 0) {
-//            cell.nameLabel.text = [NSString stringWithFormat:@"授课老师:%@",model.teacher_tname_group[0]];
-//        }
-//        
-//        cell.distanceLabel.text = [NSString stringWithFormat:@"%@KM", model.distance];
-//        
-//        cell.totalLabel.text = [NSString stringWithFormat:@"%@人班", model.need_num];
-//        NSInteger leftNum = [model.need_num integerValue] - [model.now_num integerValue];
-//        
-//        cell.leftLabel.text = [NSString stringWithFormat:@"还剩%ld人", leftNum];
-//        cell.priceLabel.text = [NSString stringWithFormat:@"原价:%@   限时抢购价:%@", model.original_price, model.now_price];
-//
-//        if ([model.coin isEqualToString:@"0"]) {
-//            cell.xingCoinBtn.hidden = YES;
-//        }else if ([model.coin isEqualToString:@"1"]){
-//            cell.xingCoinBtn.hidden = NO;
-//        }
-//        
-//        if ([model.allow_return isEqualToString:@"0"]) {
-//            cell.quitBtn.hidden = YES;
-//        }else if ([model.allow_return isEqualToString:@"1"]) {
-//            cell.quitBtn.hidden = NO;
-//        }
-//        
-//        if ([model.now_num isEqualToString:model.need_num]) {
-//            cell.fullBtn.hidden = NO;
-//        }else{
-//            cell.fullBtn.hidden = YES;
-//        }
-        
-        return cell;
     }else if (_segentControl.selectedSegmentIndex == 2) {
         ClassSchoolTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         
@@ -1127,10 +998,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_segentControl.selectedSegmentIndex == 0) {
-//        XXEXingClassRoomTeacherDetailInfoViewController *xingClassRoomTeacherDetailInfoVC = [[XXEXingClassRoomTeacherDetailInfoViewController alloc] init];
-//        XXEXingClassRoomTeacherListModel *model = teacherModelArray[indexPath.row];
-//        xingClassRoomTeacherDetailInfoVC.teacher_id = model.teacher_id;
-//        [self.navigationController pushViewController:xingClassRoomTeacherDetailInfoVC animated:YES];
+
         TeleTeachInfoViewController *teleTeachVC =[[TeleTeachInfoViewController alloc]init];
         XXEXingClassRoomTeacherListModel *model = teacherModelArray[indexPath.row];
         teleTeachVC.hidesBottomBarWhenPushed =YES;
@@ -1139,10 +1007,7 @@
         [self.navigationController pushViewController:teleTeachVC animated:YES];
         
     }else if (_segentControl.selectedSegmentIndex == 1){
-//        XXEXingClassRoomCourseDetailInfoViewController *xingClassRoomCourseDetailInfoVC = [[XXEXingClassRoomCourseDetailInfoViewController alloc] init];
 
-//        xingClassRoomCourseDetailInfoVC.course_id = model.courseId;
-//        [self.navigationController pushViewController:xingClassRoomCourseDetailInfoVC animated:YES];
         ClassRoomSubjectInfoViewController *subjectVC =[[ClassRoomSubjectInfoViewController alloc]init];
         XXEXingClassRoomCourseListModel *model = courseModelArray[indexPath.row];
         subjectVC.hidesBottomBarWhenPushed =YES;
@@ -1151,11 +1016,6 @@
         
     }else if (_segentControl.selectedSegmentIndex == 2){
 
-//        XXEHomeLogoRootViewController *homeLogoRootVC = [[XXEHomeLogoRootViewController alloc] init];
-
-//        homeLogoRootVC.schoolId = model.school_id;
-//        
-//        [self.navigationController pushViewController:homeLogoRootVC animated:NO];
         LogoTabBarController *logoViewController = [[LogoTabBarController alloc] init];
         XXEXingClassRoomSchoolListModel *model = schoolModelArray[indexPath.row];
         logoViewController.hidesBottomBarWhenPushed = YES;

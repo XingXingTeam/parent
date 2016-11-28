@@ -7,6 +7,7 @@
 //
 
 #import "MessageListDetailViewCell.h"
+#import "XXETool.h"
 
 @implementation MessageListDetailViewCell
 
@@ -73,7 +74,7 @@
     //头像
     NSString * head_img;
     if([commentModel.head_img_type integerValue] == 0){
-        head_img=[kXXEPicURL stringByAppendingString:commentModel.head_img];
+        head_img=[picURL stringByAppendingString:commentModel.head_img];
     }else{
         head_img=commentModel.head_img;
     }

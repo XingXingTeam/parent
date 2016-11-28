@@ -30,19 +30,19 @@
 #import "WZYBabyCenterViewController.h"
 #import "MainViewController.h"
 #import "VideoMonitorViewController.h"
-#import "XXEFriendCirclePageViewController.h"
+#import "XXEFriendMyCircleViewController.h"
 #import "MyHeadViewController.h"
 #import "OtherPeopleViewController.h"
 #import "ClassEditInfoViewController.h"
 #import "ClassEditViewController.h"
-#import "ClassSubjectTimeTableViewController.h"
+//#import "ClassSubjectTimeTableViewController.h"
 #import "FlowerBasketViewController.h"
 #import "RcRootTabbarViewController.h"
 #import "RootTabbarViewController.h"
 #import "MyTabBarController.h"
 #import "AFNetworking.h"
 #import "ClassAlbumViewController.h"
-#import "ClassSubjectViewController.h"
+//#import "ClassSubjectViewController.h"
 #import "ClassTelephoneViewController.h"
 #import "ClassHomeworkViewController.h"
 #import "SchoolRecipesViewController.h"
@@ -54,6 +54,8 @@
 #import <RongIMKit/RongIMKit.h>
 
 #import "ClassEditViewController.h"
+//课程表
+#import "XXESchoolTimetableViewController.h"
 
 //首页  头像
 #import "ZJCircularBtn.h"
@@ -930,8 +932,6 @@
                 NSArray *arr = commboxIDArray[didSelectedSchoolRow];
                 
                 _classStr = arr[didSelectedClassRow];
-                
-                
             }else{
             _classStr = @"";
             }
@@ -1297,38 +1297,43 @@
  */
 - (void)onClicklt:(UIButton *)button
 {
-    NSString *nameStr =[DEFAULTS objectForKey:@"TT"];
-    if ([nameStr isEqualToString:@""]) {
-        //课程表
-        ClassSubjectViewController *classSubjectVC =[[ClassSubjectViewController alloc]init];
-
-        classSubjectVC.hidesBottomBarWhenPushed =YES;
-        [self.navigationController pushViewController:classSubjectVC animated:NO];
-    }
-    else {
-        switch ([nameStr integerValue]) {
-            case 0:
-            {
-        //课程表
-            ClassSubjectViewController *classSubjectVC =[[ClassSubjectViewController alloc]init];
-                classSubjectVC.hidesBottomBarWhenPushed =YES;
-            [self.navigationController pushViewController:classSubjectVC animated:NO];
-
-            }
-                break;
-            case 1:
-            {
-        //课程表
-                ClassSubjectTimeTableViewController *classSubjectVC =[[ClassSubjectTimeTableViewController alloc]init];
-                classSubjectVC.hidesBottomBarWhenPushed =YES;
-                [self.navigationController pushViewController:classSubjectVC animated:NO];
-            }
-                break;
-                
-            default:
-                break;
-        }
-    }
+    
+    XXESchoolTimetableViewController *schoolTimetableVC = [[XXESchoolTimetableViewController alloc] init];
+    schoolTimetableVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:schoolTimetableVC animated:YES];
+//    NSString *nameStr =[DEFAULTS objectForKey:@"TT"];
+//    if ([nameStr isEqualToString:@""]) {
+//        //课程表
+//        ClassSubjectViewController *classSubjectVC =[[ClassSubjectViewController alloc]init];
+//
+//        classSubjectVC.hidesBottomBarWhenPushed =YES;
+//        [self.navigationController pushViewController:classSubjectVC animated:NO];
+//
+//    }
+//    else {
+//        switch ([nameStr integerValue]) {
+//            case 0:
+//            {
+//        //课程表
+//            ClassSubjectViewController *classSubjectVC =[[ClassSubjectViewController alloc]init];
+//                classSubjectVC.hidesBottomBarWhenPushed =YES;
+//            [self.navigationController pushViewController:classSubjectVC animated:NO];
+//
+//            }
+//                break;
+//            case 1:
+//            {
+//        //课程表
+//                ClassSubjectTimeTableViewController *classSubjectVC =[[ClassSubjectTimeTableViewController alloc]init];
+//                classSubjectVC.hidesBottomBarWhenPushed =YES;
+//                [self.navigationController pushViewController:classSubjectVC animated:NO];
+//            }
+//                break;
+//                
+//            default:
+//                break;
+//        }
+//    }
 }
 
 //通讯录

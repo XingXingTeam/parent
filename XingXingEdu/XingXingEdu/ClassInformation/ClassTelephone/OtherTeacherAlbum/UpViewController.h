@@ -39,8 +39,6 @@
  7:作业图片
  */
 
-
-
 // 4:学校相册图片
 @property (nonatomic, assign) BOOL isFromSchoolIntroduction;
 

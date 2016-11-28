@@ -19,7 +19,7 @@
 #import "HomepageViewController.h"
 #import "RcRootTabbarViewController.h"
 #import "MyHeadViewController.h"
-#import "XXEFriendCirclePageViewController.h"
+#import "XXEFriendMyCircleViewController.h"
 @interface MyTabBarController ()
 
 @end
@@ -36,7 +36,7 @@
 -(void)createViewControllers
 {
     
-NSArray*controllerNames=@[@"HomepageViewController",@"XXEFriendCirclePageViewController",@"ClassRoomHomePageViewController",@"MyHeadViewController"];
+NSArray*controllerNames=@[@"HomepageViewController",@"XXEFriendMyCircleViewController",@"ClassRoomHomePageViewController",@"MyHeadViewController"];
     NSArray *imageNames=@[@"主页icon48x48@2x",@"圈子icon48x48@2x",@"Classicon48x48@2x",@"我的icon48x48@2x"];
     NSArray *selectImageNames =@[@"主页(H01)icon48x48@2x",@"圈子（H01）icon48x48@2x",@"猩课堂(H01)icon48x48@2x",@"我的(H01)icon48x48@2x"];
    NSArray *titleNames=@[@"首页",@"圈子",@"猩课堂",@"我的"];

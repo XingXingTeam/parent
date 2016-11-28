@@ -17,6 +17,9 @@
     NSString *conStr;
     NSString *_flowerId;
     NSMutableArray *articleArray;
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
+    
 
 }
 @property (weak, nonatomic) IBOutlet UIButton *minBtn;
@@ -31,6 +34,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
+
     self.title =@"花篮购买";
     self.numLbl.text =@"1";
     articleArray = [NSMutableArray array];
@@ -59,8 +71,8 @@
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/flowers_basket_info";
     NSDictionary *dict = @{@"appkey":APPKEY,
                            @"backtype":BACKTYPE,
-                           @"xid":XID,
-                           @"user_id":USER_ID,
+                           @"xid":parameterXid,
+                           @"user_id":parameterUser_Id,
                            @"user_type":USER_TYPE,
                            };
     

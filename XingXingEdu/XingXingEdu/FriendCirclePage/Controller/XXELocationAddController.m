@@ -52,7 +52,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.view.backgroundColor = XXEBackgroundColor;
+    self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
    
     //获取经纬度或者城市
     [self setupCityName];

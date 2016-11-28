@@ -46,7 +46,10 @@
     ClassTimeTableModel *timeModel;
     NSMutableArray *modelMArr;
     
+    NSString *babyId;
     
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
 }
 @end
 
@@ -54,6 +57,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.backgroundColor = UIColorFromRGB(0, 170, 42);
+    self.navigationController.navigationBarHidden = NO;
+    
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
+    babyId =[DEFAULTS objectForKey:@"BABYID"];
     self.title = @"课程表";
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(245,245, 245);
@@ -115,10 +129,10 @@
             NSDictionary *pragram =@{
                                      @"appkey":APPKEY,
                                      @"backtype":BACKTYPE,
-                                     @"xid":XID,
-                                     @"user_id":USER_ID,
+                                     @"xid":parameterXid,
+                                     @"user_id":parameterUser_Id,
                                      @"user_type":USER_TYPE,
-                                     @"baby_id":@"3",
+                                     @"baby_id":babyId,
                                      @"week_date":self.weekStr,
                                      @"parame_data":jsonString,
                                      };
@@ -131,7 +145,7 @@
                     NSDictionary *dict =responseObject;
                     
                     
-//                                    NSLog(@"========>%@",dict);
+//    NSLog(@"========>%@",dict);
                     
                     
                     if ([[NSString stringWithFormat:@"%@",dict[@"code"]] isEqualToString:@"1"]) {
@@ -259,10 +273,10 @@
         
         NSDictionary *dict = @{@"appkey":APPKEY,
                                @"backtype":BACKTYPE,
-                               @"xid":XID,
-                               @"user_id":USER_ID,
+                               @"xid":parameterXid,
+                               @"user_id":parameterUser_Id,
                                @"user_type":USER_TYPE,
-                               @"baby_id":@"3",
+                               @"baby_id":babyId,
                                @"schedule_id":_dataType3Arr[indexPath.row][7],
                                
                                };

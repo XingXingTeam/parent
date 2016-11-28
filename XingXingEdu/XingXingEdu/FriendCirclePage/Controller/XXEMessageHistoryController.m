@@ -55,7 +55,7 @@ static NSString *const IdentifierHistory = @"messageHistoryCell";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.view.backgroundColor = XXEBackgroundColor;
+    self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
     
 }
 -(UIStatusBarStyle)preferredStatusBarStyle
@@ -65,7 +65,7 @@ static NSString *const IdentifierHistory = @"messageHistoryCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = XXEBackgroundColor;
+//    self.view.backgroundColor = XXEBackgroundColor;
     if ([XXEUserInfo user].login){
         parameterXid = [XXEUserInfo user].xid;
         parameterUser_Id = [XXEUserInfo user].user_id;

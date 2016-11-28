@@ -131,7 +131,7 @@ typedef NS_OPTIONS(NSInteger, Comments){
     //头像
     NSString * head_img;
     if([model.head_img_type integerValue] == 0){
-        head_img=[kXXEPicURL stringByAppendingString:model.head_img];
+        head_img=[picURL stringByAppendingString:model.head_img];
     }else{
         head_img=talkModel.head_img;
     }
@@ -194,7 +194,7 @@ typedef NS_OPTIONS(NSInteger, Comments){
         UIImageView *pictureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(buttonX, buttonY, picWidth, picHeight)];
         pictureImageView.contentMode = UIViewContentModeScaleAspectFill;
         pictureImageView.clipsToBounds = true;
-        [pictureImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kXXEPicURL, _picWallArray[i]]]];
+        [pictureImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", picURL, _picWallArray[i]]]];
         pictureImageView.tag = 20 + i;
         pictureImageView.userInteractionEnabled = YES;
         _picView.userInteractionEnabled = YES;

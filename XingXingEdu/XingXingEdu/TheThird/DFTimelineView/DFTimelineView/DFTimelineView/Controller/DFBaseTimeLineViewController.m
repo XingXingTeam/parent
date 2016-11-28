@@ -398,7 +398,7 @@
     [messageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [messageButton addTarget:self action:@selector(messageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     messageButton.layer.cornerRadius = 8;
-    messageButton.backgroundColor = XXEColorFromRGB(229, 233, 232);
+    messageButton.backgroundColor = UIColorFromRGB(229, 233, 232);
     messageButton.tag = 1000;
     messageButton.userInteractionEnabled = YES;
     messageButton.layer.masksToBounds = YES;

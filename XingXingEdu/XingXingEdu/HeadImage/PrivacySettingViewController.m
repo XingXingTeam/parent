@@ -23,7 +23,10 @@
     NSString *search_xid;
     NSString *search_nearby;
     NSString *add_friend_set;
-   
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
+    
+
     
 }
 @end
@@ -32,6 +35,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
+
     dataArr = [[NSMutableArray alloc]init];
     nameArr = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
@@ -49,8 +61,8 @@
     urlStr = @"http://www.xingxingedu.cn/Global/secret_default";
     NSDictionary *pragm = @{   @"appkey":APPKEY,
                                @"backtype":BACKTYPE,
-                               @"xid":XID,
-                               @"user_id":USER_ID,
+                               @"xid":parameterXid,
+                               @"user_id":parameterUser_Id,
                                @"user_type":USER_TYPE,
                                };
     [WZYHttpTool post:urlStr params:pragm success:^(id responseObj) {
@@ -206,8 +218,8 @@
     urlStr = @"http://www.xingxingedu.cn/Global/secret_set";
     NSDictionary *pragm = @{   @"appkey":APPKEY,
                                @"backtype":BACKTYPE,
-                               @"xid":XID,
-                               @"user_id":USER_ID,
+                               @"xid":parameterXid,
+                               @"user_id":parameterUser_Id,
                                @"user_type":USER_TYPE,
                                @"show_phone":phoneName,
                                @"show_tname":reallyName,
@@ -218,17 +230,17 @@
                                };
     [WZYHttpTool post:urlStr params:pragm success:^(id responseObj) {
         NSDictionary *dict =responseObj;
-       // NSLog(@"=========info====%@",dict);
+//        NSLog(@"=========info====%@",dict);
         if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
         {
+          [SVProgressHUD showInfoWithStatus:@"设置成功!"];
             
-          //  NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>%@",dict[@"data"]);
-           
-            
+        }else{
+            [SVProgressHUD showInfoWithStatus:@"设置失败!"];
         }
         
     } failure:^(NSError *error) {
-        
+        [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
     }];
 
 }

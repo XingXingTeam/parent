@@ -40,7 +40,7 @@
     self.view = _mapView;
     
 //    [self geoCode];
-//    [self testDistance];
+    [self testDistance];
 }
 
 //开启定位
@@ -128,12 +128,12 @@
 
 // 测距离
 
-//-(void)testDistance{
-//    BMKMapPoint point1 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(31.259606,121.593120));
-//    BMKMapPoint point2 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(31.286206,121.621297));
-//    CLLocationDistance distance = BMKMetersBetweenMapPoints(point1,point2);
-//    NSLog(@"%f米",distance);
-//}
+-(void)testDistance{
+    BMKMapPoint point1 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(31.259606,121.593120));
+    BMKMapPoint point2 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(31.286206,121.621297));
+    CLLocationDistance distance = BMKMetersBetweenMapPoints(point1,point2);
+    NSLog(@"%f米",distance);
+}
 
 
 //地理编码

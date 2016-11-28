@@ -92,7 +92,6 @@
     
     NSString *urlStr = @"http://www.xingxingedu.cn/Parent/school_cookbook";
     
-    //[DEFAULTS setObject:_schoolId forKey:@"SCHOOL_ID"];
     NSString *schoolStr = [DEFAULTS objectForKey:@"SCHOOL_ID"];
     
     NSDictionary *dict = @{@"appkey":APPKEY,
@@ -100,7 +99,7 @@
                            @"xid":parameterXid,
                            @"user_id":parameterUser_Id,
                            @"user_type":USER_TYPE,
-                           @"school_id":@"1",
+                           @"school_id":schoolStr,
                            };
     
     [WZYHttpTool post:urlStr params:dict success:^(id responseObj) {

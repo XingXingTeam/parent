@@ -17,7 +17,9 @@
 {
     UITableView *_tableView;
     NSMutableArray *dataArray;
-   
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
+
 }
 
 /*
@@ -51,6 +53,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
     self.title = @"权限设置";
     self.view.backgroundColor =UIColorFromRGB(229 , 232, 233);
     
@@ -63,27 +72,14 @@
 
     /*
      【权限设置---权限设置列表】
-     
      接口:
      http://www.xingxingedu.cn/Global/right_set_list
-     
      传参:
      other_xid 	//被访问者xid
      */
 
     //路径
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/right_set_list";
-    
-    //请求参数
-    NSString *parameterXid;
-    NSString *parameterUser_Id;
-    if ([XXEUserInfo user].login){
-        parameterXid = [XXEUserInfo user].xid;
-        parameterUser_Id = [XXEUserInfo user].user_id;
-    }else{
-        parameterXid = XID;
-        parameterUser_Id = USER_ID;
-    }
     NSDictionary *params = @{@"appkey":APPKEY,
                              @"backtype":BACKTYPE,
                              @"xid":parameterXid,
@@ -94,7 +90,6 @@
     
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
        
-        
         if ([[NSString stringWithFormat:@"%@", [responseObj objectForKey:@"code"]] isEqualToString:@"1"]) {
             NSDictionary *dic = responseObj[@"data"];
     
@@ -115,6 +110,7 @@
     } failure:^(NSError *error) {
         //
         NSLog(@"%@", error);
+        [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
     }];
 
 }
@@ -172,10 +168,8 @@
     
     /*
      【权限设置---权限设置操作】
-     
      接口:
      http://www.xingxingedu.cn/Global/right_set_action
-     
      传参:
      other_xid 	//被访问者xid
      action_name	//要执行的事件名,允许的事件名有: dt_look_at_him,dt_let_him_see,refuse_chat,black_user  每次只能写一个,注释见上一个接口
@@ -191,25 +185,18 @@
     _action_numStr = _flagStr;
     
 //    NSLog(@"%@-----%@-----", _action_nameStr, _action_numStr);
-    NSString *parameterXid;
-    NSString *parameterUser_Id;
-    if ([XXEUserInfo user].login){
-        parameterXid = [XXEUserInfo user].xid;
-        parameterUser_Id = [XXEUserInfo user].user_id;
-    }else{
-        parameterXid = XID;
-        parameterUser_Id = USER_ID;
-    }
+
     NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"other_xid": _XIDStr, @"action_name":_action_nameStr, @"action_num":_action_numStr};
     
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
-//        NSLog(@"%@", responseObj);
-        
+//        NSLog(@"权限设置 == %@", responseObj);
+        [SVProgressHUD showInfoWithStatus:@"设置成功!"];
         
     } failure:^(NSError *error) {
         //
         NSLog(@"%@", error);
+        [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
     }];
     
 }

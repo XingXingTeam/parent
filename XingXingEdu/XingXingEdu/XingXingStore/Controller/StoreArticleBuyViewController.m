@@ -202,7 +202,7 @@
     [mgr POST:urlStr parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-         //         NSLog(@"%@",dict);
+                  NSLog(@"%@",dict);
          
          self.addressArray=[NSMutableArray array];
          if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )

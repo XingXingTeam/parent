@@ -14,7 +14,7 @@
 #import "RCAddFriendViewController.h"
 #import "SVProgressHUD.h"
 //#import "UserViewController.h"
-#import  "XXEFriendCirclePageViewController.h"
+#import  "XXEFriendMyCircleViewController.h"
 #import "ReportPicViewController.h"
 
 
@@ -145,9 +145,9 @@
 
 - (void)seeFriendCirileButtonClick:(UIButton *)button{
 
-        XXEFriendCirclePageViewController *viewVC = [[XXEFriendCirclePageViewController alloc]init];
-        [self.navigationController pushViewController:viewVC animated:YES
-         ];
+//        ViewController *viewVC = [[ViewController alloc]init];
+//        [self.navigationController pushViewController:viewVC animated:YES
+//         ];
 
 }
 
