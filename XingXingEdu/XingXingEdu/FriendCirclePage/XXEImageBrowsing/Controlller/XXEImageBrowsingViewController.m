@@ -14,11 +14,12 @@
 //#import "XXEVerticalButton.h"
 //#import "KTActionSheet.h"
 #import "ReportPicViewController.h"
-#import "XXEAllImageCollectionApi.h"
+//#import "XXEAllImageCollectionApi.h"
 //#import "XXEHomePageCollectionPhotoApi.h"
 //#import "AppDelegate.h"
 #import "UMSocial.h"
 #import "HHControl.h"
+#import "AllImageCollectionServer.h"
 
 
 
@@ -61,6 +62,7 @@
 }
 
 - (void)createContent{
+    self.automaticallyAdjustsScrollViewInsets = YES;
     //--------  bgScrollView  ---------
     bgScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - 44)];
     bgScrollView.pagingEnabled = YES;
@@ -117,21 +119,36 @@
     CGPoint contentOffset =bgScrollView.contentOffset;
     int d =contentOffset.x/kWidth;
     
-    XXEAllImageCollectionApi *allImageCollectionApi = [[XXEAllImageCollectionApi alloc] initWithXid:parameterXid user_id:parameterUser_Id url:_imageUrlArray[d]];
-    [allImageCollectionApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+    [[AllImageCollectionServer sharedInstance] allImageCollectionWitnXid:parameterXid user_id:parameterUser_Id url:_imageUrlArray[d] succeed:^(id request) {
         //
-//            NSLog(@"收藏 -- %@", request.responseJSONObject);
-        NSString *codeStr = [NSString stringWithFormat:@"%@", request.responseJSONObject[@"code"]];
+        //            NSLog(@"收藏 -- %@", request.responseJSONObject);
+        NSString *codeStr = [NSString stringWithFormat:@"%@", request[@"code"]];
         if ([codeStr isEqualToString:@"1"]) {
             [self showHudWithString:@"收藏成功!" forSecond:1.5];
         }else{
             [self showHudWithString:@"收藏失败!" forSecond:1.5];
         }
         
-    } failure:^(__kindof YTKBaseRequest *request) {
+    } fail:^{
         //
         [self showHudWithString:@"请检查网络!" forSecond:1.5];
     }];
+    
+//    XXEAllImageCollectionApi *allImageCollectionApi = [[XXEAllImageCollectionApi alloc] initWithXid:parameterXid user_id:parameterUser_Id url:_imageUrlArray[d]];
+//    [allImageCollectionApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+//        //
+////            NSLog(@"收藏 -- %@", request.responseJSONObject);
+//        NSString *codeStr = [NSString stringWithFormat:@"%@", request.responseJSONObject[@"code"]];
+//        if ([codeStr isEqualToString:@"1"]) {
+//            [self showHudWithString:@"收藏成功!" forSecond:1.5];
+//        }else{
+//            [self showHudWithString:@"收藏失败!" forSecond:1.5];
+//        }
+//        
+//    } failure:^(__kindof YTKBaseRequest *request) {
+//        //
+//        [self showHudWithString:@"请检查网络!" forSecond:1.5];
+//    }];
 
     
 
@@ -139,7 +156,7 @@
 
 - (void)createBottomViewButton{
     //发起聊天/查看圈子/分享/举报
-    UIImageView *bottomView= [[UIImageView alloc]initWithFrame:CGRectMake(0, KScreenHeight - 49 - 64, KScreenWidth, 49)];
+    UIImageView *bottomView= [[UIImageView alloc]initWithFrame:CGRectMake(0, KScreenHeight - 49, KScreenWidth, 49)];
     bottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bottomView];
     bottomView.userInteractionEnabled =YES;
@@ -153,7 +170,8 @@
     //----------------------------下载 ---------
     downloadButton = [UIButton buttonWithType:0];
     downloadButton.frame = CGRectMake(buttonWidth / 2 * 0, 2 * kScreenRatioHeight, buttonWidth, buttonHeight);
-    [downloadButton setTitle:@"下载" forState:UIControlStateNormal];
+    [downloadButton setTitle:@"保存" forState:UIControlStateNormal];
+    [downloadButton setTitleColor:[UIColor grayColor] forState:0];
     [downloadButton addTarget:self action:@selector(downloadButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 //    downloadButton = [UIButton createButtonWithFrame:CGRectMake backGruondImageName:nil Target:self Action:@selector(downloadButtonClick:) Title:@"下载"];
     [downloadButton setImage:[UIImage imageNamed:@"album_down_icon_click"] forState:UIControlStateNormal];
@@ -168,6 +186,7 @@
     //--------------------------------分享-------
     shareButton = [UIButton buttonWithType:0];
     shareButton.frame = CGRectMake(buttonWidth * 1, 2 * kScreenRatioHeight, buttonWidth, buttonHeight);
+    [shareButton setTitleColor:[UIColor grayColor] forState:0];
     [shareButton setTitle:@"分享" forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 //    shareButton = [UIButton createButtonWithFrame:CGRectMake backGruondImageName:nil Target:self Action:@selector(shareButtonClick:) Title:@"分享"];
@@ -183,6 +202,7 @@
     //--------------------------------举报-------
     reportButton = [UIButton buttonWithType:0];
     reportButton.frame = CGRectMake(buttonWidth * 2, 2 * kScreenRatioHeight, buttonWidth, buttonHeight);
+    [reportButton setTitleColor:[UIColor grayColor] forState:0];
     [reportButton setTitle:@"举报" forState:UIControlStateNormal];
     [reportButton addTarget:self action:@selector(reportButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 //    reportButton = [UIButton createButtonWithFrame:CGRectMake(buttonWidth * 2, 2 * kScreenRatioHeight, buttonWidth, buttonHeight) backGruondImageName:nil Target:self Action:@selector(reportButtonClick:) Title:@"举报"];

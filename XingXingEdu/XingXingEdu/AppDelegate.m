@@ -18,7 +18,7 @@
 #define wxS     @"e452142ebe813f5dfab564a95b2ccc02"
 #define sinaS   @"http://sns.whalecloud.com/sina2/callback"
 
-#define UmengAppKey @"56d4096e67e58ef29300147c"
+#define UmengAppKey @"57c01a13f43e48118e000e55"
 #define WXAPPID @"wx0133249557f0fa1b"
 #define WXAPPsecret @"e452142ebe813f5dfab564a95b2ccc02"
 #define WXUrl @"http://www.xingxingedu.cn/"
@@ -59,6 +59,7 @@
 #import "FirstLaunchViewController.h"
 #import "XXETabBarViewController.h"
 #import "XXEUserInfo.h"
+#import "XXEStarImageViewController.h"
 
 //#import"PayMannerViewController.h"
 @interface AppDelegate ()
@@ -69,30 +70,30 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  
-    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
-    BOOL isNotFirstLauch = [[NSUserDefaults standardUserDefaults] boolForKey:kAppFirstLoadKey];
-    if (isNotFirstLauch) {
-        
-        if ([XXEUserInfo user].login) {
-            // 设置窗口的根控制器
-            self.window.rootViewController = [[XXETabBarViewController alloc] init];
-        }else {
-            LandingpageViewController *login=[[LandingpageViewController alloc]init];
-            self.window.rootViewController = login;
-        }
-    }
-    else{
-        isNotFirstLauch = !isNotFirstLauch;
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kAppFirstLoadKey];
-        FirstLaunchViewController *login =[[FirstLaunchViewController alloc]init];
-        UINavigationController *navi=[[UINavigationController alloc]initWithRootViewController:login];
-        self.window.rootViewController=navi;
-        
-    }
-    
-    [self.window makeKeyAndVisible];
+    [self toMainAPP];
+    [self loadStarView];
+//    BOOL isNotFirstLauch = [[NSUserDefaults standardUserDefaults] boolForKey:kAppFirstLoadKey];
+//    if (isNotFirstLauch) {
+//        
+//        if ([XXEUserInfo user].login) {
+//            // 设置窗口的根控制器
+//            self.window.rootViewController = [[XXETabBarViewController alloc] init];
+//        }else {
+//            LandingpageViewController *login=[[LandingpageViewController alloc]init];
+//            self.window.rootViewController = login;
+//        }
+//    }
+//    else{
+//        isNotFirstLauch = !isNotFirstLauch;
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kAppFirstLoadKey];
+//        FirstLaunchViewController *login =[[FirstLaunchViewController alloc]init];
+//        UINavigationController *navi=[[UINavigationController alloc]initWithRootViewController:login];
+//        self.window.rootViewController=navi;
+//        
+//    }
+//    
+//    [self.window makeKeyAndVisible];
     
     
     //初始化应用，appKey和appSecret从后台申请得
@@ -185,6 +186,56 @@
                           channel:channel apsForProduction:isProduction];
 
     return YES;
+}
+
+- (void) toMainAPP {
+    UIViewController *initViewController = [[UIViewController alloc] init];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    LandingpageViewController *login=[[LandingpageViewController alloc]init];
+//    XXENavigationViewController *navi = [[XXENavigationViewController alloc] initWithRootViewController:loginVC];
+//    XXETabBarControllerConfig *tarVC = [[XXETabBarControllerConfig alloc] init];
+    
+    if ([XXEUserInfo user].login) {
+        // 设置窗口的根控制器
+        initViewController = [[XXETabBarViewController alloc] init];
+    }else {
+        
+        initViewController = login;
+    }
+    
+    self.window.rootViewController = initViewController;
+    
+    
+}
+
+#pragma mark - 加入启动图片
+- (void)loadStarView {
+    NSUserDefaults *first = [NSUserDefaults standardUserDefaults];
+    NSString *isFirst = [first objectForKey:@"isFirst"];
+    if (!isFirst) {
+        [self setupControllers];
+    }
+    
+}
+
+- (void)setupControllers
+{
+    
+//    NSString *key = @"CFBundleShortVersionString";
+//    NSString *lastVersion = [[NSUserDefaults standardUserDefaults]objectForKey:key];
+//    //当前软件的版本号
+//    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[key];
+//    NSLog(@"%@",currentVersion);
+    XXEStarImageViewController *starImageViewController = [[XXEStarImageViewController alloc]init];
+    self.window = [[UIWindow alloc]init];
+    self.window.frame = [UIScreen mainScreen].bounds;
+    self.window.rootViewController = starImageViewController;
+    [self.window makeKeyAndVisible];
+    
 }
 
 -(void)initRongClould{

@@ -87,7 +87,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
-    self.tableView.frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight - 44);
+    
+    if ([self.rootChat isEqualToString:@"my"]) {
+        self.tableView.frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight);
+    }else {
+        self.tableView.frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight - 44);
+    }
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, -64, 70, 64);
     button.backgroundColor = [UIColor redColor];
@@ -102,7 +107,7 @@
         
     }else{
         
-    self.friendCirccleRefreshBlock();
+        self.friendCirccleRefreshBlock();
     }
     UIButton*rightButton = [[UIButton alloc]initWithFrame:CGRectMake(-10,0,22,22)];
     [rightButton setImage:[UIImage imageNamed:@"查看历史44x44"]  forState:UIControlStateNormal];

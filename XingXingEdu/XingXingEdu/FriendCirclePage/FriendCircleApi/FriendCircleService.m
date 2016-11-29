@@ -155,5 +155,45 @@ static id _instance = nil;
     }];
 }
 
+-(void)friendCircleTalkDetailWithXid:(NSString *)xid user_id:(NSString *)user_id talk_id:(NSString *)talk_id succeed:(void (^)(id request))succeed fail:(void (^)())fail {
+    NSDictionary *parameters = @{
+                                 @"appkey":APPKEY,
+                                 @"backtype":BACKTYPE,
+                                 @"xid":xid,
+                                 @"user_id":user_id,
+                                 @"user_type":USER_TYPE,
+                                 @"talk_id":talk_id
+                                 };
+    NSString *requestURL = XXEEveryTalkDetailUrl;
+    [[ServiceManager sharedInstance] requestWithURLString:requestURL parameters:parameters type:1 success:^(id responseObject) {
+        if (!responseObject) {
+            fail();
+        }else {
+            succeed(responseObject);
+        }
+    } failure:^(NSError *error) {
+        fail();
+    }];
+}
+
+//MARK: - 历史消息
+-(void)friendCircleHistoryMessageWithUserXid:(NSString *)userXid UserId:(NSString *)userId succeed:(void (^)(id request))succeed fail:(void (^)())fail {
+    NSDictionary *parameters = @{@"xid":userXid,
+                                 @"appkey":APPKEY,
+                                 @"backtype":BACKTYPE,
+                                 @"user_id":userId,
+                                 @"user_type":USER_TYPE,
+                                 };
+    NSString *requestURL = XXEMessageHistoryUrl;
+    [[ServiceManager sharedInstance] requestWithURLString:requestURL parameters:parameters type:1 success:^(id responseObject) {
+        if (!responseObject) {
+            fail();
+        }else {
+            succeed(responseObject);
+        }
+    } failure:^(NSError *error) {
+        fail();
+    }];
+}
 
 @end

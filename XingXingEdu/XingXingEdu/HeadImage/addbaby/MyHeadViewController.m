@@ -282,6 +282,8 @@
         else if (indexPath.row ==5){
             //我的圈子
             XXEFriendMyCircleViewController *viewVC = [XXEFriendMyCircleViewController new];
+            viewVC.otherXid = parameterXid;
+            viewVC.rootChat = @"my";
             viewVC.hidesBottomBarWhenPushed =YES;
             [self.navigationController pushViewController:viewVC animated:NO];
             

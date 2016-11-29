@@ -19,11 +19,12 @@
 #import "SVProgressHUD.h"
 #import "XXECommentModel.h"
 //#import "XXEFriendCircleCommentApi.h"
-#import "XXEEveryTalkDetailApi.h"
+//#import "XXEEveryTalkDetailApi.h"
 #import "XXECircleModel.h"
 #import "XXEUserInfo.h"
 #import "StringHeight.h"
-#import "XXEDeleteCommentApi.h"
+//#import "XXEDeleteCommentApi.h"
+#import "FriendCircleService.h"
 
 
 #define Kmarg 10.0f
@@ -316,13 +317,13 @@ typedef NS_OPTIONS(NSInteger, Comments){
 
 
 -(void)createDetailMessageNetRequest{
-    XXEEveryTalkDetailApi * everyTalkDetailApi = [[XXEEveryTalkDetailApi alloc] initWithXid:parameterXid user_id:parameterUser_Id talk_id:_talkId];
-    [everyTalkDetailApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+    
+    [[FriendCircleService sharedInstance] friendCircleTalkDetailWithXid:parameterXid user_id:parameterUser_Id talk_id:_talkId succeed:^(id request) {
         //
-//        NSLog(@"999== %@", request.responseJSONObject);
-        NSString *codeStr= request.responseJSONObject[@"code"];
+        //        NSLog(@"999== %@", request.responseJSONObject);
+        NSString *codeStr= request[@"code"];
         if ([codeStr integerValue] == 1) {
-            NSDictionary *dic = request.responseJSONObject[@"data"];
+            NSDictionary *dic = request[@"data"];
             talkModel = [[XXECircleModel alloc]initWithDictionary:dic error:nil];
             
             [self configure:talkModel];
@@ -330,12 +331,32 @@ typedef NS_OPTIONS(NSInteger, Comments){
             _bgScrollView.contentSize = CGSizeMake(0, bgScrollMaxH);
         }
         
-     [_tableView reloadData];
-     
-    } failure:^(__kindof YTKBaseRequest *request) {
+        [_tableView reloadData];
+        
+    } fail:^{
         //
         [SVProgressHUD showErrorWithStatus:@"网络不通，请检查网络！"];
     }];
+//    XXEEveryTalkDetailApi * everyTalkDetailApi = [[XXEEveryTalkDetailApi alloc] initWithXid:parameterXid user_id:parameterUser_Id talk_id:_talkId];
+//    [everyTalkDetailApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+//        //
+////        NSLog(@"999== %@", request.responseJSONObject);
+//        NSString *codeStr= request.responseJSONObject[@"code"];
+//        if ([codeStr integerValue] == 1) {
+//            NSDictionary *dic = request.responseJSONObject[@"data"];
+//            talkModel = [[XXECircleModel alloc]initWithDictionary:dic error:nil];
+//            
+//            [self configure:talkModel];
+//            CGFloat bgScrollMaxH =  CGRectGetMaxY(_tableView.frame) + 800;
+//            _bgScrollView.contentSize = CGSizeMake(0, bgScrollMaxH);
+//        }
+//        
+//     [_tableView reloadData];
+//     
+//    } failure:^(__kindof YTKBaseRequest *request) {
+//        //
+//        [SVProgressHUD showErrorWithStatus:@"网络不通，请检查网络！"];
+//    }];
 
 
 }
@@ -468,9 +489,8 @@ XXECommentModel* comment;
 
 //MARK: - 删除评论
 -(void)deleteComment {
-    XXEDeleteCommentApi *deleteApi = [[XXEDeleteCommentApi alloc] initWithDeleteCommentEventType:@"3" TalkId:_talkId CommentId:comment.commentId UserXid:[XXEUserInfo user].xid UserId:[XXEUserInfo user].user_id];
-    [deleteApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-        NSString *code = [request.responseJSONObject objectForKey:@"code"];
+    [[FriendCircleService sharedInstance] friendCircleDeleteCommentEventType:@"3" TalkId:_talkId CommentId:comment.commentId UserXid:parameterXid UserId:parameterUser_Id succeed:^(id request) {
+        NSString *code = [request objectForKey:@"code"];
         //        NSLog(@":data%@",data);
         if ([code integerValue]==1 || [code integerValue]==5 ) {
             DFLineCommentItem *commentItem = [[DFLineCommentItem alloc] init];
@@ -484,10 +504,31 @@ XXECommentModel* comment;
             [self hudShowText:@"删除失败" second:1.f];
         }
         
-    } failure:^(__kindof YTKBaseRequest *request) {
+    } fail:^{
         
         [self hudShowText:@"网络请求失败" second:1.f];
     }];
+    
+//    XXEDeleteCommentApi *deleteApi = [[XXEDeleteCommentApi alloc] initWithDeleteCommentEventType:@"3" TalkId:_talkId CommentId:comment.commentId UserXid:[XXEUserInfo user].xid UserId:[XXEUserInfo user].user_id];
+//    [deleteApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+//        NSString *code = [request.responseJSONObject objectForKey:@"code"];
+//        //        NSLog(@":data%@",data);
+//        if ([code integerValue]==1 || [code integerValue]==5 ) {
+//            DFLineCommentItem *commentItem = [[DFLineCommentItem alloc] init];
+//            commentItem.commentId = [comment.commentId intValue];
+//            commentItem.userId = [parameterXid integerValue];
+//            commentItem.userNick = @"";
+//            commentItem.text = @"";
+//            [self hudShowText:@"删除成功" second:1.f];
+//            [self createDetailMessageNetRequest];
+//        }else{
+//            [self hudShowText:@"删除失败" second:1.f];
+//        }
+//        
+//    } failure:^(__kindof YTKBaseRequest *request) {
+//        
+//        [self hudShowText:@"网络请求失败" second:1.f];
+//    }];
 }
 
 //MARK: - loading图

@@ -890,7 +890,15 @@
              1 :表示 第三方 头像 ，不需要 添加 前缀
              //判断是否是第三方头像
              */
-            NSString *head_img = [picURL stringByAppendingString:model.head_img];
+            NSString *head_img = @"";
+            if ([model.head_img_type integerValue] == 0) {
+                head_img = [picURL stringByAppendingString:model.head_img];
+            }else if ([model.head_img_type integerValue] == 1){
+            
+                head_img = [NSString stringWithFormat:@"%@", model.head_img];
+            }
+        
+//            NSString *head_img = [picURL stringByAppendingString:model.head_img];
             cell.iconImg.layer.cornerRadius = cell.iconImg.frame.size.width / 2;
             cell.iconImg.layer.masksToBounds = YES;
         

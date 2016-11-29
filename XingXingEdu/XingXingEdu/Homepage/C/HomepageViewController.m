@@ -64,6 +64,7 @@
 
 #import "RCUserInfo+Addition.h"
 
+#import "XXENewCourseView.h"
 
 @interface HomepageViewController ()<UIScrollViewDelegate, ZJCircularBtnDelegate, UIAlertViewDelegate>
 {
@@ -242,6 +243,7 @@
     
     [_schoolNameCombox.listTableView reloadData];
     [_gradeAndClassbox.listTableView reloadData];
+    [self initNewCourseView];
 
 }
 - (void)dealloc{
@@ -314,6 +316,25 @@
     [self createWJCommboxViews];
 //    融云的初始化
    [self connectionFromRongServer];
+    
+}
+
+//MARK: - 新手教程
+-(void)initNewCourseView{
+    
+    NSUserDefaults *first = [NSUserDefaults standardUserDefaults];
+    NSString *isFirst = [first objectForKey:@"isFirst"];
+    
+    if (!isFirst) {
+        UIWindow *window = [[UIApplication sharedApplication] windows][1];
+        XXENewCourseView *newCourseView = [[XXENewCourseView alloc] init];
+        [window addSubview:newCourseView];
+    }
+    
+    isFirst = @"NO";
+    [first setObject:isFirst  forKey:@"isFirst"];
+    [first synchronize];
+    
     
 }
 

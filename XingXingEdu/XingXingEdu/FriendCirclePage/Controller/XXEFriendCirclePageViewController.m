@@ -782,56 +782,6 @@
         } fail:^{
             [self hudShowText:@"网络不通，请检查网络！" second:1.f];
         }];
-//    NSLog(@"说说ID%@ XID%@ UserID%@",self.speakId ,strngXid,homeUserId);
-//    XXEFriendCirclegoodApi *friendGoodApi = [[XXEFriendCirclegoodApi alloc]initWithFriendCircleGoodOrCancelUerXid:parameterXid UserID:parameterUser_Id TalkId:self.speakId];
-//    [friendGoodApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-//        /*
-//         code = 10;    //取消点赞 成功
-//         data =     {
-//         nickname = summer;
-//         xid = 18886394;
-//         };
-//         msg = "Success!\U53d6\U6d88\U8d5e\U6210\U529f!";
-//         */
-//        
-////        NSLog(@"zan ===== %@", request.responseJSONObject);
-//        
-//        NSString *code = [request.responseJSONObject objectForKey:@"code"];
-//        NSDictionary *data = [request.responseJSONObject objectForKey:@"data"];
-//        
-//        XXEGoodUserModel * goodModel = [[XXEGoodUserModel alloc] init];
-//        goodModel.goodXid = [data objectForKey:@"xid"];
-//        goodModel.goodNickName = [data objectForKey:@"nickname"];
-//        DFLineLikeItem *likeItem = [[DFLineLikeItem alloc] init];
-//        [likeItem configure:goodModel];
-//        
-//        //刷新本地数据
-//        XXECircleModel * model = weakSelf.circleListDatasource[(int)itemId - 1];
-//        
-//        if ([code integerValue]==1) {
-//            [self addLikeItem:likeItem itemId:itemId isSelet:NO];
-//            [self hudShowText:@"点赞成功" second:1.f];
-//            [model.good_user addObject:goodModel];
-//            
-//        }else if ([code integerValue]==10){
-//            
-//            [self addLikeItem:likeItem itemId:itemId isSelet:YES];
-//            [self hudShowText:@"取消成功" second:1.f];
-//            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//                for (XXEGoodUserModel * good in model.good_user) {
-//                    if ([good.goodXid isEqualToString:[XXEUserInfo user].xid]) {
-//                        [model.good_user removeObject:good];
-//                        break;
-//                    }
-//                }
-//            });
-//        }
-//        weakSelf.circleListDatasource[(int)itemId - 1] = model;
-//    
-//    } failure:^(__kindof YTKBaseRequest *request) {
-//        [self hudShowText:@"网络不通，请检查网络！" second:1.f];
-//    }];
-    
     }
 }
 

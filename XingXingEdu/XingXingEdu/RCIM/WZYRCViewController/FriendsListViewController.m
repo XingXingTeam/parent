@@ -48,8 +48,6 @@
     
     [super viewDidAppear:animated];
     
-    [_table.header beginRefreshing];
-    
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -82,7 +80,7 @@
     
     [self.table registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:@"FriendCell"];
     self.table.tableFooterView = [UIView new];
-    
+    [_table.header beginRefreshing];
 }
 
 - (void)loadNewData{

@@ -144,7 +144,13 @@
 }
 
 - (void)seeFriendCirileButtonClick:(UIButton *)button{
-
+    
+    XXEFriendMyCircleViewController *myCircleVc = [[XXEFriendMyCircleViewController alloc] init];
+    myCircleVc.otherXid = self.showUserInfo.userId;
+    myCircleVc.friendCirccleRefreshBlock = ^(){
+    };
+    myCircleVc.rootChat = @"my";
+    [self.navigationController pushViewController:myCircleVc animated:YES];
 //        ViewController *viewVC = [[ViewController alloc]init];
 //        [self.navigationController pushViewController:viewVC animated:YES
 //         ];
