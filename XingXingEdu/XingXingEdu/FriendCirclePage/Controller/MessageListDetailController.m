@@ -401,60 +401,6 @@ typedef NS_OPTIONS(NSInteger, Comments){
     
     XXECommentModel *model = talkModel.comment_group[indexPath.row];
     [cell configure:model isLastCell:indexPath.row == talkModel.comment_group.count - 1 ? NO : YES];
-//    评论 类型
-//    cell.com_type = model.com_type;
-//    
-//    //头像
-//    NSString * head_img;
-//    if([model.head_img_type integerValue] == 0){
-//        head_img=[kXXEPicURL stringByAppendingString:model.head_img];
-//    }else{
-//        head_img=model.head_img;
-//    }
-//    [cell.headIconImageView sd_setImageWithURL:[NSURL URLWithString:head_img] placeholderImage:[UIImage imageNamed:@"headplaceholder"]];
-//     
-//    if ([model.com_type integerValue] == 1){
-//      //别人评论
-//        cell.otherName = @"";
-//        cell.nickName.text = model.commentNicknName;
-//    }else if ([model.com_type integerValue] == 2){
-//      //本人 回复
-//        cell.otherName = model.to_who_nickname;
-//        cell.nickName.text = [NSString stringWithFormat:@"%@ 回复 %@", model.commentNicknName, model.to_who_nickname];
-//    }
-//    //内容
-//    cell.contentTextView.text = model.con;
-//    cell.contentTextView.userInteractionEnabled = NO;
-//    cell.contentTextView.scrollEnabled = NO;
-//    cell.contentTextView.font = [UIFont systemFontOfSize:12];
-//    //自动适应行高
-//    static CGFloat maxHeight = 130.0f;
-//    CGRect frame = cell.contentTextView.frame;
-//    CGSize constraintSize = CGSizeMake(frame.size.width, MAXFLOAT);
-//    CGSize size3 = [cell.contentTextView sizeThatFits:constraintSize];
-//    if (size3.height >= maxHeight){
-//        size3.height = maxHeight;
-//        cell.contentTextView.scrollEnabled = YES;   // 允许滚动
-//    }else{
-//        cell.contentTextView.scrollEnabled = NO;    // 不允许滚动，当textview的大小足以容纳它的text的时候，需要设置scrollEnabed为NO，否则会出现光标乱滚动的情况
-//    }
-//    cell.contentTextView.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, size3.height);
-    //时间
-//    NSString *string = [XXETool dateStringFromNumberTimer:model.date_tm];
-//    if (![string isEqualToString:@""]) {
-//        //2010-9-9 0:0:0
-//        NSArray *arr = [string componentsSeparatedByString:@" "];
-//        //
-//        NSArray *arr1 = [arr[0] componentsSeparatedByString:@"-"];
-//        //9月9日
-//        NSString *str1 = [NSString stringWithFormat:@"%@月%@日", arr1[1], arr1[2]];
-//        NSArray *arr2 = [arr[1] componentsSeparatedByString:@":"];
-//        NSString *str2 = [NSString stringWithFormat:@"%@:%@", arr2[0], arr2[1]];
-//        
-//        NSString *newStr = [NSString stringWithFormat:@"%@ %@", str1, str2];
-//        cell.dateTime.text = newStr;
-//        
-//    }
 
     return cell;
 }
@@ -513,28 +459,6 @@ XXECommentModel* comment;
         
         [self hudShowText:@"网络请求失败" second:1.f];
     }];
-    
-//    XXEDeleteCommentApi *deleteApi = [[XXEDeleteCommentApi alloc] initWithDeleteCommentEventType:@"3" TalkId:_talkId CommentId:comment.commentId UserXid:[XXEUserInfo user].xid UserId:[XXEUserInfo user].user_id];
-//    [deleteApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-//        NSString *code = [request.responseJSONObject objectForKey:@"code"];
-//        //        NSLog(@":data%@",data);
-//        if ([code integerValue]==1 || [code integerValue]==5 ) {
-//            DFLineCommentItem *commentItem = [[DFLineCommentItem alloc] init];
-//            commentItem.commentId = [comment.commentId intValue];
-//            commentItem.userId = [parameterXid integerValue];
-//            commentItem.userNick = @"";
-//            commentItem.text = @"";
-//            [self hudShowText:@"删除成功" second:1.f];
-//            [self createDetailMessageNetRequest];
-//        }else{
-//            [self hudShowText:@"删除失败" second:1.f];
-//        }
-//        
-//    } failure:^(__kindof YTKBaseRequest *request) {
-//        
-//        [self hudShowText:@"网络请求失败" second:1.f];
-//    }];
-
 }
 
 //MARK: - loading图

@@ -153,7 +153,7 @@
 
 - (void)createBottomViewButton{
     //发起聊天/查看圈子/分享/举报
-    UIImageView *bottomView= [[UIImageView alloc]initWithFrame:CGRectMake(0, KScreenHeight - 49 - 64, KScreenWidth, 49)];
+    UIImageView *bottomView= [[UIImageView alloc]initWithFrame:CGRectMake(0, KScreenHeight - 49, KScreenWidth, 49)];
     bottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bottomView];
     bottomView.userInteractionEnabled =YES;
