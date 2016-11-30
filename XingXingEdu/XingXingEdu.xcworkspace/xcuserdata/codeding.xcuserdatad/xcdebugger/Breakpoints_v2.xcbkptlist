@@ -43,13 +43,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XingXingEdu/LandingpageViewController.m"
-            timestampString = "502179159.250467"
+            filePath = "XingXingEdu/FriendCirclePage/XXEImageBrowsing/Controlller/XXEImageBrowsingViewController.m"
+            timestampString = "502180300.133248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "433"
-            endingLineNumber = "433"
-            landmarkName = "-onClickQQ:"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
