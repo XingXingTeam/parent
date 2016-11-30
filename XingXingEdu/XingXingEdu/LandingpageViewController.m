@@ -366,32 +366,54 @@ self.navigationController.navigationBarHidden =NO;
      */
     
     //QQ
+    
+    CGFloat buttonW = 52*kScreenRatioWidth;
+    
+    //按钮间距
+    CGFloat space = (KScreenWidth - 50 * 2 * kScreenRatioWidth - 3 * buttonW) / 2;
+    
     QQBtn = [HHControl createButtonWithFrame:CGRectMake((kWidth - (50 * 4 + 25 * 3) * kWidth / 375) / 2, kHeight - 100, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"扣扣" Target:self Action:@selector(onClickQQ:) Title:nil];
 #pragma Mark ***************第三方登录***********
     CGFloat btnW = 50 * kWidth / 375;
-    CGFloat btnH = btnW;
+     [self.view addSubview:QQBtn];
+    QQBtn.layer.cornerRadius= QQBtn.frame.size.width / 2;
+    QQBtn.layer.masksToBounds =YES;
+    [QQBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.view.mas_left).offset(50 * kScreenRatioWidth);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-45*kScreenRatioHeight);
+        make.size.mas_equalTo(CGSizeMake(52*kScreenRatioWidth, 50*kScreenRatioHeight));
+    }];
     
-    CGFloat btnX1 = 20 + ((kWidth - 40) / 3 - btnW) / 2;
-    CGFloat btnX2 = btnX1 + (kWidth - 40) / 3;
-    CGFloat btnX3 = btnX2 + (kWidth - 40) / 3;
-  
     //微信
     weixinBtn = [HHControl createButtonWithFrame:CGRectMake(QQBtn.frame.origin.x + QQBtn.frame.size.width + 25 * kWidth / 375, QQBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"微信" Target:self Action:@selector(onClickWX:) Title:nil];
     weixinBtn.layer.cornerRadius= weixinBtn.frame.size.width / 2;
     weixinBtn.layer.masksToBounds =YES;
-    [View addSubview:weixinBtn];
+    [self.view addSubview:weixinBtn];
+    [weixinBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(QQBtn.mas_right).offset(space);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-45*kScreenRatioHeight);
+        make.size.mas_equalTo(CGSizeMake(52*kScreenRatioWidth, 50*kScreenRatioHeight));
+    }];
+    
     
     //新浪
     xinlangBtn = [HHControl createButtonWithFrame:CGRectMake(weixinBtn.frame.origin.x + weixinBtn.frame.size.width + 25 * kWidth / 375, weixinBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"微博" Target:self Action:@selector(onClickSina:) Title:nil];
     xinlangBtn.layer.cornerRadius = xinlangBtn.frame.size.width / 2;
     xinlangBtn.layer.masksToBounds =YES;
-    [View addSubview:xinlangBtn];
+    [self.view addSubview:xinlangBtn];
+    [xinlangBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(weixinBtn.mas_right).offset(space);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-45*kScreenRatioHeight);
+        make.size.mas_equalTo(CGSizeMake(52*kScreenRatioWidth, 50*kScreenRatioHeight));
+    }];
    
-    //支付宝
-    zhifubaoBtn = [HHControl createButtonWithFrame:CGRectMake(xinlangBtn.frame.origin.x + xinlangBtn.frame.size.width + 25 * kWidth / 375, xinlangBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"支付宝" Target:self Action:@selector(onClickzhifubao:) Title:nil];
-    zhifubaoBtn.layer.cornerRadius = zhifubaoBtn.frame.size.width / 2;
-    zhifubaoBtn.layer.masksToBounds =YES;
-    [View addSubview:zhifubaoBtn];
+//    zhifubaoBtn = [HHControl createButtonWithFrame:CGRectMake(xinlangBtn.frame.origin.x + xinlangBtn.frame.size.width + 25 * kWidth / 375, xinlangBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"支付宝" Target:self Action:@selector(onClickzhifubao:) Title:nil];
+//    zhifubaoBtn.layer.cornerRadius = zhifubaoBtn.frame.size.width / 2;
+//    zhifubaoBtn.layer.masksToBounds =YES;
+//    [View addSubview:zhifubaoBtn];
 }
 
 
@@ -408,7 +430,7 @@ self.navigationController.navigationBarHidden =NO;
     NSLog(@"click qq");
     [ShareSDK getUserInfo:SSDKPlatformTypeQQ onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
         if (state == SSDKResponseStateSuccess) {
-       //  创建一个Url : 请求路径
+        //  创建一个Url : 请求路径
             NSURL *url =[NSURL URLWithString:LoginUrl];
         //创建一个请求
             NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:url];
@@ -638,11 +660,7 @@ self.navigationController.navigationBarHidden =NO;
         
     }];
 }
-- (void)onClickzhifubao:(UIButton*)button{
-//支付宝
 
-    
-}
 //访客
 -(void)onClickvisitorsBtn:(UIButton *)button
 {
