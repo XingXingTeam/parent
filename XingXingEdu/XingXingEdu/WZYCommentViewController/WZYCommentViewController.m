@@ -87,6 +87,8 @@
 }
 - (void)searchB:(UIBarButtonItem*)btn{
     
+    
+    
     if ([XXEUserInfo user].login) {
         _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,20, kWidth, 44)];
         UIImage *backgroundImg = [UtilityFunc createImageWithColor:UIColorFromHex(0xf0eaf3) size:_searchBar.frame.size];

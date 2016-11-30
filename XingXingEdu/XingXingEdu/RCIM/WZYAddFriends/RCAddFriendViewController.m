@@ -245,7 +245,10 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self.navigationController pushViewController:[RCAddFriendInfoViewController alloc] animated:YES];
+    NSString *imgUrl = dataArray[indexPath.row][2];
+    RCAddFriendInfoViewController *addFriendVc = [[RCAddFriendInfoViewController alloc] init];
+    addFriendVc.iconStr = imgUrl;
+    [self.navigationController pushViewController:addFriendVc animated:YES];
 }
 -(void)collectPressed:(UIButton *)btn{
     /*

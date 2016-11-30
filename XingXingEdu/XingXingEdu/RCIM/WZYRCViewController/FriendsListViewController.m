@@ -63,7 +63,6 @@
     self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
     //    friendsArray = [AppDelegate shareAppDelegate].friendsArray;
     self.navigationItem.title=@"聊天首页";
-    
     _table.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     
     UIButton*rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,22,22)];
@@ -109,10 +108,10 @@
     NSArray *menuItems =
     @[
       
-      [KxMenuItem menuItem:@"发起群聊"
-                     image:[UIImage imageNamed:@"faqiqunliao"]
-                    target:self
-                    action:@selector(pushGroupChat:)],
+//      [KxMenuItem menuItem:@"发起群聊"
+//                     image:[UIImage imageNamed:@"faqiqunliao"]
+//                    target:self
+//                    action:@selector(pushGroupChat:)],
       
       [KxMenuItem menuItem:@"添加好友"
                      image:[UIImage imageNamed:@"tianjiahaoyou"]
