@@ -1338,7 +1338,6 @@
 		6888314A1CFC525F0060021D /* 学校课程(H01)icon48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688831471CFC525F0060021D /* 学校课程(H01)icon48x48@2x.png */; };
 		688C7FDA1CE5D36A00D49861 /* 移除icon44x44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688C7FD91CE5D36A00D49861 /* 移除icon44x44@2x.png */; };
 		688CC8CA1D01651300AB24EC /* 个性签名40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688CC8C91D01651300AB24EC /* 个性签名40x40@2x.png */; };
-		688CC8CD1D01658000AB24EC /* 举报(H)icon48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688CC8CB1D01658000AB24EC /* 举报(H)icon48x48@2x.png */; };
 		688CC8CE1D01658000AB24EC /* 举报icon48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688CC8CC1D01658000AB24EC /* 举报icon48x48@2x.png */; };
 		688CC8D11D016D6500AB24EC /* 查看我的圈子icon48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688CC8CF1D016D6500AB24EC /* 查看我的圈子icon48x48@2x.png */; };
 		688CC8D21D016D6500AB24EC /* 发起聊天icon48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688CC8D01D016D6500AB24EC /* 发起聊天icon48x48@2x.png */; };
@@ -3427,7 +3426,6 @@
 		688831471CFC525F0060021D /* 学校课程(H01)icon48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "学校课程(H01)icon48x48@2x.png"; path = "XingXingEdu/Images.xcassets/学校课程(H01)icon48x48@2x.png"; sourceTree = SOURCE_ROOT; };
 		688C7FD91CE5D36A00D49861 /* 移除icon44x44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "移除icon44x44@2x.png"; path = "老师详情资料/移除icon44x44@2x.png"; sourceTree = "<group>"; };
 		688CC8C91D01651300AB24EC /* 个性签名40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个性签名40x40@2x.png"; sourceTree = "<group>"; };
-		688CC8CB1D01658000AB24EC /* 举报(H)icon48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "举报(H)icon48x48@2x.png"; sourceTree = "<group>"; };
 		688CC8CC1D01658000AB24EC /* 举报icon48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "举报icon48x48@2x.png"; sourceTree = "<group>"; };
 		688CC8CF1D016D6500AB24EC /* 查看我的圈子icon48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "查看我的圈子icon48x48@2x.png"; path = "XingXingEdu/Images.xcassets/查看我的圈子icon48x48@2x.png"; sourceTree = SOURCE_ROOT; };
 		688CC8D01D016D6500AB24EC /* 发起聊天icon48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "发起聊天icon48x48@2x.png"; path = "XingXingEdu/Images.xcassets/发起聊天icon48x48@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -7507,7 +7505,6 @@
 		68A1312E1CBDDA7200A13358 /* PicLib */ = {
 			isa = PBXGroup;
 			children = (
-				688CC8CB1D01658000AB24EC /* 举报(H)icon48x48@2x.png */,
 				688CC8CC1D01658000AB24EC /* 举报icon48x48@2x.png */,
 			);
 			path = PicLib;
@@ -8665,7 +8662,6 @@
 				04469A711D40DE9C0067615D /* commenttab3@2x.png in Resources */,
 				04D5B10B1D6B1DE900ABA89A /* 自动播放icon48x48@2x.png in Resources */,
 				0408621D1D422DCB0060C70A /* 人数40x40@2x.png in Resources */,
-				688CC8CD1D01658000AB24EC /* 举报(H)icon48x48@2x.png in Resources */,
 				04D5B0FB1D6B1DE900ABA89A /* 校长头像118x118@2x.png in Resources */,
 				6844E8591CAD45150054B8C5 /* SubEditViewController.xib in Resources */,
 				6865413E1CE42C61003A06E5 /* 我的icon48x48@2x.png in Resources */,
