@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFHTTPRequestOperation.o
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFHTTPRequestOperationManager.o
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFHTTPSessionManager.o
@@ -16,3 +17,23 @@
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIProgressView+AFNetworking.o
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIRefreshControl+AFNetworking.o
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIWebView+AFNetworking.o
+=======
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFHTTPRequestOperation.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFHTTPRequestOperationManager.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFHTTPSessionManager.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFNetworkActivityIndicatorManager.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFNetworking-dummy.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFNetworkReachabilityManager.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFSecurityPolicy.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFURLConnectionOperation.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFURLRequestSerialization.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFURLResponseSerialization.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFURLSessionManager.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIActivityIndicatorView+AFNetworking.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIAlertView+AFNetworking.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIButton+AFNetworking.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIImageView+AFNetworking.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIProgressView+AFNetworking.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIRefreshControl+AFNetworking.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIWebView+AFNetworking.o
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc

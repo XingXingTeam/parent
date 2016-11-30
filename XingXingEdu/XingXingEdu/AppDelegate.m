@@ -19,6 +19,7 @@
 #define sinaS   @"http://sns.whalecloud.com/sina2/callback"
 
 #define UmengAppKey @"57c01a13f43e48118e000e55"
+
 #define WXAPPID @"wx0133249557f0fa1b"
 #define WXAPPsecret @"e452142ebe813f5dfab564a95b2ccc02"
 #define WXUrl @"http://www.xingxingedu.cn/"

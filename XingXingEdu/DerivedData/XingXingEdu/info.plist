@@ -3,8 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>LastAccessedDate</key>
+<<<<<<< HEAD
 	<date>2016-11-28T11:37:42Z</date>
 	<key>WorkspacePath</key>
 	<string>/Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/XingXingEdu.xcworkspace</string>
+=======
+	<date>2016-11-29T07:41:36Z</date>
+	<key>WorkspacePath</key>
+	<string>/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/XingXingEdu.xcworkspace</string>
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 </dict>
 </plist>

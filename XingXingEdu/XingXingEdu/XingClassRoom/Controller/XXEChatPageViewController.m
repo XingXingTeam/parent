@@ -166,6 +166,12 @@
     _longitudeString = [DEFAULTS objectForKey:@"Longitude"];
     _latitudeString = [DEFAULTS objectForKey:@"LatitudeString"];
 #endif
+<<<<<<< HEAD
+=======
+    
+//    NSLog(@"%@ ==== %@", _longitudeString, _latitudeString);
+    
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     firstMenuArray = [[NSMutableArray alloc] init];
     firstArr1 = [[NSMutableArray alloc] init];
     firstArr2 = [[NSMutableArray alloc] init];
@@ -472,7 +478,11 @@
                              };
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
+<<<<<<< HEAD
         NSLog(@"pppp %@", responseObj);
+=======
+//        NSLog(@"pppp %@", responseObj);
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
         
         if ([responseObj[@"code"] integerValue] == 1) {
             NSArray *modelArray = [[NSArray alloc] init];
@@ -551,7 +561,11 @@
                              };
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
+<<<<<<< HEAD
         NSLog(@"jjjj %@", responseObj);
+=======
+//        NSLog(@"jjjj %@", responseObj);
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
         
         if ([responseObj[@"code"] integerValue] == 1) {
             NSArray *modelArray = [[NSArray alloc] init];
@@ -890,6 +904,7 @@
              1 :表示 第三方 头像 ，不需要 添加 前缀
              //判断是否是第三方头像
              */
+<<<<<<< HEAD
             NSString *head_img = @"";
             if ([model.head_img_type integerValue] == 0) {
                 head_img = [picURL stringByAppendingString:model.head_img];
@@ -899,6 +914,16 @@
             }
         
 //            NSString *head_img = [picURL stringByAppendingString:model.head_img];
+=======
+        
+        NSString *head_img = @"";
+        if ([model.head_img_type integerValue] == 0) {
+            head_img = [picURL stringByAppendingString:model.head_img];
+        }else if ([model.head_img_type integerValue] == 1){
+        
+            head_img = [NSString stringWithFormat:@"%@", model.head_img];
+        }
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
             cell.iconImg.layer.cornerRadius = cell.iconImg.frame.size.width / 2;
             cell.iconImg.layer.masksToBounds = YES;
         

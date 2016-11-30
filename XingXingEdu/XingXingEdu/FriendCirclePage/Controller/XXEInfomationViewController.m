@@ -12,20 +12,35 @@
 #import "MessageListDetailController.h"
 #import "UMSocial.h"
 #import "XXECircleModel.h"
+<<<<<<< HEAD
 //#import "XXEFriendCirclegoodApi.h"
 //#import "XXEDeleteCommentApi.h"
 #import "XXETool.h"
 #import "FriendCircleService.h"
+=======
+#import "XXEFriendCirclegoodApi.h"
+#import "XXEDeleteCommentApi.h"
+#import "XXETool.h"
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 
 @interface XXEInfomationViewController ()<UIActionSheetDelegate,UIScrollViewDelegate,UMSocialUIDelegate>
 {
     UIImageView *imageView;
+<<<<<<< HEAD
     UIButton *_detaileBtn;
     UILabel *textLabel;
     BOOL isGood;
     NSMutableArray *allImages;
 }
 
+=======
+//    UIScrollView *_scrollView;
+    UIButton *_detaileBtn;
+    BOOL isGood;
+}
+
+//@property (nonatomic, strong) UIView *panelView;
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 
 @property (nonatomic, strong)UIScrollView *scrollView;
 
@@ -33,6 +48,10 @@
  *  加载视图
  */
 @property (nonatomic, strong) UIActivityIndicatorView *loadingView;
+<<<<<<< HEAD
+=======
+//@property(nonatomic,retain) NSMutableArray *ittms;
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 
 @property (nonatomic, strong) UIButton *likeButton;
 
@@ -76,6 +95,17 @@
     [super viewDidLoad];
     self.indexImage = 0;
     NSLog(@"图片的数组%@",self.imagesArr);
+<<<<<<< HEAD
+=======
+    
+//    NSLog(@"click item: %@",_itemId);
+//    NSLog(@"时间%@",_infoCircleModel.date_tm);
+//    NSLog(@"发布的照片%@",_infoCircleModel.pic_url);
+//    NSLog(@"次图片的评论ID%@",_infoCircleModel.talkId);
+//    NSLog(@"评论的%@",_infoCircleModel.comment_group);
+//    NSLog(@"点赞的%@",_infoCircleModel.good_user);
+//    NSLog(@"发布内容%@",_infoCircleModel.words);
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     NSString *timeFomatter = [XXETool dateAboutStringFromNumberTimer:_infoCircleModel.date_tm];
     self.title = timeFomatter;
     
@@ -84,7 +114,12 @@
 }
 
 -(void)createscrollView{
+<<<<<<< HEAD
     self.scrollView =  [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, KScreenWidth, KScreenHeight - 113 + 64)];
+=======
+//    self.view.backgroundColor = [UIColor blackColor];
+    self.scrollView =  [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - 113)];
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     self.scrollView.pagingEnabled =YES;
     self.scrollView.bounces = NO;
     self.scrollView.showsHorizontalScrollIndicator = YES;
@@ -94,7 +129,10 @@
     
     NSArray *arrayImage;
     arrayImage = nil;
+<<<<<<< HEAD
     allImages = [NSMutableArray array];
+=======
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     if ([_imagesArr containsString:@","]) {
         arrayImage = [_imagesArr componentsSeparatedByString:@","];
         //  加载图片
@@ -104,18 +142,31 @@
             UIImageView *imV = [[UIImageView alloc]initWithFrame:CGRectMake(KScreenWidth*i, 0, KScreenWidth, KScreenHeight-113)];
             NSString *imageUrl = [NSString stringWithFormat:@"%@%@",picURL,arrayImage[i]];
             NSURL *url =[NSURL URLWithString:imageUrl];
+<<<<<<< HEAD
+=======
+            
+//            [imV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@""]];
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
             [imV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 CGFloat imageWidth = image.size.width;
                 CGFloat imageHeight = image.size.height;
                 CGFloat imVHeight = KScreenWidth/imageWidth * imageHeight;
                 imV.frame = CGRectMake(KScreenWidth*i, (KScreenHeight - 113)/2 - imVHeight/2, KScreenWidth, imVHeight);
+<<<<<<< HEAD
                 [allImages addObject:image];
+=======
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
             }];
             [self.scrollView addSubview:imV];
         }
         CGPoint contentOffset = self.scrollView.contentOffset;
         [self.scrollView setContentOffset:contentOffset animated:YES];
         self.scrollView.contentSize =CGSizeMake(arrayImage.count*kWidth, 0);
+<<<<<<< HEAD
+=======
+//        _scrollView.delegate =self;
+
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     }else{
         NSLog(@"图片数组%@",_imagesArr);
         UIImageView *imV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight-113)];
@@ -127,25 +178,43 @@
             CGFloat imageHeight = image.size.height;
             CGFloat imVHeight = KScreenWidth/imageWidth * imageHeight;
             imV.frame = CGRectMake(0, (KScreenHeight - 113)/2 - imVHeight/2, KScreenWidth, imVHeight);
+<<<<<<< HEAD
              [allImages addObject:image];
+=======
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
         }];
         [self.scrollView addSubview:imV];
         CGPoint contentOffset = self.scrollView.contentOffset;
         [self.scrollView setContentOffset:contentOffset animated:YES];
         self.scrollView.contentSize =CGSizeMake(kWidth, 0);
+<<<<<<< HEAD
+=======
+//        _scrollView.delegate =self;
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     }
 }
 - (void)createToolbtn{
     
     //UILabel 加白字
+<<<<<<< HEAD
     textLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, KScreenHeight-153 + 64, KScreenWidth - 20, 50)];
+=======
+    UILabel *textLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, KScreenHeight-153, KScreenWidth - 20, 50)];
+//    textLabel.backgroundColor = [UIColor colorWithWhite:0.35 alpha:0.35];
+//    textLabel.backgroundColor =UIColorFromRGB(125, 130, 147);
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     [self.view addSubview:textLabel];
     textLabel.numberOfLines =0;
     textLabel.font =[UIFont systemFontOfSize:15];
     textLabel.text = _conText;
     textLabel.textColor =UIColorFromRGB(255, 255, 255);
     
+<<<<<<< HEAD
     UIImageView *imageV= [[UIImageView alloc]initWithFrame:CGRectMake(0, KScreenHeight-108 + 64, KScreenWidth, 44)];
+=======
+    UIImageView *imageV= [[UIImageView alloc]initWithFrame:CGRectMake(0, KScreenHeight-108, KScreenWidth, 44)];
+//    imageV.backgroundColor = UIColorFromRGB(255, 233, 233 );
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     [self.view addSubview:imageV];
     imageV.userInteractionEnabled =YES;
     
@@ -165,6 +234,21 @@
             break;
         }
     };
+<<<<<<< HEAD
+=======
+    
+//    if (![_goodArr isEqual:@""]) {
+//        _likeButton = [self getButton:CGRectMake(5, 2, 60, 40) title:@"取消" image:@"AlbumLike"];
+//        [_likeButton addTarget:self action:@selector(onLike:) forControlEvents:UIControlEventTouchUpInside];
+//        [imageV addSubview:_likeButton];
+//        _likeButton.selected = NO;
+//    }else{
+//        _likeButton = [self getButton:CGRectMake(5, 2, 60, 40) title:@"赞" image:@"AlbumLike"];
+//        [_likeButton addTarget:self action:@selector(onLike:) forControlEvents:UIControlEventTouchUpInside];
+//        [imageV addSubview:_likeButton];
+//        _likeButton.selected = YES;
+//    }
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 
     _commentButton = [self getButton:CGRectMake(70, 2, 60, 40) title:@"评论" image:@"AlbumComment"];
     [_commentButton addTarget:self action:@selector(commentButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -269,18 +353,29 @@
 #pragma mark - 删除的网络请求
 - (void)xxe_infomationDeleteCircleMessageStringXid:(NSString *)strngXid HomeUserId:(NSString *)homeUserId
 {
+<<<<<<< HEAD
     [[FriendCircleService sharedInstance] friendCircleDeleteCommentEventType:@"1" TalkId:_infoCircleModel.talkId CommentId:@"" UserXid:strngXid UserId:homeUserId succeed:^(id request) {
         NSLog(@"%@",request);
         NSString *code = [request objectForKey:@"code"];
         if ([code integerValue]==1) {
             NSLog(@"%@",[request objectForKey:@"msg"]);
             NSLog(@"%@",[request objectForKey:@"data"]);
+=======
+    XXEDeleteCommentApi *commentApi = [[XXEDeleteCommentApi alloc]initWithDeleteCommentEventType:@"1" TalkId:_infoCircleModel.talkId CommentId:@"" UserXid:strngXid UserId:homeUserId];
+    [commentApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSLog(@"%@",request.responseJSONObject);
+        NSString *code = [request.responseJSONObject objectForKey:@"code"];
+        if ([code integerValue]==1) {
+            NSLog(@"%@",[request.responseJSONObject objectForKey:@"msg"]);
+            NSLog(@"%@",[request.responseJSONObject objectForKey:@"data"]);
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
             [self showString:@"删除成功" forSecond:1.f];
             self.deteleModelBlock ? self.deteleModelBlock(self.infoCircleModel,self.itemId) : nil;
             [self.navigationController popViewControllerAnimated:YES];
         }else{
             [self showString:@"删除失败" forSecond:1.f];
         }
+<<<<<<< HEAD
     } fail:^{
         [self showString:@"网络请求失败" forSecond:1.f];
     }];
@@ -315,6 +410,20 @@
     
     //调用快速分享接口
     [UMSocialSnsService presentSnsIconSheetView:self appKey:UMSocialAppKey shareText:_conText shareImage:allImages[index] shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToQQ,UMShareToWechatSession,UMShareToWechatTimeline,nil] delegate:self];
+=======
+    } failure:^(__kindof YTKBaseRequest *request) {
+        [self showString:@"网络请求失败" forSecond:1.f];
+    }];
+}
+    
+- (void)sendQQFriend{
+    NSString *shareText = @"来自猩猩教室";
+    NSString *image = @"http://qzapp.qlogo.cn/qzapp/1105651422/9FFBD19645379A28C1F98EE2C2526DC4/100";
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:image]];
+    UIImage *imageA = [UIImage imageWithData:data];
+    //调用快速分享接口
+    [UMSocialSnsService presentSnsIconSheetView:self appKey:UMSocialAppKey shareText:shareText shareImage:imageA shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToQQ,UMShareToWechatSession,UMShareToWechatTimeline,nil] delegate:self];
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 }
 
 //分享的代理方法
@@ -351,6 +460,7 @@
 //点赞
 -(void)onLike:(UIButton *)shareBtn{
     
+<<<<<<< HEAD
 //    if (_likeButton.selected == NO) {
 //        
 //        [self onClickLikeButton];
@@ -359,6 +469,16 @@
 //        
 //    }
     [self onClickLikeButton];
+=======
+    if (_likeButton.selected == NO) {
+        
+        [self onClickLikeButton];
+        
+    }else if (_likeButton.selected == YES){
+        
+        [self onClickLikeButton];
+    }
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 }
 -(void)onClickLikeButton{
     
@@ -371,6 +491,7 @@
         strngXid = XID;
         homeUserId = USER_ID;
     }
+<<<<<<< HEAD
     
     [[FriendCircleService sharedInstance] friendCircleGoodOrCancelUserXid:strngXid UserID:homeUserId TalkId:_infoCircleModel.talkId succeed:^(id request) {
         NSString *code = [request objectForKey:@"code"];
@@ -405,6 +526,26 @@
 //        } failure:^(__kindof YTKBaseRequest *request) {
 //            [self showString:@"网络不通，请检查网络！" forSecond:1.f];
 //        }];
+=======
+        NSLog(@"说说ID%@ XID%@ UserID%@",_infoCircleModel.talkId ,strngXid,homeUserId);
+        XXEFriendCirclegoodApi *friendGoodApi = [[XXEFriendCirclegoodApi alloc]initWithFriendCircleGoodOrCancelUerXid:strngXid UserID:homeUserId TalkId:_infoCircleModel.talkId];
+        [friendGoodApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+            NSString *code = [request.responseJSONObject objectForKey:@"code"];
+            NSLog(@"%@",request.responseJSONObject);
+            if ([code integerValue]==1) {
+                [self showString:@"点赞成功" forSecond:1.f];
+                [_likeButton setTitle:@"取消" forState:UIControlStateSelected];
+                _likeButton.selected = !_likeButton.selected;
+            }else if ([code integerValue]==10){
+                [self showString:@"取消点赞" forSecond:1.f];
+                [_likeButton setTitle:@"赞" forState:UIControlStateNormal];
+                _likeButton.selected = !_likeButton.selected;
+            }
+            
+        } failure:^(__kindof YTKBaseRequest *request) {
+            [self showString:@"网络不通，请检查网络！" forSecond:1.f];
+        }];
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 }
 
 

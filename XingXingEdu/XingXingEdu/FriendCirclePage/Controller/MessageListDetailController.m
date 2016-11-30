@@ -19,12 +19,20 @@
 #import "SVProgressHUD.h"
 #import "XXECommentModel.h"
 //#import "XXEFriendCircleCommentApi.h"
+<<<<<<< HEAD
 //#import "XXEEveryTalkDetailApi.h"
 #import "XXECircleModel.h"
 #import "XXEUserInfo.h"
 #import "StringHeight.h"
 //#import "XXEDeleteCommentApi.h"
 #import "FriendCircleService.h"
+=======
+#import "XXEEveryTalkDetailApi.h"
+#import "XXECircleModel.h"
+#import "XXEUserInfo.h"
+#import "StringHeight.h"
+#import "XXEDeleteCommentApi.h"
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 
 
 #define Kmarg 10.0f
@@ -317,6 +325,7 @@ typedef NS_OPTIONS(NSInteger, Comments){
 
 
 -(void)createDetailMessageNetRequest{
+<<<<<<< HEAD
     
     [[FriendCircleService sharedInstance] friendCircleTalkDetailWithXid:parameterXid user_id:parameterUser_Id talk_id:_talkId succeed:^(id request) {
         //
@@ -324,6 +333,15 @@ typedef NS_OPTIONS(NSInteger, Comments){
         NSString *codeStr= request[@"code"];
         if ([codeStr integerValue] == 1) {
             NSDictionary *dic = request[@"data"];
+=======
+    XXEEveryTalkDetailApi * everyTalkDetailApi = [[XXEEveryTalkDetailApi alloc] initWithXid:parameterXid user_id:parameterUser_Id talk_id:_talkId];
+    [everyTalkDetailApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        //
+//        NSLog(@"999== %@", request.responseJSONObject);
+        NSString *codeStr= request.responseJSONObject[@"code"];
+        if ([codeStr integerValue] == 1) {
+            NSDictionary *dic = request.responseJSONObject[@"data"];
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
             talkModel = [[XXECircleModel alloc]initWithDictionary:dic error:nil];
             
             [self configure:talkModel];
@@ -331,6 +349,7 @@ typedef NS_OPTIONS(NSInteger, Comments){
             _bgScrollView.contentSize = CGSizeMake(0, bgScrollMaxH);
         }
         
+<<<<<<< HEAD
         [_tableView reloadData];
         
     } fail:^{
@@ -357,6 +376,14 @@ typedef NS_OPTIONS(NSInteger, Comments){
 //        //
 //        [SVProgressHUD showErrorWithStatus:@"网络不通，请检查网络！"];
 //    }];
+=======
+     [_tableView reloadData];
+     
+    } failure:^(__kindof YTKBaseRequest *request) {
+        //
+        [SVProgressHUD showErrorWithStatus:@"网络不通，请检查网络！"];
+    }];
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 
 
 }
@@ -489,8 +516,14 @@ XXECommentModel* comment;
 
 //MARK: - 删除评论
 -(void)deleteComment {
+<<<<<<< HEAD
     [[FriendCircleService sharedInstance] friendCircleDeleteCommentEventType:@"3" TalkId:_talkId CommentId:comment.commentId UserXid:parameterXid UserId:parameterUser_Id succeed:^(id request) {
         NSString *code = [request objectForKey:@"code"];
+=======
+    XXEDeleteCommentApi *deleteApi = [[XXEDeleteCommentApi alloc] initWithDeleteCommentEventType:@"3" TalkId:_talkId CommentId:comment.commentId UserXid:[XXEUserInfo user].xid UserId:[XXEUserInfo user].user_id];
+    [deleteApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
+        NSString *code = [request.responseJSONObject objectForKey:@"code"];
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
         //        NSLog(@":data%@",data);
         if ([code integerValue]==1 || [code integerValue]==5 ) {
             DFLineCommentItem *commentItem = [[DFLineCommentItem alloc] init];
@@ -504,6 +537,7 @@ XXECommentModel* comment;
             [self hudShowText:@"删除失败" second:1.f];
         }
         
+<<<<<<< HEAD
     } fail:^{
         
         [self hudShowText:@"网络请求失败" second:1.f];
@@ -529,6 +563,12 @@ XXECommentModel* comment;
 //        
 //        [self hudShowText:@"网络请求失败" second:1.f];
 //    }];
+=======
+    } failure:^(__kindof YTKBaseRequest *request) {
+        
+        [self hudShowText:@"网络请求失败" second:1.f];
+    }];
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 }
 
 //MARK: - loading图

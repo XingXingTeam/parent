@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/NSData+ImageContentType.o
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/SDImageCache.o
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/SDWebImage-dummy.o
@@ -13,3 +14,20 @@
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/UIImageView+HighlightedWebCache.o
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/UIImageView+WebCache.o
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/UIView+WebCacheOperation.o
+=======
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/NSData+ImageContentType.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/SDImageCache.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/SDWebImage-dummy.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/SDWebImageCompat.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/SDWebImageDecoder.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/SDWebImageDownloader.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/SDWebImageDownloaderOperation.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/SDWebImageManager.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/SDWebImagePrefetcher.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/UIButton+WebCache.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/UIImage+GIF.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/UIImage+MultiFormat.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/UIImageView+HighlightedWebCache.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/UIImageView+WebCache.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphonesimulator/SDWebImage.build/Objects-normal/x86_64/UIView+WebCacheOperation.o
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc

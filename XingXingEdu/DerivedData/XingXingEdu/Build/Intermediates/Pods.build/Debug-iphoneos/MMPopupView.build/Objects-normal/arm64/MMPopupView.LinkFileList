@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphoneos/MMPopupView.build/Objects-normal/arm64/MMAlertView.o
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphoneos/MMPopupView.build/Objects-normal/arm64/MMPopupCategory.o
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphoneos/MMPopupView.build/Objects-normal/arm64/MMPopupItem.o
@@ -5,3 +6,12 @@
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphoneos/MMPopupView.build/Objects-normal/arm64/MMPopupView.o
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphoneos/MMPopupView.build/Objects-normal/arm64/MMPopupWindow.o
 /Users/mac/Desktop/工作/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphoneos/MMPopupView.build/Objects-normal/arm64/MMSheetView.o
+=======
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphoneos/MMPopupView.build/Objects-normal/arm64/MMAlertView.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphoneos/MMPopupView.build/Objects-normal/arm64/MMPopupCategory.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphoneos/MMPopupView.build/Objects-normal/arm64/MMPopupItem.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphoneos/MMPopupView.build/Objects-normal/arm64/MMPopupView-dummy.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphoneos/MMPopupView.build/Objects-normal/arm64/MMPopupView.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphoneos/MMPopupView.build/Objects-normal/arm64/MMPopupWindow.o
+/Users/mac/Desktop/xingxingedu-parent 11-28晚/XingXingEdu/DerivedData/XingXingEdu/Build/Intermediates/Pods.build/Debug-iphoneos/MMPopupView.build/Objects-normal/arm64/MMSheetView.o
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc

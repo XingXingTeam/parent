@@ -155,6 +155,7 @@ static id _instance = nil;
     }];
 }
 
+<<<<<<< HEAD
 -(void)friendCircleTalkDetailWithXid:(NSString *)xid user_id:(NSString *)user_id talk_id:(NSString *)talk_id succeed:(void (^)(id request))succeed fail:(void (^)())fail {
     NSDictionary *parameters = @{
                                  @"appkey":APPKEY,
@@ -195,5 +196,7 @@ static id _instance = nil;
         fail();
     }];
 }
+=======
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 
 @end

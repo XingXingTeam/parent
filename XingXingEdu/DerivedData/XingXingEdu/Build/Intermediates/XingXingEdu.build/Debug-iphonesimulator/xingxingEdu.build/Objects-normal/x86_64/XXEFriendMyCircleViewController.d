@@ -1,4 +1,5 @@
 dependencies: \
+<<<<<<< HEAD
   /Users/mac/Desktop/工作/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/Controller/XXEFriendMyCircleViewController.m \
   /Users/mac/Desktop/工作/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/Controller/XXEFriendMyCircleViewController.h \
   /Users/mac/Desktop/工作/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/DFTimelineView.h \
@@ -32,3 +33,38 @@ dependencies: \
   /Users/mac/Desktop/工作/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/Controller/XXEBaseViewController.h \
   /Users/mac/Desktop/工作/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/Controller/XXEMessageHistoryController.h \
   /Users/mac/Desktop/工作/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/FriendCircleApi/FriendCircleService.h
+=======
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/Controller/XXEFriendMyCircleViewController.m \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/Controller/XXEFriendMyCircleViewController.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/DFTimelineView.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/Controller/DFTimeLineViewController.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/Item/DFBaseLineItem.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/Item/LikeComment/DFLineLikeItem.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/Item/LikeComment/DFLineCommentItem.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/Controller/DFBaseTimeLineViewController.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/UserTimeline/Controller/DFUserTimeLineViewController.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/UserTimeline/Item/DFBaseUserLineItem.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/View/DFLineCellManager.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/View/DFBaseLineCell.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/View/LikeCommentView/DFLikeCommentView.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/View/LikeCommentToolbar/DFLikeCommentToolbar.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/Define/Const.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/Item/DFTextImageLineItem.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/Model/XXECircleModel.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/Model/XXECommentModel.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/Model/XXEGoodUserModel.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/Item/DFVideoLineItem.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/View/DFTextImageLineCell.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/View/DFGridImageView/DFGridImageView.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/View/DFVideoLineCell.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/DFTimelineView/DFTimelineView/DFTimelineView/UserTimeline/Item/DFTextImageUserLineItem.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/FriendCircleApi/XXEFriendMyCircleApi.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/YTKNetwork/YTKNetwork/YTKRequest.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/YTKNetwork/YTKNetwork/YTKBaseRequest.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/TheThird/AFDownloadRequestOperation/AFDownloadRequestOperation.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/Model/XXECircleUserModel.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/Controller/XXEInfomationViewController.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/Controller/XXEBaseViewController.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/Controller/XXEMessageHistoryController.h \
+  /Users/mac/Desktop/xingxingedu-parent\ 11-28晚/XingXingEdu/XingXingEdu/FriendCirclePage/FriendCircleApi/FriendCircleService.h
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc

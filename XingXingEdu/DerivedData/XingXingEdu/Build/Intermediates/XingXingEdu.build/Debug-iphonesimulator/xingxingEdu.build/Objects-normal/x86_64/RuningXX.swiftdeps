@@ -6,6 +6,7 @@ provides-nominal:
 provides-member:
 - ["CX10wbttJtcrla8RuningXX", ""]
 provides-dynamic-lookup:
+<<<<<<< HEAD
 - "runingBackView"
 - "sharedInstance"
 - "kScreenWidth"
@@ -28,6 +29,30 @@ depends-top-level:
 - !private "AnyObject"
 - !private "=="
 - "RuningXX"
+=======
+- "kScreenHeight"
+- "showRuning"
+- "backWh"
+- "kScreenWidth"
+- "sharedInstance"
+- "dismissWithAnimation"
+- "dismissWithAnimation"
+- "runingBackView"
+depends-top-level:
+- "RuningView"
+- !private "AnyObject"
+- !private "-"
+- !private "UIColor"
+- "RuningXX"
+- !private "=="
+- "Void"
+- !private "!="
+- !private "CGRect"
+- "CGFloat"
+- !private "UIApplication"
+- "UIScreen"
+- "UIView"
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 depends-member:
 - !private ["Ps9AnyObject", "CGRect"]
 - !private ["Ps9AnyObject", "RuningView"]
@@ -804,7 +829,11 @@ depends-dynamic-lookup:
 - !private "addSubview"
 depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/Swift_2.3.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Swift.swiftmodule"
+<<<<<<< HEAD
 - "/Users/mac/Desktop/\u5DE5\u4F5C/xingxingedu-parent 11-28\u665A/XingXingEdu/XingXingEdu/XXETools/XingXingEdu-Bridging-Header.h"
+=======
+- "/Users/mac/Desktop/xingxingedu-parent 11-28\u665A/XingXingEdu/XingXingEdu/XXETools/XingXingEdu-Bridging-Header.h"
+>>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/Swift_2.3.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/Swift_2.3.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Foundation.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/Swift_2.3.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/Darwin.swiftmodule"
