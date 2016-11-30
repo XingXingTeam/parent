@@ -72,8 +72,6 @@
 @end
 
 @implementation LandingpageViewController
-<<<<<<< HEAD
-=======
 
 //    1. 懒加载初始化：
 - (CLLocationManager *)locationManager{
@@ -83,8 +81,6 @@
     }
     return _locationManager;
 }
-
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 - (void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden =YES;
 }
@@ -105,49 +101,12 @@ self.navigationController.navigationBarHidden =NO;
     //
     [self createLabel];
     
-<<<<<<< HEAD
-    
-    
-=======
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 }
 
 
 #pragma mark - 设置手机 自动定位=====================================
-<<<<<<< HEAD
 
-- (void)settingLocation{
-
-    _locationManager = [[CLLocationManager alloc] init];
     
-    if (![CLLocationManager locationServicesEnabled]) {
-        
-        [SVProgressHUD showInfoWithStatus:@"定位服务当前可能尚未打开，请设置打开！"];
-        
-        NSLog(@"定位服务不可利用");
-        
-    }
-    
-    //如果没有授权，则请求用户授权
-    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
-        
-        [_locationManager requestWhenInUseAuthorization];
-        
-    }else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse){
-        //设置代理
-        _locationManager.delegate = self;
-        //设置定位精度
-        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        
-        //一米定位一次  频率
-        CLLocationDistance distance = 0.1;
-        
-        //开启定位
-        [_locationManager startUpdatingLocation];
-    }
-    
-    
-=======
 - (void)settingLocation{
     //    判断定位操作是否允许
     if ([CLLocationManager locationServicesEnabled] &&[CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied)
@@ -195,7 +154,6 @@ self.navigationController.navigationBarHidden =NO;
         [alert addAction:cancelAction];
         [self presentViewController:alert animated:YES completion:nil];
     }
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 }
 
 
@@ -347,11 +305,7 @@ self.navigationController.navigationBarHidden =NO;
     [landBtn setTitle:@"登    录" forState:UIControlStateNormal];
     [landBtn addTarget:self action:@selector(landClick) forControlEvents:UIControlEventTouchUpInside];
     landBtn.backgroundColor = UIColorFromRGB(0, 170, 42);
-<<<<<<< HEAD
     landBtn.titleLabel.font = [UIFont systemFontOfSize:18 * kWidth / 375];
-=======
-    landBtn.titleLabel.font = [UIFont systemFontOfSize:18];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     [landBtn setTintColor:[UIColor whiteColor]];
     landBtn.layer.cornerRadius = landBtn.frame.size.height / 2;
     landBtn.layer.masksToBounds = YES;
@@ -366,33 +320,22 @@ self.navigationController.navigationBarHidden =NO;
     //免费注册BUTTOn
     newUserBtn = [HHControl createButtonWithFrame:CGRectMake(spaceWidth ,  buttonY, buttonWidth, 30) backGruondImageName:nil Target:self Action:@selector(registration:) Title:@"免费注册"];
     [newUserBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-<<<<<<< HEAD
     newUserBtn.titleLabel.font = [UIFont systemFontOfSize:12 * kWidth / 375];
-=======
-    newUserBtn.titleLabel.font = [UIFont systemFontOfSize:13];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
+
     
     [View addSubview:newUserBtn];
 
     //访客模式Button
     visitorsBtn = [HHControl createButtonWithFrame:CGRectMake( spaceWidth * 2 + buttonWidth ,buttonY, buttonWidth, 30) backGruondImageName:nil Target:self Action:@selector(onClickvisitorsBtn:) Title:@"访客登陆"];
     [visitorsBtn setTitleColor:UIColorFromRGB(0, 170, 42) forState:UIControlStateNormal];
-<<<<<<< HEAD
     visitorsBtn.titleLabel.font = [UIFont systemFontOfSize:12 * kWidth / 375];
-=======
-    visitorsBtn.titleLabel.font = [UIFont systemFontOfSize:13];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     
     [View addSubview:visitorsBtn];
     
     //找回密码BUTTOn
     forgotPwdBtn = [HHControl createButtonWithFrame:CGRectMake(spaceWidth * 3 + buttonWidth * 2, buttonY, buttonWidth, 30) backGruondImageName:nil Target:self Action:@selector(fogetPwd) Title:@"忘记密码?"];
     [forgotPwdBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-<<<<<<< HEAD
     forgotPwdBtn.titleLabel.font = [UIFont systemFontOfSize:12 * kWidth / 375];
-=======
-    forgotPwdBtn.titleLabel.font = [UIFont systemFontOfSize:13];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     
     [View addSubview:forgotPwdBtn];
 
@@ -409,11 +352,7 @@ self.navigationController.navigationBarHidden =NO;
     
     //位置
     UILabel *label = [HHControl createLabelWithFrame:CGRectMake( line3.frame.origin.x + lineWidth, kHeight - 130 - 10, 150, 20) Font:14 * kWidth / 375 Text:@"使用其他账号登陆"];
-<<<<<<< HEAD
-
-=======
     label.font = [UIFont systemFontOfSize:14];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     label.textColor = [UIColor grayColor];
     label.textAlignment = NSTextAlignmentCenter;
 
@@ -422,17 +361,12 @@ self.navigationController.navigationBarHidden =NO;
     [self.view addSubview:line3];
     [self.view addSubview:label];
     [self.view addSubview:line4];
-
-<<<<<<< HEAD
-    
     /**
      *   ***************第三方登录***********
      */
     
     //QQ
     QQBtn = [HHControl createButtonWithFrame:CGRectMake((kWidth - (50 * 4 + 25 * 3) * kWidth / 375) / 2, kHeight - 100, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"扣扣" Target:self Action:@selector(onClickQQ:) Title:nil];
-=======
- 
 #pragma Mark ***************第三方登录***********
     CGFloat btnW = 50 * kWidth / 375;
     CGFloat btnH = btnW;
@@ -440,51 +374,24 @@ self.navigationController.navigationBarHidden =NO;
     CGFloat btnX1 = 20 + ((kWidth - 40) / 3 - btnW) / 2;
     CGFloat btnX2 = btnX1 + (kWidth - 40) / 3;
     CGFloat btnX3 = btnX2 + (kWidth - 40) / 3;
-    
-    //QQ
-    QQBtn = [HHControl createButtonWithFrame:CGRectMake(btnX1, kHeight - 100, btnW, btnH) backGruondImageName:@"扣扣" Target:self Action:@selector(onClickQQ:) Title:nil];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
-    
-    QQBtn.layer.cornerRadius = QQBtn.frame.size.width / 2;
-    QQBtn.layer.masksToBounds =YES;
-    [View addSubview:QQBtn];
   
     //微信
-<<<<<<< HEAD
     weixinBtn = [HHControl createButtonWithFrame:CGRectMake(QQBtn.frame.origin.x + QQBtn.frame.size.width + 25 * kWidth / 375, QQBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"微信" Target:self Action:@selector(onClickWX:) Title:nil];
-=======
-    weixinBtn = [HHControl createButtonWithFrame:CGRectMake(btnX2, QQBtn.frame.origin.y, btnW, btnH) backGruondImageName:@"微信" Target:self Action:@selector(onClickWX:) Title:nil];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
-    
     weixinBtn.layer.cornerRadius= weixinBtn.frame.size.width / 2;
     weixinBtn.layer.masksToBounds =YES;
     [View addSubview:weixinBtn];
     
     //新浪
-<<<<<<< HEAD
     xinlangBtn = [HHControl createButtonWithFrame:CGRectMake(weixinBtn.frame.origin.x + weixinBtn.frame.size.width + 25 * kWidth / 375, weixinBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"微博" Target:self Action:@selector(onClickSina:) Title:nil];
-=======
-    xinlangBtn = [HHControl createButtonWithFrame:CGRectMake(btnX3, weixinBtn.frame.origin.y, btnW, btnH) backGruondImageName:@"微博" Target:self Action:@selector(onClickSina:) Title:nil];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     xinlangBtn.layer.cornerRadius = xinlangBtn.frame.size.width / 2;
     xinlangBtn.layer.masksToBounds =YES;
     [View addSubview:xinlangBtn];
    
-<<<<<<< HEAD
     //支付宝
     zhifubaoBtn = [HHControl createButtonWithFrame:CGRectMake(xinlangBtn.frame.origin.x + xinlangBtn.frame.size.width + 25 * kWidth / 375, xinlangBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"支付宝" Target:self Action:@selector(onClickzhifubao:) Title:nil];
     zhifubaoBtn.layer.cornerRadius = zhifubaoBtn.frame.size.width / 2;
     zhifubaoBtn.layer.masksToBounds =YES;
     [View addSubview:zhifubaoBtn];
-=======
-//    //支付宝
-//    zhifubaoBtn = [HHControl createButtonWithFrame:CGRectMake(xinlangBtn.frame.origin.x + xinlangBtn.frame.size.width + 25 * kWidth / 375, xinlangBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"支付宝" Target:self Action:@selector(onClickzhifubao:) Title:nil];
-//    zhifubaoBtn.layer.cornerRadius = zhifubaoBtn.frame.size.width / 2;
-//    zhifubaoBtn.layer.masksToBounds =YES;
-//    [View addSubview:zhifubaoBtn];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
-
-    
 }
 
 
@@ -731,21 +638,11 @@ self.navigationController.navigationBarHidden =NO;
         
     }];
 }
-<<<<<<< HEAD
 - (void)onClickzhifubao:(UIButton*)button{
 //支付宝
 
     
 }
-=======
-
-#pragma mark =======  支付宝 登录 ==============
-//- (void)onClickzhifubao:(UIButton*)button{
-////支付宝
-//
-//    
-//}
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 //访客
 -(void)onClickvisitorsBtn:(UIButton *)button
 {

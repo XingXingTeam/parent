@@ -262,12 +262,8 @@
         cell.imageV.image = [UIImage imageNamed:@"home_recipe_placehoder_icon"];
     }
     
-<<<<<<< HEAD
-=======
     cell.imageV.contentMode = UIViewContentModeScaleAspectFill;
     cell.imageV.clipsToBounds = YES;
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
-    
     cell.titleLbl.text = titleArray[indexPath.row];
     cell.detailLbl.text = contentDataSource[indexPath.section][indexPath.row];
     

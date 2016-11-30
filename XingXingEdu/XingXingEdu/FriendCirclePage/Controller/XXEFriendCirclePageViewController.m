@@ -782,8 +782,6 @@
         } fail:^{
             [self hudShowText:@"网络不通，请检查网络！" second:1.f];
         }];
-<<<<<<< HEAD
-=======
 //    NSLog(@"说说ID%@ XID%@ UserID%@",self.speakId ,strngXid,homeUserId);
 //    XXEFriendCirclegoodApi *friendGoodApi = [[XXEFriendCirclegoodApi alloc]initWithFriendCircleGoodOrCancelUerXid:parameterXid UserID:parameterUser_Id TalkId:self.speakId];
 //    [friendGoodApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
@@ -834,7 +832,6 @@
 //        [self hudShowText:@"网络不通，请检查网络！" second:1.f];
 //    }];
     
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     }
 }
 

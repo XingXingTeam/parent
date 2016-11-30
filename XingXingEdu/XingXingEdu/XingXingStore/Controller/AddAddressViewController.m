@@ -203,12 +203,6 @@
 -(void)resolveCity{
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"area" ofType:@"plist"];
     areaDic = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-<<<<<<< HEAD
-=======
-    
-   
-    
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     NSArray *components = [areaDic allKeys];
     NSArray *sortedArray = [components sortedArrayUsingComparator: ^(id obj1, id obj2) {
         

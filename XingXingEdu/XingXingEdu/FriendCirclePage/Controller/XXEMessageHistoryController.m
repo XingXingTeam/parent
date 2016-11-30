@@ -7,17 +7,9 @@
 //
 
 #import "XXEMessageHistoryController.h"
-<<<<<<< HEAD
 #import "XXEMessageHistoryModel.h"
 #import "XXEMessageHistoryCell.h"
 #import "MessageListDetailController.h"
-=======
-#import "XXEMessageHistoryApi.h"
-#import "XXEMessageHistoryModel.h"
-#import "XXEMessageHistoryCell.h"
-#import "MessageListDetailController.h"
-#import "XXENewMessageApi.h"
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
 #import "XingXingEdu-swift.h"
 #import "FriendCircleService.h"
 
@@ -51,10 +43,7 @@ static NSString *const IdentifierHistory = @"messageHistoryCell";
 {
     if (!_messageTableView) {
         _messageTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-<<<<<<< HEAD
         _messageTableView.frame = CGRectMake(0, 64, KScreenWidth, KScreenHeight - 64 - 44);
-=======
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
         _messageTableView.separatorStyle = UITableViewCellSelectionStyleNone;
         _messageTableView.delegate = self;
         _messageTableView.dataSource = self;
@@ -84,11 +73,7 @@ static NSString *const IdentifierHistory = @"messageHistoryCell";
         parameterUser_Id = USER_ID;
     }
     
-<<<<<<< HEAD
     [RuningXX.sharedInstance showRuning];
-=======
-//    [RuningXX.sharedInstance showRuning];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
     if ([self.messageNumber isEqualToString:@"1"]) {
         self.title = @"新消息";
         [self setupNewMessageList];
@@ -96,11 +81,7 @@ static NSString *const IdentifierHistory = @"messageHistoryCell";
     }else{
         self.title = @"历史消息";
         //获取网络请求
-<<<<<<< HEAD
         [RuningXX.sharedInstance showRuning];
-=======
-//        [RuningXX.sharedInstance showRuning];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
         [self setupNetWorkRequest];
     }
     [self.messageTableView registerNib:[UINib nibWithNibName:@"XXEMessageHistoryCell" bundle:nil] forCellReuseIdentifier:IdentifierHistory];
@@ -113,28 +94,18 @@ static NSString *const IdentifierHistory = @"messageHistoryCell";
 {
 
     [self.messageDatasource removeAllObjects];
-<<<<<<< HEAD
     
     [[FriendCircleService sharedInstance] friendCircleHistoryMessageWithUserXid:parameterXid UserId:parameterUser_Id succeed:^(id request) {
         //        NSLog(@"消息%@",request.responseJSONObject);
         NSString *code = [request objectForKey:@"code"];
         if ([code integerValue]==1) {
             NSArray *data = [request objectForKey:@"data"];
-=======
-    XXEMessageHistoryApi * messageApi = [[XXEMessageHistoryApi alloc]initWithCircleMeesageHistoryUserXid:parameterXid UserId:parameterUser_Id];
-    [messageApi startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest *request) {
-//        NSLog(@"消息%@",request.responseJSONObject);
-        NSString *code = [request.responseJSONObject objectForKey:@"code"];
-        if ([code integerValue]==1) {
-            NSArray *data = [request.responseJSONObject objectForKey:@"data"];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
             for (int i=0; i<data.count; i++) {
                 XXEMessageHistoryModel *model = [[XXEMessageHistoryModel alloc]initWithDictionary:data[i] error:nil];
                 [self.messageDatasource addObject:model];
             }
             [self.messageTableView reloadData];
         }else if ([code integerValue]==3){
-<<<<<<< HEAD
             [self showString:@"没有数据" forSecond:1.f];
         }else{
             [self showString:@"获取数据失败" forSecond:1.f];
@@ -165,17 +136,7 @@ static NSString *const IdentifierHistory = @"messageHistoryCell";
 ////        [RuningXX.sharedInstance dismissWithAnimation];
 //        [self showString:@"网络异常" forSecond:1.f];
 //    }];
-=======
-             [self showString:@"没有数据" forSecond:1.f];
-        }else{
-            [self showString:@"获取数据失败" forSecond:1.f];
-        }
-//        [RuningXX.sharedInstance dismissWithAnimation];
-    } failure:^(__kindof YTKBaseRequest *request) {
-//        [RuningXX.sharedInstance dismissWithAnimation];
-        [self showString:@"网络异常" forSecond:1.f];
-    }];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
+
 }
 
 - (void)setupNewMessageList
@@ -199,12 +160,7 @@ static NSString *const IdentifierHistory = @"messageHistoryCell";
         }else{
             [self showString:@"获取数据失败" forSecond:1.f];
         }
-<<<<<<< HEAD
                 [RuningXX.sharedInstance dismissWithAnimation];
-=======
-        //        [RuningXX.sharedInstance dismissWithAnimation];
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
-        
     } fail:^{
         
     }];

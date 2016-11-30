@@ -321,7 +321,6 @@
 		045FC5631D4B758500DF1E26 /* CommentsRootTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045FC5571D4B758500DF1E26 /* CommentsRootTabbarViewController.m */; };
 		045FC5641D4B758500DF1E26 /* XXECommentRequestInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045FC5591D4B758500DF1E26 /* XXECommentRequestInfoViewController.m */; };
 		045FC5651D4B758500DF1E26 /* XXECommentRequestInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045FC55A1D4B758500DF1E26 /* XXECommentRequestInfoViewController.xib */; };
-		045FC56D1D4B76E200DF1E26 /* HomepageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045FC56C1D4B76E200DF1E26 /* HomepageViewController.m */; };
 		045FC5701D4B779C00DF1E26 /* MyHeadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045FC56F1D4B779C00DF1E26 /* MyHeadViewController.m */; };
 		045FC5761D4B799900DF1E26 /* ClassHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045FC5751D4B799900DF1E26 /* ClassHomeworkViewController.m */; };
 		0463C30A1DEC3D920035BEF6 /* CommentInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0463C2041DEC3D920035BEF6 /* CommentInputViewController.m */; };
@@ -1140,7 +1139,6 @@
 		683801611CE339DE0034C54C /* 权限设置icon40x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838013D1CE339DE0034C54C /* 权限设置icon40x50.png */; };
 		683801621CE339DE0034C54C /* 查看我的圈子(H)icon48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838013E1CE339DE0034C54C /* 查看我的圈子(H)icon48x48@2x.png */; };
 		683801631CE339DE0034C54C /* 查看我的圈子icon48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838013F1CE339DE0034C54C /* 查看我的圈子icon48x48.png */; };
-		683801641CE339DE0034C54C /* 满班icon28x30.png in Resources */ = {isa = PBXBuildFile; fileRef = 683801401CE339DE0034C54C /* 满班icon28x30.png */; };
 		683801661CE339DE0034C54C /* 相册icon40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 683801421CE339DE0034C54C /* 相册icon40x40.png */; };
 		683801671CE339DE0034C54C /* 箭头icon14x26.png in Resources */ = {isa = PBXBuildFile; fileRef = 683801431CE339DE0034C54C /* 箭头icon14x26.png */; };
 		683801681CE339DE0034C54C /* 认证icon40x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 683801441CE339DE0034C54C /* 认证icon40x50.png */; };
@@ -1354,8 +1352,6 @@
 		68926B211CE971F600201E80 /* 优先级icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B1F1CE971F600201E80 /* 优先级icon@2x.png */; };
 		68926B251CE9749300201E80 /* AddClassSubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68926B231CE9749300201E80 /* AddClassSubjectCell.m */; };
 		68926B261CE9749300201E80 /* AddClassSubjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68926B241CE9749300201E80 /* AddClassSubjectCell.xib */; };
-		68926B2D1CE9767200201E80 /* 备注icon40x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B271CE9767200201E80 /* 备注icon40x50@2x.png */; };
-		68926B2E1CE9767200201E80 /* 复制icon40x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B281CE9767200201E80 /* 复制icon40x50@2x.png */; };
 		68926B2F1CE9767200201E80 /* 教室icon40x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B291CE9767200201E80 /* 教室icon40x50@2x.png */; };
 		68926B311CE9767200201E80 /* 老师icon40x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B2B1CE9767200201E80 /* 老师icon40x50@2x.png */; };
 		68926B321CE9767200201E80 /* 上下课时间icon40x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B2C1CE9767200201E80 /* 上下课时间icon40x50@2x.png */; };
@@ -2089,8 +2085,6 @@
 		045FC5581D4B758500DF1E26 /* XXECommentRequestInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXECommentRequestInfoViewController.h; sourceTree = "<group>"; };
 		045FC5591D4B758500DF1E26 /* XXECommentRequestInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXECommentRequestInfoViewController.m; sourceTree = "<group>"; };
 		045FC55A1D4B758500DF1E26 /* XXECommentRequestInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XXECommentRequestInfoViewController.xib; sourceTree = "<group>"; };
-		045FC56B1D4B76E200DF1E26 /* HomepageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomepageViewController.h; path = XingXingEdu/HomepageViewController.h; sourceTree = SOURCE_ROOT; };
-		045FC56C1D4B76E200DF1E26 /* HomepageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomepageViewController.m; path = XingXingEdu/HomepageViewController.m; sourceTree = SOURCE_ROOT; };
 		045FC56E1D4B779C00DF1E26 /* MyHeadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeadViewController.h; sourceTree = "<group>"; };
 		045FC56F1D4B779C00DF1E26 /* MyHeadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeadViewController.m; sourceTree = "<group>"; };
 		045FC5741D4B799900DF1E26 /* ClassHomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassHomeworkViewController.h; sourceTree = "<group>"; };
@@ -3142,7 +3136,6 @@
 		6838013D1CE339DE0034C54C /* 权限设置icon40x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "权限设置icon40x50.png"; sourceTree = "<group>"; };
 		6838013E1CE339DE0034C54C /* 查看我的圈子(H)icon48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "查看我的圈子(H)icon48x48@2x.png"; sourceTree = "<group>"; };
 		6838013F1CE339DE0034C54C /* 查看我的圈子icon48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "查看我的圈子icon48x48.png"; sourceTree = "<group>"; };
-		683801401CE339DE0034C54C /* 满班icon28x30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "满班icon28x30.png"; sourceTree = "<group>"; };
 		683801421CE339DE0034C54C /* 相册icon40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "相册icon40x40.png"; sourceTree = "<group>"; };
 		683801431CE339DE0034C54C /* 箭头icon14x26.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "箭头icon14x26.png"; sourceTree = "<group>"; };
 		683801441CE339DE0034C54C /* 认证icon40x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "认证icon40x50.png"; sourceTree = "<group>"; };
@@ -3453,8 +3446,6 @@
 		68926B221CE9749300201E80 /* AddClassSubjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddClassSubjectCell.h; sourceTree = "<group>"; };
 		68926B231CE9749300201E80 /* AddClassSubjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddClassSubjectCell.m; sourceTree = "<group>"; };
 		68926B241CE9749300201E80 /* AddClassSubjectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddClassSubjectCell.xib; sourceTree = "<group>"; };
-		68926B271CE9767200201E80 /* 备注icon40x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "备注icon40x50@2x.png"; sourceTree = "<group>"; };
-		68926B281CE9767200201E80 /* 复制icon40x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "复制icon40x50@2x.png"; sourceTree = "<group>"; };
 		68926B291CE9767200201E80 /* 教室icon40x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "教室icon40x50@2x.png"; sourceTree = "<group>"; };
 		68926B2B1CE9767200201E80 /* 老师icon40x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "老师icon40x50@2x.png"; sourceTree = "<group>"; };
 		68926B2C1CE9767200201E80 /* 上下课时间icon40x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上下课时间icon40x50@2x.png"; sourceTree = "<group>"; };
@@ -6454,8 +6445,6 @@
 				689F79401CF6CE9F00166C06 /* KTteacher.plist */,
 				68926B361CE9B3EF00201E80 /* 截屏grap@2x.png */,
 				68926B371CE9B3EF00201E80 /* 收藏save@2x.png */,
-				68926B271CE9767200201E80 /* 备注icon40x50@2x.png */,
-				68926B281CE9767200201E80 /* 复制icon40x50@2x.png */,
 				68926B291CE9767200201E80 /* 教室icon40x50@2x.png */,
 				68926B2B1CE9767200201E80 /* 老师icon40x50@2x.png */,
 				68926B2C1CE9767200201E80 /* 上下课时间icon40x50@2x.png */,
@@ -6480,7 +6469,6 @@
 				6838013D1CE339DE0034C54C /* 权限设置icon40x50.png */,
 				6838013E1CE339DE0034C54C /* 查看我的圈子(H)icon48x48@2x.png */,
 				6838013F1CE339DE0034C54C /* 查看我的圈子icon48x48.png */,
-				683801401CE339DE0034C54C /* 满班icon28x30.png */,
 				683801421CE339DE0034C54C /* 相册icon40x40.png */,
 				683801431CE339DE0034C54C /* 箭头icon14x26.png */,
 				683801441CE339DE0034C54C /* 认证icon40x50.png */,
@@ -7696,8 +7684,6 @@
 				68BAD2101CEDCD660008DDA6 /* AppDelegate.m */,
 				044699F61D40D81B0067615D /* LandingpageViewController.h */,
 				044699F71D40D81B0067615D /* LandingpageViewController.m */,
-				045FC56B1D4B76E200DF1E26 /* HomepageViewController.h */,
-				045FC56C1D4B76E200DF1E26 /* HomepageViewController.m */,
 				0410B0F61D50BA2800924EBE /* XXETabBarViewController.h */,
 				0410B0F51D50BA2800924EBE /* XXETabBarViewController.m */,
 				68E2A8FA1C45F67300EA8DF3 /* Main.storyboard */,
@@ -8074,7 +8060,6 @@
 				6844E8331CAD45150054B8C5 /* SampleCell.xib in Resources */,
 				04B621581DBF019A00391616 /* 签到送猩币@2x.png in Resources */,
 				6844E8D91CAD45150054B8C5 /* NavBarIconSearchBar2_blue@2x.png in Resources */,
-				683801641CE339DE0034C54C /* 满班icon28x30.png in Resources */,
 				689F6F031CF6962100166C06 /* community2.png in Resources */,
 				04B621011DBF019A00391616 /* flowerlan118.png in Resources */,
 				04B620F71DBF019A00391616 /* buyicon250.png in Resources */,
@@ -8911,7 +8896,6 @@
 				6844EB031CAD45420054B8C5 /* tackTableViewCell.xib in Resources */,
 				6844E70B1CAD440C0054B8C5 /* ShareSDKUI.bundle in Resources */,
 				04B621861DBF019A00391616 /* xingbiXB@2x.png in Resources */,
-				68926B2E1CE9767200201E80 /* 复制icon40x50@2x.png in Resources */,
 				68B2E54B1CD05CE20075A37F /* zhifubao.png in Resources */,
 				04D5B0F61D6B1DE900ABA89A /* 假设人物头像136x136@2x.png in Resources */,
 				04B621341DBF019A00391616 /* tab0_selected@1x.png in Resources */,
@@ -9158,7 +9142,6 @@
 				0447776A1D2A76CC0018A459 /* 支付完成icon120x120.png in Resources */,
 				68A012891D17F41A00A1EF00 /* TermsViewController.xib in Resources */,
 				6844E8E31CAD45150054B8C5 /* save.png in Resources */,
-				68926B2D1CE9767200201E80 /* 备注icon40x50@2x.png in Resources */,
 				044412BF1D38F2C400314884 /* LookNearUserTableViewController.xib in Resources */,
 				04B6216C1DBF019A00391616 /* big750x12.png in Resources */,
 				0447775F1D2A76CC0018A459 /* 学生头像130x130@2x.png in Resources */,
@@ -9335,7 +9318,6 @@
 				6844EA271CAD45320054B8C5 /* UtilityFunc.m in Sources */,
 				044412C61D38F2C400314884 /* WZYSearchPeopleInfoViewController.m in Sources */,
 				6844E82F1CAD45150054B8C5 /* ClassAlumModel.m in Sources */,
-				045FC56D1D4B76E200DF1E26 /* HomepageViewController.m in Sources */,
 				68BACED01CEDCB500008DDA6 /* DetailCell.m in Sources */,
 				04B620A31DBF019A00391616 /* UIViewExt.m in Sources */,
 				044412821D38F2C400314884 /* PersonModel.m in Sources */,

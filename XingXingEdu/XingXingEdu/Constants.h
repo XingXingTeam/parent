@@ -26,14 +26,8 @@
 #define KScreenWidth [UIScreen mainScreen].bounds.size.width
 #define KScreenHeight [UIScreen mainScreen].bounds.size.height
 
-<<<<<<< HEAD
 #define kScreenRatioHeight  WinHeight/667
 #define kScreenRatioWidth  WinWidth/375
-=======
-#define kScreenRatioHeight  WinWidth/667
-#define kScreenRatioWidth  WinHeight/375
->>>>>>> 635d5bd74bcb23068c8e23776c53bc63c206b6fc
-
 
 #define W(x) WinWidth*(x)/375.0
 #define H(y) WinHeight*(y)/667.0
