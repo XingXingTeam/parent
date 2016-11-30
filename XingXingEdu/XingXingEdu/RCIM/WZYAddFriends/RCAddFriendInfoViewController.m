@@ -16,9 +16,18 @@
 
 @implementation RCAddFriendInfoViewController
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = NO;
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+     self.navigationController.navigationBar.translucent = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self settingContent];
     
     // Do any additional setup after loading the view from its nib.
@@ -27,7 +36,6 @@
 }
 
 - (void)settingContent{
-
     _iconImageView.layer.cornerRadius = 30;
     _iconImageView.layer.masksToBounds = YES;
     [_iconImageView sd_setImageWithURL:[NSURL URLWithString:_iconStr] placeholderImage:[UIImage imageNamed:@"人物头像172x172"]];

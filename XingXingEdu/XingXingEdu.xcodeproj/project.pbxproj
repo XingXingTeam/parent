@@ -1379,7 +1379,6 @@
 		68938B4A1CE1D0F100661815 /* 联系方式40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68938B431CE1D0F100661815 /* 联系方式40x40@2x.png */; };
 		68938B4B1CE1D0F100661815 /* 昵称40x44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68938B441CE1D0F100661815 /* 昵称40x44@2x.png */; };
 		68938B4C1CE1D0F100661815 /* 年龄40x46@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68938B451CE1D0F100661815 /* 年龄40x46@2x.png */; };
-		68938B4E1CE1D0F100661815 /* 邮箱40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68938B471CE1D0F100661815 /* 邮箱40x40@2x.png */; };
 		68938B4F1CE1D0F100661815 /* ID40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68938B481CE1D0F100661815 /* ID40x40@2x.png */; };
 		68938B511CE1D6C600661815 /* 修改密码icon650x84@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68938B501CE1D6C600661815 /* 修改密码icon650x84@2x.png */; };
 		68938B581CE1E11900661815 /* 确定icon650x84@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68938B571CE1E11900661815 /* 确定icon650x84@2x.png */; };
@@ -3474,7 +3473,6 @@
 		68938B431CE1D0F100661815 /* 联系方式40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "联系方式40x40@2x.png"; sourceTree = "<group>"; };
 		68938B441CE1D0F100661815 /* 昵称40x44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "昵称40x44@2x.png"; sourceTree = "<group>"; };
 		68938B451CE1D0F100661815 /* 年龄40x46@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "年龄40x46@2x.png"; sourceTree = "<group>"; };
-		68938B471CE1D0F100661815 /* 邮箱40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邮箱40x40@2x.png"; sourceTree = "<group>"; };
 		68938B481CE1D0F100661815 /* ID40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ID40x40@2x.png"; sourceTree = "<group>"; };
 		68938B501CE1D6C600661815 /* 修改密码icon650x84@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "修改密码icon650x84@2x.png"; sourceTree = "<group>"; };
 		68938B571CE1E11900661815 /* 确定icon650x84@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "确定icon650x84@2x.png"; sourceTree = "<group>"; };
@@ -6845,7 +6843,6 @@
 				68938B431CE1D0F100661815 /* 联系方式40x40@2x.png */,
 				68938B441CE1D0F100661815 /* 昵称40x44@2x.png */,
 				68938B451CE1D0F100661815 /* 年龄40x46@2x.png */,
-				68938B471CE1D0F100661815 /* 邮箱40x40@2x.png */,
 				68938B481CE1D0F100661815 /* ID40x40@2x.png */,
 				68938B401CE1CA7C00661815 /* 签到106x48@2x.png */,
 				68938B3E1CE1BC3500661815 /* 修改头像36x30@2x.png */,
@@ -8924,7 +8921,6 @@
 				045140C31D3E44720050F284 /* xiaohonghua45x45@1x.png in Resources */,
 				04B621201DBF019A00391616 /* titter01@2x.png in Resources */,
 				0463C3681DEC3D930035BEF6 /* LICENSE in Resources */,
-				68938B4E1CE1D0F100661815 /* 邮箱40x40@2x.png in Resources */,
 				04469A6E1D40DE9C0067615D /* commenttab1h@2x.png in Resources */,
 				6844E7131CAD440C0054B8C5 /* RennSDK.bundle in Resources */,
 				684317CA1CE463020032F64D /* LOGO172x172@2x.png in Resources */,

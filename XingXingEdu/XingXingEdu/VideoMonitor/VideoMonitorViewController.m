@@ -69,6 +69,8 @@
 
 }
 - (void)searchB:(UIBarButtonItem*)btn{
+    [self showAlertView];
+    return;
     _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,20, kWidth, 44)];
     UIImage *backgroundImg = [UtilityFunc createImageWithColor:UIColorFromHex(0xf0eaf3) size:_searchBar.frame.size];
     [_searchBar setBackgroundImage:backgroundImg];
@@ -81,6 +83,8 @@
     _searchBar.showsCancelButton =YES;
 }
 - (void)rightBarClick:(UIBarButtonItem*)btn{
+    [self showAlertView];
+    return;
     VedioSaveViewController *vedioVC = [[VedioSaveViewController alloc]init];
     [self.navigationController pushViewController:vedioVC animated:NO];
 
@@ -91,7 +95,7 @@
     _tableView.delegate =self;
     [self.view addSubview:_tableView];
     [self createFootTable];
-    _tableView.tableFooterView =[[NSBundle mainBundle]loadNibNamed:tbC owner:nil options:nil][0];
+//    _tableView.tableFooterView =[[NSBundle mainBundle]loadNibNamed:tbC owner:nil options:nil][0];
     dataSourse = [[NSMutableArray alloc]init];
     ktArr =[NSArray arrayWithObjects:@"教室",@"走廊",@"操场",@"大厅",@"大门", nil];
     [dataSourse addObjectsFromArray:ktArr];
@@ -282,6 +286,8 @@
 
     }
     [cell.VedioBtn setBackgroundImage:[UIImage imageNamed:@"vedioimg"] forState:UIControlStateNormal];
+    cell.VedioBtn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    cell.VedioBtn.imageView.clipsToBounds = YES;
     cell.addressLabel.text =[NSString stringWithFormat:@"%@",ktArr[indexPath.row]];
     cell.instructionLabel.text = [NSString stringWithFormat:@"说明:%@",@"暂无情况"];
     
@@ -319,7 +325,26 @@
         return 0;
     }
 }
+
+//MARK: - 提示框
+- (void)showAlertView {
+    //初始化提示框；
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"视频功能暂没开放, 尽情期待!" preferredStyle:  UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //点击按钮的响应事件；
+    }]];
+    
+    //弹出提示框；
+    [self presentViewController:alert animated:true completion:nil];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self showAlertView];
+    return;
+    
+    
     if (indexPath.row ==0) {
         [self createTip];
     }
