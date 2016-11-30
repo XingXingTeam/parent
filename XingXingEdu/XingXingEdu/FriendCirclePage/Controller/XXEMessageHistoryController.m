@@ -136,6 +136,7 @@ static NSString *const IdentifierHistory = @"messageHistoryCell";
 ////        [RuningXX.sharedInstance dismissWithAnimation];
 //        [self showString:@"网络异常" forSecond:1.f];
 //    }];
+
 }
 
 - (void)setupNewMessageList
@@ -160,7 +161,6 @@ static NSString *const IdentifierHistory = @"messageHistoryCell";
             [self showString:@"获取数据失败" forSecond:1.f];
         }
                 [RuningXX.sharedInstance dismissWithAnimation];
-        
     } fail:^{
         
     }];

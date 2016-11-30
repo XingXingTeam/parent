@@ -34,4 +34,5 @@
 
 //MARK: - 历史消息
 -(void)friendCircleHistoryMessageWithUserXid:(NSString *)userXid UserId:(NSString *)userId succeed:(void (^)(id request))succeed fail:(void (^)())fail;
+
 @end

@@ -1,6 +1,0 @@
-version: "Apple Swift version 2.3 (swiftlang-800.10.13 clang-800.0.42.1)"
-options: "36f79fc85ee7464c6d8dae309628f7c5"
-build_time: [533644027, 395731000]
-inputs:
-  "/Users/mac/Desktop/\u5DE5\u4F5C/xingxingedu-parent 11-28\u665A/XingXingEdu/XingXingEdu/XXETools/RuningXX.swift": [533352697, 0]
-  "/Users/mac/Desktop/\u5DE5\u4F5C/xingxingedu-parent 11-28\u665A/XingXingEdu/XingXingEdu/XXETools/RuningView.swift": [533213401, 0]

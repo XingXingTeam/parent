@@ -72,6 +72,15 @@
 @end
 
 @implementation LandingpageViewController
+
+//    1. 懒加载初始化：
+- (CLLocationManager *)locationManager{
+    if(!_locationManager){
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+    }
+    return _locationManager;
+}
 - (void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBarHidden =YES;
 }
@@ -92,44 +101,59 @@ self.navigationController.navigationBarHidden =NO;
     //
     [self createLabel];
     
-    
-    
 }
 
 
 #pragma mark - 设置手机 自动定位=====================================
 
+    
 - (void)settingLocation{
+    //    判断定位操作是否允许
+    if ([CLLocationManager locationServicesEnabled] &&[CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied)
+    {
+        
+        //经度
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        //每隔多少米 更新 一次
+        //kCLDistanceFilterNone 任意 移动 都会更新
+        _locationManager.distanceFilter = kCLDistanceFilterNone;//横向移动距离更新
+        
+        if (__IPHONE_8_0) {
+            
+            [self.locationManager requestWhenInUseAuthorization];
+            //        [self.locationManager requestAlwaysAuthorization];
+            
+        }
+        //定位开始
+        [self.locationManager startUpdatingLocation];
+    }else{
+        //提示用户无法定位操作
+        [self initAlertWithTitle:@"温馨提醒" Message:@"您尚未开启定位是否开启" ActionTitle:@"开启" CancelTitle:@"取消" URLS:@"prefs:root=LOCATION_SERVICES"];
+    }
 
-    _locationManager = [[CLLocationManager alloc] init];
     
-    if (![CLLocationManager locationServicesEnabled]) {
-        
-        [SVProgressHUD showInfoWithStatus:@"定位服务当前可能尚未打开，请设置打开！"];
-        
-        NSLog(@"定位服务不可利用");
-        
+}
+
+- (void)initAlertWithTitle:(NSString *)title Message:(NSString *)message ActionTitle:(NSString *)actionTitle CancelTitle:(NSString *)cancelTitle URLS:(NSString *)urls
+{
+    //提示用户无法定位操作
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"确定操作");
+        NSURL*url=[NSURL URLWithString:urls];
+        [[UIApplication sharedApplication] openURL:url];
+    }];
+    if (cancelTitle==nil) {
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"取消操作");
+        }];
+        [alert addAction:okAction];
+        [alert addAction:cancelAction];
+        [self presentViewController:alert animated:YES completion:nil];
     }
-    
-    //如果没有授权，则请求用户授权
-    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
-        
-        [_locationManager requestWhenInUseAuthorization];
-        
-    }else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse){
-        //设置代理
-        _locationManager.delegate = self;
-        //设置定位精度
-        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        
-        //一米定位一次  频率
-        CLLocationDistance distance = 0.1;
-        
-        //开启定位
-        [_locationManager startUpdatingLocation];
-    }
-    
-    
 }
 
 
@@ -297,6 +321,7 @@ self.navigationController.navigationBarHidden =NO;
     newUserBtn = [HHControl createButtonWithFrame:CGRectMake(spaceWidth ,  buttonY, buttonWidth, 30) backGruondImageName:nil Target:self Action:@selector(registration:) Title:@"免费注册"];
     [newUserBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     newUserBtn.titleLabel.font = [UIFont systemFontOfSize:12 * kWidth / 375];
+
     
     [View addSubview:newUserBtn];
 
@@ -327,7 +352,7 @@ self.navigationController.navigationBarHidden =NO;
     
     //位置
     UILabel *label = [HHControl createLabelWithFrame:CGRectMake( line3.frame.origin.x + lineWidth, kHeight - 130 - 10, 150, 20) Font:14 * kWidth / 375 Text:@"使用其他账号登陆"];
-
+    label.font = [UIFont systemFontOfSize:14];
     label.textColor = [UIColor grayColor];
     label.textAlignment = NSTextAlignmentCenter;
 
@@ -336,39 +361,65 @@ self.navigationController.navigationBarHidden =NO;
     [self.view addSubview:line3];
     [self.view addSubview:label];
     [self.view addSubview:line4];
-
-    
     /**
      *   ***************第三方登录***********
      */
     
     //QQ
-    QQBtn = [HHControl createButtonWithFrame:CGRectMake((kWidth - (50 * 4 + 25 * 3) * kWidth / 375) / 2, kHeight - 100, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"扣扣" Target:self Action:@selector(onClickQQ:) Title:nil];
     
-    QQBtn.layer.cornerRadius = QQBtn.frame.size.width / 2;
+    CGFloat buttonW = 52*kScreenRatioWidth;
+    
+    //按钮间距
+    CGFloat space = (KScreenWidth - 50 * 2 * kScreenRatioWidth - 3 * buttonW) / 2;
+    
+    QQBtn = [HHControl createButtonWithFrame:CGRectMake((kWidth - (50 * 4 + 25 * 3) * kWidth / 375) / 2, kHeight - 100, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"扣扣" Target:self Action:@selector(onClickQQ:) Title:nil];
+#pragma Mark ***************第三方登录***********
+    CGFloat btnW = 50 * kWidth / 375;
+     [self.view addSubview:QQBtn];
+    QQBtn.layer.cornerRadius= QQBtn.frame.size.width / 2;
     QQBtn.layer.masksToBounds =YES;
-    [View addSubview:QQBtn];
-  
+    [QQBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.view.mas_left).offset(50 * kScreenRatioWidth);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-45*kScreenRatioHeight);
+        make.size.mas_equalTo(CGSizeMake(52*kScreenRatioWidth, 50*kScreenRatioHeight));
+    }];
+    
+    
+    
+    
+    
+    
     //微信
     weixinBtn = [HHControl createButtonWithFrame:CGRectMake(QQBtn.frame.origin.x + QQBtn.frame.size.width + 25 * kWidth / 375, QQBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"微信" Target:self Action:@selector(onClickWX:) Title:nil];
-    
     weixinBtn.layer.cornerRadius= weixinBtn.frame.size.width / 2;
     weixinBtn.layer.masksToBounds =YES;
-    [View addSubview:weixinBtn];
+    [self.view addSubview:weixinBtn];
+    [weixinBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(QQBtn.mas_right).offset(space);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-45*kScreenRatioHeight);
+        make.size.mas_equalTo(CGSizeMake(52*kScreenRatioWidth, 50*kScreenRatioHeight));
+    }];
+    
     
     //新浪
     xinlangBtn = [HHControl createButtonWithFrame:CGRectMake(weixinBtn.frame.origin.x + weixinBtn.frame.size.width + 25 * kWidth / 375, weixinBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"微博" Target:self Action:@selector(onClickSina:) Title:nil];
     xinlangBtn.layer.cornerRadius = xinlangBtn.frame.size.width / 2;
     xinlangBtn.layer.masksToBounds =YES;
-    [View addSubview:xinlangBtn];
+    [self.view addSubview:xinlangBtn];
+    [xinlangBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(weixinBtn.mas_right).offset(space);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-45*kScreenRatioHeight);
+        make.size.mas_equalTo(CGSizeMake(52*kScreenRatioWidth, 50*kScreenRatioHeight));
+    }];
    
     //支付宝
-    zhifubaoBtn = [HHControl createButtonWithFrame:CGRectMake(xinlangBtn.frame.origin.x + xinlangBtn.frame.size.width + 25 * kWidth / 375, xinlangBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"支付宝" Target:self Action:@selector(onClickzhifubao:) Title:nil];
-    zhifubaoBtn.layer.cornerRadius = zhifubaoBtn.frame.size.width / 2;
-    zhifubaoBtn.layer.masksToBounds =YES;
-    [View addSubview:zhifubaoBtn];
-
-    
+//    zhifubaoBtn = [HHControl createButtonWithFrame:CGRectMake(xinlangBtn.frame.origin.x + xinlangBtn.frame.size.width + 25 * kWidth / 375, xinlangBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"支付宝" Target:self Action:@selector(onClickzhifubao:) Title:nil];
+//    zhifubaoBtn.layer.cornerRadius = zhifubaoBtn.frame.size.width / 2;
+//    zhifubaoBtn.layer.masksToBounds =YES;
+//    [View addSubview:zhifubaoBtn];
 }
 
 
@@ -385,7 +436,7 @@ self.navigationController.navigationBarHidden =NO;
     NSLog(@"click qq");
     [ShareSDK getUserInfo:SSDKPlatformTypeQQ onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
         if (state == SSDKResponseStateSuccess) {
-       //  创建一个Url : 请求路径
+        //  创建一个Url : 请求路径
             NSURL *url =[NSURL URLWithString:LoginUrl];
         //创建一个请求
             NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:url];
@@ -615,11 +666,7 @@ self.navigationController.navigationBarHidden =NO;
         
     }];
 }
-- (void)onClickzhifubao:(UIButton*)button{
-//支付宝
 
-    
-}
 //访客
 -(void)onClickvisitorsBtn:(UIButton *)button
 {

@@ -166,6 +166,9 @@
     _longitudeString = [DEFAULTS objectForKey:@"Longitude"];
     _latitudeString = [DEFAULTS objectForKey:@"LatitudeString"];
 #endif
+    
+//    NSLog(@"%@ ==== %@", _longitudeString, _latitudeString);
+    
     firstMenuArray = [[NSMutableArray alloc] init];
     firstArr1 = [[NSMutableArray alloc] init];
     firstArr2 = [[NSMutableArray alloc] init];
@@ -471,8 +474,6 @@
                              @"search_words": _search_words
                              };
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
-        //
-        NSLog(@"pppp %@", responseObj);
         
         if ([responseObj[@"code"] integerValue] == 1) {
             NSArray *modelArray = [[NSArray alloc] init];
@@ -550,8 +551,6 @@
                              @"search_words": _search_words
                              };
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
-        //
-        NSLog(@"jjjj %@", responseObj);
         
         if ([responseObj[@"code"] integerValue] == 1) {
             NSArray *modelArray = [[NSArray alloc] init];

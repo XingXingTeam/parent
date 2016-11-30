@@ -16,6 +16,9 @@
 //#import "XXEDeleteCommentApi.h"
 #import "XXETool.h"
 #import "FriendCircleService.h"
+#import "XXEFriendCirclegoodApi.h"
+#import "XXEDeleteCommentApi.h"
+#import "XXETool.h"
 
 @interface XXEInfomationViewController ()<UIActionSheetDelegate,UIScrollViewDelegate,UMSocialUIDelegate>
 {
@@ -25,7 +28,7 @@
     BOOL isGood;
     NSMutableArray *allImages;
 }
-
+//    UIScrollView *_scrollView;
 
 @property (nonatomic, strong)UIScrollView *scrollView;
 
@@ -76,6 +79,14 @@
     [super viewDidLoad];
     self.indexImage = 0;
     NSLog(@"图片的数组%@",self.imagesArr);
+    
+//    NSLog(@"click item: %@",_itemId);
+//    NSLog(@"时间%@",_infoCircleModel.date_tm);
+//    NSLog(@"发布的照片%@",_infoCircleModel.pic_url);
+//    NSLog(@"次图片的评论ID%@",_infoCircleModel.talkId);
+//    NSLog(@"评论的%@",_infoCircleModel.comment_group);
+//    NSLog(@"点赞的%@",_infoCircleModel.good_user);
+//    NSLog(@"发布内容%@",_infoCircleModel.words);
     NSString *timeFomatter = [XXETool dateAboutStringFromNumberTimer:_infoCircleModel.date_tm];
     self.title = timeFomatter;
     
@@ -104,6 +115,8 @@
             UIImageView *imV = [[UIImageView alloc]initWithFrame:CGRectMake(KScreenWidth*i, 0, KScreenWidth, KScreenHeight-113)];
             NSString *imageUrl = [NSString stringWithFormat:@"%@%@",picURL,arrayImage[i]];
             NSURL *url =[NSURL URLWithString:imageUrl];
+            
+//            [imV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@""]];
             [imV sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 CGFloat imageWidth = image.size.width;
                 CGFloat imageHeight = image.size.height;
@@ -116,6 +129,8 @@
         CGPoint contentOffset = self.scrollView.contentOffset;
         [self.scrollView setContentOffset:contentOffset animated:YES];
         self.scrollView.contentSize =CGSizeMake(arrayImage.count*kWidth, 0);
+//        _scrollView.delegate =self;
+
     }else{
         NSLog(@"图片数组%@",_imagesArr);
         UIImageView *imV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight-113)];
@@ -133,6 +148,8 @@
         CGPoint contentOffset = self.scrollView.contentOffset;
         [self.scrollView setContentOffset:contentOffset animated:YES];
         self.scrollView.contentSize =CGSizeMake(kWidth, 0);
+
+//        _scrollView.delegate =self;
     }
 }
 - (void)createToolbtn{
@@ -165,6 +182,18 @@
             break;
         }
     };
+    
+//    if (![_goodArr isEqual:@""]) {
+//        _likeButton = [self getButton:CGRectMake(5, 2, 60, 40) title:@"取消" image:@"AlbumLike"];
+//        [_likeButton addTarget:self action:@selector(onLike:) forControlEvents:UIControlEventTouchUpInside];
+//        [imageV addSubview:_likeButton];
+//        _likeButton.selected = NO;
+//    }else{
+//        _likeButton = [self getButton:CGRectMake(5, 2, 60, 40) title:@"赞" image:@"AlbumLike"];
+//        [_likeButton addTarget:self action:@selector(onLike:) forControlEvents:UIControlEventTouchUpInside];
+//        [imageV addSubview:_likeButton];
+//        _likeButton.selected = YES;
+//    }
 
     _commentButton = [self getButton:CGRectMake(70, 2, 60, 40) title:@"评论" image:@"AlbumComment"];
     [_commentButton addTarget:self action:@selector(commentButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -315,6 +344,7 @@
     
     //调用快速分享接口
     [UMSocialSnsService presentSnsIconSheetView:self appKey:UMSocialAppKey shareText:_conText shareImage:allImages[index] shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQzone,UMShareToQQ,UMShareToWechatSession,UMShareToWechatTimeline,nil] delegate:self];
+
 }
 
 //分享的代理方法
@@ -350,7 +380,6 @@
 
 //点赞
 -(void)onLike:(UIButton *)shareBtn{
-    
 //    if (_likeButton.selected == NO) {
 //        
 //        [self onClickLikeButton];
@@ -371,7 +400,6 @@
         strngXid = XID;
         homeUserId = USER_ID;
     }
-    
     [[FriendCircleService sharedInstance] friendCircleGoodOrCancelUserXid:strngXid UserID:homeUserId TalkId:_infoCircleModel.talkId succeed:^(id request) {
         NSString *code = [request objectForKey:@"code"];
         if ([code integerValue]==1) {

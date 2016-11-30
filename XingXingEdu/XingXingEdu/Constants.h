@@ -29,7 +29,6 @@
 #define kScreenRatioHeight  WinHeight/667
 #define kScreenRatioWidth  WinWidth/375
 
-
 #define W(x) WinWidth*(x)/375.0
 #define H(y) WinHeight*(y)/667.0
 

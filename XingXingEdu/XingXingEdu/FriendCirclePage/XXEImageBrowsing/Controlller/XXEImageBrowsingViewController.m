@@ -14,7 +14,7 @@
 //#import "XXEVerticalButton.h"
 //#import "KTActionSheet.h"
 #import "ReportPicViewController.h"
-//#import "XXEAllImageCollectionApi.h"
+#import "XXEAllImageCollectionApi.h"
 //#import "XXEHomePageCollectionPhotoApi.h"
 //#import "AppDelegate.h"
 #import "UMSocial.h"
@@ -149,14 +149,11 @@
 //        //
 //        [self showHudWithString:@"请检查网络!" forSecond:1.5];
 //    }];
-
-    
-
 }
 
 - (void)createBottomViewButton{
     //发起聊天/查看圈子/分享/举报
-    UIImageView *bottomView= [[UIImageView alloc]initWithFrame:CGRectMake(0, KScreenHeight - 49, KScreenWidth, 49)];
+    UIImageView *bottomView= [[UIImageView alloc]initWithFrame:CGRectMake(0, KScreenHeight - 49 - 64, KScreenWidth, 49)];
     bottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bottomView];
     bottomView.userInteractionEnabled =YES;

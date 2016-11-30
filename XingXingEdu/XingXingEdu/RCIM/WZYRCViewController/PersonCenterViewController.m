@@ -144,7 +144,6 @@
 }
 
 - (void)seeFriendCirileButtonClick:(UIButton *)button{
-    
     XXEFriendMyCircleViewController *myCircleVc = [[XXEFriendMyCircleViewController alloc] init];
     myCircleVc.otherXid = self.showUserInfo.userId;
     myCircleVc.friendCirccleRefreshBlock = ^(){

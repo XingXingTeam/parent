@@ -87,7 +87,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
-    
     if ([self.rootChat isEqualToString:@"my"]) {
         self.tableView.frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight);
     }else {
@@ -106,7 +105,6 @@
     if (self.rootChat != nil) {
         
     }else{
-        
         self.friendCirccleRefreshBlock();
     }
     UIButton*rightButton = [[UIButton alloc]initWithFrame:CGRectMake(-10,0,22,22)];

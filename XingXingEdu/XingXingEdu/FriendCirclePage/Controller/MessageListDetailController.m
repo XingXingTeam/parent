@@ -25,6 +25,10 @@
 #import "StringHeight.h"
 //#import "XXEDeleteCommentApi.h"
 #import "FriendCircleService.h"
+#import "XXEEveryTalkDetailApi.h"
+#import "XXECircleModel.h"
+#import "StringHeight.h"
+#import "XXEDeleteCommentApi.h"
 
 
 #define Kmarg 10.0f
@@ -357,6 +361,7 @@ typedef NS_OPTIONS(NSInteger, Comments){
 //        //
 //        [SVProgressHUD showErrorWithStatus:@"网络不通，请检查网络！"];
 //    }];
+    
 
 
 }
@@ -529,6 +534,7 @@ XXECommentModel* comment;
 //        
 //        [self hudShowText:@"网络请求失败" second:1.f];
 //    }];
+
 }
 
 //MARK: - loading图

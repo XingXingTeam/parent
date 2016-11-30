@@ -48,6 +48,8 @@
     
     [super viewDidAppear:animated];
     
+    [_table.header beginRefreshing];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
