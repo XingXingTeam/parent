@@ -1125,7 +1125,6 @@
 		6838014F1CE339DE0034C54C /* 书icon80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838012B1CE339DD0034C54C /* 书icon80x80.png */; };
 		683801511CE339DE0034C54C /* 位置icon40x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838012D1CE339DD0034C54C /* 位置icon40x50.png */; };
 		683801521CE339DE0034C54C /* 假设头像172x172.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838012E1CE339DD0034C54C /* 假设头像172x172.png */; };
-		683801531CE339DE0034C54C /* 分享(H)icon48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838012F1CE339DD0034C54C /* 分享(H)icon48x48@2x.png */; };
 		683801541CE339DE0034C54C /* 分享icon48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 683801301CE339DD0034C54C /* 分享icon48x48.png */; };
 		683801551CE339DE0034C54C /* 发起聊天(H)icon48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 683801311CE339DD0034C54C /* 发起聊天(H)icon48x48@2x.png */; };
 		683801561CE339DE0034C54C /* 发起聊天icon48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 683801321CE339DD0034C54C /* 发起聊天icon48x48.png */; };
@@ -3121,7 +3120,6 @@
 		6838012B1CE339DD0034C54C /* 书icon80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "书icon80x80.png"; sourceTree = "<group>"; };
 		6838012D1CE339DD0034C54C /* 位置icon40x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "位置icon40x50.png"; sourceTree = "<group>"; };
 		6838012E1CE339DD0034C54C /* 假设头像172x172.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "假设头像172x172.png"; sourceTree = "<group>"; };
-		6838012F1CE339DD0034C54C /* 分享(H)icon48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享(H)icon48x48@2x.png"; sourceTree = "<group>"; };
 		683801301CE339DD0034C54C /* 分享icon48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享icon48x48.png"; sourceTree = "<group>"; };
 		683801311CE339DD0034C54C /* 发起聊天(H)icon48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发起聊天(H)icon48x48@2x.png"; sourceTree = "<group>"; };
 		683801321CE339DD0034C54C /* 发起聊天icon48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发起聊天icon48x48.png"; sourceTree = "<group>"; };
@@ -6453,7 +6451,6 @@
 				6838012B1CE339DD0034C54C /* 书icon80x80.png */,
 				6838012D1CE339DD0034C54C /* 位置icon40x50.png */,
 				6838012E1CE339DD0034C54C /* 假设头像172x172.png */,
-				6838012F1CE339DD0034C54C /* 分享(H)icon48x48@2x.png */,
 				683801301CE339DD0034C54C /* 分享icon48x48.png */,
 				683801311CE339DD0034C54C /* 发起聊天(H)icon48x48@2x.png */,
 				683801321CE339DD0034C54C /* 发起聊天icon48x48.png */,
@@ -8942,7 +8939,6 @@
 				04D5E4E51D48A2D700921223 /* 科目40x40@3x.png in Resources */,
 				0492ED191D49E2DE003E06D7 /* 添加icon44x44@3x.png in Resources */,
 				04D758AD1D3F1183005499ED /* 必填符号60x60@1x.png in Resources */,
-				683801531CE339DE0034C54C /* 分享(H)icon48x48@2x.png in Resources */,
 				0463C3481DEC3D920035BEF6 /* AlbumAddBtn@2x.png in Resources */,
 				0447777D1D2A76CC0018A459 /* 购买48x48@2x.png in Resources */,
 				045DCAA71D54BABE00433933 /* CommentRequestViewController.xib in Resources */,
