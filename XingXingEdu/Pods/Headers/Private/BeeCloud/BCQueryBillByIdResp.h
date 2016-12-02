@@ -1,1 +1,0 @@
-../../../BeeCloud/BCPaySDK/BeeCloud/Classes/BCQueryBillById/BCQueryBillByIdResp.h

@@ -1,1 +1,0 @@
-../../../BeeCloud/BCPaySDK/BeeCloud/Internal/BCPayUtil.h

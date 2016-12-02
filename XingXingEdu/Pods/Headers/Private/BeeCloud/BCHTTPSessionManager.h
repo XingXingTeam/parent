@@ -1,1 +1,0 @@
-../../../BeeCloud/BCPaySDK/BeeCloud/Internal/BCNetworking/BCHTTPSessionManager.h

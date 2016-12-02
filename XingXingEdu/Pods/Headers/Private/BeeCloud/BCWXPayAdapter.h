@@ -1,1 +1,0 @@
-../../../BeeCloud/BCPaySDK/Channel/WXPay/BCWXPayAdapter/BCWXPayAdapter.h

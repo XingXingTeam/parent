@@ -1,1 +1,0 @@
-../../../BeeCloud/BCPaySDK/Channel/UnionPay/UPPayPluginDelegate.h
