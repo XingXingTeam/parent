@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="140" id="KGk-i7-Jjw" customClass="VedioCell">
+            <rect key="frame" x="0.0" y="0.0" width="381" height="140"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="381" height="139"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QZa-ST-961">
+                        <rect key="frame" x="5" y="7" width="206" height="115"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="115" id="bXz-mz-Kdl"/>
+                        </constraints>
+                        <connections>
+                            <action selector="play:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fYf-RN-s5E"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教室" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vaM-bC-skr">
+                        <rect key="frame" x="226" y="8" width="100" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="BFq-Vy-cOF"/>
+                            <constraint firstAttribute="width" constant="100" id="HO9-Qe-mMy"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5W-QZ-jIg">
+                        <rect key="frame" x="226" y="25" width="130" height="54"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="130" id="2gR-7O-Eyj"/>
+                            <constraint firstAttribute="height" constant="54" id="ojK-Le-Eig"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上次播放时间:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6LM-ap-2ZP">
+                        <rect key="frame" x="226" y="95" width="100" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="3L6-Um-jNZ"/>
+                            <constraint firstAttribute="width" constant="100" id="RDR-Q4-sOx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rfo-xz-pMs">
+                        <rect key="frame" x="226" y="115" width="140" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="2Sq-ge-na6"/>
+                            <constraint firstAttribute="width" constant="140" id="KLh-fn-ixy"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="okf-6o-cAU">
+                        <rect key="frame" x="0.0" y="130" width="381" height="9"/>
+                        <color key="backgroundColor" red="0.87450980392156863" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="E5W-QZ-jIg" secondAttribute="trailing" constant="25" id="5RO-Iw-UFT"/>
+                    <constraint firstItem="E5W-QZ-jIg" firstAttribute="top" secondItem="vaM-bC-skr" secondAttribute="bottom" constant="4" id="DKp-4b-7HP"/>
+                    <constraint firstItem="Rfo-xz-pMs" firstAttribute="leading" secondItem="QZa-ST-961" secondAttribute="trailing" constant="15" id="JMh-fU-PiR"/>
+                    <constraint firstAttribute="trailing" secondItem="vaM-bC-skr" secondAttribute="trailing" constant="55" id="KyT-ij-ahW"/>
+                    <constraint firstItem="Rfo-xz-pMs" firstAttribute="top" secondItem="6LM-ap-2ZP" secondAttribute="bottom" constant="8" id="e5b-aW-Qwy"/>
+                    <constraint firstAttribute="trailing" secondItem="Rfo-xz-pMs" secondAttribute="trailing" constant="15" id="ltd-cd-WDr"/>
+                    <constraint firstItem="QZa-ST-961" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="oWV-iZ-RJy"/>
+                    <constraint firstAttribute="trailing" secondItem="6LM-ap-2ZP" secondAttribute="trailing" constant="55" id="tQD-ZR-baO"/>
+                    <constraint firstItem="QZa-ST-961" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="xFI-dk-ab2"/>
+                    <constraint firstItem="vaM-bC-skr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="xU8-ah-bIG"/>
+                    <constraint firstItem="6LM-ap-2ZP" firstAttribute="top" secondItem="E5W-QZ-jIg" secondAttribute="bottom" constant="16" id="xjG-sH-59B"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="VedioBtn" destination="QZa-ST-961" id="rxE-Dx-pIi"/>
+                <outlet property="addressLabel" destination="vaM-bC-skr" id="wtD-3O-mMv"/>
+                <outlet property="instructionLabel" destination="E5W-QZ-jIg" id="sdY-dc-Yal"/>
+                <outlet property="timeLabel" destination="Rfo-xz-pMs" id="iZk-FR-vsW"/>
+            </connections>
+            <point key="canvasLocation" x="190.5" y="168"/>
+        </tableViewCell>
+        <view contentMode="scaleToFill" id="BgW-pL-OtZ">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <point key="canvasLocation" x="540" y="17"/>
+        </view>
+    </objects>
+</document>

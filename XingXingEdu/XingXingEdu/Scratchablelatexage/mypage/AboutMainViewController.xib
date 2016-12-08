@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutMainViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTJ-cw-6dP">
+                    <rect key="frame" x="3" y="64" width="369" height="380"/>
+                    <subviews>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Z6g-jZ-jsH">
+                            <rect key="frame" x="23" y="17" width="321" height="332"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <string key="text">          猩猩教室为国内首个专注于青少年教育培训和管理，以及幼儿教育培训和管理的O2O教育品牌。品牌以移动互联技术为基础，用互联网+思维建设运营，力图用自主研发的三方平台（包括pc端和移动端平台）结合线下教育培训机构的方式，给客户带来极致便利的体验，重塑目前混乱，低效，无规模，无标准的青少年教育培训和幼儿教育培训市场。 公司下设研发部、教研部和市场部等多个部门，聚集了一群年轻的小伙伴共同努力，力争在3-5年内将猩猩教室品牌做到细分市场的领导者。</string>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系电话:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o34-b9-AI5">
+                            <rect key="frame" x="158" y="358" width="64" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="64" id="AUt-aG-jYM"/>
+                                <constraint firstAttribute="height" constant="22" id="aH6-0v-yrj"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="021-60548858" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mz7-QE-u35">
+                            <rect key="frame" x="232" y="357" width="112" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="112" id="TpC-Jc-pum"/>
+                                <constraint firstAttribute="height" constant="22" id="bTg-ev-uau"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.65490196078431373" green="0.22352941176470589" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Z6g-jZ-jsH" firstAttribute="leading" secondItem="vTJ-cw-6dP" secondAttribute="leading" constant="23" id="FNF-ah-wSb"/>
+                        <constraint firstItem="mz7-QE-u35" firstAttribute="top" secondItem="Z6g-jZ-jsH" secondAttribute="bottom" constant="8" id="IKw-fM-eY8"/>
+                        <constraint firstAttribute="trailing" secondItem="mz7-QE-u35" secondAttribute="trailing" constant="25" id="JIz-ME-Jxq"/>
+                        <constraint firstItem="mz7-QE-u35" firstAttribute="top" secondItem="Z6g-jZ-jsH" secondAttribute="bottom" constant="8" id="Mpk-Xu-nBi"/>
+                        <constraint firstItem="Z6g-jZ-jsH" firstAttribute="top" secondItem="vTJ-cw-6dP" secondAttribute="top" constant="17" id="Rcv-ZF-03M"/>
+                        <constraint firstAttribute="trailing" secondItem="Z6g-jZ-jsH" secondAttribute="trailing" constant="25" id="Z9c-6Z-JYE"/>
+                        <constraint firstItem="o34-b9-AI5" firstAttribute="top" secondItem="Z6g-jZ-jsH" secondAttribute="bottom" constant="9" id="h77-ae-30L"/>
+                        <constraint firstItem="mz7-QE-u35" firstAttribute="leading" secondItem="o34-b9-AI5" secondAttribute="trailing" constant="10" id="qUu-SX-NQZ"/>
+                        <constraint firstAttribute="bottom" secondItem="o34-b9-AI5" secondAttribute="bottom" id="wIZ-jp-oIv"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="vTJ-cw-6dP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="H8I-AL-Hzt"/>
+                <constraint firstAttribute="bottom" secondItem="vTJ-cw-6dP" secondAttribute="bottom" constant="223" id="Koh-fZ-O7u"/>
+                <constraint firstAttribute="trailing" secondItem="vTJ-cw-6dP" secondAttribute="trailing" constant="3" id="iUB-Iu-YTI"/>
+                <constraint firstItem="vTJ-cw-6dP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="3" id="sFa-p3-iGU"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="391.5" y="160.5"/>
+        </view>
+    </objects>
+</document>
