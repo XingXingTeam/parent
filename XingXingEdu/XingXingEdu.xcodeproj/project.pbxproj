@@ -350,8 +350,6 @@
 		0463C3141DEC3D920035BEF6 /* XXETimeUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0463C2171DEC3D920035BEF6 /* XXETimeUserViewController.m */; };
 		0463C3151DEC3D920035BEF6 /* XXEWhoCanLookController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0463C2191DEC3D920035BEF6 /* XXEWhoCanLookController.m */; };
 		0463C3161DEC3D920035BEF6 /* 哈哈.png in Resources */ = {isa = PBXBuildFile; fileRef = 0463C21A1DEC3D920035BEF6 /* 哈哈.png */; };
-		0463C3171DEC3D920035BEF6 /* 已选择icon28x28@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0463C21B1DEC3D920035BEF6 /* 已选择icon28x28@2x.png */; };
-		0463C3181DEC3D920035BEF6 /* 已选择icon28x28@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0463C21C1DEC3D920035BEF6 /* 已选择icon28x28@3x.png */; };
 		0463C31B1DEC3D920035BEF6 /* FriendCircleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0463C2211DEC3D920035BEF6 /* FriendCircleService.m */; };
 		0463C31C1DEC3D920035BEF6 /* XXEDeleteCommentApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0463C2231DEC3D920035BEF6 /* XXEDeleteCommentApi.m */; };
 		0463C31D1DEC3D920035BEF6 /* XXEEveryTalkDetailApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0463C2251DEC3D920035BEF6 /* XXEEveryTalkDetailApi.m */; };
@@ -2139,8 +2137,6 @@
 		0463C2181DEC3D920035BEF6 /* XXEWhoCanLookController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEWhoCanLookController.h; sourceTree = "<group>"; };
 		0463C2191DEC3D920035BEF6 /* XXEWhoCanLookController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEWhoCanLookController.m; sourceTree = "<group>"; };
 		0463C21A1DEC3D920035BEF6 /* 哈哈.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "哈哈.png"; sourceTree = "<group>"; };
-		0463C21B1DEC3D920035BEF6 /* 已选择icon28x28@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已选择icon28x28@2x.png"; sourceTree = "<group>"; };
-		0463C21C1DEC3D920035BEF6 /* 已选择icon28x28@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已选择icon28x28@3x.png"; sourceTree = "<group>"; };
 		0463C2201DEC3D920035BEF6 /* FriendCircleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendCircleService.h; sourceTree = "<group>"; };
 		0463C2211DEC3D920035BEF6 /* FriendCircleService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendCircleService.m; sourceTree = "<group>"; };
 		0463C2221DEC3D920035BEF6 /* XXEDeleteCommentApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEDeleteCommentApi.h; sourceTree = "<group>"; };
@@ -4735,8 +4731,6 @@
 				0463C2181DEC3D920035BEF6 /* XXEWhoCanLookController.h */,
 				0463C2191DEC3D920035BEF6 /* XXEWhoCanLookController.m */,
 				0463C21A1DEC3D920035BEF6 /* 哈哈.png */,
-				0463C21B1DEC3D920035BEF6 /* 已选择icon28x28@2x.png */,
-				0463C21C1DEC3D920035BEF6 /* 已选择icon28x28@3x.png */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -8430,7 +8424,6 @@
 				68938B411CE1CA7C00661815 /* 签到106x48@2x.png in Resources */,
 				68C4208B1CCA18790011552E /* Homework.png in Resources */,
 				BF41A4C31C46320B003B18F2 /* ic_landing_nickname.png in Resources */,
-				0463C3181DEC3D920035BEF6 /* 已选择icon28x28@3x.png in Resources */,
 				04D5B1F71D6B29E200ABA89A /* flowerViewController.xib in Resources */,
 				04D5E4391D48A13300921223 /* 通用头像134x134@3x.png in Resources */,
 				6838016A1CE339DE0034C54C /* 课程icon72x72.png in Resources */,
@@ -8998,7 +8991,6 @@
 				0463C3311DEC3D920035BEF6 /* WhoSeeCell.xib in Resources */,
 				0499F0A11D2FB35600EFF631 /* shenghezhong@3x.png in Resources */,
 				0492ED341D49E2DE003E06D7 /* 老师icon40x50@1x.png in Resources */,
-				0463C3171DEC3D920035BEF6 /* 已选择icon28x28@2x.png in Resources */,
 				689F6F0A1CF6962100166C06 /* community9.png in Resources */,
 				68A518BB1CCF79E900B80823 /* eyH.png in Resources */,
 				04D5E4C41D48A2D700921223 /* 收藏(H)icon44x44@3x.png in Resources */,
