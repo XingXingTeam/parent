@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermsViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dht-xi-O4c">
+                    <rect key="frame" x="0.0" y="23" width="375" height="581"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="581" id="DKx-Eg-B9B"/>
+                    </constraints>
+                    <mutableString key="text">APP免责声明:
+1、一切移动客户端用户在下载并浏览APP手机APP软件时均被视为已经仔细阅读本条款并完全同意。凡以任何方式登陆本APP，或直接、间接使用本APP资料者，均被视为自愿接受本网站相关声明和用户服务协议的约束。 
+2、APP手机APP转载的内容并不代表APP手机APP之意见及观点，也不意味着本网赞同其观点或证实其内容的真实性。 
+3、APP手机APP转载的文字、图片、音视频等资料均由本APP用户提供，其真实性、准确性和合法性由信息发布人负责。APP手机APP不提供任何保证，并不承担任何法律责任。 
+4、APP手机APP所转载的文字、图片、音视频等资料，如果侵犯了第三方的知识产权或其他权利，责任由作者或转载者本人承担，本APP对此不承担责任。 
+5、APP手机APP不保证为向用户提供便利而设置的外部链接的准确性和完整性，同时，对于该外部链接指向的不由APP手机APP实际控制的任何网页上的内容，APP手机APP不承担任何责任。 
+6、用户明确并同意其使用APP手机APP网络服务所存在的风险将完全由其本人承担；因其使用APP手机APP网络服务而产生的一切后果也由其本人承担，APP手机APP对此不承担任何责任。 
+7、除APP手机APP注明之服务条款外，其它因不当使用本APP而导致的任何意外、疏忽、合约毁坏、诽谤、版权或其他知识产权侵犯及其所造成的任何损失，APP手机APP概不负责，亦不承担任何法律责任。 
+8、对于因不可抗力或因黑客攻击、通讯线路中断等APP手机APP不能控制的原因造成的网络服务中断或其他缺陷，导致用户不能正常使用APP手机APP，APP手机APP不承担任何责任，但将尽力减少因此给用户造成的损失或影响。 
+9、本声明未涉及的问题请参见国家有关法律法规，当本声明与国家有关法律法规冲突时，以国家法律法规为准。 
+10、本网站相关声明版权及其修改权、更新权和最终解释权均属APP手机APP所有。 
+
+
+</mutableString>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgD-oY-GSU">
+                    <rect key="frame" x="148" y="621" width="80" height="30"/>
+                    <color key="backgroundColor" red="0.87722922120418845" green="0.87722922120418845" blue="0.87722922120418845" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="6M0-zS-d23"/>
+                        <constraint firstAttribute="height" constant="30" id="dYW-6j-Jpa"/>
+                    </constraints>
+                    <state key="normal" title="确定">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="determineBtn:" destination="-1" eventType="touchUpInside" id="1Or-Pg-P8E"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="BgD-oY-GSU" firstAttribute="top" secondItem="Dht-xi-O4c" secondAttribute="bottom" constant="17" id="6vj-ka-TQl"/>
+                <constraint firstAttribute="trailing" secondItem="Dht-xi-O4c" secondAttribute="trailing" id="7b2-44-zYW"/>
+                <constraint firstItem="Dht-xi-O4c" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="23" id="nCz-oI-IPe"/>
+                <constraint firstItem="Dht-xi-O4c" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="q7F-HY-e1A"/>
+                <constraint firstItem="Dht-xi-O4c" firstAttribute="centerX" secondItem="BgD-oY-GSU" secondAttribute="centerX" id="viK-ZA-Fhb"/>
+                <constraint firstItem="BgD-oY-GSU" firstAttribute="top" secondItem="Dht-xi-O4c" secondAttribute="bottom" constant="17" id="wEe-wI-V74"/>
+                <constraint firstAttribute="bottom" secondItem="BgD-oY-GSU" secondAttribute="bottom" constant="16" id="y9g-Bn-QFL"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="275.5" y="258.5"/>
+        </view>
+    </objects>
+</document>

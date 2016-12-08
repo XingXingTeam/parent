@@ -1,0 +1,7 @@
+pod 'BaiduMapKit'
+pod 'DFCommon', '~> 1.3.9'
+pod 'UMengSocial', '~> 4.3'
+pod 'RETableViewManager', '~> 1.6'
+pod 'BeeCloud'
+pod 'RongCloudIMKitWithVoip', '~> 2.4.7'
+pod 'JSONModel','~>1.2.0'
