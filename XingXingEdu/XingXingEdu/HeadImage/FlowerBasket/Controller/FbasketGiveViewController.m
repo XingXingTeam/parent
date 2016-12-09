@@ -74,7 +74,6 @@
     }
     self.title =@"班级通讯录";
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
     KTAgeMArr =[[NSMutableArray alloc]init];
     KTHead_imgMArr =[[NSMutableArray alloc]init];
@@ -89,9 +88,17 @@
     [self createTableView];
     
 }
+
+#pragma mark ======== 【猩猩商城--花篮转增下的通讯录(针对某个班级的)】====
 - (void)loadNetData{
-
-
+/*
+ 接口类型:1
+ 接口:
+ http://www.xingxingedu.cn/Global/fbasket_give_teacher
+ 传参:
+	school_id	//学校id
+	class_id	//班级id
+ */
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/fbasket_give_teacher";
     
     NSString *schoolID = [DEFAULTS objectForKey:@"SCHOOL_ID"];
@@ -112,7 +119,7 @@
       if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"])
      {
          
-//         NSLog(@"data===========================%@",dict[@"data"]);
+         NSLog(@"data=============%@",dict[@"data"]);
          
          
              ageMArr=[[NSMutableArray alloc]init];

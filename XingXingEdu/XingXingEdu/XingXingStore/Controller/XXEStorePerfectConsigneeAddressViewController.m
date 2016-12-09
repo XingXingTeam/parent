@@ -52,6 +52,16 @@
 
 @implementation XXEStorePerfectConsigneeAddressViewController
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //获取默认收货地址
+    [self getDefaultAddress];
+    
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -67,13 +77,12 @@
     daizhifuOrderDictInfo = [[NSDictionary alloc] init];
     defaultAddressDict = [[NSDictionary alloc] init];
     address_id = @"";
+    
+//    self.navigationItem.leftBarButtonItem.title = @"返回";
+    
     //上部 地址 信息
     [self createUpContent];
-    
-    //获取默认收货地址
-    [self getDefaultAddress];
-    
-    
+
     //下部 金额
     [self createDownContent];
 
@@ -342,6 +351,7 @@
 	goods_id	//商品id
 	receipt		//发票抬头
 	buyer_words	//买家留言
+    goods_type  1:实物  /2:虚拟
  */
   
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/coin_shopping";
@@ -393,8 +403,6 @@
         //
         [self showString:@"获取数据失败!" forSecond:1.5];
     }];
-    
-    
     
 }
 

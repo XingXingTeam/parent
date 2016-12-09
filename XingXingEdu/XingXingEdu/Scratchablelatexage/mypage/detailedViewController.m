@@ -5,7 +5,6 @@
 //  Created by super on 16/1/22.
 //  Copyright © 2016年 Edu. All rights reserved.
 //
-#define DETAIL @"DetailCell"
 #import "detailedViewController.h"
 #import "RedFlowerViewController.h"
 #import "HHControl.h"
@@ -59,8 +58,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.tableView.separatorStyle = UITableViewCellAccessoryNone;
+    self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
     self.title =@"小红花详情";
     
     if ([XXEUserInfo user].login){
@@ -72,8 +70,12 @@
     }
     
     picWallArray = [[NSMutableArray alloc] init];
+    self.iconArray =[[NSMutableArray alloc]initWithObjects:@"赠送人40x40", @"时间40x40", @"学校40x40", @"班级40x40", @"科目40x40", @"赠言40x40",  @"教师风采40x40",nil];
+    self.titleArray =[[NSMutableArray alloc]initWithObjects:@"赠送人:",@"赠送时间:",@"学校:", @"班级:", @"课程:", @"赠言:", @"照片墙:", nil];
     
-    NSLog(@"%@", _model.pic);
+    self.contentArray =[[NSMutableArray alloc]initWithObjects:_model.tname, [WZYTool dateStringFromNumberTimer:_model.date_tm], _model.school_name, _model.class_name, _model.teach_course, _model.con, @"", nil];
+    
+//    NSLog(@"%@", _model.pic);
     if (![_model.pic isEqualToString:@""]) {
         if (![_model.pic containsString:@","]) {
             [picWallArray addObject:_model.pic];
@@ -93,11 +95,6 @@
 
 - (void)createImageView{
     
-    self.iconArray =[[NSMutableArray alloc]initWithObjects:@"赠送人40x40", @"时间40x40", @"学校40x40", @"班级40x40", @"科目40x40", @"赠言40x40",  @"教师风采40x40",nil];
-    self.titleArray =[[NSMutableArray alloc]initWithObjects:@"赠送人:",@"赠送时间:",@"学校:", @"班级:", @"课程:", @"赠言:", @"照片墙:", nil];
-    
-    self.contentArray =[[NSMutableArray alloc]initWithObjects:_model.tname, [WZYTool dateStringFromNumberTimer:_model.date_tm], _model.school_name, _model.class_name, _model.teach_course, _model.con, @"", nil];
-
     _backgroundImageView = [[UIImageView alloc] init];
     _iconImageView = [[UIImageView alloc] init];
     
@@ -200,7 +197,7 @@
         }
         
     } failure:^(NSError *error) {
-        
+        [SVProgressHUD showErrorWithStatus:@"收藏失败!"];
     }];
 }
 
@@ -235,17 +232,16 @@
         }
         
     } failure:^(NSError *error) {
-        
+        [SVProgressHUD showErrorWithStatus:@"取消收藏失败!"];
     }];
     
 }
 - (UITableView *)tableView{
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 20  - self.backgroundImageView.frame.size.height )];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
+        
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        _tableView.scrollEnabled = YES;
-        _tableView.userInteractionEnabled = YES;
         
     }
     return _tableView;
@@ -265,17 +261,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    static NSString *identifier = @"cell";
+    DetailCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    DetailCell *cell =(DetailCell*)[tableView dequeueReusableCellWithIdentifier:DETAIL];
     if (cell == nil) {
-        NSArray *nib =[[NSBundle mainBundle] loadNibNamed:DETAIL owner:[DetailCell class] options:nil];
-        cell =(DetailCell *)[nib objectAtIndex:0];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"DetailCell" owner:self options:nil]lastObject];
     }
     
     
 //    NSLog(@"_contentArray *******  %@ ---- %ld", _contentArray, indexPath.row);
     
-    cell.lineImageView.backgroundColor = [UIColor colorWithRed:224.0/255 green:224.0/255 blue:224.0/255 alpha:1.0];
+//    cell.lineImageView.backgroundColor = [UIColor colorWithRed:224.0/255 green:224.0/255 blue:224.0/255 alpha:1.0];
     cell.titleLabel.text = self.titleArray[indexPath.row];
     cell.contentLabel.text = self.contentArray[indexPath.row];
     cell.contentLabel.numberOfLines = 0;
@@ -348,15 +345,14 @@
         CGFloat height = [StringHeight contentSizeOfString:_contentArray[indexPath.row] maxWidth:maxWidth fontSize:14];
         return height + 20;
     }else if (indexPath.row == 6) {
-        return 44 + picRow * picHeight;
+        return 44 + picRow * (picHeight + 10);
     }
-    return 44;
+    return 44 ;
 }
 
 
-- (void)buttonClick:(UIButton *)button{
-    
-    
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.000001;
 }
 
 

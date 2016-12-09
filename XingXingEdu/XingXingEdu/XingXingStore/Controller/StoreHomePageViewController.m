@@ -17,7 +17,7 @@
 #import "ArticleInfoTableViewCell.h"
 #import "FlowersBuyViewController.h"
 #import "XXEStoreListModel.h"
-
+#import "XXEStorePayViewController.h"
 
 #define Kmarg 6.0f
 #define KLabelX 27.0f
@@ -35,6 +35,9 @@
     UIButton *panicBuyBtn;//限时抢购
     UILabel *countdownLabel;//倒计时
     ZQCountDownView *countDownView;//倒计时
+    //虚拟 商品 的待支付 订单
+    NSDictionary *daizhifuOrderDictInfo;
+    
     UITableView* myTabelView;
     NSMutableArray *_dataSourceArray;
     
@@ -67,6 +70,7 @@
         parameterUser_Id = USER_ID;
     }
     _dataSourceArray = [[NSMutableArray alloc] init];
+    daizhifuOrderDictInfo = [[NSDictionary alloc] init];
     //获取 商城 数据
     [self fetchStoreNetData];
     
@@ -336,18 +340,85 @@
     return 100;
 }
 
-#pragma mark ******** 购买 ******************
+#pragma mark ******** 直接 购买 ******************
 -(void)buyButtonClick:(UIButton *)button{
-    
     XXEStoreListModel *model = _dataSourceArray[button.tag - 1000];
+    //判断 是实物还是虚拟
+    //[type] => 1			//1:实物  2:虚拟商品
+    if ([model.type integerValue] == 1) {
+        //如果 是 实物 会 跳到 完善 收货人 信息 界面
+        XXEStorePerfectConsigneeAddressViewController *perfectConsigneeAddressVC = [[XXEStorePerfectConsigneeAddressViewController alloc] init];
+        
+        perfectConsigneeAddressVC.xingIconNum = model.exchange_coin;
+        perfectConsigneeAddressVC.price = model.exchange_price;
+        perfectConsigneeAddressVC.good_id = model.good_id;
+        
+        [self.navigationController pushViewController:perfectConsigneeAddressVC animated:YES];
+    }else if ([model.type integerValue] == 2){
+      // 如果 是 虚拟 会直接到支付 界面, 先生成待支付
+        [self createNoPayOrder:model.good_id];
     
-    XXEStorePerfectConsigneeAddressViewController *perfectConsigneeAddressVC = [[XXEStorePerfectConsigneeAddressViewController alloc] init];
+    }
+}
+
+#pragma mark ========虚拟 商品 产生未支付订单 ============
+- (void)createNoPayOrder:(NSString *)good_id{
+    /*
+     【猩猩商城--猩币兑换商品点立即支付(产生订单),金额+猩币】
+     接口类型:2
+     接口:
+     http://www.xingxingedu.cn/Global/coin_shopping
+     传参:
+     address_id	//地址id
+     goods_id	//商品id *****必传
+     receipt		//发票抬头
+     buyer_words	//买家留言
+     goods_type  1:实物  /2:虚拟 ****** 默认 是1
+     */
     
-    perfectConsigneeAddressVC.xingIconNum = model.exchange_coin;
-    perfectConsigneeAddressVC.price = model.exchange_price;
-    perfectConsigneeAddressVC.good_id = model.good_id;
+    NSString *urlStr = @"http://www.xingxingedu.cn/Global/coin_shopping";
     
-    [self.navigationController pushViewController:perfectConsigneeAddressVC animated:YES];
+    NSDictionary *params = @{@"appkey":APPKEY,
+                             @"backtype":BACKTYPE,
+                             @"xid":parameterXid,
+                             @"user_id":parameterUser_Id,
+                             @"user_type":USER_TYPE,
+                             @"goods_id":good_id,
+                             @"goods_type":@"2"
+                             };
+//        NSLog(@"params --- %@", params);
+    
+    [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
+        //
+//                NSLog(@"生成待支付订单 == %@", responseObj);
+        /*
+         data =     {
+         "order_id" = 594;
+         "order_index" = 39288589297;
+         "pay_coin" = 300;
+         "pay_price" = 0;
+         "user_coin_able" = 10708;
+         };
+         */
+        if ([responseObj[@"code"]  integerValue] == 1) {
+            daizhifuOrderDictInfo = responseObj[@"data"];
+            
+            XXEStorePayViewController *storePayVC = [[XXEStorePayViewController alloc] init];
+            storePayVC.dict = daizhifuOrderDictInfo;
+            storePayVC.order_id = daizhifuOrderDictInfo[@"order_id"];
+            
+            [self.navigationController pushViewController:storePayVC animated:YES];
+            
+            
+        }else if([responseObj[@"code"]  integerValue] == 7){
+            
+            [SVProgressHUD showInfoWithStatus:@"您猩币不足"];
+        }
+        
+    } failure:^(NSError *error) {
+        //
+        [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
+    }];
     
 }
 
@@ -375,7 +446,7 @@
                           };
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
-//        NSLog(@"kkk %@", responseObj);
+//        NSLog(@"获取 商城 数据 kkk %@", responseObj);
         
         if ([responseObj[@"code"] integerValue] == 1) {
             

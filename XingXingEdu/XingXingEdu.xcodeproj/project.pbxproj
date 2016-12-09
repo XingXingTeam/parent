@@ -51,10 +51,8 @@
 		0408621B1D422DC10060C70A /* 人数40x40@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0408621A1D422DC10060C70A /* 人数40x40@1x.png */; };
 		0408621D1D422DCB0060C70A /* 人数40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0408621C1D422DCB0060C70A /* 人数40x40@2x.png */; };
 		0408621F1D422DD60060C70A /* 人数40x40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0408621E1D422DD60060C70A /* 人数40x40@3x.png */; };
-		0410B0F41D50B67000924EBE /* SendFlowerBaskerDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410B0F21D50B67000924EBE /* SendFlowerBaskerDetailController.m */; };
 		0410B0F71D50BA2800924EBE /* XXETabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410B0F51D50BA2800924EBE /* XXETabBarViewController.m */; };
 		0410B0FA1D518C0000924EBE /* ReportPicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410B0F91D518C0000924EBE /* ReportPicViewController.m */; };
-		0410B0FD1D5327C500924EBE /* MyInfomationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410B0FC1D5327C500924EBE /* MyInfomationViewController.m */; };
 		043A7F541DF8F825003C4BF0 /* XXEStoreAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A7F531DF8F825003C4BF0 /* XXEStoreAddressModel.m */; };
 		043A7F571DF90A36003C4BF0 /* XXEStorePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A7F561DF90A36003C4BF0 /* XXEStorePayViewController.m */; };
 		043A7F5A1DF92783003C4BF0 /* XXEStoreListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A7F591DF92783003C4BF0 /* XXEStoreListModel.m */; };
@@ -637,12 +635,6 @@
 		04B6211F1DBF019A00391616 /* titter01@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B61FDF1DBF019900391616 /* titter01@1x.png */; };
 		04B621201DBF019A00391616 /* titter01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B61FE01DBF019900391616 /* titter01@2x.png */; };
 		04B621211DBF019A00391616 /* titter01@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B61FE11DBF019900391616 /* titter01@3x.png */; };
-		04B621221DBF019A00391616 /* titter02@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B61FE21DBF019900391616 /* titter02@1x.png */; };
-		04B621231DBF019A00391616 /* titter02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B61FE31DBF019900391616 /* titter02@2x.png */; };
-		04B621241DBF019A00391616 /* titter02@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B61FE41DBF019900391616 /* titter02@3x.png */; };
-		04B621251DBF019A00391616 /* 今日签到成功背景@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B61FE51DBF019900391616 /* 今日签到成功背景@1x.png */; };
-		04B621261DBF019A00391616 /* 今日签到成功背景@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B61FE61DBF019900391616 /* 今日签到成功背景@2x.png */; };
-		04B621271DBF019A00391616 /* 今日签到成功背景@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B61FE71DBF019900391616 /* 今日签到成功背景@3x.png */; };
 		04B621281DBF019A00391616 /* 查看历史44x44@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B61FE81DBF019900391616 /* 查看历史44x44@1x.png */; };
 		04B621291DBF019A00391616 /* 查看历史44x44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B61FE91DBF019900391616 /* 查看历史44x44@2x.png */; };
 		04B6212A1DBF019A00391616 /* 查看历史44x44@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B61FEA1DBF019900391616 /* 查看历史44x44@3x.png */; };
@@ -1080,6 +1072,15 @@
 		04DE286E1D2B7F98002AE12A /* 叉36x36@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DE286B1D2B7F98002AE12A /* 叉36x36@1x.png */; };
 		04DE286F1D2B7F98002AE12A /* 叉36x36@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DE286C1D2B7F98002AE12A /* 叉36x36@2x.png */; };
 		04DE28701D2B7F98002AE12A /* 叉36x36@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DE286D1D2B7F98002AE12A /* 叉36x36@3x.png */; };
+		04E31BDB1DFA8FFB00691EB0 /* FbasketGiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E31BCC1DFA8FFB00691EB0 /* FbasketGiveViewController.m */; };
+		04E31BDC1DFA8FFB00691EB0 /* FlowerBasketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E31BCE1DFA8FFB00691EB0 /* FlowerBasketViewController.m */; };
+		04E31BDD1DFA8FFB00691EB0 /* MyInfomationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E31BD01DFA8FFB00691EB0 /* MyInfomationViewController.m */; };
+		04E31BDE1DFA8FFB00691EB0 /* SendFlowerBaskerDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E31BD21DFA8FFB00691EB0 /* SendFlowerBaskerDetailController.m */; };
+		04E31BDF1DFA8FFB00691EB0 /* FbasketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E31BD61DFA8FFB00691EB0 /* FbasketCell.m */; };
+		04E31BE01DFA8FFB00691EB0 /* FbasketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E31BD71DFA8FFB00691EB0 /* FbasketCell.xib */; };
+		04E31BE51DFA908500691EB0 /* XXEFlowerbasketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E31BE41DFA908500691EB0 /* XXEFlowerbasketModel.m */; };
+		04E31BE91DFA9AEA00691EB0 /* FlowerBascketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E31BE71DFA9AEA00691EB0 /* FlowerBascketCell.m */; };
+		04E31BEA1DFA9AEA00691EB0 /* FlowerBascketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E31BE81DFA9AEA00691EB0 /* FlowerBascketCell.xib */; };
 		04F100A21D45BEC900CBED22 /* ClassSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F100A11D45BEC900CBED22 /* ClassSubjectViewController.m */; };
 		04F100AF1D45C0E400CBED22 /* KTRecipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F100A51D45C0E400CBED22 /* KTRecipeCell.m */; };
 		04F100B01D45C0E400CBED22 /* KTRecipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F100A61D45C0E400CBED22 /* KTRecipeCell.xib */; };
@@ -1250,8 +1251,6 @@
 		6844E94D1CAD451E0054B8C5 /* addBabyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844E8FF1CAD451D0054B8C5 /* addBabyCell.m */; };
 		6844E94E1CAD451E0054B8C5 /* addBabyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6844E9001CAD451D0054B8C5 /* addBabyCell.xib */; };
 		6844E9531CAD451E0054B8C5 /* ClassInfomationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844E90A1CAD451D0054B8C5 /* ClassInfomationViewController.m */; };
-		6844E9541CAD451E0054B8C5 /* FlowerBascketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844E90D1CAD451D0054B8C5 /* FlowerBascketCell.m */; };
-		6844E9551CAD451E0054B8C5 /* FlowerBascketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6844E90E1CAD451D0054B8C5 /* FlowerBascketCell.xib */; };
 		6844E9571CAD451E0054B8C5 /* HeadDetailInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844E9121CAD451E0054B8C5 /* HeadDetailInfoViewController.m */; };
 		6844E9591CAD451E0054B8C5 /* HFStretchableTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844E9161CAD451E0054B8C5 /* HFStretchableTableHeaderView.m */; };
 		6844E95B1CAD451E0054B8C5 /* MyHeadInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844E91A1CAD451E0054B8C5 /* MyHeadInfoCell.m */; };
@@ -1348,7 +1347,6 @@
 		68926B211CE971F600201E80 /* 优先级icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B1F1CE971F600201E80 /* 优先级icon@2x.png */; };
 		68926B251CE9749300201E80 /* AddClassSubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68926B231CE9749300201E80 /* AddClassSubjectCell.m */; };
 		68926B261CE9749300201E80 /* AddClassSubjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68926B241CE9749300201E80 /* AddClassSubjectCell.xib */; };
-		68926B2F1CE9767200201E80 /* 教室icon40x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B291CE9767200201E80 /* 教室icon40x50@2x.png */; };
 		68926B311CE9767200201E80 /* 老师icon40x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B2B1CE9767200201E80 /* 老师icon40x50@2x.png */; };
 		68926B321CE9767200201E80 /* 上下课时间icon40x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B2C1CE9767200201E80 /* 上下课时间icon40x50@2x.png */; };
 		68926B351CE99DA400201E80 /* ChangeEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68926B341CE99DA400201E80 /* ChangeEmailViewController.m */; };
@@ -1378,9 +1376,6 @@
 		68938B4F1CE1D0F100661815 /* ID40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68938B481CE1D0F100661815 /* ID40x40@2x.png */; };
 		68938B511CE1D6C600661815 /* 修改密码icon650x84@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68938B501CE1D6C600661815 /* 修改密码icon650x84@2x.png */; };
 		68938B581CE1E11900661815 /* 确定icon650x84@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68938B571CE1E11900661815 /* 确定icon650x84@2x.png */; };
-		68954BBF1D0514A3009241A5 /* FbasketGiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68954BBE1D0514A3009241A5 /* FbasketGiveViewController.m */; };
-		68954BC31D051615009241A5 /* FbasketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68954BC11D051615009241A5 /* FbasketCell.m */; };
-		68954BC41D051615009241A5 /* FbasketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68954BC21D051615009241A5 /* FbasketCell.xib */; };
 		68954DDD1D05870B009241A5 /* 通知38x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68954DDC1D05870B009241A5 /* 通知38x50@2x.png */; };
 		689551B51D06E370009241A5 /* WZYTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 689551B11D06E370009241A5 /* WZYTextView.m */; };
 		689551B61D06E370009241A5 /* WZYTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 689551B31D06E370009241A5 /* WZYTool.m */; };
@@ -1542,7 +1537,6 @@
 		68BACEE71CEDCB500008DDA6 /* 赠言40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACECE1CEDCB500008DDA6 /* 赠言40x40@2x.png */; };
 		68BACEE81CEDCB500008DDA6 /* 赠送人40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACECF1CEDCB500008DDA6 /* 赠送人40x40@2x.png */; };
 		68BAD2111CEDCD660008DDA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BAD2101CEDCD660008DDA6 /* AppDelegate.m */; };
-		68BAD3841CEDD46D0008DDA6 /* FlowerBasketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BAD3831CEDD46D0008DDA6 /* FlowerBasketViewController.m */; };
 		68BAD6BD1CEEB21F0008DDA6 /* 加号200x200@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BAD6BC1CEEB21F0008DDA6 /* 加号200x200@2x.png */; };
 		68C420771CC9CA310011552E /* SchoolInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C420761CC9CA310011552E /* SchoolInfoViewController.m */; };
 		68C4207A1CC9F8E70011552E /* MyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C420791CC9F8E70011552E /* MyTabBarController.m */; };
@@ -1712,14 +1706,10 @@
 		0408621A1D422DC10060C70A /* 人数40x40@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "人数40x40@1x.png"; sourceTree = "<group>"; };
 		0408621C1D422DCB0060C70A /* 人数40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "人数40x40@2x.png"; sourceTree = "<group>"; };
 		0408621E1D422DD60060C70A /* 人数40x40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "人数40x40@3x.png"; sourceTree = "<group>"; };
-		0410B0F21D50B67000924EBE /* SendFlowerBaskerDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendFlowerBaskerDetailController.m; sourceTree = "<group>"; };
-		0410B0F31D50B67000924EBE /* SendFlowerBaskerDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendFlowerBaskerDetailController.h; sourceTree = "<group>"; };
 		0410B0F51D50BA2800924EBE /* XXETabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXETabBarViewController.m; path = ../XingXingEdu/Utility/LoginInfo/XXETabBarViewController.m; sourceTree = "<group>"; };
 		0410B0F61D50BA2800924EBE /* XXETabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXETabBarViewController.h; path = ../XingXingEdu/Utility/LoginInfo/XXETabBarViewController.h; sourceTree = "<group>"; };
 		0410B0F81D518C0000924EBE /* ReportPicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportPicViewController.h; sourceTree = "<group>"; };
 		0410B0F91D518C0000924EBE /* ReportPicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportPicViewController.m; sourceTree = "<group>"; };
-		0410B0FB1D5327C500924EBE /* MyInfomationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfomationViewController.h; sourceTree = "<group>"; };
-		0410B0FC1D5327C500924EBE /* MyInfomationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfomationViewController.m; sourceTree = "<group>"; };
 		043A7F521DF8F825003C4BF0 /* XXEStoreAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEStoreAddressModel.h; sourceTree = "<group>"; };
 		043A7F531DF8F825003C4BF0 /* XXEStoreAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEStoreAddressModel.m; sourceTree = "<group>"; };
 		043A7F551DF90A36003C4BF0 /* XXEStorePayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEStorePayViewController.h; sourceTree = "<group>"; };
@@ -2565,12 +2555,6 @@
 		04B61FDF1DBF019900391616 /* titter01@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titter01@1x.png"; sourceTree = "<group>"; };
 		04B61FE01DBF019900391616 /* titter01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titter01@2x.png"; sourceTree = "<group>"; };
 		04B61FE11DBF019900391616 /* titter01@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titter01@3x.png"; sourceTree = "<group>"; };
-		04B61FE21DBF019900391616 /* titter02@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titter02@1x.png"; sourceTree = "<group>"; };
-		04B61FE31DBF019900391616 /* titter02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titter02@2x.png"; sourceTree = "<group>"; };
-		04B61FE41DBF019900391616 /* titter02@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titter02@3x.png"; sourceTree = "<group>"; };
-		04B61FE51DBF019900391616 /* 今日签到成功背景@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "今日签到成功背景@1x.png"; sourceTree = "<group>"; };
-		04B61FE61DBF019900391616 /* 今日签到成功背景@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "今日签到成功背景@2x.png"; sourceTree = "<group>"; };
-		04B61FE71DBF019900391616 /* 今日签到成功背景@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "今日签到成功背景@3x.png"; sourceTree = "<group>"; };
 		04B61FE81DBF019900391616 /* 查看历史44x44@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "查看历史44x44@1x.png"; sourceTree = "<group>"; };
 		04B61FE91DBF019900391616 /* 查看历史44x44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "查看历史44x44@2x.png"; sourceTree = "<group>"; };
 		04B61FEA1DBF019900391616 /* 查看历史44x44@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "查看历史44x44@3x.png"; sourceTree = "<group>"; };
@@ -3058,6 +3042,22 @@
 		04DE286B1D2B7F98002AE12A /* 叉36x36@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "叉36x36@1x.png"; sourceTree = "<group>"; };
 		04DE286C1D2B7F98002AE12A /* 叉36x36@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "叉36x36@2x.png"; sourceTree = "<group>"; };
 		04DE286D1D2B7F98002AE12A /* 叉36x36@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "叉36x36@3x.png"; sourceTree = "<group>"; };
+		04E31BCB1DFA8FFB00691EB0 /* FbasketGiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FbasketGiveViewController.h; sourceTree = "<group>"; };
+		04E31BCC1DFA8FFB00691EB0 /* FbasketGiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FbasketGiveViewController.m; sourceTree = "<group>"; };
+		04E31BCD1DFA8FFB00691EB0 /* FlowerBasketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowerBasketViewController.h; sourceTree = "<group>"; };
+		04E31BCE1DFA8FFB00691EB0 /* FlowerBasketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlowerBasketViewController.m; sourceTree = "<group>"; };
+		04E31BCF1DFA8FFB00691EB0 /* MyInfomationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfomationViewController.h; sourceTree = "<group>"; };
+		04E31BD01DFA8FFB00691EB0 /* MyInfomationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfomationViewController.m; sourceTree = "<group>"; };
+		04E31BD11DFA8FFB00691EB0 /* SendFlowerBaskerDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendFlowerBaskerDetailController.h; sourceTree = "<group>"; };
+		04E31BD21DFA8FFB00691EB0 /* SendFlowerBaskerDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendFlowerBaskerDetailController.m; sourceTree = "<group>"; };
+		04E31BD51DFA8FFB00691EB0 /* FbasketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FbasketCell.h; sourceTree = "<group>"; };
+		04E31BD61DFA8FFB00691EB0 /* FbasketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FbasketCell.m; sourceTree = "<group>"; };
+		04E31BD71DFA8FFB00691EB0 /* FbasketCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FbasketCell.xib; sourceTree = "<group>"; };
+		04E31BE31DFA908500691EB0 /* XXEFlowerbasketModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEFlowerbasketModel.h; sourceTree = "<group>"; };
+		04E31BE41DFA908500691EB0 /* XXEFlowerbasketModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEFlowerbasketModel.m; sourceTree = "<group>"; };
+		04E31BE61DFA9AEA00691EB0 /* FlowerBascketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowerBascketCell.h; sourceTree = "<group>"; };
+		04E31BE71DFA9AEA00691EB0 /* FlowerBascketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlowerBascketCell.m; sourceTree = "<group>"; };
+		04E31BE81DFA9AEA00691EB0 /* FlowerBascketCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlowerBascketCell.xib; sourceTree = "<group>"; };
 		04F100A01D45BEC900CBED22 /* ClassSubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassSubjectViewController.h; sourceTree = "<group>"; };
 		04F100A11D45BEC900CBED22 /* ClassSubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassSubjectViewController.m; sourceTree = "<group>"; };
 		04F100A41D45C0E400CBED22 /* KTRecipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTRecipeCell.h; sourceTree = "<group>"; };
@@ -3305,9 +3305,6 @@
 		6844E9001CAD451D0054B8C5 /* addBabyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = addBabyCell.xib; sourceTree = "<group>"; };
 		6844E9091CAD451D0054B8C5 /* ClassInfomationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassInfomationViewController.h; sourceTree = "<group>"; };
 		6844E90A1CAD451D0054B8C5 /* ClassInfomationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassInfomationViewController.m; sourceTree = "<group>"; };
-		6844E90C1CAD451D0054B8C5 /* FlowerBascketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowerBascketCell.h; sourceTree = "<group>"; };
-		6844E90D1CAD451D0054B8C5 /* FlowerBascketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlowerBascketCell.m; sourceTree = "<group>"; };
-		6844E90E1CAD451D0054B8C5 /* FlowerBascketCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlowerBascketCell.xib; sourceTree = "<group>"; };
 		6844E9111CAD451E0054B8C5 /* HeadDetailInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadDetailInfoViewController.h; sourceTree = "<group>"; };
 		6844E9121CAD451E0054B8C5 /* HeadDetailInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadDetailInfoViewController.m; sourceTree = "<group>"; };
 		6844E9151CAD451E0054B8C5 /* HFStretchableTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFStretchableTableHeaderView.h; sourceTree = "<group>"; };
@@ -3445,7 +3442,6 @@
 		68926B221CE9749300201E80 /* AddClassSubjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddClassSubjectCell.h; sourceTree = "<group>"; };
 		68926B231CE9749300201E80 /* AddClassSubjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddClassSubjectCell.m; sourceTree = "<group>"; };
 		68926B241CE9749300201E80 /* AddClassSubjectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddClassSubjectCell.xib; sourceTree = "<group>"; };
-		68926B291CE9767200201E80 /* 教室icon40x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "教室icon40x50@2x.png"; sourceTree = "<group>"; };
 		68926B2B1CE9767200201E80 /* 老师icon40x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "老师icon40x50@2x.png"; sourceTree = "<group>"; };
 		68926B2C1CE9767200201E80 /* 上下课时间icon40x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上下课时间icon40x50@2x.png"; sourceTree = "<group>"; };
 		68926B331CE99DA400201E80 /* ChangeEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeEmailViewController.h; sourceTree = "<group>"; };
@@ -3476,11 +3472,6 @@
 		68938B481CE1D0F100661815 /* ID40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ID40x40@2x.png"; sourceTree = "<group>"; };
 		68938B501CE1D6C600661815 /* 修改密码icon650x84@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "修改密码icon650x84@2x.png"; sourceTree = "<group>"; };
 		68938B571CE1E11900661815 /* 确定icon650x84@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "确定icon650x84@2x.png"; sourceTree = "<group>"; };
-		68954BBD1D0514A3009241A5 /* FbasketGiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FbasketGiveViewController.h; sourceTree = "<group>"; };
-		68954BBE1D0514A3009241A5 /* FbasketGiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FbasketGiveViewController.m; sourceTree = "<group>"; };
-		68954BC01D051615009241A5 /* FbasketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FbasketCell.h; sourceTree = "<group>"; };
-		68954BC11D051615009241A5 /* FbasketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FbasketCell.m; sourceTree = "<group>"; };
-		68954BC21D051615009241A5 /* FbasketCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FbasketCell.xib; sourceTree = "<group>"; };
 		68954DDC1D05870B009241A5 /* 通知38x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "通知38x50@2x.png"; path = "XingXingEdu/Images.xcassets/通知38x50@2x.png"; sourceTree = SOURCE_ROOT; };
 		689551B01D06E370009241A5 /* WZYTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZYTextView.h; sourceTree = "<group>"; };
 		689551B11D06E370009241A5 /* WZYTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZYTextView.m; sourceTree = "<group>"; };
@@ -3682,8 +3673,6 @@
 		68BACECE1CEDCB500008DDA6 /* 赠言40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "赠言40x40@2x.png"; sourceTree = "<group>"; };
 		68BACECF1CEDCB500008DDA6 /* 赠送人40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "赠送人40x40@2x.png"; sourceTree = "<group>"; };
 		68BAD2101CEDCD660008DDA6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = XingXingEdu/AppDelegate.m; sourceTree = SOURCE_ROOT; };
-		68BAD3821CEDD46D0008DDA6 /* FlowerBasketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowerBasketViewController.h; sourceTree = "<group>"; };
-		68BAD3831CEDD46D0008DDA6 /* FlowerBasketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlowerBasketViewController.m; sourceTree = "<group>"; };
 		68BAD6BC1CEEB21F0008DDA6 /* 加号200x200@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "加号200x200@2x.png"; path = "XingXingEdu/Images.xcassets/加号200x200@2x.png"; sourceTree = SOURCE_ROOT; };
 		68C420751CC9CA310011552E /* SchoolInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolInfoViewController.h; sourceTree = "<group>"; };
 		68C420761CC9CA310011552E /* SchoolInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolInfoViewController.m; sourceTree = "<group>"; };
@@ -5603,12 +5592,6 @@
 				04B61FDF1DBF019900391616 /* titter01@1x.png */,
 				04B61FE01DBF019900391616 /* titter01@2x.png */,
 				04B61FE11DBF019900391616 /* titter01@3x.png */,
-				04B61FE21DBF019900391616 /* titter02@1x.png */,
-				04B61FE31DBF019900391616 /* titter02@2x.png */,
-				04B61FE41DBF019900391616 /* titter02@3x.png */,
-				04B61FE51DBF019900391616 /* 今日签到成功背景@1x.png */,
-				04B61FE61DBF019900391616 /* 今日签到成功背景@2x.png */,
-				04B61FE71DBF019900391616 /* 今日签到成功背景@3x.png */,
 				04B61FE81DBF019900391616 /* 查看历史44x44@1x.png */,
 				04B61FE91DBF019900391616 /* 查看历史44x44@2x.png */,
 				04B61FEA1DBF019900391616 /* 查看历史44x44@3x.png */,
@@ -6378,6 +6361,43 @@
 			path = "注册切图";
 			sourceTree = "<group>";
 		};
+		04E31BCA1DFA8FFB00691EB0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04E31BCB1DFA8FFB00691EB0 /* FbasketGiveViewController.h */,
+				04E31BCC1DFA8FFB00691EB0 /* FbasketGiveViewController.m */,
+				04E31BCD1DFA8FFB00691EB0 /* FlowerBasketViewController.h */,
+				04E31BCE1DFA8FFB00691EB0 /* FlowerBasketViewController.m */,
+				04E31BCF1DFA8FFB00691EB0 /* MyInfomationViewController.h */,
+				04E31BD01DFA8FFB00691EB0 /* MyInfomationViewController.m */,
+				04E31BD11DFA8FFB00691EB0 /* SendFlowerBaskerDetailController.h */,
+				04E31BD21DFA8FFB00691EB0 /* SendFlowerBaskerDetailController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		04E31BD31DFA8FFB00691EB0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04E31BE31DFA908500691EB0 /* XXEFlowerbasketModel.h */,
+				04E31BE41DFA908500691EB0 /* XXEFlowerbasketModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		04E31BD41DFA8FFB00691EB0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04E31BD51DFA8FFB00691EB0 /* FbasketCell.h */,
+				04E31BD61DFA8FFB00691EB0 /* FbasketCell.m */,
+				04E31BD71DFA8FFB00691EB0 /* FbasketCell.xib */,
+				04E31BE61DFA9AEA00691EB0 /* FlowerBascketCell.h */,
+				04E31BE71DFA9AEA00691EB0 /* FlowerBascketCell.m */,
+				04E31BE81DFA9AEA00691EB0 /* FlowerBascketCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		04F100A31D45C0E400CBED22 /* Cookbook */ = {
 			isa = PBXGroup;
 			children = (
@@ -6450,7 +6470,6 @@
 				689F79401CF6CE9F00166C06 /* KTteacher.plist */,
 				68926B361CE9B3EF00201E80 /* 截屏grap@2x.png */,
 				68926B371CE9B3EF00201E80 /* 收藏save@2x.png */,
-				68926B291CE9767200201E80 /* 教室icon40x50@2x.png */,
 				68926B2B1CE9767200201E80 /* 老师icon40x50@2x.png */,
 				68926B2C1CE9767200201E80 /* 上下课时间icon40x50@2x.png */,
 				683801261CE339DD0034C54C /* QQicon40x50.png */,
@@ -7031,20 +7050,9 @@
 		6844E90B1CAD451D0054B8C5 /* FlowerBasket */ = {
 			isa = PBXGroup;
 			children = (
-				0410B0FB1D5327C500924EBE /* MyInfomationViewController.h */,
-				0410B0FC1D5327C500924EBE /* MyInfomationViewController.m */,
-				0410B0F21D50B67000924EBE /* SendFlowerBaskerDetailController.m */,
-				0410B0F31D50B67000924EBE /* SendFlowerBaskerDetailController.h */,
-				68BAD3821CEDD46D0008DDA6 /* FlowerBasketViewController.h */,
-				68BAD3831CEDD46D0008DDA6 /* FlowerBasketViewController.m */,
-				6844E90C1CAD451D0054B8C5 /* FlowerBascketCell.h */,
-				6844E90D1CAD451D0054B8C5 /* FlowerBascketCell.m */,
-				6844E90E1CAD451D0054B8C5 /* FlowerBascketCell.xib */,
-				68954BBD1D0514A3009241A5 /* FbasketGiveViewController.h */,
-				68954BBE1D0514A3009241A5 /* FbasketGiveViewController.m */,
-				68954BC01D051615009241A5 /* FbasketCell.h */,
-				68954BC11D051615009241A5 /* FbasketCell.m */,
-				68954BC21D051615009241A5 /* FbasketCell.xib */,
+				04E31BCA1DFA8FFB00691EB0 /* Controller */,
+				04E31BD31DFA8FFB00691EB0 /* Model */,
+				04E31BD41DFA8FFB00691EB0 /* View */,
 			);
 			path = FlowerBasket;
 			sourceTree = "<group>";
@@ -8177,7 +8185,6 @@
 				68C4208E1CCA18790011552E /* Telephone.png in Resources */,
 				0447774A1D2A76CC0018A459 /* 搜索icon32x32.png in Resources */,
 				68A754551D2102C60062DBCA /* 支付宝@3x.png in Resources */,
-				04B621271DBF019A00391616 /* 今日签到成功背景@3x.png in Resources */,
 				04D5B10F1D6B1DE900ABA89A /* 邮箱40x40@2x.png in Resources */,
 				68DCD9241D24F81B00ED0978 /* experience@3x.png in Resources */,
 				04D5E4D11D48A2D700921223 /* 时间40x40@1x.png in Resources */,
@@ -8200,7 +8207,6 @@
 				04469A681D40DE9C0067615D /* commentRequest4.png in Resources */,
 				04469A6F1D40DE9C0067615D /* commenttab2@2x.png in Resources */,
 				04D5E3B91D488AF200921223 /* ClassSubjectTableViewCell.xib in Resources */,
-				6844E9551CAD451E0054B8C5 /* FlowerBascketCell.xib in Resources */,
 				044776F81D2A76CC0018A459 /* demoShow.gif in Resources */,
 				0499F0A21D2FB35600EFF631 /* yishenghe@1x.png in Resources */,
 				04B621091DBF019A00391616 /* lightgraybg.png in Resources */,
@@ -8420,6 +8426,7 @@
 				04B621441DBF019A00391616 /* tab4_selected@3x.png in Resources */,
 				04469A601D40DE9C0067615D /* commentInfo5.png in Resources */,
 				04D758BD1D3F1183005499ED /* 返回icon86x30@2x.png in Resources */,
+				04E31BE01DFA8FFB00691EB0 /* FbasketCell.xib in Resources */,
 				689B77141CE7C50A00837DB9 /* selectionIndicatiorImage.png in Resources */,
 				68938B411CE1CA7C00661815 /* 签到106x48@2x.png in Resources */,
 				68C4208B1CCA18790011552E /* Homework.png in Resources */,
@@ -8667,7 +8674,6 @@
 				0444128D1D38F2C400314884 /* DiscussionViewController.xib in Resources */,
 				04FD0F531D4F5FAF00E4925F /* SettingCell.xib in Resources */,
 				04B6211D1DBF019A00391616 /* guize@2x.png in Resources */,
-				04B621241DBF019A00391616 /* titter02@3x.png in Resources */,
 				044412AF1D38F2C400314884 /* FriendApplicationTableViewCell.xib in Resources */,
 				04D5E4E01D48A2D700921223 /* 确定icon245x90@2x.png in Resources */,
 				6838FF931CE31DCF0034C54C /* 发起聊天(H)icon48x48.png in Resources */,
@@ -8686,7 +8692,6 @@
 				04D5E4BF1D48A2D700921223 /* 待点评106x106@1x.png in Resources */,
 				04B621881DBF019A00391616 /* yixuan@1x.png in Resources */,
 				04D5B1051D6B1DE900ABA89A /* 猩币icon28x30@2x.png in Resources */,
-				68926B2F1CE9767200201E80 /* 教室icon40x50@2x.png in Resources */,
 				04D5E4371D48A13300921223 /* 通用头像134x134@1x.png in Resources */,
 				04B620FD1DBF019A00391616 /* deleteAdress.png in Resources */,
 				04D5E4E61D48A2D700921223 /* 老师40x45@1x.png in Resources */,
@@ -8762,6 +8767,7 @@
 				68AECC971CE36D5C004F98D1 /* 已勾选34x34.png in Resources */,
 				04B621841DBF019A00391616 /* weixuan@3x.png in Resources */,
 				0492ED251D49E2DE003E06D7 /* 确定添加icon330x88@1x.png in Resources */,
+				04E31BEA1DFA9AEA00691EB0 /* FlowerBascketCell.xib in Resources */,
 				BF41A4D11C46321D003B18F2 /* ic_landing_wechat@3x.png in Resources */,
 				04D5E4F51D48A2D700921223 /* 请求点评icon48x48@1x.png in Resources */,
 				044DEC3A1D9232D500DE101A /* narrow_icon@3x.png in Resources */,
@@ -9004,7 +9010,6 @@
 				6865414D1CE430C5003A06E5 /* 猩猩商城icon98x134@2x.png in Resources */,
 				0492ED271D49E2DE003E06D7 /* 确定添加icon330x88@3x.png in Resources */,
 				04B621961DBF019A00391616 /* FlowersHistoryTableViewCell.xib in Resources */,
-				04B621261DBF019A00391616 /* 今日签到成功背景@2x.png in Resources */,
 				68C590B81CD315AA00715CF1 /* placeHodle.png in Resources */,
 				04D5B1081D6B1DE900ABA89A /* 箭头@2x.png in Resources */,
 				04D758B31D3F1183005499ED /* 按钮（big）icon650x84@2x.png in Resources */,
@@ -9022,13 +9027,11 @@
 				04D5E4D01D48A2D700921223 /* 教师风采40x40@3x.png in Resources */,
 				04D5B0E31D6B1DE900ABA89A /* QQ40x40@2x.png in Resources */,
 				048B194E1DEBDA03005A51FE /* XXEPhoneAddressBookTableViewCell.xib in Resources */,
-				04B621231DBF019A00391616 /* titter02@2x.png in Resources */,
 				6844E8E51CAD45150054B8C5 /* selected.png in Resources */,
 				6838FF9F1CE322E60034C54C /* 关系40x46.png in Resources */,
 				04D5E3E71D489FCB00921223 /* 早餐38x34@3x.png in Resources */,
 				0492ED331D49E2DE003E06D7 /* 科目按钮灰色（H）80x60@3x.png in Resources */,
 				04D758AA1D3F1183005499ED /* 已选择icon28x28@2x.png in Resources */,
-				68954BC41D051615009241A5 /* FbasketCell.xib in Resources */,
 				68A754491D2102C60062DBCA /* 密码@3x.png in Resources */,
 				04B6212A1DBF019A00391616 /* 查看历史44x44@3x.png in Resources */,
 				044412B61D38F2C400314884 /* RCAddFriendViewController.xib in Resources */,
@@ -9055,7 +9058,6 @@
 				68926B391CE9B3EF00201E80 /* 收藏save@2x.png in Resources */,
 				04B6210E1DBF019A00391616 /* big695x60.png in Resources */,
 				04D5B1B01D6B1FF500ABA89A /* Triangle01@3x.png in Resources */,
-				04B621221DBF019A00391616 /* titter02@1x.png in Resources */,
 				044777501D2A76CC0018A459 /* 线552x1.png in Resources */,
 				6844E8E21CAD45150054B8C5 /* play.png in Resources */,
 				0464F53B1DE57708009D13A0 /* 限时抢购@1x.png in Resources */,
@@ -9066,7 +9068,6 @@
 				04D5E3B61D48438200921223 /* img@2x.png in Resources */,
 				6844E8DB1CAD45150054B8C5 /* NavBarIconSearchBar_blue@2x.png in Resources */,
 				0463C3331DEC3D920035BEF6 /* XXEMessageHistoryCell.xib in Resources */,
-				04B621251DBF019A00391616 /* 今日签到成功背景@1x.png in Resources */,
 				0463C34B1DEC3D920035BEF6 /* AlbumLike@2x.png in Resources */,
 				68A7545E1D2102C60062DBCA /* 账号@3x.png in Resources */,
 				044777581D2A76CC0018A459 /* 分享(H)icon48x48@2x.png in Resources */,
@@ -9240,6 +9241,7 @@
 				0463C35B1DEC3D920035BEF6 /* DFBaseUserLineCell.m in Sources */,
 				04B6208C1DBF019A00391616 /* CoreSVP.m in Sources */,
 				6844EA261CAD45320054B8C5 /* SpinerLayer.m in Sources */,
+				04E31BDC1DFA8FFB00691EB0 /* FlowerBasketViewController.m in Sources */,
 				689F6F0D1CF6962100166C06 /* WebViewController.m in Sources */,
 				68A012961D17F41A00A1EF00 /* VPImageCropperViewController.m in Sources */,
 				0463C3741DEC3D930035BEF6 /* YTKBaseRequest.m in Sources */,
@@ -9283,6 +9285,7 @@
 				0463C3761DEC3D930035BEF6 /* YTKBatchRequestAgent.m in Sources */,
 				6844EA4B1CAD45390054B8C5 /* SSVideoPlayController.m in Sources */,
 				6844EA4F1CAD45390054B8C5 /* TableHeadCell.m in Sources */,
+				04E31BE91DFA9AEA00691EB0 /* FlowerBascketCell.m in Sources */,
 				0463C35C1DEC3D920035BEF6 /* DFTextImageUserLineCell.m in Sources */,
 				04D5B13F1D6B1F4700ABA89A /* KTCommentViewController.m in Sources */,
 				0463C35D1DEC3D920035BEF6 /* DFUserLineCellManager.m in Sources */,
@@ -9293,12 +9296,10 @@
 				044412AC1D38F2C400314884 /* PRTweenTimingFunctions.m in Sources */,
 				044412801D38F2C400314884 /* NSString+TKUtilities.m in Sources */,
 				0463C3361DEC3D920035BEF6 /* YDEmojiCell.m in Sources */,
-				68BAD3841CEDD46D0008DDA6 /* FlowerBasketViewController.m in Sources */,
 				043A7F641DF94DED003C4BF0 /* XXEStoreGoodsListViewController.m in Sources */,
 				04B620851DBF019A00391616 /* StoreHomePageViewController.m in Sources */,
 				04B620A01DBF019A00391616 /* ZXOrderModel.m in Sources */,
 				0447770C1D2A76CC0018A459 /* ClassRoomOrderAppraiseViewController.m in Sources */,
-				68954BBF1D0514A3009241A5 /* FbasketGiveViewController.m in Sources */,
 				04B621921DBF019A00391616 /* AddressTableViewCell.m in Sources */,
 				04B6209B1DBF019A00391616 /* MultilevelMenu.m in Sources */,
 				6844EAF91CAD45420054B8C5 /* CPTextViewPlaceholder.m in Sources */,
@@ -9326,7 +9327,6 @@
 				0444128E1D38F2C400314884 /* GroupListViewController.m in Sources */,
 				04FD0F2D1D4F560000E4925F /* HomerRemarkCell.m in Sources */,
 				0463C30C1DEC3D920035BEF6 /* MessageListDetailController.m in Sources */,
-				68954BC31D051615009241A5 /* FbasketCell.m in Sources */,
 				6844EA4E1CAD45390054B8C5 /* SSVideoPlaySlider.m in Sources */,
 				04B6208E1DBF019A00391616 /* MJDictionaryCache.m in Sources */,
 				0463C31B1DEC3D920035BEF6 /* FriendCircleService.m in Sources */,
@@ -9338,7 +9338,6 @@
 				0463C3611DEC3D920035BEF6 /* DFImageUnitView.m in Sources */,
 				9E65BAA01DED753300463BA5 /* XXENewCourseView.m in Sources */,
 				044776F61D2A76CC0018A459 /* DXLocationManager.m in Sources */,
-				0410B0FD1D5327C500924EBE /* MyInfomationViewController.m in Sources */,
 				0463C35E1DEC3D920035BEF6 /* CommentInputView.m in Sources */,
 				689551B51D06E370009241A5 /* WZYTextView.m in Sources */,
 				044412881D38F2C400314884 /* WMConversationViewController.m in Sources */,
@@ -9346,6 +9345,7 @@
 				68E2A8F31C45F67300EA8DF3 /* main.m in Sources */,
 				04D5B0831D6B1D7E00ABA89A /* WZYSearchSchoolViewController.m in Sources */,
 				0464F54F1DE59DF0009D13A0 /* XXECourseManagerClassModel3.m in Sources */,
+				04E31BE51DFA908500691EB0 /* XXEFlowerbasketModel.m in Sources */,
 				04D5B1441D6B1F4700ABA89A /* KTCharactersCell.m in Sources */,
 				6844EA2A1CAD45320054B8C5 /* PassWordResetViewController.m in Sources */,
 				6844E84B1CAD45150054B8C5 /* HomeInfoViewController.m in Sources */,
@@ -9398,6 +9398,7 @@
 				0463C3871DEC3D930035BEF6 /* XXEVerticalButton.m in Sources */,
 				044777441D2A76CC0018A459 /* XingXingTool.m in Sources */,
 				044412B01D38F2C400314884 /* FriendCell.m in Sources */,
+				04E31BDF1DFA8FFB00691EB0 /* FbasketCell.m in Sources */,
 				68A012461D17863200A1EF00 /* KTFriendsModel.m in Sources */,
 				0463C3921DEC48420035BEF6 /* XXEUserInfo.m in Sources */,
 				045FC1751D48BDF200DF1E26 /* UpViewController.m in Sources */,
@@ -9484,7 +9485,6 @@
 				044777431D2A76CC0018A459 /* UIView+MJ.m in Sources */,
 				684317CF1CE466410032F64D /* NoticeInfomationViewController.m in Sources */,
 				045FC2621D48C27800DF1E26 /* MainViewController.m in Sources */,
-				0410B0F41D50B67000924EBE /* SendFlowerBaskerDetailController.m in Sources */,
 				0444128A1D38F2C400314884 /* RCCustomCell.m in Sources */,
 				04D5B0DC1D6B1DE900ABA89A /* SchoolVideoTableViewCell.m in Sources */,
 				0463C3451DEC3D920035BEF6 /* DFLineCommentItem.m in Sources */,
@@ -9518,6 +9518,7 @@
 				6844E94D1CAD451E0054B8C5 /* addBabyCell.m in Sources */,
 				04D5B14C1D6B1F4700ABA89A /* WZYCoureseCollectionTableViewCell.m in Sources */,
 				0463C32B1DEC3D920035BEF6 /* XXEHomeReportListApi.m in Sources */,
+				04E31BDE1DFA8FFB00691EB0 /* SendFlowerBaskerDetailController.m in Sources */,
 				6844E8301CAD45150054B8C5 /* PhotosController.m in Sources */,
 				0463C3321DEC3D920035BEF6 /* XXEMessageHistoryCell.m in Sources */,
 				0464F5551DE5AA4E009D13A0 /* XXEXingClassRoomSearchViewController.m in Sources */,
@@ -9551,12 +9552,12 @@
 				04D5B1481D6B1F4700ABA89A /* KTConnectCell.m in Sources */,
 				6844E8451CAD45150054B8C5 /* HeadView.m in Sources */,
 				6844E9681CAD451E0054B8C5 /* SaveInfoViewController.m in Sources */,
+				04E31BDB1DFA8FFB00691EB0 /* FbasketGiveViewController.m in Sources */,
 				04D5B0E01D6B1DE900ABA89A /* StarRemarkViewController.m in Sources */,
 				68A012831D17F41A00A1EF00 /* AuthenticationViewController.m in Sources */,
 				68926B1D1CE96F1A00201E80 /* UIColor+HexString.m in Sources */,
 				6844EAFA1CAD45420054B8C5 /* ImageTableViewCell.m in Sources */,
 				044412B21D38F2C400314884 /* RCUserInfo+Addition.m in Sources */,
-				6844E9541CAD451E0054B8C5 /* FlowerBascketCell.m in Sources */,
 				6844EAEF1CAD45420054B8C5 /* noticeViewController.m in Sources */,
 				6896CC8A1D19506E00DB50D6 /* TeleTeachInfoViewController.m in Sources */,
 				044412B51D38F2C400314884 /* RCAddFriendViewController.m in Sources */,
@@ -9621,6 +9622,7 @@
 				6844E9531CAD451E0054B8C5 /* ClassInfomationViewController.m in Sources */,
 				0447778F1D2A76CC0018A459 /* SJAvatarBrowser.m in Sources */,
 				044777171D2A76CC0018A459 /* ClassRoomOrderNoPayTableViewCell.m in Sources */,
+				04E31BDD1DFA8FFB00691EB0 /* MyInfomationViewController.m in Sources */,
 				04D5B0D71D6B1DE900ABA89A /* CourseViewController.m in Sources */,
 				0463C3851DEC3D930035BEF6 /* XXESearchHistoryWord.m in Sources */,
 				044776F11D2A76CC0018A459 /* SubjectBuyDetailMessageController.m in Sources */,

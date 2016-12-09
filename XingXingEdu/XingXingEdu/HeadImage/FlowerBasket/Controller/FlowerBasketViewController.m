@@ -12,11 +12,16 @@
 #import "FlowersBuyViewController.h"
 #import "FlowerBascketCell.h"
 #import "SendFlowerBaskerDetailController.h"
+#import "XXEFlowerbasketModel.h"
+
+
 @interface FlowerBasketViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_tableView;
-    NSInteger x;
-    NSMutableArray *_dateMArr;
+//    NSInteger x;
+//    NSMutableArray *_dateMArr;
+    //花篮 赠送 明细 model 数组
+    NSMutableArray *_dataSourceArray;
 
     NSString *confromTimespStr;
     NSInteger j;
@@ -39,6 +44,12 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    if (_dataSourceArray.count != 0) {
+        [_dataSourceArray removeAllObjects];
+    }
+    page = 0;
+    
+    
     [_tableView reloadData];
     [_tableView.header beginRefreshing];
     
@@ -46,7 +57,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = UIColorFromRGB(196, 213, 255);
+    self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
     self.edgesForExtendedLayout = UIRectEdgeNone;
     if ([XXEUserInfo user].login){
         parameterXid = [XXEUserInfo user].xid;
@@ -55,61 +66,26 @@
         parameterXid = XID;
         parameterUser_Id = USER_ID;
     }
-    page = 0;
+    _dataSourceArray = [[NSMutableArray alloc] init];
+    
     self.title =@"花篮";
+
+     [self fetchNetData];
+
+     [self createHeaderView];
+    
+     [self createTableView];
     
     //获取 花篮赠送/购买 数据
     [self fetchBasketInfo];
-    
-//    [self createHeadView];
-    
-     [self fetchNetData];
-    
-     [self createTableView];
-    // Do any additional setup after loading the view.
-    
-}
-- (void)createHeadView{
-    //headView
-    UIView *headView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kWidth, 55)];
-    
-    UIButton *sentBtn =[HHControl createButtonWithFrame:CGRectMake(0, 0, kWidth / 2, 30) backGruondImageName:nil Target:self Action:@selector(sent:) Title:@"赠送"];
-    sentBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    [sentBtn setTitleColor:UIColorFromRGB(0, 170, 42) forState:UIControlStateNormal];
-    [headView addSubview:sentBtn];
-    
-    UIButton *buyBtn =[HHControl createButtonWithFrame:CGRectMake(kWidth/2, 0, kWidth / 2, 30) backGruondImageName:nil Target:self Action:@selector(buy:) Title:@"购买"];
-    buyBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    [buyBtn setTitleColor:UIColorFromRGB(0, 170, 42) forState:UIControlStateNormal];
-    [headView addSubview:buyBtn];
-    
-    leftLb =[HHControl createLabelWithFrame:CGRectMake(0, 30, kWidth / 2, 15) Font:10 Text:[NSString stringWithFormat:@"剩余花篮数: %ld", (long)[fbasketStr integerValue]]];
-    [leftLb setTextColor:[UIColor lightGrayColor]];
-    leftLb.textAlignment = NSTextAlignmentCenter;
-    [headView addSubview:leftLb];
-    
-    overLb =[HHControl createLabelWithFrame:CGRectMake(kWidth / 2, 30, kWidth / 2, 15) Font:10 Text:[NSString stringWithFormat:@"已赠花篮数: %ld",[basketStr integerValue]-[fbasketStr integerValue]]];
-    [overLb setTextColor:[UIColor lightGrayColor]];
-    //    overLb.backgroundColor = [UIColor blueColor];
-    overLb.textAlignment = NSTextAlignmentCenter;
-    [headView addSubview:overLb];
-    
-    //投影750x4
-    UIImageView *lineOne = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth / 2 - 1, 0, 1, 45)];
-    lineOne.image = [UIImage imageNamed:@"投影750x4"];
-    UIImageView *lineTwo = [[UIImageView alloc] initWithFrame:CGRectMake(0, 45, kWidth, 1)];
-    lineTwo.image = [UIImage imageNamed:@"投影750x4"];
-    [headView addSubview:lineOne];
-    
-    _tableView.tableHeaderView =headView;
-    
-    
 }
 
+
+#pragma mark ====== //获取 花篮赠送/购买 数据 ======
 - (void)fetchBasketInfo{
     
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/getUserGlobalInfo";
-    NSDictionary *dict = @{@"appkey":APPKEY,
+    NSDictionary *params = @{@"appkey":APPKEY,
                            @"backtype":BACKTYPE,
                            @"xid":parameterXid,
                            @"user_id":parameterUser_Id,
@@ -117,21 +93,23 @@
                            @"field":@"fbasket_able,fbasket_total",
                            };
     
-    [WZYHttpTool post:urlStr params:dict success:^(id responseObj) {
+//    NSLog(@"params == %@", params);
+    
+    [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         
 //        NSLog(@"花篮kkk  == %@", responseObj);
         
-        NSDictionary *dict =responseObj;
-        
-        if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
+        if([[NSString stringWithFormat:@"%@",responseObj[@"code"]]isEqualToString:@"1"] )
         {
-            leftLb.text=[NSString stringWithFormat:@"剩余花篮数: %ld", [[dict[@"data"] objectForKey:@"fbasket_able"] integerValue]];
-            flowersNum =[NSString stringWithFormat:@"%ld", [[dict[@"data"] objectForKey:@"fbasket_able"] integerValue]];
-            overLb.text =[NSString stringWithFormat:@"已赠花篮数: %ld",[[dict[@"data"] objectForKey:@"fbasket_total"] integerValue] -[[dict[@"data"] objectForKey:@"fbasket_able"] integerValue]];
+            
+            NSDictionary *dict =responseObj[@"data"];
+            leftLb.text=[NSString stringWithFormat:@"剩余花篮数: %@", dict[@"fbasket_able"]];
+            flowersNum =[NSString stringWithFormat:@"%@", dict[@"fbasket_able"]];
+            overLb.text =[NSString stringWithFormat:@"已赠花篮数: %ld",[dict[@"fbasket_total"] integerValue] - [dict[@"fbasket_able"] integerValue]];
             
 //            [_tableView reloadData];
         }
-        [self createHeadView];
+       
         
     } failure:^(NSError *error) {
         [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
@@ -139,22 +117,21 @@
     
 }
 
+#pragma mark ======== 【猩猩商城--花篮赠送明细】========
 - (void)fetchNetData{
-
-    _dateMArr = [NSMutableArray array];
     
     NSString *pageStr = [NSString stringWithFormat:@"%ld", page];
-    //teacher
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/fbasket_record";
-    NSDictionary *dict = @{@"appkey":APPKEY,
+    NSDictionary *params = @{@"appkey":APPKEY,
                            @"backtype":BACKTYPE,
                            @"xid":parameterXid,
                            @"user_id":parameterUser_Id,
                            @"user_type":USER_TYPE,
                            @"page": pageStr
                            };
+//    NSLog(@"params ****** %@", params);
     
-    [WZYHttpTool post:urlStr params:dict success:^(id responseObj) {
+    [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         
         NSDictionary *dict =responseObj;
         
@@ -164,23 +141,10 @@
         if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
         {
             
-            x =[dict[@"data"] count];
-            for (int i=0; i<[dict[@"data"] count]; i++) {
-                
-                NSString *con = [dict[@"data"][i] objectForKey:@"con"];
-                NSString *date_tm = [dict[@"data"][i] objectForKey:@"date_tm"];
-                NSString *head_img_type = [dict[@"data"][i] objectForKey:@"head_img_type"];
-                NSString *head_img = [dict[@"data"][i] objectForKey:@"head_img"];
-                NSString *sendId = [dict[@"data"][i] objectForKey:@"id"];
-                NSString *num = [dict[@"data"][i] objectForKey:@"num"];
-                NSString *tname = [dict[@"data"][i] objectForKey:@"tname"];
-                
-                NSMutableArray *arr=[NSMutableArray arrayWithObjects:con,date_tm,head_img_type,head_img,sendId, num,tname,nil];
-                [_dateMArr addObject:arr];
-        
-            }
-            
-//            [_tableView reloadData];
+            NSArray *modelArr = [NSArray array];
+            modelArr = [XXEFlowerbasketModel parseResondsData:dict[@"data"]];
+            [_dataSourceArray addObjectsFromArray:modelArr];
+
         }
         
         [self customContent];
@@ -196,14 +160,14 @@
     // 如果 有占位图 先 移除
     [self removePlaceholderImageView];
     
-    if (_dateMArr.count == 0) {
+    if (_dataSourceArray.count == 0) {
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         // 1、无数据的时候
         [self createPlaceholderView];
         
     }else{
         //2、有数据的时候
-//        [AppDelegate shareAppDelegate].friendsArray = self.friendListDatasource;
+
     }
     
     [_tableView reloadData];
@@ -230,10 +194,45 @@
     }
 }
 
+- (void)createHeaderView{
+ 
+    UIView *headView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, kWidth, 55)];
+    [self.view addSubview:headView];
+    
+    UIButton *sentBtn =[HHControl createButtonWithFrame:CGRectMake(0, 0, kWidth / 2, 30) backGruondImageName:nil Target:self Action:@selector(sentBtnClick:) Title:@"赠送"];
+    sentBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [sentBtn setTitleColor:UIColorFromRGB(0, 170, 42) forState:UIControlStateNormal];
+    [headView addSubview:sentBtn];
+    
+    UIButton *buyBtn =[HHControl createButtonWithFrame:CGRectMake(kWidth/2, 0, kWidth / 2, 30) backGruondImageName:nil Target:self Action:@selector(buy:) Title:@"购买"];
+    buyBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [buyBtn setTitleColor:UIColorFromRGB(0, 170, 42) forState:UIControlStateNormal];
+    [headView addSubview:buyBtn];
+    
+    leftLb =[HHControl createLabelWithFrame:CGRectMake(0, 30, kWidth / 2, 15) Font:10 Text:[NSString stringWithFormat:@"剩余花篮数: %ld", (long)[fbasketStr integerValue]]];
+    [leftLb setTextColor:[UIColor lightGrayColor]];
+    leftLb.textAlignment = NSTextAlignmentCenter;
+    [headView addSubview:leftLb];
+    
+    overLb =[HHControl createLabelWithFrame:CGRectMake(kWidth / 2, 30, kWidth / 2, 15) Font:10 Text:[NSString stringWithFormat:@"已赠花篮数: %ld",[basketStr integerValue]-[fbasketStr integerValue]]];
+    [overLb setTextColor:[UIColor lightGrayColor]];
+    overLb.textAlignment = NSTextAlignmentCenter;
+    [headView addSubview:overLb];
+    
+    //投影750x4
+    UIImageView *lineOne = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth / 2 - 1, 0, 1, 45)];
+    lineOne.image = [UIImage imageNamed:@"投影750x4"];
+    UIImageView *lineTwo = [[UIImageView alloc] initWithFrame:CGRectMake(0, 45, kWidth, 1)];
+    lineTwo.image = [UIImage imageNamed:@"投影750x4"];
+    [headView addSubview:lineOne];
+    [headView addSubview:lineTwo];
+    
+}
+
 
 - (void)createTableView{
     
-    _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 0, kWidth, kHeight) style:UITableViewStyleGrouped];
+    _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 55, kWidth, kHeight - 55) style:UITableViewStyleGrouped];
     _tableView.delegate =self;
     _tableView.dataSource =self;
     [self.view addSubview:_tableView];
@@ -263,8 +262,8 @@
     
 }
 
-
-- (void)sent:(UIButton*)btn{
+#pragma mark ========= 赠送 花篮 ============
+- (void)sentBtnClick:(UIButton*)btn{
     FlowersPresentViewController *flowersPresentVC =[[FlowersPresentViewController alloc]init];
     flowersPresentVC.flowersRemain =flowersNum;
     [self.navigationController pushViewController:flowersPresentVC animated:NO];
@@ -287,7 +286,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return x;
+    return _dataSourceArray.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.000001;
@@ -304,43 +303,52 @@
         cell =(FlowerBascketCell*)[nib objectAtIndex:0];
         
     }
+    XXEFlowerbasketModel *model = _dataSourceArray[indexPath.row];
     
-    NSArray *tmp = _dateMArr[indexPath.row];
-    
-    cell.imageV.layer.cornerRadius =30;
+    cell.imageV.layer.cornerRadius = cell.imageV.frame.size.width / 2;
     cell.imageV.layer.masksToBounds =YES;
-    
-    if ([tmp[2] isEqualToString:@"0"]) {
-        [cell.imageV sd_setImageWithURL: [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",picURL,tmp[3]]] placeholderImage:[UIImage imageNamed:@"LOGO172x172@2x"]];
-
-    }else{
-         [cell.imageV sd_setImageWithURL: [NSURL URLWithString:[NSString stringWithFormat:@"%@",tmp[3]]] placeholderImage:[UIImage imageNamed:@"LOGO172x172@2x"]];
+    /*
+     0 :表示 自己 头像 ，需要添加 前缀
+     1 :表示 第三方 头像 ，不需要 添加 前缀
+     //判断是否是第三方头像
+     */
+    NSString *headImage;
+    if ([model.head_img_type integerValue] == 0) {
+        headImage = [NSString stringWithFormat:@"%@%@", picURL , model.head_img];
+    }else if ([model.head_img_type integerValue] == 1){
+        headImage = [NSString stringWithFormat:@"%@", model.head_img];
     }
     
+    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:headImage] placeholderImage:[UIImage imageNamed:@"LOGO172x172"]];
     
-    cell.teacherLabel.text =tmp[6];
-    cell.numLabel.text =[NSString stringWithFormat:@"花篮: %@",tmp[5]];
-    cell.textLabe.text =[NSString stringWithFormat:@"赠言: %@",tmp[0]];
+    
+    cell.teacherLabel.text = model.tname;
+    cell.numLabel.text =[NSString stringWithFormat:@"花篮: %@",model.num];
+    cell.textLabe.text =[NSString stringWithFormat:@"赠言: %@",model.con];
 
-    cell.timeLbl.text =[NSString stringWithFormat:@"%@",[WZYTool dateStringFromNumberTimer:tmp[1]]];
+    cell.timeLbl.text =[NSString stringWithFormat:@"%@",[WZYTool dateStringFromNumberTimer:model.date_tm]];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+     XXEFlowerbasketModel *model = _dataSourceArray[indexPath.row];
+    
     if ([XXEUserInfo user].login) {
         
         SendFlowerBaskerDetailController *SendFlowerBaskerDetailVC = [[SendFlowerBaskerDetailController alloc] init];
-        SendFlowerBaskerDetailVC.teacherLabel = _dateMArr[indexPath.row][6];
-        SendFlowerBaskerDetailVC.numLabel = _dateMArr[indexPath.row][5];
-        SendFlowerBaskerDetailVC.timeLbl = _dateMArr[indexPath.row][1];
-        SendFlowerBaskerDetailVC.textLabe = _dateMArr[indexPath.row][0];
+        SendFlowerBaskerDetailVC.teacherLabel = model.tname;
+        SendFlowerBaskerDetailVC.numLabel = model.num;
+        SendFlowerBaskerDetailVC.timeLbl = model.date_tm;
+        SendFlowerBaskerDetailVC.textLabe = model.con;
         [self.navigationController pushViewController:SendFlowerBaskerDetailVC animated:YES];
     }else{
         [SVProgressHUD showInfoWithStatus:@"请用账号登录后查看"];
     }
     
-   
 }
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

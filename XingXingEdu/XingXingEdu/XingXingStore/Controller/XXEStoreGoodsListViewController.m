@@ -223,7 +223,7 @@
         cell = [[XXEStoreGoodsOrderListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     XXEStoreGoodsOrderListModel *model = _dataSourceArray[indexPath.row];
-    [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kXXEPicURL, model.pic]] placeholderImage:[UIImage imageNamed:@"zhanweitu"]];
+    [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kXXEPicURL, model.pic]] placeholderImage:[UIImage imageNamed:@"sdimg1"]];
     
     cell.titleLabel.text = model.title;
     cell.totalIconLabel.text = model.exchange_coin;

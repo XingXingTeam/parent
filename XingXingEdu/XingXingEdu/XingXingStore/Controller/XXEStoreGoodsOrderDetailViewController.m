@@ -82,7 +82,7 @@
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         
 //        NSLog(@" ooo %@", responseObj);
-        //class = 1
+        //此处的type 就是goods_type 1:实物  /2:虚拟
         
         if ([responseObj[@"code"] integerValue] == 1) {
             detailInfoDict = responseObj[@"data"];
@@ -101,12 +101,20 @@
     //创建 上部分 内容
     [self createUpContent];
     
-    //创建 中间  内容
-    [self createMiddleContent];
+
     
-    if ([detailInfoDict[@"class"] integerValue] != 1) {
+    CGFloat buttonY = 0.00;
+    if ([detailInfoDict[@"type"] integerValue] == 1) {
+        //实物
+        //创建 中间  内容
+        [self createMiddleContent];
         //创建 下部分 内容
         [self createDownContent];
+        
+        buttonY = downBgView.frame.origin.y + downBgView.height;
+    }else if ([detailInfoDict[@"type"] integerValue] == 2){
+        //虚拟
+        buttonY = upBgView.frame.origin.y + upBgView.height;
     }
     
 
@@ -117,11 +125,12 @@
         NSMutableArray *arr2 = [[NSMutableArray alloc] initWithObjects:@"立刻收货", @"可退货", nil];
         
         CGFloat buttonX = (KScreenWidth - 325 * kScreenRatioWidth) / 2;
+        
         CGFloat buttonW = 325 * kScreenRatioWidth;
         CGFloat buttonH = 42 * kScreenRatioHeight;
         
         for (int h = 0; h < 2; h ++) {
-            UIButton *button = [HHControl createButtonWithFrame:CGRectMake(buttonX, downBgView.frame.origin.y + downBgView.height + 10 + (buttonH + 10) * h, buttonW, buttonH) backGruondImageName:@"按钮big650x84" Target:self Action:@selector(buttonClick:) Title:@""];
+            UIButton *button = [HHControl createButtonWithFrame:CGRectMake(buttonX,  buttonY + 10 + (buttonH + 10) * h, buttonW, buttonH) backGruondImageName:@"按钮big650x84" Target:self Action:@selector(buttonClick:) Title:@""];
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             button.titleLabel.font = [UIFont systemFontOfSize:18 * kScreenRatioWidth];
             
@@ -344,7 +353,7 @@
     //商品图片
     UIImageView *coursePic = [[UIImageView alloc] initWithFrame:CGRectMake(10, lineView1.frame.origin.y + 5, 70, 70)];
     //course_pic
-    [coursePic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kXXEPicURL, detailInfoDict[@"pic"]]] placeholderImage:[UIImage imageNamed:@"zhanweitu"]];
+    [coursePic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kXXEPicURL, detailInfoDict[@"pic"]]] placeholderImage:[UIImage imageNamed:@"sdimg1"]];
     [upBgView addSubview:coursePic];
     
     //商品名称
@@ -362,7 +371,7 @@
     
     //猩币
     UIImageView *coinImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KScreenWidth / 3 * 2, priceLabel.frame.origin.y, 16, 16)];
-    coinImageView.image = [UIImage imageNamed:@"store_xingbi_icon"];
+    coinImageView.image = [UIImage imageNamed:@"猩币"];
     [upBgView addSubview:coinImageView];
     UILabel *coinLabel = [[UILabel alloc] initWithFrame:CGRectMake(coinImageView.frame.origin.x + 16 + 5, coinImageView.frame.origin.y, KScreenWidth / 3 - 20, 20)];
     coinLabel.text = [NSString stringWithFormat:@"猩币:%@", detailInfoDict[@"exchange_coin"]];
@@ -372,7 +381,7 @@
     
     //销量
     UIImageView *saleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KScreenWidth / 3 * 2, coinImageView.frame.origin.y + coinImageView.height + 5, 16, 16)];
-    saleImageView.image = [UIImage imageNamed:@"sale_icon"];
+    saleImageView.image = [UIImage imageNamed:@"销量"];
     [upBgView addSubview:saleImageView];
     UILabel *saleLabel = [[UILabel alloc] initWithFrame:CGRectMake(coinImageView.frame.origin.x + 16 + 5, saleImageView.frame.origin.y, KScreenWidth / 3 - 20, 20)];
     saleLabel.text = [NSString stringWithFormat:@"销量:%@", detailInfoDict[@"sale_num"]];
@@ -483,14 +492,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
