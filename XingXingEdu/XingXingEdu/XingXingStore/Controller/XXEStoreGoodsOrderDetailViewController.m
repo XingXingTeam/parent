@@ -53,6 +53,7 @@
         parameterUser_Id = USER_ID;
     }
     
+    
     iconArray = [[NSMutableArray alloc] initWithObjects:@"dingdan", @"time", @"zhuangtai", nil];
     titleArray = [[NSMutableArray alloc] initWithObjects:@"订单号:", @"下单时间:", @"订单状态:", nil];
     detailInfoDict = [[NSDictionary alloc] init];
@@ -101,8 +102,6 @@
 - (void)createContent{
     //创建 上部分 内容
     [self createUpContent];
-    
-
     
     CGFloat buttonY = 0.00;
     if ([detailInfoDict[@"type"] integerValue] == 1) {
@@ -303,6 +302,11 @@
     upBgView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:upBgView];
     
+    upBgView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickPicture:)];
+    [upBgView addGestureRecognizer:tap];
+
+    
     // [condit] => 1	//0:待付款 1:待发货 2:待收货 3:完成 10:退货中  11:退货驳回  12:退货完成
     NSString *state = @"";
     if ([detailInfoDict[@"condit"] integerValue] == 0) {
@@ -419,10 +423,6 @@
     middleView = [[UIView alloc] initWithFrame:CGRectMake(0, upBgView.frame.origin.y + upBgView.height + 5, KScreenWidth, 150)];
     middleView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:middleView];
-    
-    middleView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickPicture:)];
-    [middleView addGestureRecognizer:tap];
 
     //收货人
     NSString *buyer = [NSString stringWithFormat:@"收货人:%@", detailInfoDict[@"name"]];
@@ -476,22 +476,15 @@
 
 }
 
+
+
 - (void)onClickPicture:(UITapGestureRecognizer *)tap{
     
-    XXEStoreGoodDetailInfoViewController*storeGoodDetailInfoVC=  [[XXEStoreGoodDetailInfoViewController alloc]init];
-//    XXEStoreListModel *model = _dataSourceArray[indexPath.row];
-    storeGoodDetailInfoVC.orderNum = _order_id;
-    [self.navigationController pushViewController:storeGoodDetailInfoVC animated:YES];
+//    XXEStoreGoodDetailInfoViewController*storeGoodDetailInfoVC=  [[XXEStoreGoodDetailInfoViewController alloc]init];
+////    XXEStoreListModel *model = _dataSourceArray[indexPath.row];
+//    storeGoodDetailInfoVC.orderNum = _order_id;
+//    [self.navigationController pushViewController:storeGoodDetailInfoVC animated:YES];
     
-//    NSLog(@"--- 点击了第%ld张图片", tap.view.tag - 20);
-    
-//    RedFlowerViewController *redFlowerVC =[[RedFlowerViewController alloc]init];
-//    redFlowerVC.imageArr = picWallArray;
-//    redFlowerVC.index = tap.view.tag - 20;
-//    redFlowerVC.hidesBottomBarWhenPushed = YES;
-//    //图片 举报 来源 小红花 1:小红花赠言中的图片
-//    redFlowerVC.origin_pageStr = @"1";
-//    [self.navigationController pushViewController:redFlowerVC animated:YES];
 }
 #pragma mark ======= 创建 下部分 内容 =============
 - (void)createDownContent{

@@ -10,7 +10,6 @@
 #import "StoreCollectTableViewController.h"
 #import "MoneyHistoryTableViewController.h"
 #import "XXEStoreConsigneeAddressViewController.h"
-//#import "SubjectOrderListViewController.h"
 #import "XXEStoreGoodsListViewController.h"
 
 
@@ -76,8 +75,6 @@
 
 #pragma mark ^^^^^^^^^^^ 订单 列表 ^^^^^^^^^^^^^
 - (IBAction)subjectOrderBtn:(id)sender {
-//    SubjectOrderListViewController *orderListVC = [[SubjectOrderListViewController alloc] init];
-//    [self.navigationController pushViewController:orderListVC animated:YES];
     
     //XXEStoreGoodsListViewController
     XXEStoreGoodsListViewController *orderListVC = [[XXEStoreGoodsListViewController alloc] init];

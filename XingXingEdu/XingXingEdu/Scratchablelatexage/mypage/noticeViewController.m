@@ -8,11 +8,11 @@
 #define KT @"yyyy年MM月dd日 HH:MM:ss"
 #import "noticeViewController.h"
 #import "schoolTableViewCell.h"
-#import "NoticeInfomationViewController.h"
-#import "NoticeSettingInfomationViewController.h"
+//#import "NoticeSettingInfomationViewController.h"
 #import "XXESchoolNotificationModel.h"
 #import "XXESystemNotificationModel.h"
 #import "XXESchoolNotificationDetailViewController.h"
+#import "XXESystemNotificationDetailViewController.h"
 
 @interface noticeViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -210,7 +210,7 @@
     [WZYHttpTool post:urlStr params:pragm success:^(id responseObj) {
         NSDictionary *dict =responseObj;
         
-         NSLog(@"===========official_notice===========%@",dict);
+//     NSLog(@"===========official_notice===========%@",dict);
         if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
         {
             NSArray *modelArray = [XXESystemNotificationModel parseResondsData:dict[@"data"]];
@@ -330,14 +330,6 @@
     switch (a) {
         case 0:
         {
-//            NoticeInfomationViewController *noticeInfoVC =[[NoticeInfomationViewController alloc]init];
-//            XXESchoolNotificationModel *model = _schoolDataSourceArray[indexPath.row];
-//            
-//            noticeInfoVC.nameStr = model.school_name;
-//            noticeInfoVC.locationStr = model.type;
-//            noticeInfoVC.dateStr =[WZYTool dateStringFromNumberTime:model.date_tm];
-//            noticeInfoVC.conStr = model.con;
-//           [self.navigationController pushViewController:noticeInfoVC animated:YES];
             
             //XXESchoolNotificationDetailViewController
             XXESchoolNotificationDetailViewController *notificationDetailVC =[[XXESchoolNotificationDetailViewController alloc]init];
@@ -362,13 +354,15 @@
             break;
         case 1:
         {
-           NoticeSettingInfomationViewController *noticeInfoVC =[[NoticeSettingInfomationViewController alloc]init];
+            //XXESystemNotificationDetailViewController
+            XXESystemNotificationDetailViewController *notificationDetailVC =[[XXESystemNotificationDetailViewController alloc]init];
             XXESystemNotificationModel *model = _systemDataSourecArray[indexPath.row];
             
-            noticeInfoVC.nameStr = model.school_name;
-            noticeInfoVC.dateStr =[WZYTool dateStringFromNumberTime:model.date_tm];
-            noticeInfoVC.conStr = model.con;
-           [self.navigationController pushViewController:noticeInfoVC animated:YES];
+            notificationDetailVC.name = model.school_name;
+            notificationDetailVC.time =[WZYTool dateStringFromNumberTime:model.date_tm];
+            notificationDetailVC.content = model.con;
+            notificationDetailVC.titleStr = model.title;
+            [self.navigationController pushViewController:notificationDetailVC animated:YES];
         }
             break;
         default:

@@ -53,6 +53,7 @@
 		0408621F1D422DD60060C70A /* 人数40x40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0408621E1D422DD60060C70A /* 人数40x40@3x.png */; };
 		0410B0F71D50BA2800924EBE /* XXETabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410B0F51D50BA2800924EBE /* XXETabBarViewController.m */; };
 		0410B0FA1D518C0000924EBE /* ReportPicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0410B0F91D518C0000924EBE /* ReportPicViewController.m */; };
+		041D67331DFEB51C00119BCA /* XXESystemNotificationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041D67321DFEB51C00119BCA /* XXESystemNotificationDetailViewController.m */; };
 		043A7F541DF8F825003C4BF0 /* XXEStoreAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A7F531DF8F825003C4BF0 /* XXEStoreAddressModel.m */; };
 		043A7F571DF90A36003C4BF0 /* XXEStorePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A7F561DF90A36003C4BF0 /* XXEStorePayViewController.m */; };
 		043A7F5A1DF92783003C4BF0 /* XXEStoreListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A7F591DF92783003C4BF0 /* XXEStoreListModel.m */; };
@@ -1165,8 +1166,6 @@
 		6838FFA81CE328940034C54C /* collecticon44x44.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838FFA61CE328940034C54C /* collecticon44x44.png */; };
 		684317CA1CE463020032F64D /* LOGO172x172@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 684317C81CE463020032F64D /* LOGO172x172@2x.png */; };
 		684317CB1CE463020032F64D /* schoollogo(1)172x172@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 684317C91CE463020032F64D /* schoollogo(1)172x172@2x.png */; };
-		684317CF1CE466410032F64D /* NoticeInfomationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 684317CD1CE466410032F64D /* NoticeInfomationViewController.m */; };
-		684317D01CE466410032F64D /* NoticeInfomationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 684317CE1CE466410032F64D /* NoticeInfomationViewController.xib */; };
 		6844E7081CAD440C0054B8C5 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6844E6D51CAD440C0054B8C5 /* ShareSDK.framework */; };
 		6844E7091CAD440C0054B8C5 /* ShareSDKExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6844E6D81CAD440C0054B8C5 /* ShareSDKExtension.framework */; };
 		6844E70A1CAD440C0054B8C5 /* ShareSDKInterfaceAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6844E6D91CAD440C0054B8C5 /* ShareSDKInterfaceAdapter.framework */; };
@@ -1391,8 +1390,6 @@
 		6896CC8A1D19506E00DB50D6 /* TeleTeachInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6896CC861D19506E00DB50D6 /* TeleTeachInfoViewController.m */; };
 		689855FF1D2608CD00AA5B47 /* ClassTimeTableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 689855FE1D2608CD00AA5B47 /* ClassTimeTableModel.m */; };
 		6899F32B1CF2A01F003F5E12 /* 小红花45x45@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6899F32A1CF2A01F003F5E12 /* 小红花45x45@2x.png */; };
-		689AE0FB1D0FB527000B4125 /* NoticeSettingInfomationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689AE0F91D0FB527000B4125 /* NoticeSettingInfomationViewController.m */; };
-		689AE0FC1D0FB527000B4125 /* NoticeSettingInfomationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 689AE0FA1D0FB527000B4125 /* NoticeSettingInfomationViewController.xib */; };
 		689B77141CE7C50A00837DB9 /* selectionIndicatiorImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 689B77131CE7C50A00837DB9 /* selectionIndicatiorImage.png */; };
 		689B77181CE7CBC300837DB9 /* selectindorImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 689B77171CE7CBC300837DB9 /* selectindorImage.png */; };
 		689F6EF11CF6962100166C06 /* CommunityImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 689F6D3B1CF6962000166C06 /* CommunityImageTableViewCell.m */; };
@@ -1713,6 +1710,8 @@
 		0410B0F61D50BA2800924EBE /* XXETabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXETabBarViewController.h; path = ../XingXingEdu/Utility/LoginInfo/XXETabBarViewController.h; sourceTree = "<group>"; };
 		0410B0F81D518C0000924EBE /* ReportPicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportPicViewController.h; sourceTree = "<group>"; };
 		0410B0F91D518C0000924EBE /* ReportPicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportPicViewController.m; sourceTree = "<group>"; };
+		041D67311DFEB51C00119BCA /* XXESystemNotificationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXESystemNotificationDetailViewController.h; path = XingXingEdu/XXESystemNotificationDetailViewController.h; sourceTree = SOURCE_ROOT; };
+		041D67321DFEB51C00119BCA /* XXESystemNotificationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXESystemNotificationDetailViewController.m; path = XingXingEdu/XXESystemNotificationDetailViewController.m; sourceTree = SOURCE_ROOT; };
 		043A7F521DF8F825003C4BF0 /* XXEStoreAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEStoreAddressModel.h; sourceTree = "<group>"; };
 		043A7F531DF8F825003C4BF0 /* XXEStoreAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEStoreAddressModel.m; sourceTree = "<group>"; };
 		043A7F551DF90A36003C4BF0 /* XXEStorePayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEStorePayViewController.h; sourceTree = "<group>"; };
@@ -3170,9 +3169,6 @@
 		6838FFA61CE328940034C54C /* collecticon44x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collecticon44x44.png; sourceTree = "<group>"; };
 		684317C81CE463020032F64D /* LOGO172x172@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LOGO172x172@2x.png"; path = "XingXingEdu/Images.xcassets/LOGO172x172@2x.png"; sourceTree = SOURCE_ROOT; };
 		684317C91CE463020032F64D /* schoollogo(1)172x172@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "schoollogo(1)172x172@2x.png"; path = "XingXingEdu/Images.xcassets/schoollogo(1)172x172@2x.png"; sourceTree = SOURCE_ROOT; };
-		684317CC1CE466410032F64D /* NoticeInfomationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeInfomationViewController.h; sourceTree = "<group>"; };
-		684317CD1CE466410032F64D /* NoticeInfomationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeInfomationViewController.m; sourceTree = "<group>"; };
-		684317CE1CE466410032F64D /* NoticeInfomationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeInfomationViewController.xib; sourceTree = "<group>"; };
 		6844E6D51CAD440C0054B8C5 /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
 		6844E6D81CAD440C0054B8C5 /* ShareSDKExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKExtension.framework; sourceTree = "<group>"; };
 		6844E6D91CAD440C0054B8C5 /* ShareSDKInterfaceAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKInterfaceAdapter.framework; sourceTree = "<group>"; };
@@ -3500,9 +3496,6 @@
 		689855FD1D2608CD00AA5B47 /* ClassTimeTableModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassTimeTableModel.h; sourceTree = "<group>"; };
 		689855FE1D2608CD00AA5B47 /* ClassTimeTableModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassTimeTableModel.m; sourceTree = "<group>"; };
 		6899F32A1CF2A01F003F5E12 /* 小红花45x45@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "小红花45x45@2x.png"; path = "XingXingEdu/Images.xcassets/小红花45x45@2x.png"; sourceTree = SOURCE_ROOT; };
-		689AE0F81D0FB527000B4125 /* NoticeSettingInfomationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeSettingInfomationViewController.h; sourceTree = "<group>"; };
-		689AE0F91D0FB527000B4125 /* NoticeSettingInfomationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeSettingInfomationViewController.m; sourceTree = "<group>"; };
-		689AE0FA1D0FB527000B4125 /* NoticeSettingInfomationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeSettingInfomationViewController.xib; sourceTree = "<group>"; };
 		689B77131CE7C50A00837DB9 /* selectionIndicatiorImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectionIndicatiorImage.png; path = XingXingEdu/Images.xcassets/selectionIndicatiorImage.png; sourceTree = SOURCE_ROOT; };
 		689B77171CE7CBC300837DB9 /* selectindorImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectindorImage.png; path = XingXingEdu/Images.xcassets/selectindorImage.png; sourceTree = SOURCE_ROOT; };
 		689F6D3A1CF6962000166C06 /* CommunityImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityImageTableViewCell.h; sourceTree = "<group>"; };
@@ -7298,12 +7291,6 @@
 				040862161D421B570060C70A /* noticeViewController.h */,
 				6844EA971CAD45420054B8C5 /* noticeViewController.m */,
 				6844EA981CAD45420054B8C5 /* noticeViewController.xib */,
-				684317CC1CE466410032F64D /* NoticeInfomationViewController.h */,
-				684317CD1CE466410032F64D /* NoticeInfomationViewController.m */,
-				684317CE1CE466410032F64D /* NoticeInfomationViewController.xib */,
-				689AE0F81D0FB527000B4125 /* NoticeSettingInfomationViewController.h */,
-				689AE0F91D0FB527000B4125 /* NoticeSettingInfomationViewController.m */,
-				689AE0FA1D0FB527000B4125 /* NoticeSettingInfomationViewController.xib */,
 				0480A0721D87AA8C00D7589B /* XXESchoolNotificationModel.h */,
 				0480A0731D87AA8C00D7589B /* XXESchoolNotificationModel.m */,
 				0480A0751D87AAA100D7589B /* XXESystemNotificationModel.h */,
@@ -7710,6 +7697,8 @@
 				0410B0F51D50BA2800924EBE /* XXETabBarViewController.m */,
 				04E6599F1DFEA2CB009C8684 /* XXESchoolNotificationDetailViewController.h */,
 				04E659A01DFEA2CB009C8684 /* XXESchoolNotificationDetailViewController.m */,
+				041D67311DFEB51C00119BCA /* XXESystemNotificationDetailViewController.h */,
+				041D67321DFEB51C00119BCA /* XXESystemNotificationDetailViewController.m */,
 				68E2A8FA1C45F67300EA8DF3 /* Main.storyboard */,
 				68E2A8FD1C45F67300EA8DF3 /* Assets.xcassets */,
 				68E2A8FF1C45F67300EA8DF3 /* LaunchScreen.storyboard */,
@@ -8301,7 +8290,6 @@
 				0492ED081D49E2DE003E06D7 /* 切换icon44x44@1x.png in Resources */,
 				04B6210A1DBF019A00391616 /* littleFlower38.png in Resources */,
 				04D5E49C1D48A2D700921223 /* 人物@2x.png in Resources */,
-				689AE0FC1D0FB527000B4125 /* NoticeSettingInfomationViewController.xib in Resources */,
 				04B621141DBF019A00391616 /* 收藏icon26x26@2x.png in Resources */,
 				044777481D2A76CC0018A459 /* 小箭头22x24.png in Resources */,
 				04D5B14B1D6B1F4700ABA89A /* KTPicterCell.xib in Resources */,
@@ -9066,7 +9054,6 @@
 				04B621701DBF019A00391616 /* Decorative-thread@1x.png in Resources */,
 				04D5E4B01D48A2D700921223 /* 取消icon245x90@1x.png in Resources */,
 				044412A41D38F2C400314884 /* rcim7.png in Resources */,
-				684317D01CE466410032F64D /* NoticeInfomationViewController.xib in Resources */,
 				68961EA01D07C29B004B1FEE /* banner@3x.png in Resources */,
 				04D5E4DF1D48A2D700921223 /* 确定icon245x90@1x.png in Resources */,
 				04B6210C1DBF019A00391616 /* nextbuyicon650.png in Resources */,
@@ -9249,7 +9236,6 @@
 				6844E9611CAD451E0054B8C5 /* OthePeopleCell.m in Sources */,
 				04F100B11D45C0E400CBED22 /* SchoolRecipeCell.m in Sources */,
 				04B620891DBF019A00391616 /* CoreUMengLogin.m in Sources */,
-				689AE0FB1D0FB527000B4125 /* NoticeSettingInfomationViewController.m in Sources */,
 				044412AD1D38F2C400314884 /* WMUtil.m in Sources */,
 				044776FE1D2A76CC0018A459 /* FSPhotoAssetsModel.m in Sources */,
 				68BACEB31CEDC80C0008DDA6 /* SunDerTableViewCell.m in Sources */,
@@ -9306,6 +9292,7 @@
 				0463C35D1DEC3D920035BEF6 /* DFUserLineCellManager.m in Sources */,
 				6844E70E1CAD440C0054B8C5 /* README.md in Sources */,
 				044776F51D2A76CC0018A459 /* BMKMapViewController.m in Sources */,
+				041D67331DFEB51C00119BCA /* XXESystemNotificationDetailViewController.m in Sources */,
 				0447778A1D2A76CC0018A459 /* ClassSubjectTableViewCell.m in Sources */,
 				68A012931D17F41A00A1EF00 /* LMComBoxView.m in Sources */,
 				044412AC1D38F2C400314884 /* PRTweenTimingFunctions.m in Sources */,
@@ -9500,7 +9487,6 @@
 				04B620941DBF019A00391616 /* NSObject+MJClass.m in Sources */,
 				0447778C1D2A76CC0018A459 /* ClassTeacherTableViewCell.m in Sources */,
 				044777431D2A76CC0018A459 /* UIView+MJ.m in Sources */,
-				684317CF1CE466410032F64D /* NoticeInfomationViewController.m in Sources */,
 				045FC2621D48C27800DF1E26 /* MainViewController.m in Sources */,
 				0444128A1D38F2C400314884 /* RCCustomCell.m in Sources */,
 				04D5B0DC1D6B1DE900ABA89A /* SchoolVideoTableViewCell.m in Sources */,
