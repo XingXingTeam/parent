@@ -48,8 +48,9 @@
         [_dataSourceArray removeAllObjects];
     }
     page = 0;
-    
-    
+    [self fetchNetData];
+    //获取 花篮赠送/购买 数据
+    [self fetchBasketInfo];
     [_tableView reloadData];
     [_tableView.header beginRefreshing];
     
@@ -70,14 +71,11 @@
     
     self.title =@"花篮";
 
-     [self fetchNetData];
-
      [self createHeaderView];
     
      [self createTableView];
     
-    //获取 花篮赠送/购买 数据
-    [self fetchBasketInfo];
+
 }
 
 

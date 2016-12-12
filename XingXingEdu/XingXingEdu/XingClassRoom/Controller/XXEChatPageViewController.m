@@ -223,11 +223,11 @@
     //  设置代理
     [self.view addSubview:menu];
     
-    menu.menuTitleFont = 14;                   //  设置menuTitle字体大小    不设置默认是  11
-    menu.tableTitleFont = 12;                  //  设置tableTitle字体大小   不设置默认是  10
-    menu.cellHeight = 38;                      //  设置tableViewcell高度   不设置默认是  40
+    menu.menuTitleFont = 14;  //  设置menuTitle字体大小    不设置默认是  11
+    menu.tableTitleFont = 12; //  设置tableTitle字体大小   不设置默认是  10
+    menu.cellHeight = 38;    //  设置tableViewcell高度   不设置默认是  40
     menu.menuArrowStyle = menuArrowStyleSolid; //  旋转箭头的样式(空心箭头 or 实心箭头)
-    menu.tableViewMaxHeight = 200;             //  tableView的最大高度(超过此高度就可以滑动显示)
+    menu.tableViewMaxHeight = 200; //  tableView的最大高度(超过此高度就可以滑动显示)
     
     menu.CarverViewColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];//设置遮罩层颜色
     menu.selectedColor = UIColorFromRGB(0, 172, 54);  //  选中的字体颜色

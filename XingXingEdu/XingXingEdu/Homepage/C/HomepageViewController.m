@@ -1409,10 +1409,9 @@
     storeHomeVC.hidesBottomBarWhenPushed =YES;
     [self.navigationController pushViewController:storeHomeVC animated:NO];
 }
-//反馈
+#pragma mark =========== 通知 ====================
 -(void)onClickhurn:(UIButton *)button
 {
-    
     
      noticeViewController * forVC = [[noticeViewController alloc]init];
     forVC.hidesBottomBarWhenPushed =YES;
