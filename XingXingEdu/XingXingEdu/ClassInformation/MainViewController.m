@@ -108,8 +108,6 @@
     contentScrollView.scrollsToTop  = NO;
     contentScrollView.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:contentScrollView];
-//    [self addListVCWithIndex:2];
-//    [self addListVCWithIndex:0];
 
 }
 #pragma mark -QHNavSliderMenuDelegate
@@ -119,15 +117,15 @@
 }
 
 #pragma mark scrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     //用scrollView的滑动大小与屏幕宽度取整数 得到滑动的页数
     [navSliderMenu selectAtRow:(int)((scrollView.contentOffset.x+screenWidth/2.f)/screenWidth) andDelegate:NO];
     //根据页数添加相应的视图
     [self addListVCWithIndex:(int)(scrollView.contentOffset.x/screenWidth)];
-//    [self addListVCWithIndex:(int)(scrollView.contentOffset.x/screenWidth)+1];
-    
 }
+
+
+
 #pragma mark -addVC
 
 - (void)addListVCWithIndex:(NSInteger)index {
@@ -140,6 +138,8 @@
     //根据页数添加相对应的视图 并存入数组
    //@"小红花",@"用户",@"点评",@"图片",@"链接",@"学校",@"课程"
     //@"小红花"
+    
+//    NSLog(@"index === %ld", index);
     
     if (index == 0) {
         CharactersViewController *classAlbumVC =[[CharactersViewController alloc]init];

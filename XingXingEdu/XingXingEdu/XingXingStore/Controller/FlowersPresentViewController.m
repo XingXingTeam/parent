@@ -106,7 +106,7 @@
     
     
     //确认转赠
-    [self.view addSubview:[HHControl createButtonWithFrame:CGRectMake(25, kHeight - 170,kWidth - 50, 42) backGruondImageName:@"surepresent.png" Target:nil Action:@selector(affirmBtn) Title:nil]];
+    [self.view addSubview:[HHControl createButtonWithFrame:CGRectMake(25, kHeight - 170,kWidth - 50, 42) backGruondImageName:@"surepresent" Target:nil Action:@selector(affirmBtn) Title:nil]];
     
     //赠言
     [self.view addSubview: [HHControl createLabelWithFrame:CGRectMake(15, 118, 50, 30) Font:16 Text:@"赠言："]];
@@ -141,6 +141,8 @@
 
 -(void)affirmBtn{
     
+//    NSLog(@"ppppppppp");
+    
     if([flowersText.text intValue]>[self.flowersRemain intValue]){
         [SVProgressHUD showErrorWithStatus:@"剩余鲜花不足，赠送失败"];
         return;
@@ -163,7 +165,7 @@
         flowersRemainLabel.text=[NSString stringWithFormat:@"%i",[self.flowersRemain intValue]-[flowersText.text intValue]];
         //sent
         NSString *urlStr = @"http://www.xingxingedu.cn/Global/give_fbasket";
-        NSDictionary *dict = @{@"appkey":APPKEY,
+        NSDictionary *params = @{@"appkey":APPKEY,
                                @"backtype":BACKTYPE,
                                @"xid":parameterXid,
                                @"user_id":parameterUser_Id,
@@ -172,31 +174,27 @@
                                @"num":flowersText.text,
                                @"con":adviceWord.text,
                                };
+//        NSLog(@"params *** %@", params);
         
-        [WZYHttpTool post:urlStr params:dict success:^(id responseObj) {
-            NSDictionary *dict =responseObj;
-//            NSLog(@"==========dict==============%@",dict); 
-            if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
-            {
-                
-                UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"赠送成功" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
-                UIAlertAction *cancel=[UIAlertAction actionWithTitle:@"继续赠送" style:UIAlertActionStyleCancel handler:nil];
-                UIAlertAction *ok=[UIAlertAction actionWithTitle:@"离开" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
+            //
+//            NSLog(@"nnn %@", responseObj);
+            if ([responseObj[@"code"] integerValue] == 1) {
+                [SVProgressHUD showInfoWithStatus:@"花篮赠送成功!"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self.navigationController popViewControllerAnimated:YES];
-                    
-                }];
-                [alert addAction:ok];
-                [alert addAction:cancel];
-                [self presentViewController:alert animated:YES completion:nil];
-  
+                });
+            }else{
+            
+                [SVProgressHUD showErrorWithStatus:@"花篮赠送失败!"];
             }
             
         } failure:^(NSError *error) {
-            
+            //
+            [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
         }];
-        
-        
     }
+    
     
 }
 
@@ -269,7 +267,6 @@
     }];
 
     [self.navigationController pushViewController:fbascktGiveVC animated:NO];
-   
-
 }
+
 @end

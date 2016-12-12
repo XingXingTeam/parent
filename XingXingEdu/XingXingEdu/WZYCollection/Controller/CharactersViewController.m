@@ -115,13 +115,13 @@
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/col_flower_list";
     
     //请求参数  page
-    
-    
+    NSString *pageStr = [NSString stringWithFormat:@"%ld", page];
     NSDictionary *params = @{@"appkey":APPKEY,
                              @"backtype":BACKTYPE,
                              @"xid":parameterXid,
                              @"user_id":parameterUser_Id,
-                             @"user_type":USER_TYPE};
+                             @"user_type":USER_TYPE,
+                             @"page": pageStr};
     
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         
@@ -189,6 +189,9 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    
+//    NSLog(@"dataSourceArray.count *** %ld", dataSourceArray.count);
     
     return dataSourceArray.count;
 }
@@ -289,7 +292,6 @@
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/deleteCollect";
     
     //请求参数
-    
     NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"collect_id":_collectionId, @"collect_type":@"6"};
     
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {

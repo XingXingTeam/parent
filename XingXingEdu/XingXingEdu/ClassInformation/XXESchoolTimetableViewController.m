@@ -227,6 +227,8 @@
                              @"baby_id":babyID,
                              @"week_date":timeString
                              };
+    
+//    NSLog(@"pragram ==== %@", pragram);
     [WZYHttpTool post:urlStr params:pragram success:^(id responseObj) {
         //
 //        NSLog(@"课程表  传统 模式 === %@", responseObj);

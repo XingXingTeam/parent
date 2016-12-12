@@ -25,39 +25,28 @@
 #import "SVProgressHUD.h"
 #import "UtilityFunc.h"
 #import "FbasketCell.h"
+#import "XXEClassAddressTeacherInfoModel.h"
+#import "XXEClassAddressManagerInfoModel.h"
+
+
+
 @interface FbasketGiveViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,HeadViewDelegate>
 {
-    UITableView *_telTabView;
-    NSMutableArray *_telArray;
-    NSArray *sections;
-    NSArray *_friendsData;
-    //ceshi
+
     UITableView *_tableView;
-    NSArray *tempArray;
-    NSMutableArray *KTAgeMArr;
-    NSMutableArray *KTHead_imgMArr;
-    NSMutableArray *KTTnameMArr;
-    NSMutableArray *KTparent_listMArr;
     
-    NSMutableArray *headTitleArr;
-    NSMutableArray *KTIDMArr;
-    NSDictionary *_showDic;
-    
-    NSMutableArray * ageMArr;
-    NSMutableArray * head_imgMArr;
-    NSMutableArray * parent_listMArr;
-    NSMutableArray * tnameMArr;
-    NSMutableArray * idMArr;
+    //数据源
+    NSMutableArray *dataSourceArray;
+    NSArray *title_nameArray;
+    UIButton *arrowButton;
+
     NSString *parameterXid;
     NSString *parameterUser_Id;
     
     
 }
+@property (nonatomic,strong) NSMutableArray *flagArray;
 @property(nonatomic,strong)UISearchBar *searchBar;
-@property(nonatomic,strong)UISearchController *searchDC;
-@property (nonatomic, strong) NSMutableArray *contactArraytemp; //从数据库读取的contacts数据
-@property (nonatomic, strong) NSMutableArray *allArray;  // 包含空数据的contactsArray  // 核心数据
-@property (nonatomic, strong) NSMutableArray *indexTitles;
 @end
 
 @implementation FbasketGiveViewController
@@ -72,17 +61,17 @@
         parameterXid = XID;
         parameterUser_Id = USER_ID;
     }
+    dataSourceArray = [[NSMutableArray alloc] init];
+    self.flagArray = [[NSMutableArray alloc]init];
+    for (int j=0; j<2; j++) {
+        NSNumber *flagN = [NSNumber numberWithBool:YES];
+        [self.flagArray addObject:flagN];
+    }
+    title_nameArray = [[NSArray alloc] initWithObjects:@"班级老师", @"管理员", nil];
     self.title =@"班级通讯录";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
-    KTAgeMArr =[[NSMutableArray alloc]init];
-    KTHead_imgMArr =[[NSMutableArray alloc]init];
-    KTTnameMArr =[[NSMutableArray alloc]init];
-    headTitleArr =[[NSMutableArray alloc]init];
-    KTparent_listMArr =[[NSMutableArray alloc]init];
-    KTIDMArr =[[NSMutableArray alloc]init];
-    _showDic =[[NSDictionary alloc]initWithObjectsAndKeys:@"班级老师",@"teacher",@"管理员",@"manager",nil];
-    
+
     [self.navigationController.navigationBar setTintColor:UIColorFromRGB(255, 255, 255)];
     [self loadNetData];
     [self createTableView];
@@ -114,85 +103,160 @@
                              };
     
   [WZYHttpTool post:urlStr params:dictKT success:^(id responseObj) {
-      NSDictionary * dict =responseObj;
       
-      if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"])
+      if([[NSString stringWithFormat:@"%@",responseObj[@"code"]]isEqualToString:@"1"])
      {
+         NSDictionary *dict = responseObj[@"data"];
+         NSArray *teacherModelArray = [[NSArray alloc] init];
+         teacherModelArray = [XXEClassAddressTeacherInfoModel parseResondsData:dict[@"teacher"]];
+         NSArray *managerModelArray = [[NSArray alloc] init];
+         managerModelArray  = [XXEClassAddressManagerInfoModel parseResondsData:dict[@"manager"]];
          
-         NSLog(@"data=============%@",dict[@"data"]);
-         
-         
-             ageMArr=[[NSMutableArray alloc]init];
-             head_imgMArr =[[NSMutableArray alloc]init];
-             tnameMArr =[[NSMutableArray alloc]init];
-             parent_listMArr =[[NSMutableArray alloc]init];
-             idMArr =[[NSMutableArray alloc]init];
-
-             
-                 for (int i=0; i<[dict[@"data"][@"teacher"] count]; i++) {
-                     [ageMArr addObject:[dict[@"data"][@"teacher"][i] objectForKey:@"teach_course"]];
-                     [head_imgMArr addObject:[dict[@"data"][@"teacher"][i] objectForKey:@"head_img"]];
-                     [tnameMArr addObject:[dict[@"data"][@"teacher"][i] objectForKey:@"tname"]];
-                     [parent_listMArr addObject:[dict[@"data"][@"teacher"][i] objectForKey:@"id"]];
-                 }
-                 [KTAgeMArr addObject:ageMArr];
-                 [KTHead_imgMArr addObject:head_imgMArr];
-                 [KTTnameMArr addObject:tnameMArr];
-                 [KTparent_listMArr addObject:parent_listMArr];
-         
-         
+         [dataSourceArray addObject:teacherModelArray];
+         [dataSourceArray addObject:managerModelArray];
      }
       
       [_tableView reloadData];
     
   } failure:^(NSError *error) {
-      
+      [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
   }];
 
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return KTAgeMArr.count;
+    return dataSourceArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return ageMArr.count;
+
+    if ([self.flagArray[section] boolValue] == YES) {
+        return [dataSourceArray[section] count];
+    }else{
+        return 0;
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FbasketCell *cell =(FbasketCell*)[tableView dequeueReusableCellWithIdentifier:KPATA];
+    static NSString *identifier = @"cell";
+    FbasketCell *cell =(FbasketCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (cell == nil) {
-        NSArray *nib =[[NSBundle mainBundle]loadNibNamed:KPATA owner:[FbasketCell class] options:nil];
-        cell =(FbasketCell*)[nib objectAtIndex:0];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell =[[[NSBundle mainBundle]loadNibNamed:@"FbasketCell" owner:[FbasketCell class] options:nil] lastObject];
     }
     
+    /*
+     0 :表示 自己 头像 ，需要添加 前缀
+     1 :表示 第三方 头像 ，不需要 添加 前缀
+     //判断是否是第三方头像
+     */
+    if (indexPath.section == 0) {
+        XXEClassAddressTeacherInfoModel *model = dataSourceArray[indexPath.section][indexPath.row];
+        NSString *haeadImage;
+        if ([model.head_img_type integerValue] == 0) {
+            haeadImage = [NSString stringWithFormat:@"%@%@", picURL, model.head_img];
+        }else{
+            haeadImage = [NSString stringWithFormat:@"%@", model.head_img];
+        }
+        [cell.headImgV sd_setImageWithURL:[NSURL URLWithString:haeadImage] placeholderImage:[UIImage imageNamed:@"人物头像占位图136x136"]];
+        cell.titleLbl.text = model.tname;
+        cell.detailLbl.text = model.teach_course;
+        cell.detailLbl.textColor = [UIColor lightGrayColor];
+        
+    }else if (indexPath.section == 1) {
+        XXEClassAddressManagerInfoModel *model = dataSourceArray[indexPath.section][indexPath.row];
+        NSString *haeadImage;
+        if ([model.head_img_type integerValue] == 0) {
+            haeadImage = [NSString stringWithFormat:@"%@%@", picURL, model.head_img];
+        }else{
+            haeadImage = [NSString stringWithFormat:@"%@", model.head_img];
+        }
+        [cell.headImgV sd_setImageWithURL:[NSURL URLWithString:haeadImage] placeholderImage:[UIImage imageNamed:@"人物头像占位图136x136"]];
+        cell.titleLbl.text = model.tname;
+        cell.detailLbl.text = model.teach_course;
+        cell.detailLbl.textColor = [UIColor lightGrayColor];
+        
+    }
+    cell.headImgV.layer.masksToBounds = YES;
+    cell.headImgV.layer.cornerRadius = cell.headImgV.frame.size.width / 2;
     
-    if ([KTHead_imgMArr[indexPath.section][indexPath.row] hasPrefix:@"http:"]) {
-        [cell.headImgV sd_setImageWithURL:[NSURL URLWithString:KTHead_imgMArr[indexPath.section][indexPath.row]] placeholderImage:[UIImage imageNamed:@"人物头像占位图136x136@2x"]];
-    }
-    else{
-        [cell.headImgV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",picURL,KTHead_imgMArr[indexPath.section][indexPath.row]]] placeholderImage:[UIImage imageNamed:@"人物头像占位图136x136@2x"]];
-    }
-
-    cell.titleLbl.text = KTTnameMArr[indexPath.section][indexPath.row];
-    cell.detailLbl.textColor =UIColorFromRGB(166, 166, 166);
-    cell.detailLbl.text = KTAgeMArr[indexPath.section][indexPath.row];
     return cell;
 }
+
+
+///
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
+    view.backgroundColor = [UIColor whiteColor];
+    view.userInteractionEnabled = YES;
+    
+    view.tag = 100 + section;
+    
+    UITapGestureRecognizer *viewPress = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewPressClick:)];
+    [view addGestureRecognizer:viewPress];
+    
+    arrowButton = [[UIButton alloc]initWithFrame:CGRectMake(10, (40-12)/2, 12, 12)];
+    NSNumber *flagN = self.flagArray[section];
+    
+    if ([flagN boolValue]) {
+        [arrowButton setBackgroundImage:[UIImage imageNamed:@"narrow_icon"] forState:UIControlStateNormal];
+        CGAffineTransform currentTransform =arrowButton.transform;
+        CGAffineTransform newTransform =CGAffineTransformRotate(currentTransform, M_PI/2);
+        arrowButton.transform =newTransform;
+        
+    }else
+    {
+        [arrowButton setBackgroundImage:[UIImage imageNamed:@"narrow_icon"] forState:UIControlStateNormal ];
+        
+    }
+    arrowButton.tag = 300+section;
+    //    [arrowButton addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:arrowButton];
+    
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(40, 5, 200 * kScreenRatioWidth, 30)];
+    label.text = [NSString stringWithFormat:@"%@",title_nameArray[section]];
+    label.textColor = [UIColor blackColor];
+    label.font = [UIFont boldSystemFontOfSize:16 * kScreenRatioWidth];
+    [view addSubview:label];
+    
+    //线
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 39, KScreenWidth, 1)];
+    lineView.backgroundColor = UIColorFromRGB(229, 232, 233);
+    [view addSubview:lineView];
+    
+    return view;
+}
+
+- (void)viewPressClick:(UITapGestureRecognizer *)press{
+    
+    //    NSLog(@" 头视图  tag  %ld", press.view.tag - 100);
+    
+    if ([self.flagArray[press.view.tag - 100] boolValue]) {
+        [self.flagArray replaceObjectAtIndex:(press.view.tag - 100) withObject:[NSNumber  numberWithBool:NO]];
+        
+    }else{
+        [self.flagArray replaceObjectAtIndex:(press.view.tag - 100) withObject:[NSNumber numberWithBool:YES]];
+    }
+    [_tableView reloadData ];
+    
+    
+}
+
+
+//返回每个分组的表头视图的高度
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 40;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.0000001;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;
 }
-- ( NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section;{
-    
-    return[NSString stringWithFormat:@"班级老师"];
-}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 30;
-}
+
 - (void)ReturnTextBlock:(ReturnTextBlock)block{
     self.textblock =block;
 }
@@ -203,11 +267,18 @@
 {
 
     if (self.isFlowerView==YES||self.isComment==YES) {
-        self.textblock(KTTnameMArr[indexPath.section][indexPath.row]);
-        self.idblock(KTparent_listMArr[indexPath.section][indexPath.row]);
+        if (indexPath.section == 0) {
+            XXEClassAddressTeacherInfoModel *model = dataSourceArray[indexPath.section][indexPath.row];
+            self.textblock(model.tname);
+            self.idblock(model.teacher_id);
+        }else if (indexPath.section == 1){
+            XXEClassAddressManagerInfoModel *model = dataSourceArray[indexPath.section][indexPath.row];
+            self.textblock(model.tname);
+            self.idblock(model.manager_id);
+        }
+    
         [self.navigationController popViewControllerAnimated:YES];
-    }
-    else if(self.isRCIM==YES){
+    }else if(self.isRCIM==YES){
         UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"添加好友" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
         [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
             
@@ -223,15 +294,13 @@
         [alert addAction:ok];
         [alert addAction:cancel];
         [self presentViewController:alert animated:YES completion:nil];
-    }
-    else  if (indexPath.section==1) {
+    }else  if (indexPath.section==1) {
         HomeInfoViewController *infoVC = [[HomeInfoViewController alloc]init];
         
         [self.navigationController pushViewController:infoVC animated:YES];
         
         
-    }
-    else if (indexPath.section ==2){
+    }else if (indexPath.section ==2){
         
         TeleTeachInfoViewController *teleTeachVC =[[TeleTeachInfoViewController alloc]init];
         [self.navigationController pushViewController:teleTeachVC animated:YES];
@@ -256,7 +325,6 @@
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWidth,kHeight - 30) style:UITableViewStyleGrouped];
     _tableView.dataSource = self;
     _tableView.delegate = self;
-    [_telTabView registerClass:[UITableViewCell class] forCellReuseIdentifier:KPATA];
     [self.view addSubview: _tableView];
 }
 //测试
@@ -300,14 +368,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

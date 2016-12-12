@@ -155,7 +155,7 @@
 //花篮点击支付(产生订单)
 - (void)initFlowers_Basket_PayData{
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/flowers_basket_pay";
-    NSDictionary *dict = @{@"appkey":APPKEY,
+    NSDictionary *params = @{@"appkey":APPKEY,
                            @"backtype":BACKTYPE,
                            @"xid":parameterXid,
                            @"user_id":parameterUser_Id,
@@ -164,11 +164,15 @@
                            @"buy_num":self.numLbl.text,
                            };
     
-    [WZYHttpTool post:urlStr params:dict success:^(id responseObj) {
+//    NSLog(@"params **** %@", params);
+    
+    [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         NSDictionary *dict =responseObj;
         if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
         {
             NSDictionary *daizhifuOrderDictInfo = [[NSDictionary alloc] init];
+            
+//            NSLog(@"daizhifuOrderDictInfo === %@", responseObj[@"data"]);
             
             daizhifuOrderDictInfo = responseObj[@"data"];
             

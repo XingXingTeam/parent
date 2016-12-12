@@ -1081,6 +1081,9 @@
 		04E31BE51DFA908500691EB0 /* XXEFlowerbasketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E31BE41DFA908500691EB0 /* XXEFlowerbasketModel.m */; };
 		04E31BE91DFA9AEA00691EB0 /* FlowerBascketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E31BE71DFA9AEA00691EB0 /* FlowerBascketCell.m */; };
 		04E31BEA1DFA9AEA00691EB0 /* FlowerBascketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E31BE81DFA9AEA00691EB0 /* FlowerBascketCell.xib */; };
+		04E6599D1DFE44EF009C8684 /* XXEClassAddressManagerInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6599A1DFE44EF009C8684 /* XXEClassAddressManagerInfoModel.m */; };
+		04E6599E1DFE44EF009C8684 /* XXEClassAddressTeacherInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E6599C1DFE44EF009C8684 /* XXEClassAddressTeacherInfoModel.m */; };
+		04E659A11DFEA2CB009C8684 /* XXESchoolNotificationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E659A01DFEA2CB009C8684 /* XXESchoolNotificationDetailViewController.m */; };
 		04F100A21D45BEC900CBED22 /* ClassSubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F100A11D45BEC900CBED22 /* ClassSubjectViewController.m */; };
 		04F100AF1D45C0E400CBED22 /* KTRecipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F100A51D45C0E400CBED22 /* KTRecipeCell.m */; };
 		04F100B01D45C0E400CBED22 /* KTRecipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F100A61D45C0E400CBED22 /* KTRecipeCell.xib */; };
@@ -3058,6 +3061,12 @@
 		04E31BE61DFA9AEA00691EB0 /* FlowerBascketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowerBascketCell.h; sourceTree = "<group>"; };
 		04E31BE71DFA9AEA00691EB0 /* FlowerBascketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlowerBascketCell.m; sourceTree = "<group>"; };
 		04E31BE81DFA9AEA00691EB0 /* FlowerBascketCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlowerBascketCell.xib; sourceTree = "<group>"; };
+		04E659991DFE44EF009C8684 /* XXEClassAddressManagerInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEClassAddressManagerInfoModel.h; sourceTree = "<group>"; };
+		04E6599A1DFE44EF009C8684 /* XXEClassAddressManagerInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEClassAddressManagerInfoModel.m; sourceTree = "<group>"; };
+		04E6599B1DFE44EF009C8684 /* XXEClassAddressTeacherInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEClassAddressTeacherInfoModel.h; sourceTree = "<group>"; };
+		04E6599C1DFE44EF009C8684 /* XXEClassAddressTeacherInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEClassAddressTeacherInfoModel.m; sourceTree = "<group>"; };
+		04E6599F1DFEA2CB009C8684 /* XXESchoolNotificationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XXESchoolNotificationDetailViewController.h; path = XingXingEdu/XXESchoolNotificationDetailViewController.h; sourceTree = SOURCE_ROOT; };
+		04E659A01DFEA2CB009C8684 /* XXESchoolNotificationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XXESchoolNotificationDetailViewController.m; path = XingXingEdu/XXESchoolNotificationDetailViewController.m; sourceTree = SOURCE_ROOT; };
 		04F100A01D45BEC900CBED22 /* ClassSubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassSubjectViewController.h; sourceTree = "<group>"; };
 		04F100A11D45BEC900CBED22 /* ClassSubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassSubjectViewController.m; sourceTree = "<group>"; };
 		04F100A41D45C0E400CBED22 /* KTRecipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTRecipeCell.h; sourceTree = "<group>"; };
@@ -6379,6 +6388,10 @@
 		04E31BD31DFA8FFB00691EB0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				04E659991DFE44EF009C8684 /* XXEClassAddressManagerInfoModel.h */,
+				04E6599A1DFE44EF009C8684 /* XXEClassAddressManagerInfoModel.m */,
+				04E6599B1DFE44EF009C8684 /* XXEClassAddressTeacherInfoModel.h */,
+				04E6599C1DFE44EF009C8684 /* XXEClassAddressTeacherInfoModel.m */,
 				04E31BE31DFA908500691EB0 /* XXEFlowerbasketModel.h */,
 				04E31BE41DFA908500691EB0 /* XXEFlowerbasketModel.m */,
 			);
@@ -7695,6 +7708,8 @@
 				044699F71D40D81B0067615D /* LandingpageViewController.m */,
 				0410B0F61D50BA2800924EBE /* XXETabBarViewController.h */,
 				0410B0F51D50BA2800924EBE /* XXETabBarViewController.m */,
+				04E6599F1DFEA2CB009C8684 /* XXESchoolNotificationDetailViewController.h */,
+				04E659A01DFEA2CB009C8684 /* XXESchoolNotificationDetailViewController.m */,
 				68E2A8FA1C45F67300EA8DF3 /* Main.storyboard */,
 				68E2A8FD1C45F67300EA8DF3 /* Assets.xcassets */,
 				68E2A8FF1C45F67300EA8DF3 /* LaunchScreen.storyboard */,
@@ -9410,6 +9425,7 @@
 				04469A551D40DE9C0067615D /* MMDrawerController.m in Sources */,
 				0404F7D21DF81DED00A37B57 /* XXEStoreConsigneeAddressViewController.m in Sources */,
 				6844E96C1CAD451E0054B8C5 /* OrganInfoViewController.m in Sources */,
+				04E659A11DFEA2CB009C8684 /* XXESchoolNotificationDetailViewController.m in Sources */,
 				68A012881D17F41A00A1EF00 /* TermsViewController.m in Sources */,
 				0404F7C31DF7AA8F00A37B57 /* XXERedFlowerModel.m in Sources */,
 				689F6EFA1CF6962100166C06 /* primarySchoolViewController.m in Sources */,
@@ -9448,6 +9464,7 @@
 				04D5B0DF1D6B1DE900ABA89A /* SpeechViewController.m in Sources */,
 				6844E8501CAD45150054B8C5 /* OtherTeacherViewController.m in Sources */,
 				044412AE1D38F2C400314884 /* FriendApplicationTableViewCell.m in Sources */,
+				04E6599E1DFE44EF009C8684 /* XXEClassAddressTeacherInfoModel.m in Sources */,
 				68AECC9B1CE36EC8004F98D1 /* ReportCell.m in Sources */,
 				044777401D2A76CC0018A459 /* UIImage+Extension.m in Sources */,
 				6844E82D1CAD45150054B8C5 /* Cell.m in Sources */,
@@ -9501,6 +9518,7 @@
 				0463C30F1DEC3D920035BEF6 /* XXEFriendMyCircleViewController.m in Sources */,
 				04B795101DDED60000E5B2E5 /* ClassEditInfoModel.m in Sources */,
 				6844E8631CAD45150054B8C5 /* NullSafe.m in Sources */,
+				04E6599D1DFE44EF009C8684 /* XXEClassAddressManagerInfoModel.m in Sources */,
 				044412B31D38F2C400314884 /* RCAddFriendInfoViewController.m in Sources */,
 				0463C33F1DEC3D920035BEF6 /* DFTimeLineViewController.m in Sources */,
 				6896CC891D19506E00DB50D6 /* TeleHomepageViewController.m in Sources */,

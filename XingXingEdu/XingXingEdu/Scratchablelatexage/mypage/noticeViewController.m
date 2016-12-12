@@ -12,6 +12,7 @@
 #import "NoticeSettingInfomationViewController.h"
 #import "XXESchoolNotificationModel.h"
 #import "XXESystemNotificationModel.h"
+#import "XXESchoolNotificationDetailViewController.h"
 
 @interface noticeViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -209,7 +210,7 @@
     [WZYHttpTool post:urlStr params:pragm success:^(id responseObj) {
         NSDictionary *dict =responseObj;
         
-//         NSLog(@"===========official_notice===========%@",dict);
+         NSLog(@"===========official_notice===========%@",dict);
         if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
         {
             NSArray *modelArray = [XXESystemNotificationModel parseResondsData:dict[@"data"]];
@@ -329,14 +330,34 @@
     switch (a) {
         case 0:
         {
-            NoticeInfomationViewController *noticeInfoVC =[[NoticeInfomationViewController alloc]init];
+//            NoticeInfomationViewController *noticeInfoVC =[[NoticeInfomationViewController alloc]init];
+//            XXESchoolNotificationModel *model = _schoolDataSourceArray[indexPath.row];
+//            
+//            noticeInfoVC.nameStr = model.school_name;
+//            noticeInfoVC.locationStr = model.type;
+//            noticeInfoVC.dateStr =[WZYTool dateStringFromNumberTime:model.date_tm];
+//            noticeInfoVC.conStr = model.con;
+//           [self.navigationController pushViewController:noticeInfoVC animated:YES];
+            
+            //XXESchoolNotificationDetailViewController
+            XXESchoolNotificationDetailViewController *notificationDetailVC =[[XXESchoolNotificationDetailViewController alloc]init];
             XXESchoolNotificationModel *model = _schoolDataSourceArray[indexPath.row];
             
-            noticeInfoVC.nameStr = model.school_name;
-            noticeInfoVC.locationStr = model.type;
-            noticeInfoVC.dateStr =[WZYTool dateStringFromNumberTime:model.date_tm];
-            noticeInfoVC.conStr = model.con;
-           [self.navigationController pushViewController:noticeInfoVC animated:YES];
+//            NSLog(@"bbb %@", model);
+            
+            notificationDetailVC.name = model.school_name;
+            //[type] => 2		//1:班级通知, 2:学校通知
+            if ([model.type integerValue] == 1) {
+                notificationDetailVC.scope = @"班级通知";
+            }else if ([model.type integerValue] == 2){
+                notificationDetailVC.scope = @"学校通知";
+            }else{
+                notificationDetailVC.scope = @"班级通知";
+            }
+            notificationDetailVC.time =[WZYTool dateStringFromNumberTime:model.date_tm];
+            notificationDetailVC.content = model.con;
+            notificationDetailVC.titleStr = model.title;
+            [self.navigationController pushViewController:notificationDetailVC animated:YES];
         }
             break;
         case 1:

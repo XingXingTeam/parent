@@ -29,6 +29,10 @@
 @interface ClassAlbumViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView * _tableView;
+    UIImageView *placeholderImageView;
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
+
 
 }
 @property (nonatomic, retain) NSMutableArray* teachNameMArr;
@@ -46,6 +50,13 @@
 - (void)viewDidLoad {
    
     [super viewDidLoad];
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
     self.title =@"相册";
     self.dataArr = [[NSMutableArray alloc]init];
 
@@ -77,23 +88,19 @@
     NSString *class_idStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"CLASS_ID"];
     NSString *schoolIdStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"SCHOOL_ID"];
     
-    NSString *parameterXid;
-    NSString *parameterUser_Id;
-    if ([XXEUserInfo user].login){
-        parameterXid = [XXEUserInfo user].xid;
-        parameterUser_Id = [XXEUserInfo user].user_id;
-    }else{
-        parameterXid = XID;
-        parameterUser_Id = USER_ID;
-    }
+    NSDictionary *params = @{@"appkey":APPKEY,
+                             @"backtype":BACKTYPE,
+                             @"xid":parameterXid,
+                             @"user_id":parameterUser_Id,
+                             @"user_type":USER_TYPE,
+                             @"school_id":schoolIdStr,
+                             @"class_id":class_idStr};
     
-    NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"school_id":schoolIdStr, @"class_id":class_idStr};
-    
-//    NSLog(@"%@", params);
+    NSLog(@"%@", params);
     
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
-//        NSLog(@"%@", responseObj);
+        NSLog(@"%@", responseObj);
         
         NSDictionary *dict = responseObj;
 
@@ -126,25 +133,42 @@
 
 
 
-//相册 有数据 和 无数据 进行判断
+// 有数据 和 无数据 进行判断
 - (void)customContent{
+    // 如果 有占位图 先 移除
+    [self removePlaceholderImageView];
     
     if (_picterMArr.count == 0) {
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         // 1、无数据的时候
-        UIImage *myImage = [UIImage imageNamed:@"人物"];
-        CGFloat myImageWidth = myImage.size.width;
-        CGFloat myImageHeight = myImage.size.height;
-        
-        UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth / 2 - myImageWidth / 2, (kHeight - 64 - 49) / 2 - myImageHeight / 2, myImageWidth, myImageHeight)];
-        myImageView.image = myImage;
-        [self.view addSubview:myImageView];
+        [self createPlaceholderView];
         
     }else{
         //2、有数据的时候
-        [_tableView reloadData];
-        
     }
     
+    [_tableView reloadData];
+    
+}
+
+
+//没有 数据 时,创建 占位图
+- (void)createPlaceholderView{
+    // 1、无数据的时候
+    UIImage *myImage = [UIImage imageNamed:@"人物"];
+    CGFloat myImageWidth = myImage.size.width;
+    CGFloat myImageHeight = myImage.size.height;
+    
+    placeholderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth / 2 - myImageWidth / 2, (kHeight - 64 - 49) / 2 - myImageHeight / 2, myImageWidth, myImageHeight)];
+    placeholderImageView.image = myImage;
+    [self.view addSubview:placeholderImageView];
+}
+
+//去除 占位图
+- (void)removePlaceholderImageView{
+    if (placeholderImageView != nil) {
+        [placeholderImageView removeFromSuperview];
+    }
 }
 
 

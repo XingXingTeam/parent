@@ -11,6 +11,7 @@
 #import "XXEStorePayViewController.h"
 //申请退货
 #import "XXEStoreReturnGoodsViewController.h"
+#import "XXEStoreGoodDetailInfoViewController.h"
 
 
 @interface XXEStoreGoodsOrderDetailViewController ()
@@ -364,7 +365,7 @@
     
     //商品价格
     UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, nameLabel.frame.origin.y + nameLabel.height + 10, KScreenWidth - 100, 20)];
-    priceLabel.text = [NSString stringWithFormat:@"¥:%@",detailInfoDict[@"price"]];
+    priceLabel.text = [NSString stringWithFormat:@"¥:%@",detailInfoDict[@"exchange_price"]];
     priceLabel.textColor = [UIColor redColor];
     priceLabel.font = [UIFont systemFontOfSize:12 * kScreenRatioWidth];
     [upBgView addSubview:priceLabel];
@@ -396,7 +397,7 @@
     //购买数量
     NSString *numStr = [NSString stringWithFormat:@"购买数量:%@", detailInfoDict[@"buy_num"]];
     //实付金额
-    NSString *priceStr = [NSString stringWithFormat:@"实付:%@元", detailInfoDict[@"exchange_price"]];
+    NSString *priceStr = [NSString stringWithFormat:@"实付:%@元", detailInfoDict[@"pay_price"]];
     //猩币
     NSString *deductionStr = [NSString stringWithFormat:@"猩币:%ld", [detailInfoDict[@"exchange_coin"] integerValue] * [detailInfoDict[@"buy_num"] integerValue]];
     
@@ -419,6 +420,10 @@
     middleView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:middleView];
     
+    middleView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickPicture:)];
+    [middleView addGestureRecognizer:tap];
+
     //收货人
     NSString *buyer = [NSString stringWithFormat:@"收货人:%@", detailInfoDict[@"name"]];
     //电话
@@ -471,7 +476,23 @@
 
 }
 
-
+- (void)onClickPicture:(UITapGestureRecognizer *)tap{
+    
+    XXEStoreGoodDetailInfoViewController*storeGoodDetailInfoVC=  [[XXEStoreGoodDetailInfoViewController alloc]init];
+//    XXEStoreListModel *model = _dataSourceArray[indexPath.row];
+    storeGoodDetailInfoVC.orderNum = _order_id;
+    [self.navigationController pushViewController:storeGoodDetailInfoVC animated:YES];
+    
+//    NSLog(@"--- 点击了第%ld张图片", tap.view.tag - 20);
+    
+//    RedFlowerViewController *redFlowerVC =[[RedFlowerViewController alloc]init];
+//    redFlowerVC.imageArr = picWallArray;
+//    redFlowerVC.index = tap.view.tag - 20;
+//    redFlowerVC.hidesBottomBarWhenPushed = YES;
+//    //图片 举报 来源 小红花 1:小红花赠言中的图片
+//    redFlowerVC.origin_pageStr = @"1";
+//    [self.navigationController pushViewController:redFlowerVC animated:YES];
+}
 #pragma mark ======= 创建 下部分 内容 =============
 - (void)createDownContent{
     downBgView = [[UIView alloc] initWithFrame:CGRectMake(0, middleView.frame.origin.y + middleView.height + 5, KScreenWidth, 40)];

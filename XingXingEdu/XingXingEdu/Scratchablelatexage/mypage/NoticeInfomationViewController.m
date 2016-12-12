@@ -17,6 +17,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLbl;
 @property (weak, nonatomic) IBOutlet UITextView *texView;
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+
 
 @end
 

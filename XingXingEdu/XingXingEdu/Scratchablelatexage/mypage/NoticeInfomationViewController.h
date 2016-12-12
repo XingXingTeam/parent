@@ -13,4 +13,7 @@
 @property (nonatomic, copy)NSString * locationStr;
 @property (nonatomic, copy)NSString * dateStr;
 @property (nonatomic, copy)NSString * conStr;
+//主题
+@property (nonatomic, copy)NSString * title;
+
 @end
