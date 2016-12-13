@@ -213,12 +213,9 @@
     UIImageView *weekrecommend = [HHControl createImageViewFrame:CGRectMake(KLabelX, CGRectGetMaxY(grayView2.frame) + Kmarg *3, kWidth - KLabelX * 2, 14) imageName:@"本周推荐" color:nil];
     [bgScrollView addSubview:weekrecommend];
     
-//    CGFloat maxH = CGRectGetMaxY(weekrecommend.frame) + Kmarg * 5 + (articleArray.count +1) * 100;
-//    bgScrollView.contentSize = CGSizeMake(0, maxH);
-    
 }
 
-
+#pragma mark ====== 签到 送猩币 ==========
 -(void)checkInBtn{
     
     [self.navigationController pushViewController:[CheckInViewController alloc] animated:YES];
@@ -423,11 +420,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    ArticleInfoViewController*vc=  [[ArticleInfoViewController alloc]init];
-//
-//    XXEStoreListModel *model = _dataSourceArray[indexPath.row];
-//    vc.orderNum=model.good_id;
-//    [self.navigationController pushViewController:vc animated:YES];
     XXEStoreGoodDetailInfoViewController*storeGoodDetailInfoVC=  [[XXEStoreGoodDetailInfoViewController alloc]init];
     XXEStoreListModel *model = _dataSourceArray[indexPath.row];
     storeGoodDetailInfoVC.orderNum=model.good_id;

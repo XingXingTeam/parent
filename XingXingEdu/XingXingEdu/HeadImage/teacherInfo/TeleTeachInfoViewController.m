@@ -52,7 +52,8 @@
     NSString *_xid;
     BOOL isCollect;
     
-     YSProgressView *ysView;
+//     YSProgressView *ysView;
+    UIProgressView *progressView;
     NSString *parameterXid;
     NSString *parameterUser_Id;
     
@@ -260,38 +261,16 @@
     [_personalInfo addSubview:teletitleLabel];
     
     
+    progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    progressView.frame =CGRectMake(teletitleLabel.x, CGRectGetMaxY(teletitleLabel.frame) + 5, 180, 1);
+    // 设置已过进度部分的颜色
+    progressView.progressTintColor = UIColorFromRGB(229, 229, 229);
+    // 设置未过进度部分的颜色
+    progressView.trackTintColor = UIColorFromRGB(67, 181, 59);
+    progressView.progress = [headDetailArr[7] floatValue] / [headDetailArr[6] floatValue];
     
-    ysView = [[YSProgressView alloc] initWithFrame:CGRectMake(teletitleLabel.x, CGRectGetMaxY(teletitleLabel.frame) + 5, 180, 1)];
-    ysView.progressHeight = 0.5;
-    ysView.progressTintColor = [UIColor colorWithRed:102 green:204 blue:127 alpha:0.5];
-    ysView.trackTintColor = UIColorFromRGB(255, 255, 255);
-    CGFloat width = 180;
-    double durationValue = [headDetailArr[7] doubleValue]/[headDetailArr[6] doubleValue];
     
-    if (durationValue > 1 && durationValue < 2) {
-        durationValue = durationValue - 1;
-    }else if (durationValue > 2 && durationValue < 3) {
-        durationValue = durationValue - 2;
-    }else  if (durationValue > 3 && durationValue < 4) {
-        durationValue = durationValue - 3;
-    }else if (durationValue > 4 && durationValue < 5) {
-        durationValue = durationValue - 4;
-    }else if (durationValue > 5 && durationValue < 6) {
-        durationValue = durationValue - 5;
-    }else if (durationValue > 6 && durationValue < 7) {
-        durationValue = durationValue - 6;
-    }else if (durationValue > 7 && durationValue < 8) {
-        durationValue = durationValue - 7;
-    }else if (durationValue > 8 && durationValue < 9) {
-        durationValue = durationValue - 8;
-    }else if (durationValue > 9 && durationValue < 10) {
-        durationValue = durationValue - 9;
-    }else if (durationValue > 10 && durationValue < 1000000000000000000) {
-        durationValue = durationValue - 10;
-    }
-    ysView.progressValue = durationValue *width;
-    [self.view addSubview:ysView];
-    
+    [self.view addSubview:progressView];
     
     QHNavSliderMenuStyleModel *model = [QHNavSliderMenuStyleModel new];
     NSMutableArray *titles = [[NSMutableArray alloc] initWithObjects:@"主页",@"课程",@"教师风采",nil];
@@ -300,11 +279,11 @@
     model.donotScrollTapViewWhileScroll = YES;
     model.sliderMenuTextColorForNormal = QHRGB(120, 120, 120);       
     model.sliderMenuTextColorForSelect = QHRGB(255, 255, 255);
-    model.titleLableFont               = defaultFont(16);
+    model.titleLableFont               = defaultFont(14);
     navSliderMenu = [[QHNavSliderMenu alloc] initWithFrame:(CGRect){0,_personalInfo.size.height - 65,kWidth,65} andStyleModel:model andDelegate:self showType:self.menuType];
     [_personalInfo addSubview:navSliderMenu];
     
-    contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, navSliderMenu.bottom - 10, kWidth, kHeight - navSliderMenu.bottom-37-64)];
+    contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, navSliderMenu.bottom - 10, kWidth, kHeight - navSliderMenu.bottom-37-65)];
     contentScrollView.contentSize = (CGSize){kWidth*menuCount,contentScrollView.contentSize.height};
     contentScrollView.pagingEnabled = YES;
     contentScrollView.delegate      = self;
@@ -364,8 +343,6 @@
     teacherAppearVC.view.top =0;
     [contentScrollView addSubview:teacherAppearVC.view];
     [listVCQueue setObject:teacherAppearVC forKey:@(2)];
-    
-    
 }
 
 
@@ -405,8 +382,6 @@
     [mgr POST:urlStr parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
          NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-         
-         
          
          if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
          {

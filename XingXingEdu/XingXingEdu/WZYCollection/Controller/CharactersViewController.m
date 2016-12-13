@@ -219,6 +219,9 @@
         headImage = [NSString stringWithFormat:@"%@", model.head_img];
     }
 
+    cell.Rphone.layer.cornerRadius= cell.Rphone.bounds.size.width/2;
+    cell.Rphone.layer.masksToBounds=YES;
+    
     [cell.Rphone sd_setImageWithURL:[NSURL URLWithString:headImage] placeholderImage:[UIImage imageNamed:@"人物头像172x172"]];
     
     cell.TLabel.text = [NSString stringWithFormat:@"%@ %@ %@ %@",model.tname,model.teach_course,model.school_name,model.class_name];

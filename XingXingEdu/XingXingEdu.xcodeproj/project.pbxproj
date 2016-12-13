@@ -182,7 +182,6 @@
 		04469A7D1D40DE9C0067615D /* CommentsRecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04469A441D40DE9C0067615D /* CommentsRecordTableViewCell.xib */; };
 		04469A7E1D40DE9C0067615D /* DynamicScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04469A461D40DE9C0067615D /* DynamicScrollView.m */; };
 		04469A7F1D40DE9C0067615D /* SlideSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04469A481D40DE9C0067615D /* SlideSwitchView.m */; };
-		044776EA1D2A76CC0018A459 /* ClassRoomHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044774C41D2A76CA0018A459 /* ClassRoomHomePageViewController.m */; };
 		044776EE1D2A76CC0018A459 /* ClassRoomSubjectInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044774CB1D2A76CA0018A459 /* ClassRoomSubjectInfoViewController.m */; };
 		044776EF1D2A76CC0018A459 /* PayInformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044774CD1D2A76CA0018A459 /* PayInformationCell.m */; };
 		044776F01D2A76CC0018A459 /* PayInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044774CE1D2A76CA0018A459 /* PayInformationCell.xib */; };
@@ -468,6 +467,7 @@
 		0464F55D1DE5BAF8009D13A0 /* ClassRoomSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0464F55A1DE5BAF8009D13A0 /* ClassRoomSearchViewController.xib */; };
 		0480A0741D87AA8C00D7589B /* XXESchoolNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0480A0731D87AA8C00D7589B /* XXESchoolNotificationModel.m */; };
 		0480A0771D87AAA100D7589B /* XXESystemNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0480A0761D87AAA100D7589B /* XXESystemNotificationModel.m */; };
+		048A1A8E1DFFE96000A4E2E0 /* XXEClassRoomCustomerServicesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A1A8D1DFFE96000A4E2E0 /* XXEClassRoomCustomerServicesModel.m */; };
 		048B19491DEBD762005A51FE /* XXERongCloudPhoneNumListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B19481DEBD762005A51FE /* XXERongCloudPhoneNumListModel.m */; };
 		048B194D1DEBDA03005A51FE /* XXEPhoneAddressBookTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B194B1DEBDA03005A51FE /* XXEPhoneAddressBookTableViewCell.m */; };
 		048B194E1DEBDA03005A51FE /* XXEPhoneAddressBookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048B194C1DEBDA03005A51FE /* XXEPhoneAddressBookTableViewCell.xib */; };
@@ -1290,7 +1290,6 @@
 		6844EA4F1CAD45390054B8C5 /* TableHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA411CAD45390054B8C5 /* TableHeadCell.m */; };
 		6844EA501CAD45390054B8C5 /* TableHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA421CAD45390054B8C5 /* TableHeadCell.xib */; };
 		6844EA531CAD45390054B8C5 /* VedioSaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA471CAD45390054B8C5 /* VedioSaveViewController.m */; };
-		6844EAE31CAD45420054B8C5 /* aboutusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA811CAD45420054B8C5 /* aboutusViewController.m */; };
 		6844EAE81CAD45420054B8C5 /* feedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA8B1CAD45420054B8C5 /* feedbackViewController.m */; };
 		6844EAEF1CAD45420054B8C5 /* noticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA971CAD45420054B8C5 /* noticeViewController.m */; };
 		6844EAF01CAD45420054B8C5 /* noticeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA981CAD45420054B8C5 /* noticeViewController.xib */; };
@@ -1897,8 +1896,6 @@
 		04469A461D40DE9C0067615D /* DynamicScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DynamicScrollView.m; sourceTree = "<group>"; };
 		04469A471D40DE9C0067615D /* SlideSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideSwitchView.h; sourceTree = "<group>"; };
 		04469A481D40DE9C0067615D /* SlideSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideSwitchView.m; sourceTree = "<group>"; };
-		044774C31D2A76CA0018A459 /* ClassRoomHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassRoomHomePageViewController.h; sourceTree = "<group>"; };
-		044774C41D2A76CA0018A459 /* ClassRoomHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassRoomHomePageViewController.m; sourceTree = "<group>"; };
 		044774CA1D2A76CA0018A459 /* ClassRoomSubjectInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassRoomSubjectInfoViewController.h; sourceTree = "<group>"; };
 		044774CB1D2A76CA0018A459 /* ClassRoomSubjectInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassRoomSubjectInfoViewController.m; sourceTree = "<group>"; };
 		044774CC1D2A76CA0018A459 /* PayInformationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayInformationCell.h; sourceTree = "<group>"; };
@@ -2340,6 +2337,8 @@
 		0480A0731D87AA8C00D7589B /* XXESchoolNotificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXESchoolNotificationModel.m; sourceTree = "<group>"; };
 		0480A0751D87AAA100D7589B /* XXESystemNotificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXESystemNotificationModel.h; sourceTree = "<group>"; };
 		0480A0761D87AAA100D7589B /* XXESystemNotificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXESystemNotificationModel.m; sourceTree = "<group>"; };
+		048A1A8C1DFFE96000A4E2E0 /* XXEClassRoomCustomerServicesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEClassRoomCustomerServicesModel.h; sourceTree = "<group>"; };
+		048A1A8D1DFFE96000A4E2E0 /* XXEClassRoomCustomerServicesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEClassRoomCustomerServicesModel.m; sourceTree = "<group>"; };
 		048B19471DEBD762005A51FE /* XXERongCloudPhoneNumListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXERongCloudPhoneNumListModel.h; sourceTree = "<group>"; };
 		048B19481DEBD762005A51FE /* XXERongCloudPhoneNumListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXERongCloudPhoneNumListModel.m; sourceTree = "<group>"; };
 		048B194A1DEBDA03005A51FE /* XXEPhoneAddressBookTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEPhoneAddressBookTableViewCell.h; sourceTree = "<group>"; };
@@ -3372,8 +3371,6 @@
 		6844EA421CAD45390054B8C5 /* TableHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableHeadCell.xib; sourceTree = "<group>"; };
 		6844EA461CAD45390054B8C5 /* VedioSaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VedioSaveViewController.h; sourceTree = "<group>"; };
 		6844EA471CAD45390054B8C5 /* VedioSaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VedioSaveViewController.m; sourceTree = "<group>"; };
-		6844EA801CAD45420054B8C5 /* aboutusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aboutusViewController.h; sourceTree = "<group>"; };
-		6844EA811CAD45420054B8C5 /* aboutusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aboutusViewController.m; sourceTree = "<group>"; };
 		6844EA8A1CAD45420054B8C5 /* feedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = feedbackViewController.h; sourceTree = "<group>"; };
 		6844EA8B1CAD45420054B8C5 /* feedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = feedbackViewController.m; sourceTree = "<group>"; };
 		6844EA971CAD45420054B8C5 /* noticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = noticeViewController.m; sourceTree = "<group>"; };
@@ -4326,8 +4323,6 @@
 				0464F5541DE5AA4E009D13A0 /* XXEXingClassRoomSearchViewController.m */,
 				0464F53E1DE59C68009D13A0 /* XXEChatPageViewController.h */,
 				0464F53F1DE59C68009D13A0 /* XXEChatPageViewController.m */,
-				044774C31D2A76CA0018A459 /* ClassRoomHomePageViewController.h */,
-				044774C41D2A76CA0018A459 /* ClassRoomHomePageViewController.m */,
 				044774CA1D2A76CA0018A459 /* ClassRoomSubjectInfoViewController.h */,
 				044774CB1D2A76CA0018A459 /* ClassRoomSubjectInfoViewController.m */,
 				044774CC1D2A76CA0018A459 /* PayInformationCell.h */,
@@ -4367,6 +4362,8 @@
 				0464F54A1DE59DF0009D13A0 /* XXEXingClassRoomSchoolListModel.m */,
 				0464F54B1DE59DF0009D13A0 /* XXEXingClassRoomTeacherListModel.h */,
 				0464F54C1DE59DF0009D13A0 /* XXEXingClassRoomTeacherListModel.m */,
+				048A1A8C1DFFE96000A4E2E0 /* XXEClassRoomCustomerServicesModel.h */,
+				048A1A8D1DFFE96000A4E2E0 /* XXEClassRoomCustomerServicesModel.m */,
 				044774DC1D2A76CA0018A459 /* FSImagePicker */,
 				044774F51D2A76CA0018A459 /* JSDropDownMenu */,
 				044774FA1D2A76CA0018A459 /* Model_HisWord.h */,
@@ -7284,8 +7281,6 @@
 				68CD02F61CF82B5600AE7251 /* FlowersBuyViewController.xib */,
 				68BACEAA1CEDC7800008DDA6 /* RedFlowerViewController.h */,
 				68BACEAB1CEDC7800008DDA6 /* RedFlowerViewController.m */,
-				6844EA801CAD45420054B8C5 /* aboutusViewController.h */,
-				6844EA811CAD45420054B8C5 /* aboutusViewController.m */,
 				6844EA8A1CAD45420054B8C5 /* feedbackViewController.h */,
 				6844EA8B1CAD45420054B8C5 /* feedbackViewController.m */,
 				040862161D421B570060C70A /* noticeViewController.h */,
@@ -9243,6 +9238,7 @@
 				04B6208C1DBF019A00391616 /* CoreSVP.m in Sources */,
 				6844EA261CAD45320054B8C5 /* SpinerLayer.m in Sources */,
 				04E31BDC1DFA8FFB00691EB0 /* FlowerBasketViewController.m in Sources */,
+				048A1A8E1DFFE96000A4E2E0 /* XXEClassRoomCustomerServicesModel.m in Sources */,
 				689F6F0D1CF6962100166C06 /* WebViewController.m in Sources */,
 				68A012961D17F41A00A1EF00 /* VPImageCropperViewController.m in Sources */,
 				0463C3741DEC3D930035BEF6 /* YTKBaseRequest.m in Sources */,
@@ -9268,7 +9264,6 @@
 				0463C32E1DEC3D920035BEF6 /* MessageListDetailViewCell.m in Sources */,
 				04B6207A1DBF019A00391616 /* MoneyPresentedViewController.m in Sources */,
 				6844EA251CAD45320054B8C5 /* HyTransitions.m in Sources */,
-				044776EA1D2A76CC0018A459 /* ClassRoomHomePageViewController.m in Sources */,
 				04469A7A1D40DE9C0067615D /* CommentRequestTableViewCell.m in Sources */,
 				04B621951DBF019A00391616 /* FlowersHistoryTableViewCell.m in Sources */,
 				689551B61D06E370009241A5 /* WZYTool.m in Sources */,
@@ -9495,7 +9490,6 @@
 				6844E95B1CAD451E0054B8C5 /* MyHeadInfoCell.m in Sources */,
 				6844E8421CAD45150054B8C5 /* Friend.m in Sources */,
 				0480A0741D87AA8C00D7589B /* XXESchoolNotificationModel.m in Sources */,
-				6844EAE31CAD45420054B8C5 /* aboutusViewController.m in Sources */,
 				6844E8471CAD45150054B8C5 /* UIImage+ResizeImage.m in Sources */,
 				04F100C51D45D6A000CBED22 /* ClassHomeWorkCell.m in Sources */,
 				6844E96F1CAD451E0054B8C5 /* RegistTeacherViewController.m in Sources */,

@@ -89,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XingXingEdu/ClassInformation/ClassFi/ClassAlbumViewController.m"
-            timestampString = "503219088.271937"
+            filePath = "XingXingEdu/XingClassRoom/Controller/ClassRoomSubjectInfoViewController.m"
+            timestampString = "503318748.904066"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "-initData"
+            startingLineNumber = "416"
+            endingLineNumber = "416"
+            landmarkName = "-getCustomerServicesInfo"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -105,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XingXingEdu/ClassInformation/ClassFi/ClassAlbumViewController.m"
-            timestampString = "503219090.646765"
+            filePath = "XingXingEdu/XingClassRoom/Controller/ClassRoomSubjectInfoViewController.m"
+            timestampString = "503318752.244286"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "-initData"
+            startingLineNumber = "412"
+            endingLineNumber = "412"
+            landmarkName = "-getCustomerServicesInfo"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -10,14 +10,13 @@
 
 @interface CheckInViewController : UIViewController
 
-//@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *weekLabel;
+
 @property(nonatomic ,strong)NSString * money;//签到获得猩币
 @property(nonatomic ,strong)NSString * weekDay;//每周签到几天
 @property(nonatomic ,strong)NSString * monthDay;//每月签到几天
 @property(nonatomic ,strong)NSString * lastChickIn;//上次签到时间
 
-//@property (weak, nonatomic) IBOutlet UILabel *dayLabel;
-
 @property  BOOL isCheck;
+
+
 @end

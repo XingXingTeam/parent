@@ -10,7 +10,6 @@
 #import "BeeCloud.h"
 #import "LSSAlertView.h"
 #import "ClassRoomOrderMessageController.h"
-#import "ClassRoomHomePageViewController.h"
 #define Kmgar 15.0f
 #define KlabelH 20.0f
 #define KlabelW 150.0f

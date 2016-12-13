@@ -12,14 +12,14 @@
 #import "SJAvatarBrowser.h"
 #import "WMConversationViewController.h"
 #import "RedFlowerViewController.h"
-
+#import "XXEClassRoomCustomerServicesModel.h"
 
 #define Kmarg 15.0f
 #define KLabelX 20.0f
 #define KLabelW 65.0f
 #define KLabelH 30.0f
 #define kUnderButtonH 64.0f
-@interface ClassRoomSubjectInfoViewController ()<UITextViewDelegate>{
+@interface ClassRoomSubjectInfoViewController ()<UITextViewDelegate, UIActionSheetDelegate>{
     NSInteger  imgCount;
     UIScrollView *bgScrollView;
     UIScrollView *scrollView;//课程详情图片滚动
@@ -36,6 +36,13 @@
     //收藏按钮
     UIButton *rightBtn;
     UIImage *saveImage;
+    
+    //猩课堂 客服 model 数组
+    NSMutableArray *serviceModelArray;
+    //弹出 菜单
+    UIActionSheet *actionSheet;
+    //该课程 所在 学校 ID
+    NSString *school_id;
     
     NSString *parameterXid;
     NSString *parameterUser_Id;
@@ -64,6 +71,7 @@
         parameterXid = XID;
         parameterUser_Id = USER_ID;
     }
+    serviceModelArray = [[NSMutableArray alloc] init];
     
     [self getSubjectInfo:self.courseId];
  
@@ -140,6 +148,8 @@
                 
                          //课程详情图片
             picGroup = dict[@"course_pic_group"];
+            
+            school_id = dict[@"school_id"];
             detailedLabelArr = [[NSMutableArray alloc] initWithObjects:tname,school_name,read_num,collect_num,need_num,age,teach_goal,course_time_str,address,middle_in_rule,quit_rule,original_price,now_price,nil];
                          
           [self scrollViewUI];
@@ -308,7 +318,6 @@
     redFlowerVC.origin_pageStr = @"3";
     redFlowerVC.hidesBottomBarWhenPushed = YES;
     
-    
     [self.navigationController pushViewController:redFlowerVC animated:YES];
     
 }
@@ -376,31 +385,127 @@
 
 //发起聊天
 - (void)clickchatBtn:(UIButton*)btn{
-//    NSLog(@"聊聊");
-    
-    NSString * userId = [XXEUserInfo user].user_id;
-    
-    NSString * userNickName = [XXEUserInfo user].nickname;
-    
-    NSString * userPortraitUri = [XXEUserInfo user].user_head_img;
-    
-    RCUserInfo *_currentUserInfo =
-    [[RCUserInfo alloc] initWithUserId:userId
-                                  name:userNickName
-                              portrait:userPortraitUri];
-    [RCIM sharedRCIM].currentUserInfo = _currentUserInfo;
-    
-    
-    
-    WMConversationViewController *chatPrivateVC = [[WMConversationViewController alloc]init];
+//先获取 客服 信息
+    [self getCustomerServicesInfo];
 
-    chatPrivateVC.conversationType = ConversationType_PRIVATE;
-    chatPrivateVC.targetId = @"18886064";
-    chatPrivateVC.title = @"想要显示的会话标题";
-    
-    
-    [self.navigationController pushViewController:chatPrivateVC animated:YES];
 }
+
+
+#pragma mark ******* 先获取 客服 信息 ***********
+- (void)getCustomerServicesInfo{
+/*
+ 【猩课堂--客服列表】
+ 接口类型:1
+ 接口:
+ http://www.xingxingedu.cn/Global/xkt_customer_service_list
+ */
+    NSString *urlStr = @"http://www.xingxingedu.cn/Global/xkt_customer_service_list";
+    
+    if (school_id) {
+        NSDictionary *params = @{@"appkey":APPKEY,
+                                 @"backtype":BACKTYPE,
+                                 @"xid":parameterXid,
+                                 @"user_id":parameterUser_Id,
+                                 @"user_type":USER_TYPE,
+                                 @"school_id":school_id
+                                 };
+        NSLog(@"params === %@", params);
+        
+        [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
+            //
+            NSLog(@"客服 信息 === %@", responseObj);
+            
+            if ([responseObj[@"code"] integerValue] == 1) {
+                
+                NSArray *arr = [NSArray array];
+                arr = [XXEClassRoomCustomerServicesModel parseResondsData:responseObj[@"data"]];
+                if (serviceModelArray.count != 0) {
+                    [serviceModelArray removeAllObjects];
+                }
+                
+                [serviceModelArray addObjectsFromArray:arr];
+            }
+            if (serviceModelArray.count != 0) {
+                //弹出框
+                [self createActionSheetAlert];
+                
+                
+            }else{
+                [SVProgressHUD showInfoWithStatus:@"该课程暂无客服咨询服务"];
+            }
+            
+        } failure:^(NSError *error) {
+            //
+            [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
+        }];
+
+    }
+    
+    
+}
+
+- (void)createActionSheetAlert{
+    NSMutableArray *serviceNameArray = [[NSMutableArray alloc] init];
+    
+    for (XXEClassRoomCustomerServicesModel *model in serviceModelArray) {
+        [serviceNameArray addObject:model.name];
+    }
+    
+    if (serviceNameArray.count == 1) {
+        actionSheet  = [[UIActionSheet alloc] initWithTitle:@"猩课堂客服" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:serviceNameArray[0] , nil];
+    }else if (serviceNameArray.count == 2){
+        actionSheet  = [[UIActionSheet alloc] initWithTitle:@"猩课堂客服" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:serviceNameArray[0],  serviceNameArray[1], nil];
+    }else if (serviceNameArray.count == 3){
+        actionSheet  = [[UIActionSheet alloc] initWithTitle:@"猩课堂客服" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:serviceNameArray[0],  serviceNameArray[1], serviceNameArray[2], nil];
+    }else if (serviceNameArray.count == 4){
+        actionSheet  = [[UIActionSheet alloc] initWithTitle:@"猩课堂客服" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:serviceNameArray[0], serviceNameArray[1], serviceNameArray[2], serviceNameArray[3], nil];
+    }
+    
+    actionSheet.delegate = self;
+    [actionSheet showInView:self.view];
+
+}
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == serviceModelArray.count) {
+        return;
+    }else{
+        [self pushToChatVC:buttonIndex];
+    }
+    
+    
+}
+
+#pragma mark ====== 进入 聊天 界面 ==========
+- (void)pushToChatVC:(NSInteger)index{
+            NSString * userId = [XXEUserInfo user].user_id;
+    
+            NSString * userNickName = [XXEUserInfo user].nickname;
+    
+            NSString * userPortraitUri = [XXEUserInfo user].user_head_img;
+    
+            RCUserInfo *_currentUserInfo =
+            [[RCUserInfo alloc] initWithUserId:userId
+                                          name:userNickName
+                                      portrait:userPortraitUri];
+            [RCIM sharedRCIM].currentUserInfo = _currentUserInfo;
+    
+    
+    
+            WMConversationViewController *chatPrivateVC = [[WMConversationViewController alloc]init];
+    
+            chatPrivateVC.conversationType = ConversationType_PRIVATE;
+    
+        XXEClassRoomCustomerServicesModel *model = serviceModelArray[index];
+        chatPrivateVC.targetId = model.xid;
+        chatPrivateVC.title = model.name;
+    
+        [self.navigationController pushViewController:chatPrivateVC animated:YES];
+
+}
+
 
 // 购买
 - (void)clickBuyBtn:(UIButton*)btn{

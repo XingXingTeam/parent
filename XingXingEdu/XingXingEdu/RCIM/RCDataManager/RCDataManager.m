@@ -187,9 +187,6 @@
                     NSLog(@"token 错误");
                 }];
             
-            
-        
-   
 }
 
 -(void)refreshBadgeValue{
