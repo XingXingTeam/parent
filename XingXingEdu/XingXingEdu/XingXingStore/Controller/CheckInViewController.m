@@ -18,7 +18,9 @@
     UILabel *_dayLabel;
     UILabel *_weekLabel;
     UILabel *_moneyLabel;
-    YSProgressView *ysView;
+//    YSProgressView *ysView;
+    //进度条
+    UIProgressView *progressView;
     
     NSString *parameterXid;
     NSString *parameterUser_Id;
@@ -75,46 +77,52 @@
     _moneyLabel = [HHControl createLabelWithFrame:CGRectMake((CGRectGetMaxX(bgView.frame) - kLabelW + kLabelX)/2,CGRectGetMaxY(_weekLabel.frame)+ 10 , 150, kLabelH) Font:12 Text:@""];
     _moneyLabel.backgroundColor = [UIColor clearColor];
     [bgView addSubview:_moneyLabel];
+
+    progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    progressView.frame = CGRectMake(40, CGRectGetMaxY(bgView.frame) + 20, kWidth - 80, 2);
+    // 设置已过进度部分的颜色
+    progressView.progressTintColor = UIColorFromRGB(67, 181, 59);
+    // 设置未过进度部分的颜色
+    progressView.trackTintColor = UIColorFromRGB(229, 229, 229);
     
-    ysView = [[YSProgressView alloc] initWithFrame:CGRectMake(40, CGRectGetMaxY(bgView.frame) + 20, kWidth - 80, 2)];
-    ysView.progressHeight = 2;
-    ysView.progressTintColor = UIColorFromRGB(229, 229, 229);
-    ysView.trackTintColor = UIColorFromRGB(67, 181, 59);
-    [self.view addSubview:ysView];
+    [self.view addSubview:progressView];
  
-    UIImageView *bgRuleImgView = [[UIImageView alloc] initWithFrame:CGRectMake(25, CGRectGetMaxY(ysView.frame) + kLabelX, kWidth - 50, 20)];
+    UIImageView *bgRuleImgView = [[UIImageView alloc] initWithFrame:CGRectMake(25, CGRectGetMaxY(progressView.frame) + kLabelX, kWidth - 50, 20)];
     bgRuleImgView.image =  [UIImage imageNamed:@"guize"];
     [self.view addSubview:bgRuleImgView];
  
-    UITextView *checkInText = [[UITextView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(bgRuleImgView.frame) + kLabelX, kWidth - 40, kHeight /3)];
-    checkInText.text = @"  1.每周第一次签到获得5猩币，之后每天签到多增加5猩币,直至20猩币,如有签到中断,将会重新从5猩币开始获取.\n  2.签到签满1周额外获得10猩币,连续签满2周额外获得20猩币,连续签满3周额外获得30猩币,连续签满4周额外获得40猩币.\n";
+    UITextView *checkInText = [[UITextView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(bgRuleImgView.frame) + kLabelX, kWidth - 40, kHeight /2)];
+    
+    NSString *con = @"  1.每周第一次签到获得5猩币，之后每天签到多增加5猩币,直至20猩币,如有签到中断,将会重新从5猩币开始获取.\n  2.签到签满1周额外获得10猩币,连续签满2周额外获得20猩币,连续签满3周额外获得30猩币,连续签满4周额外获得40猩币.\n";
+    checkInText.text = con;
     checkInText.layer.backgroundColor = [[UIColor clearColor] CGColor];
-    checkInText.font = [UIFont systemFontOfSize:16];
+    checkInText.font = [UIFont systemFontOfSize:14 * kScreenRatioWidth];
     checkInText.layer.borderColor = [[UIColor colorWithRed:230.0/255.0 green:230.0/255.0 blue:230.0/255.0 alpha:1.0]CGColor];
     checkInText.layer.borderWidth = 1.0;
     checkInText.layer.cornerRadius = 8.0f;
     checkInText.userInteractionEnabled = NO;
     checkInText.editable = NO;
     [checkInText.layer setMasksToBounds:YES];
+    
     //自动适应行高
-    static CGFloat maxHeight = 130.0f;
+    CGFloat maxHeight = kHeight /2;
     CGRect frame = checkInText.frame;
     CGSize constraintSize = CGSizeMake(frame.size.width, MAXFLOAT);
-    CGSize size = [checkInText sizeThatFits:constraintSize];
-    if (size.height >= maxHeight){
-        size.height = maxHeight;
+    CGSize maxSize = [checkInText sizeThatFits:constraintSize];
+    if (maxSize.height >= maxHeight){
+        maxSize.height = maxHeight;
         checkInText.scrollEnabled = YES;   // 允许滚动
     }
     else{
         checkInText.scrollEnabled = NO;    // 不允许滚动，当textview的大小足以容纳它的text的时候，需要设置scrollEnabed为NO，否则会出现光标乱滚动的情况
     }
-    checkInText.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, size.height);
+    checkInText.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, maxSize.height);
     [self.view addSubview:checkInText];
     
 }
 -(void)createHistoryButton {
     UIButton*rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,22,22)];
-    [rightButton setImage:[UIImage imageNamed:@"查看历史44x44.png"]forState:UIControlStateNormal];
+    [rightButton setImage:[UIImage imageNamed:@"查看历史44x44"]forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(xingMoneyHistory)forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem*rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem= rightItem;
@@ -152,6 +160,13 @@
      {
          NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
 
+         NSString *next_grade_coin = [NSString stringWithFormat:@"%@",dict[@"data"][@"next_grade_coin"]];
+         NSString *coin_total = [NSString stringWithFormat:@"%@",dict[@"data"][@"coin_total"]];
+//         NSLog(@"next_grade_coin === %@", next_grade_coin);
+//         NSLog(@"coin_total **** %@", coin_total);
+//         
+//         NSLog(@"%f", [coin_total floatValue] / [next_grade_coin floatValue]);
+         
          if([[NSString stringWithFormat:@"%@",dict[@"code"]] isEqualToString:@"1"] )
          {
              
@@ -162,72 +177,24 @@
              
             NSString *next_grade_coin = [NSString stringWithFormat:@"%@",dict[@"data"][@"next_grade_coin"]];
             NSString *coin_total = [NSString stringWithFormat:@"%@",dict[@"data"][@"coin_total"]];
-            CGFloat width = kWidth - 80;
-            double durationValue = [coin_total intValue]/[next_grade_coin intValue];
+             progressView.progress = [coin_total floatValue] / [next_grade_coin floatValue];
+
              
-             if (durationValue > 1 && durationValue < 2) {
-                 durationValue = durationValue - 1;
-             }else if (durationValue > 2 && durationValue < 3) {
-                 durationValue = durationValue - 2;
-             }else  if (durationValue > 3 && durationValue < 4) {
-                 durationValue = durationValue - 3;
-             }else if (durationValue > 4 && durationValue < 5) {
-                 durationValue = durationValue - 4;
-             }else if (durationValue > 5 && durationValue < 6) {
-                 durationValue = durationValue - 5;
-             }else if (durationValue > 6 && durationValue < 7) {
-                 durationValue = durationValue - 6;
-             }else if (durationValue > 7 && durationValue < 8) {
-                 durationValue = durationValue - 7;
-             }else if (durationValue > 8 && durationValue < 9) {
-                 durationValue = durationValue - 8;
-             }else if (durationValue > 9 && durationValue < 10) {
-                 durationValue = durationValue - 9;
-             }else if (durationValue > 10 && durationValue < 1000000000000000000) {
-                 durationValue = durationValue - 10;
-             }
-             
-             ysView.progressValue = durationValue *width;
-             
+             NSLog(@"%f", [coin_total floatValue] / [next_grade_coin floatValue]);
              [SVProgressHUD showSuccessWithStatus:@"签到成功"];
              
-         }else{
+         }else if([[NSString stringWithFormat:@"%@",dict[@"code"]] isEqualToString:@"3"]){
              
              _moneyLabel.text=[NSString stringWithFormat:@"明天签到将获得%@猩币",dict[@"data"][@"next_sign_coin"]];
              _dayLabel.text=[NSString stringWithFormat:@"%@天",dict[@"data"][@"continued"]];
              _weekLabel.text=[NSString stringWithFormat:@"获得%@猩币",dict[@"data"][@"sign_coin"]];
              NSString *next_grade_coin = [NSString stringWithFormat:@"%@",dict[@"data"][@"next_grade_coin"]];
              NSString *coin_total = [NSString stringWithFormat:@"%@",dict[@"data"][@"coin_total"]];
-             CGFloat width = kWidth - 80;
-             double durationValue = [coin_total doubleValue]/[next_grade_coin doubleValue];
-             
-             if (durationValue > 1 && durationValue < 2) {
-                 durationValue = durationValue - 1;
-             }else if (durationValue > 2 && durationValue < 3) {
-                 durationValue = durationValue - 2;
-             }else  if (durationValue > 3 && durationValue < 4) {
-                 durationValue = durationValue - 3;
-             }else if (durationValue > 4 && durationValue < 5) {
-                 durationValue = durationValue - 4;
-             }else if (durationValue > 5 && durationValue < 6) {
-                 durationValue = durationValue - 5;
-             }else if (durationValue > 6 && durationValue < 7) {
-                 durationValue = durationValue - 6;
-             }else if (durationValue > 7 && durationValue < 8) {
-                 durationValue = durationValue - 7;
-             }else if (durationValue > 8 && durationValue < 9) {
-                 durationValue = durationValue - 8;
-             }else if (durationValue > 9 && durationValue < 10) {
-                 durationValue = durationValue - 9;
-             }else if (durationValue > 10 && durationValue < 1000000000000000000) {
-                 durationValue = durationValue - 10;
-             }
-             ysView.progressValue = durationValue *width;
+             progressView.progress = [coin_total floatValue] / [next_grade_coin floatValue];
              
               [SVProgressHUD showSuccessWithStatus:@"已经签到"];
          }
          //延时返回主页
-         //         [self performSelector:@selector(delayMethod) withObject:nil afterDelay:2.0f];
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"请求失败:%@",error);
          [SVProgressHUD showErrorWithStatus:@"网络不通，请检查网络！"];

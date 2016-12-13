@@ -96,11 +96,11 @@
                              @"school_id":schoolIdStr,
                              @"class_id":class_idStr};
     
-    NSLog(@"%@", params);
+//    NSLog(@"%@", params);
     
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
-        NSLog(@"%@", responseObj);
+//        NSLog(@"%@", responseObj);
         
         NSDictionary *dict = responseObj;
 

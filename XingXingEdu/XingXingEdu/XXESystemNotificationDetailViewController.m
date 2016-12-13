@@ -34,9 +34,26 @@
     titleArray = [[NSMutableArray alloc] initWithObjects:@"发布人:", @"发布主题:", @"发布时间:", nil];
     contentArray = [[NSMutableArray alloc] initWithObjects:_name, _titleStr, _time, nil];
     
+    [self createLeftButton];
+    
     [self createContent];
 
 }
+
+-(void)createLeftButton{
+    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn.frame = CGRectMake(- 10, 0, 44, 20);
+    
+    [backBtn setImage:[UIImage imageNamed:@"backButton"] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(doBack:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    self.navigationItem.leftBarButtonItem = backItem;
+}
+-(void)doBack:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 - (void)createContent{
     

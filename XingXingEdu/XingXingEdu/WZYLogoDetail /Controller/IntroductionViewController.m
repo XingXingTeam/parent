@@ -12,8 +12,6 @@
 #import "AlbumViewController.h"
 #import "StarRemarkViewController.h"
 #import "SchoolVideoViewController.h"
-
-#import "ClassRoomHomePageViewController.h"
 #import "SchoolIntroductionDetailViewController.h"
 
 #import "WZYHttpTool.h"

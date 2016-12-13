@@ -42,45 +42,54 @@
     
 }
 - (IBAction)submitBtn:(UIButton *)sender {
-
-    /*
-     【意见反馈(两端通用)】
-     接口类型:2
-     接口:
-     http://www.xingxingedu.cn/Global/suggestion_sub
-     传参:
-     con	//反馈内容
-     */
-    //路径
-    NSString *urlStr = @"http://www.xingxingedu.cn/Global/suggestion_sub";
     
-    //请求参数
-    NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"con":_textFid.text};
     
-    [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
-        //
-//        NSLog(@"反馈 意见  ---  %@", responseObj);
-
-        NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
-        if ([codeStr isEqualToString:@"1"]) {
+    if ([_textFid.text isEqualToString:@""]) {
+        [SVProgressHUD showInfoWithStatus:@"请完善反馈信息"];
+    }else{
+        /*
+         【意见反馈(两端通用)】
+         接口类型:2
+         接口:
+         http://www.xingxingedu.cn/Global/suggestion_sub
+         传参:
+         con	//反馈内容
+         */
+        //路径
+        NSString *urlStr = @"http://www.xingxingedu.cn/Global/suggestion_sub";
+        
+        //请求参数
+        NSDictionary *params = @{@"appkey":APPKEY,
+                                 @"backtype":BACKTYPE,
+                                 @"xid":parameterXid,
+                                 @"user_id":parameterUser_Id,
+                                 @"user_type":USER_TYPE,
+                                 @"con":_textFid.text};
+        
+        [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
+            //        NSLog(@"反馈 意见  ---  %@", responseObj);
             
+            NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
+            if ([codeStr isEqualToString:@"1"]) {
+                
                 [UIView animateWithDuration:2 animations:^{
                     [SVProgressHUD showSuccessWithStatus:@"提交成功!"];
                 } completion:^(BOOL finished) {
-                       [self.navigationController popViewControllerAnimated:YES];
+                    [self.navigationController popViewControllerAnimated:YES];
                 }];
-        
-        }else{
+                
+            }else{
+                
+                [SVProgressHUD showErrorWithStatus:@"提交失败!"];
+                
+            }
             
-        [SVProgressHUD showSuccessWithStatus:@"提交失败!"];
-        
-        }
-        
-    } failure:^(NSError *error) {
-        //
-        NSLog(@"%@", error);
-    }];
-    
+        } failure:^(NSError *error) {
+            //
+            [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
+        }];
+
+    }
 }
 
 
@@ -89,7 +98,15 @@
 
 }
 - (void)textViewDidChange:(UITextView *)textView{
-    _numLbl.text =[NSString stringWithFormat:@"%ld/200",textView.text.length];
+    if (textView == _textFid) {
+        
+        if (_textFid.text.length <= 200) {
+            _numLbl.text = [NSString stringWithFormat:@"%lu/200",(unsigned long)textView.text.length];
+        }else{
+            [SVProgressHUD showInfoWithStatus:@"最多可输入200个字符"];
+            _textFid.text = [_textFid.text substringToIndex:200];
+        }
+    }
 
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text

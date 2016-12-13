@@ -489,11 +489,9 @@
 }
 
 - (void)fetchCourseInfo{
-    
     /*
     猩课堂 课程 列表 http://www.xingxingedu.cn/Global/xkt_course
      */
-    
 //    NSLog(@"_coursePage ==== %ld", _coursePage);
     if ([_filter_distance isEqualToString:@"附近"]) {
         _filter_distance = @"";
@@ -504,7 +502,7 @@
                              @"xid":parameterXid,
                              @"user_id":parameterUser_Id,
                              @"user_type":USER_TYPE,
-                             @"page": [NSString stringWithFormat:@"%ld", _teacherPage],
+                             @"page": [NSString stringWithFormat:@"%ld", _coursePage],
                              @"user_lng": _longitudeString,
                              @"user_lat": _latitudeString,
                              @"filter_distance": _filter_distance,
@@ -542,7 +540,7 @@
                              @"xid":parameterXid,
                              @"user_id":parameterUser_Id,
                              @"user_type":USER_TYPE,
-                             @"page": [NSString stringWithFormat:@"%ld", _teacherPage],
+                             @"page": [NSString stringWithFormat:@"%ld", _schoolPage],
                              @"user_lng": _longitudeString,
                              @"user_lat": _latitudeString,
                              @"filter_distance": _filter_distance,

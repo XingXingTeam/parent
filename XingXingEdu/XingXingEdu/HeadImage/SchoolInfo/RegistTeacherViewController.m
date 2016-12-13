@@ -7,7 +7,6 @@
 //
 #define kPData @"ClassTeacherTableViewCell"
 #import "RegistTeacherViewController.h"
-#import "ClassRoomHomePageViewController.h"
 #import "ClassTeacherTableViewCell.h"
 #import "JSDropDownMenu.h"
 #import "ClassSubjectTableViewCell.h"

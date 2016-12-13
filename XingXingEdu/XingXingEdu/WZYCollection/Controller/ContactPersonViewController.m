@@ -210,7 +210,8 @@
     }
     
     [cell.headImgV sd_setImageWithURL:[NSURL URLWithString:iconImageArray[indexPath.row]] placeholderImage:[UIImage imageNamed:@"人物头像172x172"]];
-    
+    cell.headImgV.layer.cornerRadius= cell.headImgV.bounds.size.width/2;
+    cell.headImgV.layer.masksToBounds=YES;
     cell.nameLbl.text = nameArray[indexPath.row];
     
     if ([typeArray[indexPath.row] isEqualToString:@"1"]) {
