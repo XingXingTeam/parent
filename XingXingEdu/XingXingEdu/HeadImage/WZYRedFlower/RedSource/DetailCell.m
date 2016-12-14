@@ -12,6 +12,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
+    
+    self.contentLabel.width = 230 * kScreenRatioWidth;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

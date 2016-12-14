@@ -37,8 +37,6 @@
 #import "BeeCloud.h"
 #import "JPUSHService.h"
 #import "StoreHomePageViewController.h"
-#import "AddAddressViewController.h"
-#import "ClassRoomHomePageViewController.h"
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>
 #import "BMKMapViewController.h"
 #import "CommentsRootTabbarViewController.h"

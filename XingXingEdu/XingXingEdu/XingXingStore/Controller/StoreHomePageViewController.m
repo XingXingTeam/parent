@@ -8,14 +8,16 @@
 
 #import "StoreHomePageViewController.h"
 #import "StoreSettngViewController.h"
-#import "ArticleInfoViewController.h"
+#import "XXEStoreGoodDetailInfoViewController.h"
 #import "MoneyPresentedViewController.h"
 #import "MoneyHistoryTableViewController.h"
 #import "CheckInViewController.h"
 #import "ZQCountDownView.h"
-#import "StoreArticleBuyViewController.h"
+#import "XXEStorePerfectConsigneeAddressViewController.h"
 #import "ArticleInfoTableViewCell.h"
 #import "FlowersBuyViewController.h"
+#import "XXEStoreListModel.h"
+#import "XXEStorePayViewController.h"
 
 #define Kmarg 6.0f
 #define KLabelX 27.0f
@@ -33,8 +35,15 @@
     UIButton *panicBuyBtn;//限时抢购
     UILabel *countdownLabel;//倒计时
     ZQCountDownView *countDownView;//倒计时
+    //虚拟 商品 的待支付 订单
+    NSDictionary *daizhifuOrderDictInfo;
+    
     UITableView* myTabelView;
-    NSMutableArray *articleArray;
+    NSMutableArray *_dataSourceArray;
+    
+    UIView *grayView1;
+    //占位图
+    UIImageView *placeholderImageView;
     
     NSString *parameterXid;
     NSString *parameterUser_Id;
@@ -47,6 +56,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor= UIColorFromRGB(229, 232, 233);
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.title=@"商城";
+    //轮播图 数量
+    imgCount=3;
     
     if ([XXEUserInfo user].login){
         parameterXid = [XXEUserInfo user].xid;
@@ -55,28 +69,28 @@
         parameterXid = XID;
         parameterUser_Id = USER_ID;
     }
+    _dataSourceArray = [[NSMutableArray alloc] init];
+    daizhifuOrderDictInfo = [[NSDictionary alloc] init];
+    //获取 商城 数据
+    [self fetchStoreNetData];
     
-    [self netManage];
+    //创建 最下层 bgScrollView
+    [self createBgScrollView];
     
-    articleArray=[NSMutableArray array];
+    //创建 上部 滚动视图
+    [self createBrowseView];
     
-    self.view.backgroundColor=[UIColor whiteColor];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+    //创建 中部 倒计时
+    [self createCountDownView];
+
+    //创建 下部 tableView
+    [self createTableView];
     
-    self.tabBarController.navigationItem.title=@"首页";
-    
-    imgCount=3;
-    
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(scrollImage) userInfo:nil repeats:YES];
-    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-    [runLoop addTimer:self.timer forMode:NSRunLoopCommonModes];
-    
-    
-    self.tabBarController.navigationItem.title=@"猩猩商城";
     
 }
 
--(void)creatFieldset{
+#pragma mark ########### 创建 最下层 bgScrollView ###
+- (void)createBgScrollView{
     //背景滑动视图
     bgScrollView = [[UIScrollView alloc] init];
     bgScrollView.frame = CGRectMake(0, 0, kWidth, WinHeight);
@@ -86,7 +100,14 @@
     bgScrollView.showsHorizontalScrollIndicator = NO;
     bgScrollView.showsVerticalScrollIndicator  = NO;
     [self.view addSubview:bgScrollView];
-    
+}
+
+#pragma mark ************ 创建 上部 滚动视图 **********
+- (void)createBrowseView{
+    //初始化 计时器
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(scrollImage) userInfo:nil repeats:YES];
+    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+    [runLoop addTimer:self.timer forMode:NSRunLoopCommonModes];
     
     //图片轮播器
     imgScrollView = [[UIScrollView alloc] init];
@@ -120,10 +141,13 @@
     imgPageControl.currentPage=0;
     [bgScrollView addSubview:imgPageControl];
     
-    UIView *grayView1=[[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(imgScrollView.frame), kWidth, 7)];
+   grayView1 =[[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(imgScrollView.frame), kWidth, 7)];
     grayView1.backgroundColor=UIColorFromRGB(229, 232, 233);
     [bgScrollView addSubview:grayView1];
-    
+}
+
+#pragma mark &&&&&&&&&&&&&& 创建 中部 倒计时 &&&&&&&&&&
+- (void)createCountDownView{
     //时钟
     UIImageView *clockIcon = [HHControl createImageViewWithFrame:CGRectMake(Kmarg, CGRectGetMaxY(grayView1.frame) + Kmarg, 24, 24) ImageName:@"抢购倒计时icon"];
     [bgScrollView addSubview:clockIcon];
@@ -189,21 +213,9 @@
     UIImageView *weekrecommend = [HHControl createImageViewFrame:CGRectMake(KLabelX, CGRectGetMaxY(grayView2.frame) + Kmarg *3, kWidth - KLabelX * 2, 14) imageName:@"本周推荐" color:nil];
     [bgScrollView addSubview:weekrecommend];
     
-    //tableView
-    myTabelView=[[UITableView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(weekrecommend.frame) + Kmarg * 3, kWidth, articleArray.count*100)];
-    UINib *nib = [UINib nibWithNibName:@"ArticleInfoTableViewCell" bundle:nil];
-    [myTabelView registerNib:nib forCellReuseIdentifier:@"cell"];
-    myTabelView.delegate=self;
-    myTabelView.dataSource=self;
-    myTabelView.backgroundColor = [UIColor yellowColor];
-    [bgScrollView addSubview:myTabelView];
-    
-    CGFloat maxH = CGRectGetMaxY(weekrecommend.frame) + Kmarg * 5 + (articleArray.count +1) * 100;
-    bgScrollView.contentSize = CGSizeMake(0, maxH);
-    
 }
 
-
+#pragma mark ====== 签到 送猩币 ==========
 -(void)checkInBtn{
     
     [self.navigationController pushViewController:[CheckInViewController alloc] animated:YES];
@@ -218,6 +230,7 @@
 }
 
 -(void)FlowersPrefecture{
+    
     FlowersBuyViewController *flowerBuyVC =[[FlowersBuyViewController alloc]init];
     [self.navigationController pushViewController:flowerBuyVC animated:YES];
 }
@@ -268,10 +281,16 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)buyPressed{
-    [self.navigationController pushViewController:[StoreArticleBuyViewController alloc] animated:YES];
+#pragma mark $$$$$$$$$$$$ 创建 下部 tableView $$$$$$$$
+- (void)createTableView{
+    myTabelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 230 * kScreenRatioHeight, KScreenWidth, 320 * kScreenRatioHeight)];
+    
+    myTabelView.dataSource = self;
+    myTabelView.delegate = self;
+    
+    [bgScrollView addSubview:myTabelView];
+    
 }
-
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -281,35 +300,34 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return articleArray.count;
+    return _dataSourceArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ArticleInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if(cell==nil){
-        cell=[[ArticleInfoTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
     
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        cell.layoutMargins = UIEdgeInsetsZero;
-    }
+    static NSString *identifier = @"cell";
+    ArticleInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    NSArray * tmp=articleArray[indexPath.row];
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"ArticleInfoTableViewCell" owner:self options:nil]lastObject];
+    }
+    XXEStoreListModel *model = _dataSourceArray[indexPath.row];
+    NSString *head_img = [kXXEPicURL stringByAppendingString:model.goods_pic];
     cell.img.layer.cornerRadius=5;
     cell.img.layer.masksToBounds=YES;
-    [cell.img sd_setImageWithURL:[NSURL URLWithString:tmp[0]] placeholderImage:[UIImage imageNamed:@"sdimg1.png"]];
+    [cell.img sd_setImageWithURL:[NSURL URLWithString:head_img] placeholderImage:[UIImage imageNamed:@"sdimg1"]];
     
-    cell.nameLabel.text=tmp[1];
+    cell.nameLabel.text=model.title;
     
-    cell.priceLabel.text= [NSString stringWithFormat:@"￥ %@",tmp[2]];
+    cell.priceLabel.text= [NSString stringWithFormat:@"￥ %@",model.exchange_price];
     
-    cell.oldPriceLabel.text= [NSString stringWithFormat:@"原价:￥ %@",tmp[3]];
+    cell.oldPriceLabel.text= [NSString stringWithFormat:@"原价:￥ %@",model.price];
     
-    cell.moneyLabel.text=[NSString stringWithFormat:@"猩币:%@",tmp[4]];
-    cell.saleLabel.text= [NSString stringWithFormat:@"销量:%@",tmp[5]];
+    cell.moneyLabel.text=[NSString stringWithFormat:@"猩币:%@",model.exchange_coin];
+    cell.saleLabel.text= [NSString stringWithFormat:@"销量:%@",model.sale_num];
     
-    [cell.buyBtn addTarget:self action:@selector(collectPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.buyBtn addTarget:self action:@selector(buyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.buyBtn.tag=indexPath.row+1000;
     
     return cell;
@@ -319,26 +337,98 @@
     return 100;
 }
 
+#pragma mark ******** 直接 购买 ******************
+-(void)buyButtonClick:(UIButton *)button{
+    XXEStoreListModel *model = _dataSourceArray[button.tag - 1000];
+    //判断 是实物还是虚拟
+    //[type] => 1			//1:实物  2:虚拟商品
+    if ([model.type integerValue] == 1) {
+        //如果 是 实物 会 跳到 完善 收货人 信息 界面
+        XXEStorePerfectConsigneeAddressViewController *perfectConsigneeAddressVC = [[XXEStorePerfectConsigneeAddressViewController alloc] init];
+        
+        perfectConsigneeAddressVC.xingIconNum = model.exchange_coin;
+        perfectConsigneeAddressVC.price = model.exchange_price;
+        perfectConsigneeAddressVC.good_id = model.good_id;
+        
+        [self.navigationController pushViewController:perfectConsigneeAddressVC animated:YES];
+    }else if ([model.type integerValue] == 2){
+      // 如果 是 虚拟 会直接到支付 界面, 先生成待支付
+        [self createNoPayOrder:model.good_id];
+    
+    }
+}
 
--(void)collectPressed:(UIButton *)btn{
-    StoreArticleBuyViewController *vc= [[StoreArticleBuyViewController alloc]init];
-    int i=(int)btn.tag-1000;
-    vc.orderNum=articleArray[i][6];
-    vc.xingMoney=articleArray[i][4];
-    vc.rmbMoney=articleArray[i][2];
-    [self.navigationController pushViewController:vc animated:YES];
+#pragma mark ========虚拟 商品 产生未支付订单 ============
+- (void)createNoPayOrder:(NSString *)good_id{
+    /*
+     【猩猩商城--猩币兑换商品点立即支付(产生订单),金额+猩币】
+     接口类型:2
+     接口:
+     http://www.xingxingedu.cn/Global/coin_shopping
+     传参:
+     address_id	//地址id
+     goods_id	//商品id *****必传
+     receipt		//发票抬头
+     buyer_words	//买家留言
+     goods_type  1:实物  /2:虚拟 ****** 默认 是1
+     */
+    
+    NSString *urlStr = @"http://www.xingxingedu.cn/Global/coin_shopping";
+    
+    NSDictionary *params = @{@"appkey":APPKEY,
+                             @"backtype":BACKTYPE,
+                             @"xid":parameterXid,
+                             @"user_id":parameterUser_Id,
+                             @"user_type":USER_TYPE,
+                             @"goods_id":good_id,
+                             @"goods_type":@"2"
+                             };
+//        NSLog(@"params --- %@", params);
+    
+    [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
+        //
+//                NSLog(@"生成待支付订单 == %@", responseObj);
+        /*
+         data =     {
+         "order_id" = 594;
+         "order_index" = 39288589297;
+         "pay_coin" = 300;
+         "pay_price" = 0;
+         "user_coin_able" = 10708;
+         };
+         */
+        if ([responseObj[@"code"]  integerValue] == 1) {
+            daizhifuOrderDictInfo = responseObj[@"data"];
+            
+            XXEStorePayViewController *storePayVC = [[XXEStorePayViewController alloc] init];
+            storePayVC.dict = daizhifuOrderDictInfo;
+            storePayVC.order_id = daizhifuOrderDictInfo[@"order_id"];
+            
+            [self.navigationController pushViewController:storePayVC animated:YES];
+            
+            
+        }else if([responseObj[@"code"]  integerValue] == 7){
+            
+            [SVProgressHUD showInfoWithStatus:@"您猩币不足"];
+        }
+        
+    } failure:^(NSError *error) {
+        //
+        [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
+    }];
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ArticleInfoViewController*vc=  [[ArticleInfoViewController alloc]init];
-    vc.orderNum=articleArray[indexPath.row][6];
-    [self.navigationController pushViewController:vc animated:YES];
+    XXEStoreGoodDetailInfoViewController*storeGoodDetailInfoVC=  [[XXEStoreGoodDetailInfoViewController alloc]init];
+    XXEStoreListModel *model = _dataSourceArray[indexPath.row];
+    storeGoodDetailInfoVC.orderNum=model.good_id;
+    [self.navigationController pushViewController:storeGoodDetailInfoVC animated:YES];
     
 }
 
-#pragma mark 网络
-- (void)netManage{
+#pragma mark ============ 获取 商城 数据 ============
+- (void)fetchStoreNetData{
    NSString *urlStr = @"http://www.xingxingedu.cn/Global/coin_goods";
    NSDictionary *params = @{@"appkey":APPKEY,
                           @"backtype":BACKTYPE,
@@ -348,26 +438,17 @@
                           };
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
-//        NSLog(@"kkk %@", responseObj);
+//        NSLog(@"获取 商城 数据 kkk %@", responseObj);
         
         if ([responseObj[@"code"] integerValue] == 1) {
-           for (NSDictionary *dic in responseObj[@"data"]) {
-            NSString * goods_pic = [picURL stringByAppendingString:dic[@"goods_pic"]];
-                NSString * title = dic[@"title"];
-                NSString * price = dic[@"price"];
-                NSString * exchange_price = dic[@"exchange_price"];
-                NSString * exchange_coin = dic[@"exchange_coin"];
-                NSString * sale_num = dic[@"sale_num"];
-                NSString *  orderNum = dic[@"id"];
-                NSMutableArray *arr=[NSMutableArray arrayWithObjects:goods_pic, title,exchange_price,price,exchange_coin,sale_num,orderNum,nil];
-                             
-                [articleArray addObject:arr];
-                }
-              [myTabelView reloadData];
-              [self creatFieldset];
+            
+            NSArray *modelArray = [[NSArray alloc] init];
+           modelArray = [XXEStoreListModel parseResondsData:responseObj[@"data"]];
+            
+            [_dataSourceArray addObjectsFromArray:modelArray];
   
         }
-        
+        [self customContent];
     } failure:^(NSError *error) {
         //
         [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
@@ -375,6 +456,43 @@
 
 }
 
+// 有数据 和 无数据 进行判断
+- (void)customContent{
+    // 如果 有占位图 先 移除
+    [self removePlaceholderImageView];
+    
+    if (_dataSourceArray.count == 0) {
+        myTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        // 1、无数据的时候
+        [self createPlaceholderView];
+        
+    }else{
+        //2、有数据的时候
+    }
+    
+    [myTabelView reloadData];
+    
+}
+
+
+//没有 数据 时,创建 占位图
+- (void)createPlaceholderView{
+    // 1、无数据的时候
+    UIImage *myImage = [UIImage imageNamed:@"人物"];
+    CGFloat myImageWidth = myImage.size.width;
+    CGFloat myImageHeight = myImage.size.height;
+    
+    placeholderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth / 2 - myImageWidth / 2, (kHeight - 64 - 49) / 2 - myImageHeight / 2, myImageWidth, myImageHeight)];
+    placeholderImageView.image = myImage;
+    [self.view addSubview:placeholderImageView];
+}
+
+//去除 占位图
+- (void)removePlaceholderImageView{
+    if (placeholderImageView != nil) {
+        [placeholderImageView removeFromSuperview];
+    }
+}
 
 
 @end

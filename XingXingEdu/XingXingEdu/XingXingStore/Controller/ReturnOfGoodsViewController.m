@@ -9,7 +9,6 @@
 #import "ReturnOfGoodsViewController.h"
 #import "WJCommboxView.h"
 #import "WZYTextView.h"
-#import "SubjectOrderListViewController.h"
 
 #define kmgar 20.0f
 #define klabelW 65.0f

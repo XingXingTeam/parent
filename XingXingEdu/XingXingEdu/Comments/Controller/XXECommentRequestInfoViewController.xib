@@ -52,10 +52,10 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请求内容：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M77-RX-Ume">
-                                    <rect key="frame" x="50" y="15" width="70" height="21"/>
+                                    <rect key="frame" x="50" y="15" width="97" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="2bU-0w-h0a"/>
-                                        <constraint firstAttribute="width" constant="70" id="Ca4-m1-2An"/>
+                                        <constraint firstAttribute="width" constant="97" id="Ca4-m1-2An"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="0.25882352939999997" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

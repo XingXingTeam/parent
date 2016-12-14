@@ -19,9 +19,9 @@
     
     for (int i = 0; i < btnNum; i++) {
         
-        CGFloat x = raiuds*(cosf(M_PI_2 +(i - 1)*M_PI*2/btnNum)) * 0.5;
+        CGFloat x = raiuds*(cosf(M_PI_2 +(i - 1)*M_PI*2/btnNum)) * 0.8;
         
-        CGFloat y = raiuds*(sinf(M_PI_2 +(i - 1)*M_PI*2/btnNum)) * 0.5;
+        CGFloat y = raiuds*(sinf(M_PI_2 +(i - 1)*M_PI*2/btnNum)) * 0.8;
         
         CGPoint point1 = CGPointMake(center.x - x,center.y - y);
         

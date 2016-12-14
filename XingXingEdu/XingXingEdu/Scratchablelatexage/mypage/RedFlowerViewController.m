@@ -98,7 +98,6 @@
     contentOffset.x = self.index * kWidth;
     [_scrollView setContentOffset:contentOffset animated:YES];
     
-    //    [self createToolBarItems];
     _scrollView.contentSize =CGSizeMake(_ittms.count*kWidth, 0);
     _scrollView.delegate =self;
     
@@ -180,11 +179,9 @@
     [shareBtn addTarget:self action:@selector(shareButn:) forControlEvents:UIControlEventTouchUpInside];
     [imageV addSubview:shareBtn];
     
-    UILabel *shareLbl =[HHControl createLabelWithFrame:CGRectMake(kWidth/2-15, 30, 20, 18) Font:10 Text:@"分享"];
+    UILabel *shareLbl =[HHControl createLabelWithFrame:CGRectMake(kWidth/2-15, 30, 30, 18) Font:10 Text:@"分享"];
     [imageV addSubview:shareLbl];
     //jubao
-    
-    
     UIButton *KTBtn = [[UIButton alloc]initWithFrame:CGRectMake(kWidth-50, 2, 30, 30)];
     [KTBtn setTitle:@"" forState:UIControlStateNormal];
     [KTBtn setImage:[UIImage imageNamed:@"举报icon48x48"] forState:UIControlStateNormal];
@@ -192,7 +189,7 @@
     [KTBtn addTarget:self action:@selector(KTButn:) forControlEvents:UIControlEventTouchUpInside];
     [imageV addSubview:KTBtn];
     
-    UILabel *KTLbl =[HHControl createLabelWithFrame:CGRectMake(kWidth-45, 30, 20, 18) Font:10 Text:@"举报"];
+    UILabel *KTLbl =[HHControl createLabelWithFrame:CGRectMake(kWidth-45, 30, 30, 18) Font:10 Text:@"举报"];
     [imageV addSubview:KTLbl];
     
     UIButton *downBtn = [[UIButton alloc]initWithFrame:CGRectMake(20, 2, 30, 30)];
@@ -203,7 +200,7 @@
     [downBtn addTarget:self action:@selector(downButn:) forControlEvents:UIControlEventTouchUpInside];
     [imageV addSubview:downBtn];
     
-    UILabel *downLbl =[HHControl createLabelWithFrame:CGRectMake(23, 30, 20, 18) Font:10 Text:@"下载"];
+    UILabel *downLbl =[HHControl createLabelWithFrame:CGRectMake(23, 30, 30, 18) Font:10 Text:@"下载"];
     [imageV addSubview:downLbl];
     
 }
@@ -221,16 +218,8 @@
     [self.navigationController pushViewController:reportPicVC animated:YES];
     
 }
-- (void)createToolBarItems{
-    
-}
 
-- (void)savePic{
-    
-    
-    
-    
-}
+
 - (void)shareButn:(UIButton*)btn{
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];

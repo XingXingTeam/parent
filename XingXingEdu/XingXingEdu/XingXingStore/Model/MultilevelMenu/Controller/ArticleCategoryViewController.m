@@ -11,19 +11,14 @@
 #import "XXEXingStoreGoodInfoModel.h"
 #import "MultilevelMenu.h"
 #import "HHControl.h"
-#import "ArticleInfoViewController.h"
+//商品 详情
+#import "XXEStoreGoodDetailInfoViewController.h"
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
 @interface ArticleCategoryViewController ()<UISearchBarDelegate>{
-    //    NSMutableArray *_categoryArr;//类别
-    //    NSMutableArray *_titleArr;//物品名称
-    //    NSMutableArray *_priceArr;//销售价格
-    //    NSMutableArray *_sale_numArr;//销售数量
-    //    NSMutableArray *_goods_picArr;//物品图片
-    //    NSMutableArray *_idArr;//物品ID
-    //    NSMutableArray *_exchange_coinArr;
+
     UISearchBar* m_searchBar;
     
     NSString *parameterXid;
@@ -34,7 +29,6 @@
     
 }
 
-//@property (nonatomic, strong) MultilevelMenu *menu;
 @property (nonatomic, copy) NSString *rowStr;
 
 @end
@@ -218,7 +212,7 @@
     
     MultilevelMenu * view=[[MultilevelMenu alloc] initWithFrame:CGRectMake(0, 50, kScreenWidth, kScreenHeight-50) WithData:lis withSelectIndex:^(NSInteger left, NSInteger right,rightMeun* info) {
         
-        ArticleInfoViewController*vc=  [[ArticleInfoViewController alloc]init];
+        XXEStoreGoodDetailInfoViewController*vc=  [[XXEStoreGoodDetailInfoViewController alloc]init];
         vc.orderNum = info.ID;
         [self.navigationController pushViewController:vc animated:YES];
     }];

@@ -38,4 +38,6 @@
 #import <RongIMKit/RongIMKit.h>
 #import "FriendCircleHeader.h"
 
+#import "StringHeight.h"
+
 #endif

@@ -1,4 +1,4 @@
-//
+
 //  HomepageViewController.m
 //  Homepage
 //
@@ -20,8 +20,6 @@
 #import "noticeViewController.h"
 #import "addbabyViewController.h"
 #import "StoreHomePageViewController.h"
-#import "AddAddressViewController.h"
-#import "ClassRoomHomePageViewController.h"
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>
 #import "BMKMapViewController.h"
 #import "CommentsRootTabbarViewController.h"
@@ -81,7 +79,6 @@
     //头像 滚动头像
     UIView *headView;
     
-    UIImageView *Image;
     UIButton *flowerBtn;
     UIButton *flowersBtn;
     UIButton *xingbiBtn;
@@ -98,10 +95,7 @@
     UILabel *xnumberLabel;
     UILabel *fsnumberLabel;
     UIImageView *manimage;
-    UIButton *LOGOBtn;
-    UIButton *editoclassBtn;
-    UIButton *addBtn;
-    UIView *mView;
+
     UIScrollView * _scrollView;
 
     MyTabBarController *_tbBar;
@@ -109,17 +103,10 @@
     NSString *fbasket_able;
     NSString *flower_able;
     NSString *lv;
-    NSString *age1;
     NSString *baby_id1;
-    NSString *tname1;
-    NSString *personal_sign1;
     NSString *coin_total;
     NSString *next_grade_coin;
-    NSString *school_idStr;
-    UISlider *slide;
-    
-    NSMutableArray *combineMArr;
-    NSMutableArray *familyMemberIcon;
+
     
     //孩子id数组
     NSMutableArray *baby_idArray;
@@ -171,19 +158,14 @@
     //宝贝 性别 数组
     NSMutableArray *babySexArray;
     
+    //请求参数
+    NSString *parameterXid;
+    NSString *parameterUser_Id;
+    
 }
 
 
-@property (nonatomic,retain) UIButton *sjBtn;
-@property (nonatomic,retain) UIButton *bxBtn;
-@property (nonatomic,retain) UIButton *fxBtn;
-@property (nonatomic,retain) UIButton *ldBtn;
-@property (nonatomic,retain) UIButton *ltBtn;
-@property (nonatomic,retain) UIButton *szBtn;
-@property (nonatomic,retain) UIButton *wqBtn;
-@property (nonatomic,retain) UIButton *xsBtn;
-@property (nonatomic,retain) UIButton *xtBtn;
-@property (nonatomic,strong) NSArray *cityArray;
+
 @property(nonatomic,strong) WJCommboxView *schoolNameCombox;
 @property (nonatomic,strong) WJCommboxView *gradeAndClassbox;
 
@@ -278,8 +260,10 @@
     
     [DEFAULTS setObject:_gradeAndClassbox.textField.text forKey:@"GRADEANDCLASS"];
     
+//    NSString *str = [DEFAULTS objectForKey:@"CLASS_ID"];
     
-    //    [ synchronize];
+//    NSLog(@"CLASS_ID == %@", str);
+    
     [DEFAULTS synchronize];
     
     
@@ -300,6 +284,14 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
 
     buttonPicArray = [[NSArray alloc] initWithObjects:@"实时监控icon98x134", @"相册icon98x134", @"课程表icon98x134", @"通讯录icon98x134", @"聊天icon98x134", @"点评icon98x134", @"作业icon98x134", @"食谱icon98x134", @"猩天地icon98x134", @"猩猩商城icon98x134", @"", @"", nil];
     
@@ -475,19 +467,6 @@
     //路径
     NSString *urlStr = DATA_URL;
     
-    //请求参数 无
-    
-    NSString *parameterXid;
-    NSString *parameterUser_Id;
-    if ([XXEUserInfo user].login){
-        parameterXid = [XXEUserInfo user].xid;
-        parameterUser_Id = [XXEUserInfo user].user_id;
-    }else{
-        parameterXid = XID;
-        parameterUser_Id = USER_ID;
-    }
-    
-    
     NSDictionary *params = @{@"appkey":APPKEY,
                              @"backtype":BACKTYPE,
                              @"xid":parameterXid,
@@ -495,13 +474,15 @@
                              @"user_type":USER_TYPE
                              };
     
+//    NSLog(@"params === %@", params);
+    
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
         
         if ([[NSString stringWithFormat:@"%@", [responseObj objectForKey:@"code"]] isEqualToString:@"1"]) {
-                        NSDictionary *dict =[responseObj objectForKey:@"data"];
+            NSDictionary *dict =[responseObj objectForKey:@"data"];
             
-//            NSLog(@"首页%@", dict);
+//            NSLog(@"首页 === %@", dict);
                         //星币//花篮  //红花 //等级
             
             if ([dict[@"coin_able"]  length] >= 5) {
@@ -949,6 +930,12 @@
             [DEFAULTS setObject:_schoolId forKey:@"SCHOOL_ID"];
             [DEFAULTS synchronize];
             
+//            NSLog(@"1--- %@", commboxIDArray);
+//            
+//            NSLog(@"2------%@", commboxIDArray[didSelectedSchoolRow]);
+//            
+//            NSLog(@"3========%@", commboxIDArray[didSelectedSchoolRow][didSelectedClassRow]);
+            
             if (commboxIDArray.count != 0) {
                 NSArray *arr = commboxIDArray[didSelectedSchoolRow];
                 
@@ -956,8 +943,12 @@
             }else{
             _classStr = @"";
             }
-            [DEFAULTS setObject:_classStr forKey:@"CLASS_ID"];
-            [DEFAULTS synchronize];
+            
+//            NSLog(@"_classStr ***** %@", _classStr);
+            
+           [DEFAULTS setObject:_classStr forKey:@"CLASS_ID"];
+            
+           [DEFAULTS synchronize];
 
         [self.gradeAndClassbox.listTableView reloadData];
             
@@ -968,10 +959,9 @@
             //如果 改变 右边的年级班级信息  ——》自动关联到 左边 学校
             //取出name的旧值和新值
             NSString * newNameTwo=[change objectForKey:@"new"];
-
             if([newNameTwo isEqualToString:@"编辑班级"]){
-// 添加班级 // 添加班级 // 添加班级 // 添加班级 // 添加班级  // 添加班级
-                     ClassEditInfoViewController *classEditVC =[[ClassEditInfoViewController alloc]init];
+                // 添加班级 // 添加班级 // 添加班级 // 添加班级 // 添加班级  // 添加班级
+                ClassEditInfoViewController *classEditVC =[[ClassEditInfoViewController alloc]init];
                 
                 if (baby_id1 == nil) {
                     baby_id1 = baby_idArray[0];
@@ -979,11 +969,33 @@
                 }
                 classEditVC.babyId = baby_id1;
                 classEditVC.hidesBottomBarWhenPushed =YES;
-            [self.navigationController pushViewController:classEditVC animated:YES];
+                [self.navigationController pushViewController:classEditVC animated:YES];
                 
+                
+            }else{
+                
+//                NSLog(@"%@", commboxGradeAndClassArray);
+                
+//                NSLog(@"%ld", [commboxGradeAndClassArray indexOfObject:newNameTwo]);
+            
+                if (commboxGradeAndClassArray.count != 0) {
+                    didSelectedClassRow =[commboxGradeAndClassArray[didSelectedSchoolRow] indexOfObject:newNameTwo];
+                    if (commboxIDArray.count != 0) {
+                        NSArray *arr = commboxIDArray[didSelectedSchoolRow];
+                        
+                        _classStr = arr[didSelectedClassRow];
+                    }else{
+                        _classStr = @"";
+                    }
+                    
+                    NSLog(@"_classStr ***** %@", _classStr);
+                    
+                    [DEFAULTS setObject:_classStr forKey:@"CLASS_ID"];
+                    
+                    [DEFAULTS synchronize];
+                }
             
             }
-        
         }
     
     }
@@ -1396,10 +1408,9 @@
     storeHomeVC.hidesBottomBarWhenPushed =YES;
     [self.navigationController pushViewController:storeHomeVC animated:NO];
 }
-//反馈
+#pragma mark =========== 通知 ====================
 -(void)onClickhurn:(UIButton *)button
 {
-    
     
      noticeViewController * forVC = [[noticeViewController alloc]init];
     forVC.hidesBottomBarWhenPushed =YES;

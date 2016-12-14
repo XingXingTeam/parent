@@ -5,7 +5,6 @@
 //  Created by super on 16/1/22.
 //  Copyright © 2016年 Edu. All rights reserved.
 //
-#define DETAIL @"DetailCell"
 #import "detailedViewController.h"
 #import "RedFlowerViewController.h"
 #import "HHControl.h"
@@ -19,15 +18,30 @@
 
 @interface detailedViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
+    
+    //
+    UIButton *collcetionButton;
+    //照片墙 的图片 可以排列几行
+    
+    //图片 有字符串 拆成的数组
+    NSMutableArray *picWallArray;
+    
+    NSInteger picRow;
+    //照片墙 照片 宽
+    CGFloat picWidth;
+    //照片墙 照片 高
+    CGFloat picHeight;
+    
+    CGFloat maxWidth;
+    
     NSArray *arr;
     NSString *parameterXid;
     NSString *parameterUser_Id;
     
 }
-@property (nonatomic) NSArray *pictureArray;
+@property (nonatomic) NSArray *iconArray;
 @property (nonatomic) NSArray *titleArray;
 @property (nonatomic) NSArray *contentArray;
-@property (nonatomic) NSMutableArray *pictureWallArray;
 
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) UIImageView *backgroundImageView;
@@ -44,8 +58,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.tableView.separatorStyle = UITableViewCellAccessoryNone;
+    self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
     self.title =@"小红花详情";
     
     if ([XXEUserInfo user].login){
@@ -56,6 +69,22 @@
         parameterUser_Id = USER_ID;
     }
     
+    picWallArray = [[NSMutableArray alloc] init];
+    self.iconArray =[[NSMutableArray alloc]initWithObjects:@"赠送人40x40", @"时间40x40", @"学校40x40", @"班级40x40", @"科目40x40", @"赠言40x40",  @"教师风采40x40",nil];
+    self.titleArray =[[NSMutableArray alloc]initWithObjects:@"赠送人:",@"赠送时间:",@"学校:", @"班级:", @"课程:", @"赠言:", @"照片墙:", nil];
+    
+    self.contentArray =[[NSMutableArray alloc]initWithObjects:_model.tname, [WZYTool dateStringFromNumberTimer:_model.date_tm], _model.school_name, _model.class_name, _model.teach_course, _model.con, @"", nil];
+    
+//    NSLog(@"%@", _model.pic);
+    if (![_model.pic isEqualToString:@""]) {
+        if (![_model.pic containsString:@","]) {
+            [picWallArray addObject:_model.pic];
+        }else{
+            NSArray *picArr = [NSArray array];
+            picArr = [_model.pic componentsSeparatedByString:@","];
+            [picWallArray addObjectsFromArray:picArr];
+        }
+    }
     
     [self createImageView];
     [self.view addSubview:self.tableView];
@@ -66,11 +95,6 @@
 
 - (void)createImageView{
     
-    self.pictureArray =[[NSMutableArray alloc]initWithObjects:@"赠送人40x40@2x.png", @"时间40x40@2x.png", @"学校40x40@2x.png", @"班级40x40@2x.png", @"科目40x40@2x.png", @"赠言40x40@2x.png",  @"教师风采40x40@2x.png",nil];
-    self.titleArray =[[NSMutableArray alloc]initWithObjects:@"赠送人:",@"赠送时间:",@"学校:", @"班级:", @"课程:", @"赠言:", @"照片墙:", nil];
-    self.contentArray =[[NSMutableArray alloc]initWithObjects:self.name, self.time, self.schoolName, self.className, self.couseName, self.text, @"", nil];
-    self.pictureWallArray = [[NSMutableArray alloc] initWithObjects:@"照片182x182@2x.png", @"照片(1)182x182@2x.png", nil];
-    
     _backgroundImageView = [[UIImageView alloc] init];
     _iconImageView = [[UIImageView alloc] init];
     
@@ -78,8 +102,17 @@
     _backgroundImageView.backgroundColor = UIColorFromRGB(0, 170, 42);
     
     _iconImageView.frame = CGRectMake(kScreenWidth / 2 - 87/2, _backgroundImageView.frame.size.height / 2 - 87/2, 87, 87);
-    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:self.imageName] placeholderImage:[UIImage imageNamed:@"小红花详情人物头像174x174@2x.png"]];
-    _iconImageView.layer.cornerRadius = 87/2;
+    
+    NSString *headImage;
+    
+    if ([_model.head_img_type integerValue] == 0) {
+        headImage = [NSString stringWithFormat:@"%@%@", picURL, _model.head_img];
+    }else{
+        headImage = [NSString stringWithFormat:@"%@", _model.head_img];
+    }
+    
+    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:headImage] placeholderImage:[UIImage imageNamed:@"小红花详情人物头像174x174"]];
+    _iconImageView.layer.cornerRadius = _iconImageView.frame.size.width / 2;
     _iconImageView.layer.masksToBounds = YES;
     [self.backgroundImageView addSubview:_iconImageView];
     
@@ -88,16 +121,16 @@
 
 //设置收藏
 - (void)customCollection{
-    if ([self.i isEqualToNumber:@1]) {
-        self.collcetionButton =[HHControl createButtonWithFrame:CGRectMake(251, 0, 22, 22) backGruondImageName:@"收藏(H)icon44x44" Target:self Action:@selector(collectionClick:) Title:nil];
+    if ([_model.collect_condit integerValue] == 1) {
+        collcetionButton =[HHControl createButtonWithFrame:CGRectMake(251, 0, 22, 22) backGruondImageName:@"收藏(H)icon44x44" Target:self Action:@selector(collectionClick:) Title:nil];
     }
-    else if ([self.i isEqualToNumber:@2]){
+    else if ([_model.collect_condit integerValue] == 2){
         
-        self.collcetionButton =[HHControl createButtonWithFrame:CGRectMake(251, 0, 22, 22) backGruondImageName:@"收藏icon44x44" Target:self Action:@selector(collectionClick:) Title:nil];
+        collcetionButton =[HHControl createButtonWithFrame:CGRectMake(251, 0, 22, 22) backGruondImageName:@"收藏icon44x44" Target:self Action:@selector(collectionClick:) Title:nil];
     }
     
     
-    UIBarButtonItem* rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.collcetionButton];
+    UIBarButtonItem* rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:collcetionButton];
     self.navigationItem.rightBarButtonItem = rightBarButtonItem;
 }
 
@@ -105,74 +138,36 @@
     self.HUDH =[[MBProgressHUD alloc]initWithView:self.view];
     [self.view addSubview:self.HUDH];
     
-    if ([self.i isEqualToNumber:@1]) {
+    if ([_model.collect_condit integerValue] == 1) {
         //已收藏
         if (shareBtn.selected ) {
             shareBtn.selected=NO;
             [self saveFlower];
-            self.HUDH.dimBackground =YES;
-            [shareBtn setBackgroundImage:[UIImage  imageNamed:@"收藏(H)icon44x44"] forState:UIControlStateNormal];
-            self.HUDH.labelText =@"已收藏";
-            
-            [self.HUDH showAnimated:YES whileExecutingBlock:^{
-                sleep(1);
-            } completionBlock:^{
-                [self.HUDH removeFromSuperview];
-                self.HUDH =nil;
-            }];
+
         }
         else{
             shareBtn.selected=YES;
             [self deleteFlower];
-            [shareBtn setBackgroundImage:[UIImage  imageNamed:@"收藏icon44x44"] forState:UIControlStateNormal];
-            self.HUDH.dimBackground =YES;
-            self.HUDH.labelText =@"取消收藏";
-            
-            [self.HUDH showAnimated:YES whileExecutingBlock:^{
-                sleep(1);
-            } completionBlock:^{
-                [self.HUDH removeFromSuperview];
-                self.HUDH =nil;
-            }];
         }
         
     }
-    else if ([self.i isEqualToNumber:@2]){
+    else if ([_model.collect_condit integerValue] == 2){
         //未收藏
         
         if (shareBtn.selected ) {
             [self deleteFlower];
             shareBtn.selected=NO;
-            
-            self.HUDH.dimBackground =YES;
-            [shareBtn setBackgroundImage:[UIImage  imageNamed:@"收藏icon44x44"] forState:UIControlStateNormal];
-            self.HUDH.labelText =@"取消收藏";
-            
-            [self.HUDH showAnimated:YES whileExecutingBlock:^{
-                sleep(1);
-            } completionBlock:^{
-                [self.HUDH removeFromSuperview];
-                self.HUDH =nil;
-            }];
         }
         else{
             shareBtn.selected=YES;
             [self saveFlower];
-            [shareBtn setBackgroundImage:[UIImage  imageNamed:@"收藏(H)icon44x44"] forState:UIControlStateNormal];
-            self.HUDH.dimBackground =YES;
-            self.HUDH.labelText =@"已收藏";
-            
-            [self.HUDH showAnimated:YES whileExecutingBlock:^{
-                sleep(1);
-            } completionBlock:^{
-                [self.HUDH removeFromSuperview];
-                self.HUDH =nil;
-            }];
+
         }
         
     }
 }
 
+#pragma Mark ************ 收藏 ****************
 - (void)saveFlower{
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/collect";
     NSDictionary *dict = @{@"appkey":APPKEY,
@@ -180,16 +175,33 @@
                            @"xid":parameterXid,
                            @"user_id":parameterUser_Id,
                            @"user_type":USER_TYPE,
-                           @"collect_id":[NSString stringWithFormat:@"%@",self.idKT],
+                           @"collect_id":[NSString stringWithFormat:@"%@", _model.flowerId],
                            @"collect_type":@"6"
                            };
     
     [WZYHttpTool post:urlStr params:dict success:^(id responseObj) {
         
-    } failure:^(NSError *error) {
+//        NSLog(@"collect === %@", responseObj);
         
+        if ([responseObj[@"code"]  integerValue] == 1) {
+            self.HUDH.dimBackground =YES;
+            [collcetionButton setBackgroundImage:[UIImage  imageNamed:@"收藏(H)icon44x44"] forState:UIControlStateNormal];
+            self.HUDH.labelText =@"已收藏";
+            
+            [self.HUDH showAnimated:YES whileExecutingBlock:^{
+                sleep(1);
+            } completionBlock:^{
+                [self.HUDH removeFromSuperview];
+                self.HUDH =nil;
+            }];
+        }
+        
+    } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"收藏失败!"];
     }];
 }
+
+#pragma mark =========== 取消 收藏 =========
 - (void)deleteFlower{
     
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/deleteCollect";
@@ -198,27 +210,38 @@
                            @"xid":parameterXid,
                            @"user_id":parameterUser_Id,
                            @"user_type":USER_TYPE,
-                           @"collect_id":self.idKT,
+                           @"collect_id":_model.flowerId,
                            @"collect_type":@"6"
                            };
     
     [WZYHttpTool post:urlStr params:dict success:^(id responseObj) {
         
-        
-        
+//        NSLog(@"deleteCollect ---- %@", responseObj);
+        if ([responseObj[@"code"] integerValue] == 1) {
+            [collcetionButton setBackgroundImage:[UIImage  imageNamed:@"收藏icon44x44"] forState:UIControlStateNormal];
+            self.HUDH.dimBackground =YES;
+            self.HUDH.labelText =@"取消收藏";
+            
+            [self.HUDH showAnimated:YES whileExecutingBlock:^{
+                sleep(1);
+            } completionBlock:^{
+                [self.HUDH removeFromSuperview];
+                self.HUDH =nil;
+            }];
+
+        }
         
     } failure:^(NSError *error) {
-        
+        [SVProgressHUD showErrorWithStatus:@"取消收藏失败!"];
     }];
     
 }
 - (UITableView *)tableView{
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 20  - self.backgroundImageView.frame.size.height )];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) style:UITableViewStyleGrouped];
+        
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        _tableView.scrollEnabled = YES;
-        _tableView.userInteractionEnabled = YES;
         
     }
     return _tableView;
@@ -238,37 +261,63 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    static NSString *identifier = @"cell";
+    DetailCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    DetailCell *cell =(DetailCell*)[tableView dequeueReusableCellWithIdentifier:DETAIL];
     if (cell == nil) {
-        NSArray *nib =[[NSBundle mainBundle] loadNibNamed:DETAIL owner:[DetailCell class] options:nil];
-        cell =(DetailCell *)[nib objectAtIndex:0];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"DetailCell" owner:self options:nil]lastObject];
     }
     
     
-    cell.lineImageView.backgroundColor = [UIColor colorWithRed:224.0/255 green:224.0/255 blue:224.0/255 alpha:1.0];
+//    NSLog(@"_contentArray *******  %@ ---- %ld", _contentArray, indexPath.row);
+    
+//    cell.lineImageView.backgroundColor = [UIColor colorWithRed:224.0/255 green:224.0/255 blue:224.0/255 alpha:1.0];
     cell.titleLabel.text = self.titleArray[indexPath.row];
     cell.contentLabel.text = self.contentArray[indexPath.row];
-    cell.pictureImageView.image = [UIImage imageNamed:self.pictureArray[indexPath.row]];
+    cell.contentLabel.numberOfLines = 0;
+    maxWidth = cell.contentLabel.width;
+    CGFloat height = [StringHeight contentSizeOfString:_contentArray[indexPath.row] maxWidth:maxWidth fontSize:14];
+    
+    CGSize size = cell.contentLabel.size;
+    size.height = height;
+    cell.contentLabel.size = size;
+    cell.pictureImageView.image = [UIImage imageNamed:_iconArray[indexPath.row]];
     
     if (indexPath.row == 6) {
-        //  NSLog(@"%@",self.imageStr);
-        if (![self.imageStr isEqualToString:@""]) {
-            arr =[self.imageStr componentsSeparatedByString:@","];
-            //            NSLog(@"%ld",arr.count);
-            for (int i =0; i<arr.count; i++) {
-                UIButton *pictureWallButton = [UIButton buttonWithType:UIButtonTypeCustom];
-                pictureWallButton.frame = CGRectMake(10 + (10 + 100) * i, 60, 100, 100);
-                pictureWallButton.tag = 10 + i;
-                self.buttonTag = pictureWallButton.tag;
-                [pictureWallButton setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",picURL,arr[i]]]]] forState:UIControlStateNormal];
-                [pictureWallButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.contentView addSubview:pictureWallButton];
-                
-            }
-            
+        
+        if (picWallArray.count % 3 == 0) {
+            picRow = picWallArray.count / 3;
+        }else{
+            picRow = picWallArray.count / 3 + 1;
         }
         
+        int margin = 10;
+        picWidth = (kWidth - 20 - 4 * margin) / 3;
+        picHeight = picWidth;
+        
+//        NSLog(@"%@", picWallArray);
+        
+        for ( int i = 0; i < picWallArray.count; i++) {
+            //行
+            int buttonRow = i / 3;
+            //列
+            int buttonLine = i % 3;
+            CGFloat buttonX = 10 + (picWidth + margin) * buttonLine;
+            CGFloat buttonY = 40 + (picHeight + margin) * buttonRow;
+            
+            UIImageView *pictureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(buttonX, buttonY, picWidth, picHeight)];
+            pictureImageView.contentMode = UIViewContentModeScaleAspectFill;
+            pictureImageView.clipsToBounds = YES;
+            [pictureImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", picURL , picWallArray[i]]] placeholderImage:[UIImage imageNamed:@""]];
+            pictureImageView.tag = 20 + i;
+            pictureImageView.userInteractionEnabled = YES;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickPicture:)];
+            [pictureImageView addGestureRecognizer:tap];
+            
+            [cell.contentView addSubview:pictureImageView];
+            
+        }
         
         
     }
@@ -276,25 +325,34 @@
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 6) {
-        return 180;
-    }
-    return 48;
-}
-
-
-- (void)buttonClick:(UIButton *)button{
+- (void)onClickPicture:(UITapGestureRecognizer *)tap{
+    
+    //    NSLog(@"--- 点击了第%ld张图片", tap.view.tag - 20);
     
     RedFlowerViewController *redFlowerVC =[[RedFlowerViewController alloc]init];
-    redFlowerVC.imageArr = arr;
-    redFlowerVC.index = button.tag - 10;
+    redFlowerVC.imageArr = picWallArray;
+    redFlowerVC.index = tap.view.tag - 20;
     redFlowerVC.hidesBottomBarWhenPushed = YES;
     //图片 举报 来源 小红花 1:小红花赠言中的图片
     redFlowerVC.origin_pageStr = @"1";
     
     [self.navigationController pushViewController:redFlowerVC animated:YES];
-    
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 5) {
+        CGFloat height = [StringHeight contentSizeOfString:_contentArray[indexPath.row] maxWidth:maxWidth fontSize:14];
+        return height + 20;
+    }else if (indexPath.row == 6) {
+        return 44 + picRow * (picHeight + 10);
+    }
+    return 44 ;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.000001;
 }
 
 

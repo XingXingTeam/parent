@@ -98,8 +98,8 @@
     codelabel.textAlignment = NSTextAlignmentRight;
     
     
-    UIImageView *codeImage=[[UIImageView alloc]initWithFrame:CGRectMake(- kmagr, 0, kmagr *2, kmagrH)];
-    codeImage.image=[UIImage imageNamed:@"验证码46x46.png"];
+    UIImageView *codeImage=[[UIImageView alloc]initWithFrame:CGRectMake(- kmagr, 0, 23, 23)];
+    codeImage.image=[UIImage imageNamed:@"验证码46x46"];
     [codelabel addSubview:codeImage];
     
     code =[HHControl createTextFielfFrame:CGRectMake(CGRectGetMaxX(codelabel.frame) + kmagr, CGRectGetMaxY(phone.frame) + kmagr*2, bgView.size.width*0.4, kmagrH) font:[UIFont systemFontOfSize:14]  placeholder:@"4位数字" ];
@@ -267,8 +267,6 @@
             [SVProgressHUD showInfoWithStatus:@"验证码错误"];
         }
     }];
-    
-    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

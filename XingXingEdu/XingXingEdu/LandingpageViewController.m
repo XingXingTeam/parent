@@ -320,7 +320,7 @@ self.navigationController.navigationBarHidden =NO;
     //免费注册BUTTOn
     newUserBtn = [HHControl createButtonWithFrame:CGRectMake(spaceWidth ,  buttonY, buttonWidth, 30) backGruondImageName:nil Target:self Action:@selector(registration:) Title:@"免费注册"];
     [newUserBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    newUserBtn.titleLabel.font = [UIFont systemFontOfSize:12 * kWidth / 375];
+    newUserBtn.titleLabel.font = [UIFont systemFontOfSize:14 ];
 
     
     [View addSubview:newUserBtn];
@@ -328,14 +328,14 @@ self.navigationController.navigationBarHidden =NO;
     //访客模式Button
     visitorsBtn = [HHControl createButtonWithFrame:CGRectMake( spaceWidth * 2 + buttonWidth ,buttonY, buttonWidth, 30) backGruondImageName:nil Target:self Action:@selector(onClickvisitorsBtn:) Title:@"访客登陆"];
     [visitorsBtn setTitleColor:UIColorFromRGB(0, 170, 42) forState:UIControlStateNormal];
-    visitorsBtn.titleLabel.font = [UIFont systemFontOfSize:12 * kWidth / 375];
+    visitorsBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     
     [View addSubview:visitorsBtn];
     
     //找回密码BUTTOn
     forgotPwdBtn = [HHControl createButtonWithFrame:CGRectMake(spaceWidth * 3 + buttonWidth * 2, buttonY, buttonWidth, 30) backGruondImageName:nil Target:self Action:@selector(fogetPwd) Title:@"忘记密码?"];
     [forgotPwdBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    forgotPwdBtn.titleLabel.font = [UIFont systemFontOfSize:12 * kWidth / 375];
+    forgotPwdBtn.titleLabel.font = [UIFont systemFontOfSize:14 ];
     
     [View addSubview:forgotPwdBtn];
 

@@ -98,44 +98,51 @@
 
 - (IBAction)addButton:(id)sender {
     
-    WZYRequestCommentViewController *WZYRequestCommentVC = [[WZYRequestCommentViewController alloc] init];
-    
-    //返回 数组 头像、名称、id、课程
-    [WZYRequestCommentVC returnArray:^(NSMutableArray *selectedTeacherInfoArray) {
-        _selectedTeacherInfoArr = [NSMutableArray arrayWithArray:selectedTeacherInfoArray];
+    if (didSelectTeacherNameArray.count == 4) {
+        [SVProgressHUD showInfoWithStatus:@"一次最多可请求4位老师点评"];
+    }else{
+        WZYRequestCommentViewController *WZYRequestCommentVC = [[WZYRequestCommentViewController alloc] init];
         
-        //老师 头像
-        [dynamicScrollView addImageView:selectedTeacherInfoArray[0]];
+        WZYRequestCommentVC.didSelectTeacherIdArray = didSelectTeacherIdArray;
         
-        //老师 名字
-        [didSelectTeacherNameArray addObject:selectedTeacherInfoArray[1]];
-        NSMutableString *labelStr=[NSMutableString string];
-        for (NSString * str in didSelectTeacherNameArray ) {
-        [labelStr appendString:str];
-        [labelStr appendString:@"  "];
-        }
-      self.nameLabel.text=labelStr;
-        
-        //老师 id
-        [didSelectTeacherIdArray addObject:selectedTeacherInfoArray[2]];
-        
-        NSMutableString *tidStr = [NSMutableString string];
-        
-        for (int j = 0; j < didSelectTeacherIdArray.count; j ++) {
-            NSString *str = didSelectTeacherIdArray[j];
+        //返回 数组 头像、名称、id、课程
+        [WZYRequestCommentVC returnArray:^(NSMutableArray *selectedTeacherInfoArray) {
+            _selectedTeacherInfoArr = [NSMutableArray arrayWithArray:selectedTeacherInfoArray];
             
-            if (j != didSelectTeacherIdArray.count - 1) {
-               [tidStr appendFormat:@"%@,", str];
-            }else{
-               [tidStr appendFormat:@"%@", str];
+            //老师 头像
+            [dynamicScrollView addImageView:selectedTeacherInfoArray[0]];
+            
+            //老师 名字
+            [didSelectTeacherNameArray addObject:selectedTeacherInfoArray[1]];
+            NSMutableString *labelStr=[NSMutableString string];
+            for (NSString * str in didSelectTeacherNameArray ) {
+                [labelStr appendString:str];
+                [labelStr appendString:@"  "];
             }
-        }
+            self.nameLabel.text=labelStr;
+            
+            //老师 id
+            [didSelectTeacherIdArray addObject:selectedTeacherInfoArray[2]];
+            
+            NSMutableString *tidStr = [NSMutableString string];
+            
+            for (int j = 0; j < didSelectTeacherIdArray.count; j ++) {
+                NSString *str = didSelectTeacherIdArray[j];
+                
+                if (j != didSelectTeacherIdArray.count - 1) {
+                    [tidStr appendFormat:@"%@,", str];
+                }else{
+                    [tidStr appendFormat:@"%@", str];
+                }
+            }
+            
+            teacherIdStr = tidStr;
+            
+        }];
         
-        teacherIdStr = tidStr;
-      
-    }];
+        [self.navigationController pushViewController:WZYRequestCommentVC animated:YES];
     
-    [self.navigationController pushViewController:WZYRequestCommentVC animated:YES];
+    }
     
 }
 
@@ -189,7 +196,16 @@
 
 - (void)textViewDidChange:(UITextView *)textView{
 
-    self.textcountLabel.text=[NSString stringWithFormat:@"%lu/200",(unsigned long)textView.text.length];
+//    self.textcountLabel.text=[NSString stringWithFormat:@"%lu/200",(unsigned long)textView.text.length];
+    if (textView == _requestText) {
+        
+        if (_requestText.text.length <= 200) {
+            self.textcountLabel.text=[NSString stringWithFormat:@"%lu/200",(unsigned long)textView.text.length];
+        }else{
+            [SVProgressHUD showInfoWithStatus:@"最多可输入200个字符"];
+            _requestText.text = [_requestText.text substringToIndex:200];
+        }
+    }
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
    [self.view endEditing:YES];

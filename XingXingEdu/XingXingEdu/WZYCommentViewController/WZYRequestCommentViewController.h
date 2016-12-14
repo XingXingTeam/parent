@@ -15,6 +15,8 @@ typedef void(^ReturnArrayBlock)(NSMutableArray *selectedTeacherInfoArray);
 
 @property (nonatomic, copy) ReturnArrayBlock ReturnArrayBlock;
 
+@property (nonatomic, strong) NSMutableArray *didSelectTeacherIdArray;
+
 
 - (void)returnArray:(ReturnArrayBlock)block;
 

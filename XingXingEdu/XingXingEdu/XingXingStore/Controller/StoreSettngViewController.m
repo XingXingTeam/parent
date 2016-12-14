@@ -9,8 +9,9 @@
 #import "StoreSettngViewController.h"
 #import "StoreCollectTableViewController.h"
 #import "MoneyHistoryTableViewController.h"
-#import "AddressViewController.h"
-#import "SubjectOrderListViewController.h"
+#import "XXEStoreConsigneeAddressViewController.h"
+#import "XXEStoreGoodsListViewController.h"
+
 
 #define kMarg 30.0f
 #define kButtonH 40.0f
@@ -55,22 +56,28 @@
     
 }
 
-
+#pragma mark ========== 收藏 商品 列表 ========
 - (IBAction)myCollect:(id)sender {
     [self.navigationController pushViewController:[StoreCollectTableViewController alloc] animated:YES];
 }
 
+#pragma mark *********** 猩币 历史 列表 ***********
 - (IBAction)moneyHistory:(id)sender {
     [self.navigationController pushViewController:[MoneyHistoryTableViewController alloc] animated:YES];
 }
 
+#pragma mark $$$$$$$$$$$ 收货地址 列表 $$$$$$$$$$$$$
 - (IBAction)adress:(id)sender {
-    [self.navigationController pushViewController:[AddressViewController alloc] animated:YES];
+    [self.navigationController pushViewController:[XXEStoreConsigneeAddressViewController alloc] animated:YES];
     
     
 }
+
+#pragma mark ^^^^^^^^^^^ 订单 列表 ^^^^^^^^^^^^^
 - (IBAction)subjectOrderBtn:(id)sender {
-    SubjectOrderListViewController *orderListVC = [[SubjectOrderListViewController alloc] init];
+    
+    //XXEStoreGoodsListViewController
+    XXEStoreGoodsListViewController *orderListVC = [[XXEStoreGoodsListViewController alloc] init];
     [self.navigationController pushViewController:orderListVC animated:YES];
 }
 

@@ -28,20 +28,27 @@
 #import "WMConversationListViewController.h"
 @interface MyHeadViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 {
-     UIImageView *icon;
-     UIImageView *headPortraitView;
+    UIImageView *icon;
     UITableView *_tableView;
-    NSMutableArray *dataArray;
-    NSMutableArray *detailArray;
-    UIImageView *imageView;
+    //
+    
+    NSMutableArray *titleArray;
+    //
     NSArray *headArr;
-    NSString *urlStr;
-    NSString *coin_total;
-    NSString *head_img;
-    NSString *lv;
-    NSString *next_grade_coin;
-    NSString *nickname;
-    NSString *head_img_type;
+    //
+    NSDictionary *myselfInfoDict;
+    
+    //
+    UIImageView *imageView;
+    //用户名
+    UILabel *nameLbl;
+    
+    //等级
+    UILabel *lvLabel;
+    //添加性别
+    UIImageView *manimage;
+    //文字
+    UILabel *titleLbl;
     
     YSProgressView *ysView;
     CGFloat imageViewBottom;
@@ -78,33 +85,64 @@
         parameterUser_Id = USER_ID;
     }
     
-    dataArray = [[NSMutableArray alloc]init];
-    detailArray = [[NSMutableArray alloc]init];
     headArr =[NSArray arrayWithObjects:@"我的资料40x40",@"我的订单40x48",@"我的好友40x44",@"我的聊天40x40",@"我的收藏40x40",@"我的圈子40x40",@"我的黑名单40x40",@"系统设置40x40",@"隐私设置40x40",nil];
-    [dataArray addObject:headArr];
     
-    NSArray *arr = [NSArray arrayWithObjects:@"我的资料",@"我的订单",@"我的好友",@"我的聊天",@"我的收藏",@"我的圈子",@"我的黑名单",@"系统设置",@"隐私设置",nil];
-    
-    [dataArray addObject:arr];
-    
-    
-//    NSLog(@"999999999");
-    
+    titleArray = [NSMutableArray arrayWithObjects:@"我的资料",@"我的订单",@"我的好友",@"我的聊天",@"我的收藏",@"我的圈子",@"我的黑名单",@"系统设置",@"隐私设置",nil];
+    myselfInfoDict = [[NSDictionary alloc] init];
+
+    [self createContent];
+
+    [self createTableView];
+}
+
+- (void)createContent{
     imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 64, kWidth, 150 * kWidth / 375)];
     imageView.image = [UIImage imageNamed:@"banner"];
-    //    _tableView.tableHeaderView =imageView;
     imageView.userInteractionEnabled =YES;
     [self.view addSubview:imageView];
+
+    nameLbl =[HHControl createLabelWithFrame:CGRectMake(150 * kWidth / 375, 42 * kWidth / 375, 150 * kWidth / 375, 20 * kWidth / 375 ) Font:18 * kWidth / 375 Text:@""];
+    nameLbl.textColor =UIColorFromRGB(255, 255, 255);
+    [imageView addSubview:nameLbl];
     
-    imageViewBottom = imageView.frame.origin.y + imageView.frame.size.height;
+    
+    // 等级
+    lvLabel = [HHControl createLabelWithFrame:CGRectMake(250 * kWidth / 375, 43 * kWidth / 375, 40 * kWidth / 375, 18 * kWidth / 375) Font:12 * kWidth / 375 Text:@""];
+    lvLabel.textColor = UIColorFromRGB(3, 169, 244);
+    lvLabel.textAlignment = NSTextAlignmentCenter;
+    lvLabel.backgroundColor = [UIColor whiteColor];
+    lvLabel.layer.cornerRadius = 5;
+    lvLabel.layer.masksToBounds = YES;
+    [imageView addSubview:lvLabel];
+    
+    icon = [[UIImageView alloc] initWithFrame:CGRectMake(30 * kWidth / 375, 30 * kWidth / 375, 100 * kWidth / 375,100 * kWidth / 375)];
+    
+    icon.layer.cornerRadius =50 * kWidth / 375;
+    icon.layer.masksToBounds =YES;
+    [imageView addSubview:icon];
+    icon.userInteractionEnabled =YES;
+    manimage = [[UIImageView alloc]initWithFrame:CGRectMake(40 * kWidth / 375, 75 * kWidth / 375, 20 * kWidth / 375, 20 * kWidth / 375)];
+    [icon addSubview:manimage];
+    
+    titleLbl =[HHControl createLabelWithFrame:CGRectMake(150 * kWidth / 375, 80 * kWidth / 375, 220 * kWidth / 375, 20 * kWidth / 375) Font:14 * kWidth / 375 Text:@""];
+    titleLbl.textColor =UIColorFromRGB(255, 255, 255);
+    titleLbl.numberOfLines =0;
+    [imageView addSubview:titleLbl];
+    
+    //滚动条
+    ysView = [[YSProgressView alloc] initWithFrame:CGRectMake(150 * kWidth / 375, 120 * kWidth / 375, 200 * kWidth / 375, 10 * kWidth / 375)];
+    ysView.progressHeight = 2;
+    ysView.progressTintColor = [UIColor colorWithRed:0.0 / 255 green:0.0 / 255 blue:0.0 / 255 alpha:0.5];
+    ysView.trackTintColor = [UIColor whiteColor];
     
     
-    [self createTableView];
+    [imageView addSubview:ysView];
 
 }
+
 - (void)loadNewData{
 
-    urlStr = @"http://www.xingxingedu.cn/Parent/my_personal_center";
+   NSString * urlStr = @"http://www.xingxingedu.cn/Parent/my_personal_center";
 //    NSLog(@"xid %@ ----  user_id  %@", parameterXid, parameterUser_Id);
     
     NSDictionary *pragm = @{   @"appkey":APPKEY,
@@ -113,32 +151,16 @@
                                @"user_id":parameterUser_Id,
                                @"user_type":USER_TYPE,
                                };
-    
-    
+//    NSLog(@"pragm == %@", pragm);
     [WZYHttpTool post:urlStr params:pragm success:^(id responseObj) {
-
-        
+//        NSLog(@"responseObj **** %@", responseObj);
         if([[NSString stringWithFormat:@"%@",responseObj[@"code"]]isEqualToString:@"1"] )
         {
-            
-            NSDictionary *dict =responseObj[@"data"];
-
-            coin_total = dict[@"coin_total"];
-
-            //head_img_type] => 0	//关系人头像类型,0代表用户上传的头像,1代表第三方头像,区别在于url头部
-          
-            if([[NSString stringWithFormat:@"%@",dict[@"head_img_type"]]isEqualToString:@"0"]){
-                head_img=[picURL stringByAppendingString:dict[@"head_img"]];
-            }else{
-                head_img=dict[@"head_img"];
-            }
-
-            lv = dict[@"lv"];
-            next_grade_coin = dict[@"next_grade_coin"];
-            nickname = dict[@"nickname"];
+            myselfInfoDict = responseObj[@"data"];
             
         }
-        [self initUI];
+        //更新 数据
+        [self updateHeaderInfo];
         
     } failure:^(NSError *error) {
         
@@ -149,59 +171,45 @@
 
 }
 - (void)createTableView{
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, imageViewBottom, kWidth, kHeight - imageViewBottom) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 150 * kWidth / 375 + 64, kWidth, kHeight - 150 * kWidth / 375 - 70) style:UITableViewStyleGrouped];
     _tableView.dataSource =self;
     _tableView.delegate =self;
     [self.view addSubview:_tableView];
 
 }
-- (void)initUI{
 
-    //用户名
-    UILabel *nameLbl =[HHControl createLabelWithFrame:CGRectMake(150 * kWidth / 375, 42 * kWidth / 375, 150 * kWidth / 375, 20 * kWidth / 375 ) Font:18 * kWidth / 375 Text:nickname];
-    nameLbl.textColor =UIColorFromRGB(255, 255, 255);
-    [imageView addSubview:nameLbl];
+- (void)updateHeaderInfo{
+    //姓名
+    nameLbl.text = myselfInfoDict[@"nickname"];
+    //等级
+    lvLabel.text = [NSString stringWithFormat:@"LV%@", myselfInfoDict[@"lv"]];
+    //头像
+    /*
+     0 :表示 自己 头像 ，需要添加 前缀
+     1 :表示 第三方 头像 ，不需要 添加 前缀
+     //判断是否是第三方头像
+     */
+    NSString *headImage;
+    if ([myselfInfoDict[@"head_img_type"] integerValue] == 0) {
+        headImage = [NSString stringWithFormat:@"%@%@", picURL, myselfInfoDict[@"head_img"]];
+    }else if ([myselfInfoDict[@"head_img_type"] integerValue] ==1){
+        headImage = [NSString stringWithFormat:@"%@", myselfInfoDict[@"head_img"]];
+    }
     
-    
-    // 等级
-    NSString *lvString = [NSString stringWithFormat:@"LV%@", lv];
-    UILabel *lvLabel = [HHControl createLabelWithFrame:CGRectMake(250 * kWidth / 375, 43 * kWidth / 375, 40 * kWidth / 375, 18 * kWidth / 375) Font:12 * kWidth / 375 Text:lvString];
-    lvLabel.textColor = UIColorFromRGB(3, 169, 244);
-    lvLabel.textAlignment = NSTextAlignmentCenter;
-    lvLabel.backgroundColor = [UIColor whiteColor];
-    lvLabel.layer.cornerRadius = 5;
-    lvLabel.layer.masksToBounds = YES;
-    [imageView addSubview:lvLabel];
-    
-    icon = [[UIImageView alloc] initWithFrame:CGRectMake(30 * kWidth / 375, 30 * kWidth / 375, 100 * kWidth / 375,100 * kWidth / 375)];
-//    NSLog(@"11  aaaaa  -- %@", head_img);
-    
-    [icon sd_setImageWithURL:[NSURL URLWithString:head_img] placeholderImage:[UIImage imageNamed:@"人物头像172x172"]];
+    [icon sd_setImageWithURL:[NSURL URLWithString:headImage] placeholderImage:[UIImage imageNamed:@"人物头像172x172"]];
+    //性别  sex 男/女
+    if ([myselfInfoDict[@"sex"] isEqualToString:@"男"]) {
+        manimage.image = [UIImage imageNamed:@"男"];
+    }else if ([myselfInfoDict[@"sex"] isEqualToString:@"女"]){
+        manimage.image = [UIImage imageNamed:@"女"];
+    }
 
-    icon.layer.cornerRadius =50 * kWidth / 375;
-    icon.layer.masksToBounds =YES;
-    [imageView addSubview:icon];
-    icon.userInteractionEnabled =YES;
-    //添加性别
-    UIImageView *manimage = [[UIImageView alloc]initWithFrame:CGRectMake(40 * kWidth / 375, 75 * kWidth / 375, 20 * kWidth / 375, 20 * kWidth / 375)];
-    manimage.image = [UIImage imageNamed:@"man"];
-    [icon addSubview:manimage];
-    
     //文字
-    UILabel *titleLbl =[HHControl createLabelWithFrame:CGRectMake(150 * kWidth / 375, 80 * kWidth / 375, 220 * kWidth / 375, 20 * kWidth / 375) Font:14 * kWidth / 375 Text:[NSString stringWithFormat:@"还差%ld星币升级到%ld级会员",[next_grade_coin integerValue]-[coin_total integerValue], [lv integerValue]+1]];
-    titleLbl.textColor =UIColorFromRGB(255, 255, 255);
-    titleLbl.numberOfLines =0;
-    [imageView addSubview:titleLbl];
+    titleLbl.text = [NSString stringWithFormat:@"还差%ld星币升级到%ld级会员",[myselfInfoDict[@"coin_total"] integerValue]-[myselfInfoDict[@"next_grade_coin"] integerValue], [myselfInfoDict[@"lv"] integerValue]+1];
     
     //滚动条
-    ysView = [[YSProgressView alloc] initWithFrame:CGRectMake(150 * kWidth / 375, 120 * kWidth / 375, 200 * kWidth / 375, 10 * kWidth / 375)];
-    ysView.progressHeight = 2;
-    ysView.progressTintColor = [UIColor colorWithRed:0.0 / 255 green:0.0 / 255 blue:0.0 / 255 alpha:0.5];
-    ysView.trackTintColor = [UIColor whiteColor];
-    float b =  [coin_total floatValue]/[next_grade_coin floatValue];
+    float b =  [myselfInfoDict[@"coin_total"] floatValue]/[myselfInfoDict[@"next_grade_coin"] floatValue];
     ysView.progressValue = b * ysView.frame.size.width;
-    
-    [imageView addSubview:ysView];
     
 }
 
@@ -221,8 +229,8 @@
         NSArray *nib =[[NSBundle mainBundle]loadNibNamed:@"MyHeadInfoCell" owner:[MyHeadInfoCell class] options:nil];
         cell =(MyHeadInfoCell*)[nib objectAtIndex:0];
     }
-      cell.nameLbl.text =dataArray[1][indexPath.row];
-      cell.headImagV.image = [UIImage imageNamed:dataArray[0][indexPath.row]];
+      cell.nameLbl.text = titleArray[indexPath.row];
+      cell.headImagV.image = [UIImage imageNamed:headArr[indexPath.row]];
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
@@ -242,7 +250,7 @@
             //我的资料
             MyInfomationViewController *myInfomationVC =[[MyInfomationViewController alloc]init];
             myInfomationVC.hidesBottomBarWhenPushed =YES;
-            myInfomationVC.lvString = [NSString stringWithFormat:@"LV%@", lv];
+            myInfomationVC.lvString = [NSString stringWithFormat:@"LV%@",myselfInfoDict[@"lv"]];
             [self.navigationController pushViewController:myInfomationVC animated:YES];
             
         }

@@ -10,13 +10,14 @@
 #import "shezhiViewController.h"
 #import "HHControl.h"
 #import "feedbackViewController.h"
-#import "aboutusViewController.h"
 #import "LandingpageViewController.h"
 #import "CoreUMeng.h"
+//关于我们
 #import "AboutMainViewController.h"
 #import "ProbromBackViewController.h"
 #import "FGGImageCacheCleaner.h"
 #import "MBProgressHUD.h"
+
 @interface shezhiViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
     UITableView *_tableView;
@@ -51,25 +52,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title =@"系统设置";
-    //self.view.backgroundColor = UIColorFromRGB(245, 245, 245);
-    [self createTableView];
-}
-- (void)createTableView{
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kWidth, kHeight) style:UITableViewStyleGrouped];
-    _tableView.dataSource =self;
-    _tableView.delegate =self;
-     _tableView.separatorStyle =UITableViewCellSeparatorStyleSingleLine;
-    [self.view addSubview:_tableView];
+    self.view.backgroundColor = UIColorFromRGB(229 , 232, 233);
+    
     dataArr =[[NSMutableArray alloc]init];
     NSArray *arr =@[@"消息提醒",@"消息提醒音",@"非WIFI网络播放提醒",@"关于我们",@"分享",@"去app评分",@"清楚缓存",@"反馈问题送猩币"];
     [dataArr addObjectsFromArray:arr];
-
+    
+    [self createTableView];
+    
+    
 }
-- (void)passWord{
-
-
-
-
+- (void)createTableView{
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kWidth, kHeight - 64) style:UITableViewStyleGrouped];
+    _tableView.dataSource =self;
+    _tableView.delegate =self;
+//     _tableView.separatorStyle =UITableViewCellSeparatorStyleSingleLine;
+    [self.view addSubview:_tableView];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -108,24 +106,28 @@
     switch (indexPath.row) {
         case 0:
         {
-        
+        //@"消息提醒"
+            
         }
             break;
         case 1:
         {
+            //@"消息提醒音"
             
         }
             break;
         case 2:
         {
+          //@"非WIFI网络播放提醒"
             
         }
             break;
         case 3:
         {
-            NSLog(@"关于我们");
+//            NSLog(@"关于我们");
             AboutMainViewController *aboutMainVC =[[AboutMainViewController alloc]init];
             [self.navigationController pushViewController:aboutMainVC animated:YES];
+    
             
         }
             break;
@@ -133,8 +135,6 @@
         {
              NSLog(@"分享");
          [CoreUmengShare show:self text:@"为了孩子的未来,这里有你想要的一切,快点点击下载吧！https://itunes.apple.com/cn/app/jie-dian-qian-zhuan-ye-ban/id1112373854?mt=8&v0=WWW-GCCN-ITSTOP100-FREEAPPS&l=&ign-mpt=uo%3D4" image:[UIImage imageNamed:@"猩猩教室.png"]];
-            
-            
             
         }
             break;
@@ -145,10 +145,8 @@
             break;
         case 6:
         {
-              NSLog(@"清楚缓存");
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"清空缓存数据" message:@"确认清空猩猩教室本地的缓存数据?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-            alert.tag=2;
-            [alert show];
+//              NSLog(@"清除缓存");
+            [self createAlertView];
             
         }
             break;
@@ -163,31 +161,87 @@
             break;
     }
 }
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex==1) {
-        if (alertView.tag==2) {
-        
-            HUD =[[MBProgressHUD alloc]initWithView:self.view];
-            [self.view addSubview:HUD];
-            
-            HUD.dimBackground =YES;
-            HUD.labelText =@"正在清除缓存中...";
-            [HUD showAnimated:YES whileExecutingBlock:^{
-                
-            [[FGGImageCacheCleaner currentCleaner] clearImageCache];
-                sleep(2);
-                HUD.labelText =@"清除成功!";
-            } completionBlock:^{
-                [HUD removeFromSuperview];
-                HUD =nil;
-               
-            }];
-            
-        }
-    }
 
+- (void)createAlertView{
+    //清除缓存计算缓存大小
+    // 获取要清除缓存的路径
+    NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask,YES) objectAtIndex:0];
+    // 调用folderSizeAtPath方法计算缓存路径下的文件size
+    CGFloat fileSize = [self folderSizeAtPath:cachPath];
+    NSString *str = [NSString stringWithFormat:@"缓存%.1fM", fileSize];
+    //    NSLog(@"%@",NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES));
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str message:@"确定清除数据缓存?"delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+    [alert show];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    switch (buttonIndex) {
+        case 0:
+            //取消
+            break;
+            
+        case 1:
+        {
+            [self clearCacheFlies];
+            
+        }
+            break;
+    }
+}
+
+//二、计算缓存cache文件夹下文件大小。
+//单个文件的大小
+- (CGFloat)fileSizeAtPath:(NSString*) filePath{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if([manager fileExistsAtPath:filePath]){
+        return[[manager attributesOfItemAtPath:filePath error:nil]fileSize];
+    }
+    return 0;
+    
+}
+
+
+//遍历文件夹获得文件夹大小，返回多少M
+- (float) folderSizeAtPath:(NSString*) folderPath{
+    
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if(![manager fileExistsAtPath:folderPath])
+        return 0;
+    
+    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];
+    
+    NSString* fileName;
+    
+    long long folderSize =0;
+    
+    while((fileName = [childFilesEnumerator nextObject]) != nil){
+        NSString* fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
+        folderSize += [self fileSizeAtPath:fileAbsolutePath];
+    }
+    return folderSize/(1024.0*1024.0);//得到缓存大小M
+    
+}
+
+//一、清理缓存cache文件夹，删除文件方法
+-(void)clearCacheFlies
+{
+    NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask,YES) objectAtIndex:0];
+    NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachPath];
+    //        NSLog(@"files :%ld",[files count]);
+    for (NSString *p in files) {
+        NSError *error;
+        NSString *path = [cachPath stringByAppendingPathComponent:p];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+            // 删除缓存
+            [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+        }
+//        NSLog(@"清理成功！");
+    }
+    [SVProgressHUD showSuccessWithStatus:@"清除成功!"];
+    
+}
 
 
 
@@ -200,106 +254,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-////创建摁钮
-//-(void)createButton
-//{
-////    //咨询客服摁钮
-////    UIButton *consultBtn=[HHControl createButtonWithFrame:CGRectMake(150, 80, 100, 30) backGruondImageName:nil Target:self Action:@selector(onclickconsult:) Title:@"咨询客服"];
-////    [consultBtn setBackgroundColor: [UIColor colorWithWhite:(255,255,255) alpha:1]];
-////    consultBtn.userInteractionEnabled = YES;
-////    [self.view addSubview:consultBtn];
-//    
-//    //去APP评分摁钮
-//    UIButton *appBtn = [HHControl createButtonWithFrame:CGRectMake(8, 300, 100, 100) backGruondImageName:nil Target:self Action:@selector(onClickapp:) Title:@"去app评分"];
-//        appBtn.userInteractionEnabled = YES;
-//    [self.view addSubview:appBtn];
-//    
-//    //关于我们
-//    aboutusBtn =[HHControl createButtonWithFrame:CGRectMake(5, 50, 100, 100) backGruondImageName:nil Target:self Action:@selector(onClickaboutus:) Title:@"关于我们"];
-//        aboutusBtn.userInteractionEnabled = YES;
-//    [self.view addSubview:aboutusBtn];
-//
-//    
-//    //分享摁钮
-//    UIButton *shareBtn = [HHControl createButtonWithFrame:CGRectMake(7, 280, 100 , 50) backGruondImageName:nil Target:self Action:@selector(onclickshare:) Title:@"分享           "];
-//        shareBtn.userInteractionEnabled = YES;
-//    [self.view addSubview:shareBtn];
-//    
-//    //清除缓存摁钮
-//    UIButton *removeBtn = [HHControl createButtonWithFrame:CGRectMake(7, 380, 100, 50) backGruondImageName:nil Target:self Action:@selector(onClickremove:) Title:@"清除缓存  "];
-//  
-////    removeBtn.backgroundColor = [UIColor yellowColor];
-//   
-//
-//    
-//      removeBtn.userInteractionEnabled = YES;
-//    [self.view addSubview:removeBtn];
-//    
-//    
-//    
-//    //退出登录摁钮
-//    UIButton *exitBtn = [HHControl createButtonWithFrame:CGRectMake(10, 450, 100, 100) backGruondImageName:nil Target:self Action:@selector(onClickexit:) Title:@"退出登录  "];
-//        exitBtn.userInteractionEnabled = YES;
-//    [self.view addSubview:exitBtn];
-//    
-////    //反馈问题摁钮
-////    UIButton *feedbackBtn = [HHControl createButtonWithFrame:CGRectMake(6, 430, 100, 50) backGruondImageName:nil Target:self Action:@selector(feedbackBtn:) Title:@"反馈问题"];
-////    [feedbackBtn setTitle:@"反馈问题" forState:UIControlStateNormal];
-////    [feedbackBtn setTitle:@"猩猩教室" forState:UIControlStateHighlighted];
-////    feedbackBtn.userInteractionEnabled = YES;
-////    [self.view addSubview:feedbackBtn];
-//    //点击这里
-//    hereBtn = [HHControl createButtonWithFrame:CGRectMake(6, 430, 150,50) backGruondImageName:@"123" Target:self Action:@selector(onclickhere:) Title:@"反馈问题送猩币"];
-//    hereBtn.userInteractionEnabled = YES;
-//    [self.view addSubview:hereBtn];
-//    
-//}
-//-(void)onclickhere:(UIButton *)Btn
-//{
-//    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"新用户回馈" message:@"尊敬的用户：给您带来极致便利的用户体验是猩猩教室的至高目标。为了持续不断的接近这一目标，我们高度重视收集您在使用过程中遇到的问题或者建议。感谢您将自己所遇见的问题或者意见反馈给我们。您的反馈被采纳后，我们将赠送您500猩币。" delegate:self cancelButtonTitle:@"去反馈问题" otherButtonTitles: nil];
-//    myAlertView.tag = 1;
-//    [myAlertView show];
-//    
-//
-//}
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-//    if (alertView.tag == 1) {
-//       feedbackViewController *forVC = [[feedbackViewController alloc]init];
-//        [self.navigationController pushViewController:forVC animated:YES];
-//    }
-//}
-////APP分享
-//- (void)onClickapp:(UIButton*)Btn
-//{
-//    
-//}
-////分享
-//-(void) onclickshare:(UIButton*)Btn
-//{
-//     [CoreUmengShare show:self text:@"猩猩教室" image:[UIImage imageNamed:@"store2.jpg"]];
-//}
-////清除缓存
-//-(void)onClickremove:(UIButton*)Btn
-//{
-//   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//       NSString*cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask,YES)objectAtIndex:0];
-//       NSArray *files =[[NSFileManager defaultManager]subpathsAtPath:cachPath];
-//       NSLog(@"files:%ld",[files count]);
-//       for (NSString *p in files ) {
-//           NSError *error;
-//           NSString *path = [cachPath stringByAppendingPathComponent:p];
-//           if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-//               [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
-//           }
-//       }
-////       [self performSelectorOnMainThread:@selector(clearCacheSuccess) withObject:nil waitUntilDone:YES];
-//   });
-//    NSLog(@"清理成功");
-//    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"清除成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
-//    
-//    [myAlertView show];
-//
-//}
+
 //
 //
 //
@@ -358,7 +313,7 @@
 //
 //}
 //
-////Switch
+//Switch
 //- (void)remSwitch:(UISwitch*)sende{
 //    if (sende.isOn) {
 //        NSLog(@"关闭提醒");
@@ -384,26 +339,7 @@
 //        NSLog(@"Wi-Fi提醒打开");
 //    }
 //}
-//-(void)createTextView
-//{
-//    feedbackTextView =[[UITextView alloc]initWithFrame:CGRectMake(100, 490, 250, 150)];
-//    
-//   [consultBtn setBackgroundColor: [UIColor colorWithWhite:(255,255,255) alpha:1]];
-//    [self.view addSubview:feedbackTextView];
-//}
 
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-//+(UILabel *)createLabelWithFrame:(CGRect )frame Font:(int)font Text:(NSString *)text;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 

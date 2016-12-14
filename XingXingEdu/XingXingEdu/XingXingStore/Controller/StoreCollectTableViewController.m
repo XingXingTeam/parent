@@ -8,11 +8,14 @@
 
 #import "StoreCollectTableViewController.h"
 #import "StoreCollectTableViewCell.h"
-#import "ArticleInfoViewController.h"
+#import "XXEStoreGoodDetailInfoViewController.h"
 #import "MJRefresh.h"
 @interface StoreCollectTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
 
+    //占位图
+    UIImageView *placeholderImageView;
+    
     NSString *parameterXid;
     NSString *parameterUser_Id;
 }
@@ -23,6 +26,23 @@
 
 @implementation StoreCollectTableViewController
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    if (_allArray.count != 0) {
+        [_allArray removeAllObjects];
+    }
+    
+    //收藏商品 数据
+    [self collect_goods_show];
+    
+    [self.tableView reloadData];
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     if ([XXEUserInfo user].login){
@@ -32,9 +52,9 @@
         parameterXid = XID;
         parameterUser_Id = USER_ID;
     }
-  
+    self.allArray = [NSMutableArray array];
+
     [self createTabelView];
-    
 }
 
 -(void)createTabelView{
@@ -43,31 +63,29 @@
     [self.tableView registerNib:nib forCellReuseIdentifier:@"cell"];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewCollectData)];
+//    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewCollectData)];
 
 }
 
 
--(void)loadNewCollectData{
-    [self collect_goods_show];
-    [self.tableView.header endRefreshing];
-}
--(void)endRefresh{
-    [self.tableView.header endRefreshing];
-}
--(void)viewWillAppear:(BOOL)animated{
-      [self.tableView reloadData];
-}
--(void)viewDidAppear:(BOOL)animated{
-    [self.tableView.header beginRefreshing];
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+//-(void)loadNewCollectData{
+//    [self collect_goods_show];
+//    [self.tableView.header endRefreshing];
+//}
+//-(void)endRefresh{
+//    [self.tableView.header endRefreshing];
+//}
+//-(void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//    
+//      [self.tableView reloadData];
+//}
+//-(void)viewDidAppear:(BOOL)animated{
+//    [self.tableView.header beginRefreshing];
+//}
+
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -83,6 +101,8 @@
     if(cell==nil){
         cell=[[StoreCollectTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
+//    NSLog(@"---- %@", self.allArray[indexPath.row]);
+    
     NSArray * tmp=self.allArray[indexPath.row];
     [cell.articleImageView sd_setImageWithURL:[NSURL URLWithString:tmp[0]] placeholderImage:[UIImage imageNamed:@"sdimg1.png"]];
    
@@ -99,18 +119,27 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ArticleInfoViewController*vc=  [[ArticleInfoViewController alloc]init];
+    XXEStoreGoodDetailInfoViewController*vc=  [[XXEStoreGoodDetailInfoViewController alloc]init];
     vc.orderNum=self.allArray[indexPath.row][4];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
 
-#pragma mark 网络
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.000001;
+}
+
+
+#pragma mark ============= 猩猩商城--我收藏的商品列表 ==========
 - (void)collect_goods_show{
-    
-   self.allArray = [NSMutableArray array];
+    /*
+     【猩猩商城--我收藏的商品列表】
+     接口类型:1
+     接口:
+     http://www.xingxingedu.cn/Global/collect_goods_show
+     传参:*/
+   
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/collect_goods_show";
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *dict = @{@"appkey":APPKEY,
                            @"backtype":BACKTYPE,
@@ -119,45 +148,69 @@
                            @"user_type":USER_TYPE,
                            };
     
-    // 服务器返回的数据格式
-    mgr.responseSerializer = [AFHTTPResponseSerializer serializer]; // 二进制数据
-    [mgr POST:urlStr parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-         
-        
-         if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
-         {
-            
-             
-             for (NSDictionary *dic in dict[@"data"] ) {
-                 NSString * goods_pic=[picURL stringByAppendingString:dic[@"pic"]];
-                 NSString * title=dic[@"title"];
-                 NSString * exchange_coin=dic[@"exchange_coin"];
-                 NSString * date_tm=dic[@"collect_tm"];
-                 NSString *  orderid=dic[@"id"];
-                 NSMutableArray *arr=[NSMutableArray arrayWithObjects:goods_pic, title,exchange_coin,date_tm,orderid,nil];
-
-                 [self.allArray addObject:arr];
-             }
-         
-         
-         }
-         else
-         {
-             [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"获取收藏失败，%@",dict[@"msg"]]];
-         }
-           [self.tableView reloadData];
-
-         
-       
-     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         NSLog(@"请求失败:%@",error);
-         [SVProgressHUD showErrorWithStatus:@"网络不通，请检查网络！"];
-       
-         
-     }];
     
+//    NSLog(@"传参 ==== %@", dict);
+    
+    [WZYHttpTool post:urlStr params:dict success:^(id responseObj) {
+        //
+//        NSLog(@"responseObj == %@", responseObj);
+        if ([responseObj[@"code"] integerValue] == 1) {
+            for (NSDictionary *dic in responseObj[@"data"] ) {
+                NSString * goods_pic=[picURL stringByAppendingString:dic[@"pic"]];
+                NSString * title=dic[@"title"];
+                NSString * exchange_coin=dic[@"exchange_coin"];
+                NSString * date_tm=dic[@"collect_tm"];
+                NSString *  orderid=dic[@"id"];
+                NSMutableArray *arr=[NSMutableArray arrayWithObjects:goods_pic, title,exchange_coin,date_tm,orderid,nil];
+                
+                [self.allArray addObject:arr];
+            }
+            
+        }
+         [self customContent];
+    } failure:^(NSError *error) {
+        //
+        [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
+    }];
+    
+}
+
+// 有数据 和 无数据 进行判断
+- (void)customContent{
+    // 如果 有占位图 先 移除
+    [self removePlaceholderImageView];
+    
+    if (self.allArray.count == 0) {
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        // 1、无数据的时候
+        [self createPlaceholderView];
+        
+    }else{
+        //2、有数据的时候
+    }
+    
+    [self.tableView reloadData];
+    
+}
+
+
+//没有 数据 时,创建 占位图
+- (void)createPlaceholderView{
+    // 1、无数据的时候
+    UIImage *myImage = [UIImage imageNamed:@"人物"];
+    CGFloat myImageWidth = myImage.size.width;
+    CGFloat myImageHeight = myImage.size.height;
+    
+    placeholderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth / 2 - myImageWidth / 2, (kHeight - 64 - 49) / 2 - myImageHeight / 2, myImageWidth, myImageHeight)];
+    placeholderImageView.image = myImage;
+    [self.view addSubview:placeholderImageView];
+}
+
+//去除 占位图
+- (void)removePlaceholderImageView{
+    if (placeholderImageView != nil) {
+        [placeholderImageView removeFromSuperview];
+    }
 }
 
 

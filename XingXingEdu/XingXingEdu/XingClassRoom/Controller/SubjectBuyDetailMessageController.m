@@ -10,13 +10,15 @@
 #import "BeeCloud.h"
 #import "LSSAlertView.h"
 #import "ClassRoomOrderMessageController.h"
-#import "ClassRoomHomePageViewController.h"
 #define Kmgar 15.0f
 #define KlabelH 20.0f
 #define KlabelW 150.0f
 @interface SubjectBuyDetailMessageController ()<BeeCloudDelegate>{
     BOOL isCollect;
     NSInteger  btnNumber;
+    
+    //判断是否支付成功过
+    BOOL isPaySuccess;
 }
 
 @end
@@ -28,6 +30,7 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = UIColorFromRGB(230, 230, 230);
     self.title = @"订单详情";
+    isPaySuccess = NO;
     
     [self createBuydetailMessage];
     // Do any additional setup after loading the view.
@@ -122,12 +125,23 @@
 -(void)clickSureButton:(UIButton *)btn{
 
     if (btnNumber == 100) {
-        
-        [self doPay:PayChannelWxApp];
+        //微信支付
+        if (isPaySuccess == YES) {
+            [SVProgressHUD showInfoWithStatus:@"该订单您已支付过"];
+        }else{
+            
+         [self doPay:PayChannelWxApp];
+        }
+
     }
     if (btnNumber == 101) {
+        //支付宝 支付
+        if (isPaySuccess == YES) {
+            [SVProgressHUD showInfoWithStatus:@"该订单您已支付过"];
+        }else{
         
         [self doPay:PayChannelAliApp];
+        }
     }
 }
 
@@ -174,6 +188,8 @@
                      {
                          
                          LSSAlertView *alert = [[LSSAlertView alloc] initWithTitle:resp.resultMsg message:@"您已完成支付,请注意上课时间哦"  picImage:@"支付完成icon120x120"  sureBtn:@"查看订单" cancleBtn:@"现在离开"];
+                         isPaySuccess = YES;
+                         
                          alert.returnIndex = ^(NSInteger index){
                              if (index == 0) {
                                  

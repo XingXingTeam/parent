@@ -10,7 +10,7 @@
 #import "FlowersPresentViewController.h"
 #import "AccountManagerViewController.h"
 #import "CoreUMeng.h"
-#import "PayMannerViewController.h"
+#import "XXEStorePayViewController.h"
 @interface FlowersBuyViewController ()
 {
     NSString *priceStr;
@@ -47,13 +47,15 @@
     self.numLbl.text =@"1";
     articleArray = [NSMutableArray array];
     
-    
+    //选择赠送 对象 按钮
     [self createRightBar];
+    //获取 花篮 详情
     [self initData];
+    //创建 返回 按钮
     [self createLeftButton];
-    // Do any additional setup after loading the view from its nib.
 }
 
+#pragma Mark ********** 创建 返回 按钮 ***************
 -(void)createLeftButton{
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(- 10, 0, 44, 20);
@@ -64,10 +66,20 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
     self.navigationItem.leftBarButtonItem = backItem;
 }
+
+
 -(void)doBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+#pragma Mark =========== 【猩猩商城--花篮详情】 =========
 - (void)initData{
+    /*
+     接口类型:1
+     接口:
+     http://www.xingxingedu.cn/Global/flowers_basket_info
+     */
+    
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/flowers_basket_info";
     NSDictionary *dict = @{@"appkey":APPKEY,
                            @"backtype":BACKTYPE,
@@ -77,17 +89,18 @@
                            };
     
     [WZYHttpTool post:urlStr params:dict success:^(id responseObj) {
-    NSDictionary *dict =responseObj;
-    if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
+//        NSLog(@"花篮 详情 ===== %@", responseObj);
+        
+    if([[NSString stringWithFormat:@"%@",responseObj[@"code"]]isEqualToString:@"1"] )
         {
-            priceStr =dict[@"data"][@"exchange_price"];
-            conStr=dict[@"data"][@"con"];
-            _flowerId = dict[@"data"][@"id"];
+            priceStr =responseObj[@"data"][@"exchange_price"];
+            conStr=responseObj[@"data"][@"con"];
+            _flowerId = responseObj[@"data"][@"id"];
         }
         [self initUI];
         
     } failure:^(NSError *error) {
-        
+        [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
     }];
 
 }
@@ -100,7 +113,7 @@
 
 - (void)createRightBar{
     UIButton*rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,22,22)];
-    [rightButton setImage:[UIImage imageNamed:@"赠icon44x44.png"]forState:UIControlStateNormal];
+    [rightButton setImage:[UIImage imageNamed:@"赠icon44x44"]forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(flowersPresent)forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem*rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem= rightItem;
@@ -116,6 +129,7 @@
 }
 - (IBAction)minBt:(id)sender {
     if ([self.numLbl.text intValue] <1) {
+        [SVProgressHUD showInfoWithStatus:@"最少为1个"];
         return;
     }else{
         self.numLbl.text =[NSString stringWithFormat:@"%d",[self.numLbl.text intValue] -1];
@@ -141,30 +155,34 @@
 //花篮点击支付(产生订单)
 - (void)initFlowers_Basket_PayData{
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/flowers_basket_pay";
-    NSDictionary *dict = @{@"appkey":APPKEY,
+    NSDictionary *params = @{@"appkey":APPKEY,
                            @"backtype":BACKTYPE,
-                           @"xid":XID,
-                           @"user_id":USER_ID,
+                           @"xid":parameterXid,
+                           @"user_id":parameterUser_Id,
                            @"user_type":USER_TYPE,
                            @"goods_id":_flowerId,
                            @"buy_num":self.numLbl.text,
                            };
     
-    [WZYHttpTool post:urlStr params:dict success:^(id responseObj) {
+//    NSLog(@"params **** %@", params);
+    
+    [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         NSDictionary *dict =responseObj;
         if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
         {
+            NSDictionary *daizhifuOrderDictInfo = [[NSDictionary alloc] init];
             
-           NSString *order_id =dict[@"data"][@"order_id"];
-           NSString *order_index=dict[@"data"][@"order_index"];
-           NSString *exchange_price = dict[@"data"][@"exchange_price"];
+//            NSLog(@"daizhifuOrderDictInfo === %@", responseObj[@"data"]);
             
-            PayMannerViewController *BuyDetailMessageVC = [[PayMannerViewController alloc] init];
-            BuyDetailMessageVC.price = exchange_price;
-            BuyDetailMessageVC.orderId = order_id;
-            BuyDetailMessageVC.order_index = order_index;
-            BuyDetailMessageVC.isFlower = YES;
-            [self.navigationController pushViewController:BuyDetailMessageVC animated:YES];
+            daizhifuOrderDictInfo = responseObj[@"data"];
+            
+            XXEStorePayViewController *storePayVC = [[XXEStorePayViewController alloc] init];
+            storePayVC.dict = daizhifuOrderDictInfo;
+            storePayVC.order_id = daizhifuOrderDictInfo[@"order_id"];
+            
+            [self.navigationController pushViewController:storePayVC animated:YES];
+            
+            
         }
         [self initUI];
         
@@ -175,19 +193,5 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

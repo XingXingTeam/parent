@@ -94,7 +94,7 @@
    NSString *class_idStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"CLASS_ID"];
    NSString *schoolIdStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"SCHOOL_ID"];
     
-//    NSLog(@"aaaa///////////class_idStr----%@; schoolIdStr------%@", class_idStr, schoolIdStr);
+//    NSLog(@"aaaa////class_idStr----%@; schoolIdStr------%@", class_idStr, schoolIdStr);
     
     NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"school_id":schoolIdStr ,@"class_id":class_idStr };
     
@@ -308,15 +308,22 @@
         model = _managerModelArray[indexPath.row];
     }
 
-    //选中老师的 头像、名称、id、课程 放进数组
-    _selectedTeacherInfoArr = [[NSMutableArray alloc] initWithObjects:model.iconStr, model.nameStr, model.tidStr, model.jobStr, nil];
     
-    
-//    NSLog(@"%@", _selectedTeacherInfoArr);
-    
-    self.ReturnArrayBlock(_selectedTeacherInfoArr);
+    if ([_didSelectTeacherIdArray containsObject:model.tidStr]) {
+        [SVProgressHUD showInfoWithStatus:@"该老师已选中,请重新选择赠送对象!"];
+    }else{
+        //选中老师的 头像、名称、id、课程 放进数组
+        _selectedTeacherInfoArr = [[NSMutableArray alloc] initWithObjects:model.iconStr, model.nameStr, model.tidStr, model.jobStr, nil];
+        
+        
+        //    NSLog(@"%@", _selectedTeacherInfoArr);
+        
+        self.ReturnArrayBlock(_selectedTeacherInfoArr);
+        
+        [self.navigationController popViewControllerAnimated:YES];
 
-    [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 
 

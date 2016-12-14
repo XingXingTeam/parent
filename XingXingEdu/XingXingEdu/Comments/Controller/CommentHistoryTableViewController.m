@@ -35,13 +35,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    NSLog(@"self.teacherId-%@",self.teacherId);
-    
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, WinWidth, WinHeight) style:UITableViewStyleGrouped];
-    UINib *nib = [UINib nibWithNibName:@"CommentsRecordTableViewCell" bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:@"cell"];
-    
-     [self getCommentInfo];
-
     if ([XXEUserInfo user].login){
         parameterXid = [XXEUserInfo user].xid;
         parameterUser_Id = [XXEUserInfo user].user_id;
@@ -50,6 +43,13 @@
         parameterUser_Id = USER_ID;
     }
     
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, WinWidth, WinHeight) style:UITableViewStyleGrouped];
+    UINib *nib = [UINib nibWithNibName:@"CommentsRecordTableViewCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"cell"];
+    
+     [self getCommentInfo];
+
+
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     
 }
@@ -104,7 +104,6 @@
         [[cell.collect currentBackgroundImage] setAccessibilityIdentifier:@"1"];
     }
     
-    
 
     cell.collect.tag=1000+(int)indexPath.row;
     [cell.collect addTarget:self action:@selector(collectPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -125,11 +124,7 @@
         [self deleteCollectArticle:btn];
     }
 
-  
-    
 
-    
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

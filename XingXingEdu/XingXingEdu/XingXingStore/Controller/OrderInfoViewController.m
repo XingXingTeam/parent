@@ -8,7 +8,7 @@
 
 #import "OrderInfoViewController.h"
 #import "WZYTool.h"
-#import "PayMannerViewController.h"
+//#import "PayMannerViewController.h"
 #import "ReturnOfGoodsViewController.h"
 #define Kmarg 10.0f
 #define KLabelX 30.0f
@@ -382,12 +382,12 @@
 
 - (IBAction)buyOrder:(id)sender {
     
-    PayMannerViewController *vc=[[PayMannerViewController alloc]init];
-    vc.orderId = orderArray[14];
-    vc.price = orderArray[4];
-    vc.xingMoney = orderArray[5];
-    vc.order_index = orderArray[0];
-    [self.navigationController pushViewController:vc animated:YES];
+//    PayMannerViewController *vc=[[PayMannerViewController alloc]init];
+//    vc.orderId = orderArray[14];
+//    vc.price = orderArray[4];
+//    vc.xingMoney = orderArray[5];
+//    vc.order_index = orderArray[0];
+//    [self.navigationController pushViewController:vc animated:YES];
     
     
 }
