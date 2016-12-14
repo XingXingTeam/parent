@@ -385,11 +385,6 @@ self.navigationController.navigationBarHidden =NO;
         make.size.mas_equalTo(CGSizeMake(52*kScreenRatioWidth, 50*kScreenRatioHeight));
     }];
     
-    
-    
-    
-    
-    
     //微信
     weixinBtn = [HHControl createButtonWithFrame:CGRectMake(QQBtn.frame.origin.x + QQBtn.frame.size.width + 25 * kWidth / 375, QQBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"微信" Target:self Action:@selector(onClickWX:) Title:nil];
     weixinBtn.layer.cornerRadius= weixinBtn.frame.size.width / 2;
@@ -415,7 +410,6 @@ self.navigationController.navigationBarHidden =NO;
         make.size.mas_equalTo(CGSizeMake(52*kScreenRatioWidth, 50*kScreenRatioHeight));
     }];
    
-    //支付宝
 //    zhifubaoBtn = [HHControl createButtonWithFrame:CGRectMake(xinlangBtn.frame.origin.x + xinlangBtn.frame.size.width + 25 * kWidth / 375, xinlangBtn.frame.origin.y, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"支付宝" Target:self Action:@selector(onClickzhifubao:) Title:nil];
 //    zhifubaoBtn.layer.cornerRadius = zhifubaoBtn.frame.size.width / 2;
 //    zhifubaoBtn.layer.masksToBounds =YES;

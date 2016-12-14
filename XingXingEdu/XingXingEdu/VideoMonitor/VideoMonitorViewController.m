@@ -276,7 +276,7 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return dataSourse.count;
+    return 1;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     VedioCell *cell =(VedioCell*)[tableView dequeueReusableCellWithIdentifier:kPData];
