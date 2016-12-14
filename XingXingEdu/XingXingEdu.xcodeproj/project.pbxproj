@@ -1280,7 +1280,6 @@
 		6844EA2E1CAD45320054B8C5 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA1B1CAD45320054B8C5 /* 3.png */; };
 		6844EA2F1CAD45320054B8C5 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA1C1CAD45320054B8C5 /* 4.png */; };
 		6844EA301CAD45320054B8C5 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA1D1CAD45320054B8C5 /* area.plist */; };
-		6844EA321CAD45320054B8C5 /* goback_back_orange_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA1F1CAD45320054B8C5 /* goback_back_orange_on@2x.png */; };
 		6844EA351CAD45320054B8C5 /* SNS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA221CAD45320054B8C5 /* SNS@2x.png */; };
 		6844EA4A1CAD45390054B8C5 /* SSVideoPlayContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA381CAD45390054B8C5 /* SSVideoPlayContainer.m */; };
 		6844EA4B1CAD45390054B8C5 /* SSVideoPlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA3A1CAD45390054B8C5 /* SSVideoPlayController.m */; };
@@ -1522,7 +1521,6 @@
 		68BACED11CEDCB500008DDA6 /* DetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEB81CEDCB500008DDA6 /* DetailCell.xib */; };
 		68BACED51CEDCB500008DDA6 /* 假设头像172x172@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEBC1CEDCB500008DDA6 /* 假设头像172x172@2x.png */; };
 		68BACED61CEDCB500008DDA6 /* 学校40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEBD1CEDCB500008DDA6 /* 学校40x40@2x.png */; };
-		68BACED71CEDCB500008DDA6 /* 小红花50x46@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEBE1CEDCB500008DDA6 /* 小红花50x46@2x.png */; };
 		68BACED81CEDCB500008DDA6 /* 小红花详情人物头像174x174@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEBF1CEDCB500008DDA6 /* 小红花详情人物头像174x174@2x.png */; };
 		68BACED91CEDCB500008DDA6 /* 小红花详情人物头像（1）174x174@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEC01CEDCB500008DDA6 /* 小红花详情人物头像（1）174x174@2x.png */; };
 		68BACEDA1CEDCB500008DDA6 /* 收藏(H)36x32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEC11CEDCB500008DDA6 /* 收藏(H)36x32@2x.png */; };
@@ -3355,7 +3353,6 @@
 		6844EA1B1CAD45320054B8C5 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		6844EA1C1CAD45320054B8C5 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
 		6844EA1D1CAD45320054B8C5 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
-		6844EA1F1CAD45320054B8C5 /* goback_back_orange_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goback_back_orange_on@2x.png"; sourceTree = "<group>"; };
 		6844EA221CAD45320054B8C5 /* SNS@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SNS@2x.png"; sourceTree = "<group>"; };
 		6844EA371CAD45390054B8C5 /* SSVideoPlayContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSVideoPlayContainer.h; sourceTree = "<group>"; };
 		6844EA381CAD45390054B8C5 /* SSVideoPlayContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSVideoPlayContainer.m; sourceTree = "<group>"; };
@@ -3658,7 +3655,6 @@
 		68BACEB81CEDCB500008DDA6 /* DetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailCell.xib; sourceTree = "<group>"; };
 		68BACEBC1CEDCB500008DDA6 /* 假设头像172x172@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "假设头像172x172@2x.png"; sourceTree = "<group>"; };
 		68BACEBD1CEDCB500008DDA6 /* 学校40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "学校40x40@2x.png"; sourceTree = "<group>"; };
-		68BACEBE1CEDCB500008DDA6 /* 小红花50x46@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "小红花50x46@2x.png"; sourceTree = "<group>"; };
 		68BACEBF1CEDCB500008DDA6 /* 小红花详情人物头像174x174@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "小红花详情人物头像174x174@2x.png"; sourceTree = "<group>"; };
 		68BACEC01CEDCB500008DDA6 /* 小红花详情人物头像（1）174x174@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "小红花详情人物头像（1）174x174@2x.png"; sourceTree = "<group>"; };
 		68BACEC11CEDCB500008DDA6 /* 收藏(H)36x32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "收藏(H)36x32@2x.png"; sourceTree = "<group>"; };
@@ -7196,7 +7192,6 @@
 				6844EA1B1CAD45320054B8C5 /* 3.png */,
 				6844EA1C1CAD45320054B8C5 /* 4.png */,
 				6844EA1D1CAD45320054B8C5 /* area.plist */,
-				6844EA1F1CAD45320054B8C5 /* goback_back_orange_on@2x.png */,
 				6844EA221CAD45320054B8C5 /* SNS@2x.png */,
 			);
 			path = Resource;
@@ -7565,7 +7560,6 @@
 				68BACEB81CEDCB500008DDA6 /* DetailCell.xib */,
 				68BACEBC1CEDCB500008DDA6 /* 假设头像172x172@2x.png */,
 				68BACEBD1CEDCB500008DDA6 /* 学校40x40@2x.png */,
-				68BACEBE1CEDCB500008DDA6 /* 小红花50x46@2x.png */,
 				68BACEBF1CEDCB500008DDA6 /* 小红花详情人物头像174x174@2x.png */,
 				68BACEC01CEDCB500008DDA6 /* 小红花详情人物头像（1）174x174@2x.png */,
 				68BACEC11CEDCB500008DDA6 /* 收藏(H)36x32@2x.png */,
@@ -8303,7 +8297,6 @@
 				0408620C1D4210F90060C70A /* 线框270x60@1x.png in Resources */,
 				04B6215D1DBF019A00391616 /* 购买icon78x48@1x.png in Resources */,
 				689F7ADA1CF71B9200166C06 /* upLoadPic.plist in Resources */,
-				6844EA321CAD45320054B8C5 /* goback_back_orange_on@2x.png in Resources */,
 				04B621551DBF019A00391616 /* 猩币转赠@2x.png in Resources */,
 				04D5B0F81D6B1DE900ABA89A /* 机构简介(H)icon48x48@2x.png in Resources */,
 				044777181D2A76CC0018A459 /* ClassRoomOrderNoPayTableViewCell.xib in Resources */,
@@ -8379,7 +8372,6 @@
 				04D5B1AE1D6B1FF500ABA89A /* Decorative-thread01@3x.png in Resources */,
 				04B621371DBF019A00391616 /* tab0_selected（0）@1x.png in Resources */,
 				689F6EF71CF6962100166C06 /* kindergartenTableViewCell.xib in Resources */,
-				68BACED71CEDCB500008DDA6 /* 小红花50x46@2x.png in Resources */,
 				04B6213A1DBF019A00391616 /* tab1_selected(1)@1x.png in Resources */,
 				04D5E3EE1D489FCB00921223 /* 箭头20x36@1x.png in Resources */,
 				0463C34F1DEC3D920035BEF6 /* AlbumOperateMoreHL@2x.png in Resources */,
