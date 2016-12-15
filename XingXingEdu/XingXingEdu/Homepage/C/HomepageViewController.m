@@ -478,6 +478,7 @@
     
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
+//        NSLog(@"首页  数据 ==== %@", responseObj);
         
         if ([[NSString stringWithFormat:@"%@", [responseObj objectForKey:@"code"]] isEqualToString:@"1"]) {
             NSDictionary *dict =[responseObj objectForKey:@"data"];
