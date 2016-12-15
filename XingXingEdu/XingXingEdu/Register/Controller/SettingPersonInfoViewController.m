@@ -28,7 +28,7 @@
 #define headLabelSize 80.f
 #define klabelH 30.0f
 #define klabelW 120.0f
-@interface SettingPersonInfoViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, VPImageCropperDelegate>
+@interface SettingPersonInfoViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, VPImageCropperDelegate,UITextFieldDelegate>
 
 {
     UIView *bgView;
@@ -64,10 +64,38 @@
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.barTintColor =UIColorFromRGB(0, 170, 42);
     
+    if ([self.whereFromController isEqualToString:@"loginVC"]) {
+        [self setbackBtn];
+    }
     
     [self createTextFields];
     [self loadPortrait];
     
+}
+
+- (void)setbackBtn {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:@"返回" forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"navigationButtonReturn"] forState:UIControlStateNormal];
+    //    [button setImage:[UIImage imageNamed:@"navigationButtonReturn"] forState:UIControlStateHighlighted];
+    button.size = CGSizeMake(70, 30);
+    // 让按钮内部的所有内容左对齐
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    //        [button sizeToFit];
+    // 让按钮的内容往左边偏移10
+    button.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    button.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
+    
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //    [button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    
+    // 修改导航栏左边的item
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
+- (void)back {
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 -(void)createTextFields
@@ -109,6 +137,7 @@
     [self.view addSubview:parentsNameLabel];
     
     parentsName = [self createTextFielfFrame:CGRectMake(CGRectGetMaxX(parentsNameLabel.frame) + spaceX, CGRectGetMaxY(label.frame) + spaceX, kWidth - parentsNameLabel.size.width - awayX * 2, klabelH) font:[UIFont systemFontOfSize:14] placeholder:@"请输入您的姓名"  alignment:NSTextAlignmentCenter clearButtonMode:UITextFieldViewModeWhileEditing];
+    parentsName.delegate = self;
     parentsName.layer.cornerRadius = 17.0f;
     parentsName.layer.borderWidth = 0.1f;
     parentsName.clipsToBounds = YES;
@@ -140,6 +169,7 @@
     
     //家长身份证号
     parentsIDCard = [self createTextFielfFrame:CGRectMake(CGRectGetMaxX(self.parentsIDCardCombox.frame) + spaceX, CGRectGetMaxY(parentsNameLabel.frame) + spaceX, kWidth - parentsNameLabel.size.width - awayX * 2, klabelH) font:[UIFont systemFontOfSize:14] placeholder:@"请输入您的身份号"  alignment:NSTextAlignmentCenter clearButtonMode:UITextFieldViewModeWhileEditing];
+    parentsIDCard.delegate = self;
     parentsIDCard.layer.cornerRadius = 17.0f;
     parentsIDCard.layer.borderWidth = 0.1f;
     parentsIDCard.clipsToBounds = YES;
@@ -161,6 +191,7 @@
     [self.view addSubview:studentNameLabel];
     
     studentName=[self createTextFielfFrame:CGRectMake(CGRectGetMaxX(studentNameLabel.frame) + spaceX, CGRectGetMaxY(parentsIDCard.frame) + spaceX, kWidth - studentNameLabel.size.width - awayX * 2, klabelH) font:[UIFont systemFontOfSize:14] placeholder:@"请输入学生姓名"  alignment:NSTextAlignmentCenter clearButtonMode:UITextFieldViewModeWhileEditing];
+    studentName.delegate = self;
     studentName.layer.cornerRadius = 17.0f;
     studentName.layer.borderWidth = 0.1f;
     studentName.clipsToBounds = YES;
@@ -190,6 +221,7 @@
     self.studentIDCardComBackView.alpha = 0.5;
     
     studentIDCard=[self createTextFielfFrame:CGRectMake(CGRectGetMaxX(self.studentIDCardCombox.frame) + spaceX, CGRectGetMaxY(studentNameLabel.frame) + spaceX, kWidth - studentNameLabel.size.width - awayX * 2, klabelH) font:[UIFont systemFontOfSize:14] placeholder:@"请输入学生身份号"  alignment:NSTextAlignmentCenter clearButtonMode:UITextFieldViewModeWhileEditing];
+    studentIDCard.delegate = self;
     studentIDCard.backgroundColor = [UIColor whiteColor];
     studentIDCard.textAlignment = NSTextAlignmentCenter ;
     studentIDCard.layer.cornerRadius = 17.0f;
@@ -337,9 +369,19 @@
     }
     
     [self upload];
-    
-    
-    
+}
+
+//MARK: - UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.transform = CGAffineTransformMakeTranslation(0, -212);
+    }];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.transform = CGAffineTransformIdentity;
+    }];
 }
 
 -(NSString * )rangeString:(NSString *)str begin:(NSInteger )begin  length:(NSInteger)length{

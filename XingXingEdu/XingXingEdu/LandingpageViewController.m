@@ -25,13 +25,15 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WXApi.h"
 #import "WeiboSDK.h"
-//#import "SchoolInfoViewController.h"
+#import "SchoolInfoViewController.h"
 #import "HHControl.h"
 #import "MyTabBarController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "XXETabBarViewController.h"
 #import "ClassEditViewController.h"
-
+#import "UMSocial.h"
+#import "ServiceManager.h"
+#import "XXENavigationViewController.h"
 
 #import "XXEUserInfo.h"
 
@@ -68,6 +70,20 @@
 @property (nonatomic, copy) NSString *lastTimeLoginAccountStr;
 @property (nonatomic, copy) NSString *lastTimeLoginHeadPicStr;
 
+/** 第三方昵称 */
+@property (nonatomic, copy)NSString *thirdNickName;
+/** 第三放头像 */
+@property (nonatomic, copy)NSString *thirdHeadImage;
+/** QQToken */
+@property (nonatomic, copy)NSString *qqLoginToken;
+/** 微信Token */
+@property (nonatomic, copy)NSString *weixinLoginToken;
+/** 新浪Token */
+@property (nonatomic, copy)NSString *sinaLoginToken;
+/** 支付宝Token */
+@property (nonatomic, copy)NSString *aliPayLoginToken;
+/** 登录类型 1为手机 2为qq 3为微信 4为微博 5为 支付宝  10为访客模式(访客模式只要此参数)*/
+@property (nonatomic, copy)NSString *login_type;
 
 @end
 
@@ -426,239 +442,103 @@ self.navigationController.navigationBarHidden =NO;
 
 - (void)onClickQQ:(UIButton *)button
 {
-    //qq
-    NSLog(@"click qq");
-    [ShareSDK getUserInfo:SSDKPlatformTypeQQ onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
-        if (state == SSDKResponseStateSuccess) {
-        //  创建一个Url : 请求路径
-            NSURL *url =[NSURL URLWithString:LoginUrl];
-        //创建一个请求
-            NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:url];
-            request.HTTPMethod =@"POST";
-            request.timeoutInterval =10;
-            //设置请求体
-            NSString *param =[NSString stringWithFormat:@"appkey=%@&backtype=%@&login_type=%d&nickname=%@&t_head_img=%@&qq=%@",@"U3k8Dgj7e934bh5Y",@"json",2,user.nickname, user.rawData[@"figureurl_qq_2"],user.uid];
-    //NSString-->NSData
-            request.HTTPBody =[param dataUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"------QQ登录------");
+    
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        //          获取QQ用户名、uid、token等
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            self.login_type = @"2";
+            NSDictionary *dict = [UMSocialAccountManager socialAccountDictionary];
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:snsPlatform.platformName];
+            self.qqLoginToken = snsAccount.usid;
+            self.thirdNickName = snsAccount.userName;
+            self.thirdHeadImage = snsAccount.iconURL;
+            //            [self getAddInfomationMessage:snsAccount LoginType:self.login_type];
             
-            NSOperationQueue *queue =[NSOperationQueue mainQueue];
-            [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
-                if (connectionError ||data ==nil) {
-                    return ;
-                }
-                NSDictionary *dict =[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-                
-                if ([dict[@"msg"] isEqualToString:@"Error!账号或密码错误!"]) {
-                    [SVProgressHUD showInfoWithStatus:@"账号或密码错误!"];
-                
-                }
-                else if ([dict[@"msg"] isEqualToString:@"Success!登陆成功!"])
-                {
-            if ([[NSString stringWithFormat:@"%@",dict[@"code"]]  isEqualToString:@"1"]) {
-                
-                if ([[dict[@"data"] objectForKey:@"login_times"] integerValue]==1) {
-                    //跳转到注册
-                    NSLog(@"跳转到注册");
-                    SettingPersonInfoViewController *settPersonVC =[[SettingPersonInfoViewController alloc]init];
-                    settPersonVC.phone =@"15201938305";
-                    settPersonVC.pwd =@"123456";
-                  
-        [self.navigationController pushViewController:settPersonVC animated:YES];
-
-                }else{
-                    
-                    [SVProgressHUD showSuccessWithStatus:@"登录成功"];
-                    XXETabBarViewController *myTableVC =[[XXETabBarViewController alloc]init];
-                    [self presentViewController:myTableVC animated:YES completion:nil];
-                
-                }
-                
-                
-    
-        }
-                    else{
-                    
-                        
-                        [SVProgressHUD showSuccessWithStatus:@"登录失败"];
-                        
-                      
-                    }
-                    
-                    
-                }
-
-            }];
-         
-        }
-        else
-        {
-            [SVProgressHUD showInfoWithStatus:@"链接错误!"];
-        }
-        
-    }];
-    
+           NSDictionary *parameters = @{
+                                        @"account":snsAccount.usid,
+                                        @"appkey":APPKEY,
+                                        @"backtype":BACKTYPE,
+                                        @"user_type":USER_TYPE,
+                                        @"pass":@"",
+                                        @"lng":longitudeKT,
+                                        @"lat":latitudeKT,
+                                        @"login_type":_login_type
+              };
+            
+            [self thirdLoginRequestWithParameters:parameters];
+        }});
 }
 
 - (void)onClickWX:(UIButton *)button
 {
-    NSLog(@"click wx");
-    [ShareSDK getUserInfo:SSDKPlatformTypeWechat onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
-       
-           if (state == SSDKResponseStateSuccess)
-    {
-           
-             //  创建一个Url : 请求路径
-             NSURL *url =[NSURL URLWithString:LoginUrl];
-             //创建一个请求
-             NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:url];
-             request.HTTPMethod =@"POST";
-             request.timeoutInterval =10;
-             //设置请求体
-             NSString *param =[NSString stringWithFormat:@"appkey=%@&backtype=%@&login_type=%d&nickname=%@&t_head_img=%@&qq=%@",@"U3k8Dgj7e934bh5Y",@"json",3,user.nickname, user.rawData[@"headimgurl"],user.uid];
-             //NSString-->NSData
-             request.HTTPBody =[param dataUsingEncoding:NSUTF8StringEncoding];
-             
-             NSOperationQueue *queue =[NSOperationQueue mainQueue];
-             [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+    NSLog(@"------微信登录------");
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            self.login_type = @"3";
+            NSDictionary *dict = [UMSocialAccountManager socialAccountDictionary];
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:snsPlatform.platformName];
+            self.weixinLoginToken = snsAccount.usid;
+            self.thirdNickName = snsAccount.userName;
+            self.thirdHeadImage = snsAccount.iconURL;
             
-                 if (connectionError ||data ==nil) {
-                 return ;
-                                 }
-             NSDictionary *dict =[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        
-             
-             if ([dict[@"msg"] isEqualToString:@"Error!账号或密码错误!"]) {
-             [SVProgressHUD showInfoWithStatus:@"账号或密码错误!"];
-             
-             }
-             else if ([dict[@"msg"] isEqualToString:@"Success!登陆成功!"])
-             {
-                if ([[NSString stringWithFormat:@"%@",dict[@"code"]]  isEqualToString:@"1"]) {
-                    
-                    if ([[dict[@"data"] objectForKey:@"login_times"] integerValue]==1) {
-                        //跳转到注册
-                        NSLog(@"跳转到注册");
-                        SettingPersonInfoViewController *settPersonVC =[[SettingPersonInfoViewController alloc]init];
-                        settPersonVC.phone =@"15201938305";
-                        settPersonVC.pwd =@"123456";
-                        //                        settPersonVC.qqString =@"qq";
-                        //                        settPersonVC.qqImge =user.rawData[@"figureurl_qq_2"];
-                        //                        settPersonVC.qqNickName =user.nickname;
-                        //                        settPersonVC.qqUid =user.uid;
-                        [self.navigationController pushViewController:settPersonVC animated:YES];
-                        
-                    }else{
-                        
-                        [SVProgressHUD showSuccessWithStatus:@"登录成功"];
-                        XXETabBarViewController *myTableVC =[[XXETabBarViewController alloc]init];
-                        [self presentViewController:myTableVC animated:YES completion:nil];
-                        
-                    }
-                    
-
-             
-                    
-                                                                   }
-               else{
-             
-             
-             [SVProgressHUD showSuccessWithStatus:@"登录失败"];
-             
-                                 }
-             
-             
-             }
-             
-             }];
- 
+            NSLog(@"iD微信:---%@",snsAccount.unionId);
+            
+            NSDictionary *parameters = @{
+                                         @"account":snsAccount.usid,
+                                         @"appkey":APPKEY,
+                                         @"backtype":BACKTYPE,
+                                         @"user_type":USER_TYPE,
+                                         @"pass":@"",
+                                         @"lng":longitudeKT,
+                                         @"lat":latitudeKT,
+                                         @"login_type":_login_type
+                                         };
+            
+            [self thirdLoginRequestWithParameters:parameters];
+            
+//            [self getAddInfomationMessage:snsAccount LoginType:self.login_type];
         }
-  else
-          {
-            [SVProgressHUD showInfoWithStatus:@"链接错误!"];
-          }
-        
-    }];
+    });
+    
 }
 
 
 - (void)onClickSina:(UIButton *)button
 {
-    
-    [ShareSDK getUserInfo:SSDKPlatformTypeSinaWeibo onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
-        if (state == SSDKResponseStateSuccess) {
-
-            //  创建一个Url : 请求路径
-            NSURL *url =[NSURL URLWithString:LoginUrl];
-            //创建一个请求
-            NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:url];
-            request.HTTPMethod =@"POST";
-            request.timeoutInterval =10;
-            //设置请求体
-//            NSLog(@"uid=%@",user.uid);
-//            NSLog(@"user.rawData=%@",user.rawData[@"profile_image_url"]);
-//            NSLog(@"nickname=%@",user.nickname);
-            NSString *param =[NSString stringWithFormat:@"appkey=%@&backtype=%@&login_type=%d&nickname=%@&t_head_img=%@&qq=%@",@"U3k8Dgj7e934bh5Y",@"json",4,user.nickname, user.rawData[@"profile_image_url"],user.uid];
-            //NSString-->NSData
-            request.HTTPBody =[param dataUsingEncoding:NSUTF8StringEncoding];
-            
-            NSOperationQueue *queue =[NSOperationQueue mainQueue];
-            [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
-                
-                if (connectionError ||data ==nil) {
-                    return ;
-                }
-                NSDictionary *dict =[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-                
-                NSLog(@"%@",dict);
-                
-                if ([dict[@"msg"] isEqualToString:@"Error!账号或密码错误!"]) {
-                    [SVProgressHUD showInfoWithStatus:@"账号或密码错误!"];
-                    
-                }
-                else if ([dict[@"msg"] isEqualToString:@"Success!登陆成功!"])
-                {
-        if ([[NSString stringWithFormat:@"%@",dict[@"code"]]  isEqualToString:@"1"]) {
-                        
-            if ([[dict[@"data"] objectForKey:@"login_times"] integerValue]==1) {
-                //跳转到注册
-                NSLog(@"跳转到注册");
-                SettingPersonInfoViewController *settPersonVC =[[SettingPersonInfoViewController alloc]init];
-                settPersonVC.phone =@"15201938305";
-                settPersonVC.pwd =@"123456";
-                //                        settPersonVC.qqString =@"qq";
-                //                        settPersonVC.qqImge =user.rawData[@"figureurl_qq_2"];
-                //                        settPersonVC.qqNickName =user.nickname;
-                //                        settPersonVC.qqUid =user.uid;
-                [self.navigationController pushViewController:settPersonVC animated:YES];
-                
-            }else{
-                
-                [SVProgressHUD showSuccessWithStatus:@"登录成功"];
-                XXETabBarViewController *myTableVC =[[XXETabBarViewController alloc]init];
-                [self presentViewController:myTableVC animated:YES completion:nil];
-                
-            }
-            
-                    }
-                    else{
-                        
-                        [SVProgressHUD showSuccessWithStatus:@"登录失败"];
-                        
-                        
-                    }
-                    
-                    
-                }
-                
-            }];
-  
-        }
-        else
-        {
-            [SVProgressHUD showInfoWithStatus:@"链接错误!"];
-        }
+    NSLog(@"------新浪登录------");
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
         
-    }];
+        //          获取微博用户名、uid、token等
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            self.login_type = @"4";
+            NSDictionary *dict = [UMSocialAccountManager socialAccountDictionary];
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:snsPlatform.platformName];
+            self.sinaLoginToken = snsAccount.usid ;
+            self.thirdNickName = snsAccount.userName;
+            self.thirdHeadImage = snsAccount.iconURL;
+            //
+            //            [self getAddInfomationMessage:snsAccount LoginType:self.login_type];
+//            [self loginInterFaceApiSnsAccount:snsAccount.usid LoginTYpe:self.login_type];
+            
+            NSDictionary *parameters = @{
+                                         @"account":snsAccount.usid,
+                                         @"appkey":APPKEY,
+                                         @"backtype":BACKTYPE,
+                                         @"user_type":USER_TYPE,
+                                         @"pass":@"",
+                                         @"lng":longitudeKT,
+                                         @"lat":latitudeKT,
+                                         @"login_type":_login_type
+                                         };
+            [self thirdLoginRequestWithParameters:parameters];
+            
+        }});
+    
+    
 }
 
 //访客
@@ -734,6 +614,18 @@ self.navigationController.navigationBarHidden =NO;
     }
     else if (user.text.length==11)
     {
+//        NSDictionary *parameters = @{
+//                                     @"account":user.text,
+//                                     @"appkey":APPKEY,
+//                                     @"backtype":BACKTYPE,
+//                                     @"user_type":USER_TYPE,
+//                                     @"pass":pwd.text,
+//                                     @"lng":longitudeKT,
+//                                     @"lat":latitudeKT,
+//                                     @"login_type":_login_type
+//                                     };
+//        
+//        [self loginRequestWithParameters:parameters];
         
 //        NSLog(@"%@ , %@",user.text,pwd.text);
         //创建一个URL :请求路径
@@ -811,6 +703,173 @@ self.navigationController.navigationBarHidden =NO;
         }];
        
     }
+}
+
+
+
+//- (void)loginRequestWithParameters:(NSDictionary *)parameters  {
+//    [[ServiceManager sharedInstance] requestWithURLString:LoginUrl parameters:parameters type:HttpRequestTypePost success:^(id responseObject) {
+//        //                NSLog(@"%@",request.responseJSONObject);
+//        NSDictionary *data = [request.responseJSONObject objectForKey:@"data"];
+//        NSString *code = [request.responseJSONObject objectForKey:@"code"];
+//        NSLog(@"错误信息是什么%@",[request.responseJSONObject objectForKey:@"msg"]);
+//        if ([code intValue]==1) {
+//            [self LoginSetupUserInfoDict:data SnsAccessToken:@"" LoginType:self.login_type];
+//            NSString *login_times = [data objectForKey:@"login_times"];
+//            
+//            if ([login_times intValue]==1) {
+//                NSLog(@"进入信息补全");
+//                XXEPerfectInfoViewController *perfecVC = [[XXEPerfectInfoViewController alloc]init];
+//                XXENavigationViewController *navi = [[XXENavigationViewController alloc]initWithRootViewController:perfecVC];
+//                UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//                window.rootViewController = navi;
+//                [self.view removeFromSuperview];
+//                
+//                
+//            }else{
+//                
+//                [_loginButton ExitAnimationCompletion:^{
+//                    //                        NSLog(@"111---点击登录按钮-------");
+//                    
+//                    XXETabBarControllerConfig *tabBarControllerConfig = [[XXETabBarControllerConfig alloc]init];
+//                    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//                    window.rootViewController = tabBarControllerConfig;
+//                    [self.view removeFromSuperview];
+//                    
+//                }];
+//            }
+//        }else if([code intValue]==3)
+//        {
+//            [self showString:@"你的密码错误" forSecond:1.f];
+//            [_loginButton ErrorRevertAnimationCompletion:^{
+//                NSString *stringMsg = [request.responseJSONObject objectForKey:@"msg"];
+//                [self showHudWithString:stringMsg forSecond:2.f];
+//            }];
+//        }else{
+//            
+//            [self showString:@"登录失败" forSecond:1.f];
+//        }
+//        
+//    } failure:^(NSError *error) {
+//        
+//        [_loginButton ErrorRevertAnimationCompletion:^{
+//            
+//            [self showHudWithString:@"网络请求失败" forSecond:2.f];
+//        }];
+//        
+//    }];
+//}
+
+- (void)thirdLoginRequestWithParameters:(NSDictionary *)parameters {
+    //微博第三方蹦是因为没有审核通过没有unionId 为空
+    [[ServiceManager sharedInstance] requestWithURLString:LoginUrl parameters:parameters type:HttpRequestTypePost success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        
+        NSLog(@"%@",[responseObject objectForKey:@"msg"]);
+        NSString *code = [responseObject objectForKey:@"code"];
+        if ([code intValue] == 1) {
+            //存储数据直接进入首页
+            [SVProgressHUD showSuccessWithStatus:@"正在登录"];
+//            [self showHudWithString:@"正在登录" forSecond:2.f];
+            NSDictionary *data = [responseObject objectForKey:@"data"];
+            NSString * logintimes = [data objectForKey:@"login_times"];
+            [self LoginSetupUserInfoDict:data SnsAccessToken:parameters[@"account"] LoginType:_login_type];
+            NSLog(@"%@",logintimes);
+#warning wzy   =======  完善 学校 信息 =========
+            if ([logintimes integerValue]==1 ) {
+                SchoolInfoViewController *schoolInfoVC = [[SchoolInfoViewController alloc] init];
+                XXENavigationViewController *navi = [[XXENavigationViewController alloc]initWithRootViewController:schoolInfoVC];
+                UIWindow *window = [UIApplication sharedApplication].keyWindow;
+                window.rootViewController = navi;
+                [self.view removeFromSuperview];
+            }else{
+                
+                XXETabBarViewController *tabBarControllerConfig = [[XXETabBarViewController alloc]init];
+                UIWindow *window = [UIApplication sharedApplication].keyWindow;
+                window.rootViewController = tabBarControllerConfig;
+                [self.view removeFromSuperview];
+                //                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                //
+                //
+                //                });
+            }
+            
+        }else{
+            //进入注册的第三个
+            SettingPersonInfoViewController *settingVC = [[SettingPersonInfoViewController alloc]init];
+            settingVC.phone = @"";
+            settingVC.pwd = @"";
+            settingVC.nickName = self.thirdNickName;
+            settingVC.t_head_img = self.thirdHeadImage;
+            settingVC.login_type = _login_type;
+            settingVC.QQToken = self.qqLoginToken;
+            settingVC.weixinToken = self.weixinLoginToken;
+            settingVC.sinaToken = self.sinaLoginToken;
+            settingVC.whereFromController = @"loginVC";
+            UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:settingVC];
+            UIColor *color = [UIColor whiteColor];
+            NSDictionary * dict=[NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
+            navi.navigationBar.titleTextAttributes = dict;
+            //
+            [self presentViewController:navi animated:true completion:nil];
+            //            [self.navigationController pushViewController:navi animated:YES];
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void)LoginSetupUserInfoDict:(NSDictionary *)data SnsAccessToken:(NSString *)accessToken LoginType:(NSString *)logintype
+{
+    NSString *phone = [NSString stringWithFormat:@"%@", [data objectForKey:@"phone"]];
+    NSString *login_times = [data objectForKey:@"login_times"];
+    NSString *nickname = [data objectForKey:@"nickname"];
+    NSString *token = [data objectForKey:@"token"];
+    NSString *user_head_img = [data objectForKey:@"user_head_img"];
+    NSString *user_id = [data objectForKey:@"user_id"];
+    NSString *user_type = [data objectForKey:@"user_type"];
+    NSString *xid = [data objectForKey:@"xid"];
+    NSString *login_type = logintype;
+    
+    NSLog(@"登录次数%@ 昵称%@ token%@ 用头像%@ 用户Id%@ 用户类型%@ XID%@ ",login_times,nickname,token,user_head_img, user_id, user_type,xid);
+    
+    if ([logintype  isEqualToString: @"1"]) {
+        [XXEUserInfo user].login = YES;
+    }else if ([logintype isEqualToString:@"2"]){
+        self.qqLoginToken = accessToken;
+        [XXEUserInfo user].login = YES;
+    }else if ([logintype isEqualToString:@"3"]){
+        self.weixinLoginToken = accessToken;
+        [XXEUserInfo user].login = YES;
+    }else if ([logintype isEqualToString:@"4"]){
+        self.sinaLoginToken = accessToken;
+        [XXEUserInfo user].login = YES;
+    }else if ([logintype isEqualToString:@"5"]){
+        self.aliPayLoginToken = accessToken;
+        [XXEUserInfo user].login = YES;
+    }else if ([logintype isEqualToString:@"10"]){
+        [XXEUserInfo user].login = NO;
+    }
+    NSDictionary *userInfo = @{
+                               //                               @"account":
+                               @"phone": phone,
+                               @"login_times":login_times,
+                               @"nickname":nickname,
+                               @"token":token,
+                               @"qqNumberToken":self.qqLoginToken,
+                               @"weixinToken":self.weixinLoginToken,
+                               @"sinaNumberToken":self.sinaLoginToken,
+                               @"zhifubaoToken":self.aliPayLoginToken,
+                               @"login_type":login_type,
+                               @"user_head_img":user_head_img,
+                               @"user_id":user_id,
+                               @"user_type":user_type,
+                               @"xid":xid,
+                               @"loginStatus":[NSNumber numberWithBool:[XXEUserInfo user].login]
+                               };
+    NSLog(@"%@",userInfo);
+    [[XXEUserInfo user] setupUserInfoWithUserInfo:userInfo];
 }
 
 - (void)LoginButton{
