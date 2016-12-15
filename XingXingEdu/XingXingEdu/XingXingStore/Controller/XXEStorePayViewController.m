@@ -53,16 +53,49 @@
         parameterXid = XID;
         parameterUser_Id = USER_ID;
     }
-    coinAble = _dict[@"user_coin_able"];
     seleteButtonArray = [[NSMutableArray alloc] init];
     isPaySuccess = NO;
     
     //输出BOOL值的方法：
 //    NSLog(@"%@", _onlyXingCoin ?@"YES":@"NO");
 
+    //获取 用户当前 可用猩币
+    [self fetchUserCoinAble];
+    
     //创建 内容
     [self createContent];
 }
+
+#pragma mark ====== 获取 用户当前 可用猩币
+- (void)fetchUserCoinAble{
+    /*
+     【猩猩商城首页,显示猩币数量】
+     接口类型:1
+     接口:
+     http://www.xingxingedu.cn/Global/get_user_coin
+     */
+    NSString *urlStr = @"http://www.xingxingedu.cn/Global/get_user_coin";
+    
+    NSDictionary *params = @{@"appkey":APPKEY,
+                             @"backtype":BACKTYPE,
+                             @"xid":parameterXid,
+                             @"user_id":parameterUser_Id,
+                             @"user_type":USER_TYPE
+                             };
+    [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
+        //        NSLog(@"用户当前可用猩币 === %@", responseObj);
+        
+        if ([responseObj[@"code"] integerValue] == 1) {
+            coinAble = responseObj[@"data"][@"coin_able"];
+        }
+        
+    } failure:^(NSError *error) {
+        //
+        [self showHudWithString:@"获取数据失败!" forSecond:1.5];
+    }];
+    
+}
+
 
 - (void)createContent{
 

@@ -11,7 +11,8 @@
 
 #import "XXEStoreGoodDetailInfoViewController.h"
 #import "XXEStorePerfectConsigneeAddressViewController.h"
-
+//虚拟 商品 直接支付 界面
+#import "XXEStorePayViewController.h"
 #import "UMSocial.h"
 
 @interface XXEStoreGoodDetailInfoViewController ()<UIScrollViewDelegate>
@@ -42,8 +43,10 @@
     NSString *collect_conditStr;
     //收藏 id
     NSString *collect_id;
-    
+    //商品 详情
     NSDictionary *goodDetailInfoDic;
+    //虚拟 商品 待支付 订单
+    NSDictionary *daizhifuOrderDictInfo;
     
     NSString *parameterXid;
     NSString *parameterUser_Id;
@@ -65,6 +68,7 @@
         parameterUser_Id = USER_ID;
     }
     goodDetailInfoDic = [[NSDictionary alloc] init];
+    daizhifuOrderDictInfo = [[NSDictionary alloc] init];
     picArray = [[NSMutableArray alloc] init];
 
     //获取 商品 具体 信息
@@ -346,14 +350,83 @@
 //购买
 - (void)buyButtonClick{
 
-    XXEStorePerfectConsigneeAddressViewController *storePerfectConsigneeAddressVC = [[XXEStorePerfectConsigneeAddressViewController alloc] init];
-    
-    storePerfectConsigneeAddressVC.xingIconNum = goodDetailInfoDic[@"exchange_coin"];
-    storePerfectConsigneeAddressVC.price = goodDetailInfoDic[@"exchange_price"];
-    storePerfectConsigneeAddressVC.good_id = goodDetailInfoDic[@"id"];
-    
-    [self.navigationController pushViewController:storePerfectConsigneeAddressVC animated:YES];
+    //判断 是实物还是虚拟
+    //[type] => 1			//1:实物  2:虚拟商品
+    if ([goodDetailInfoDic[@"type"] integerValue] == 1) {
+        //如果 是 实物 会 跳到 完善 收货人 信息 界面
+        XXEStorePerfectConsigneeAddressViewController *perfectConsigneeAddressVC = [[XXEStorePerfectConsigneeAddressViewController alloc] init];
+        
+        perfectConsigneeAddressVC.xingIconNum = goodDetailInfoDic[@"exchange_coin"];
+        perfectConsigneeAddressVC.price = goodDetailInfoDic[@"exchange_price"];
+        perfectConsigneeAddressVC.good_id = goodDetailInfoDic[@"id"];
+        
+        [self.navigationController pushViewController:perfectConsigneeAddressVC animated:YES];
+    }else if ([goodDetailInfoDic[@"type"] integerValue] == 2){
+        // 如果 是 虚拟 会直接到支付 界面, 先生成待支付
+        [self createNoPayOrder:goodDetailInfoDic[@"id"]];
+        
+    }
+}
 
+#pragma mark ========虚拟 商品 产生未支付订单 ============
+- (void)createNoPayOrder:(NSString *)good_id{
+    /*
+     【猩猩商城--猩币兑换商品点立即支付(产生订单),金额+猩币】
+     接口类型:2
+     接口:
+     http://www.xingxingedu.cn/Global/coin_shopping
+     传参:
+     address_id	//地址id
+     goods_id	//商品id *****必传
+     receipt		//发票抬头
+     buyer_words	//买家留言
+     goods_type  1:实物  /2:虚拟 ****** 默认 是1
+     */
+    
+    NSString *urlStr = @"http://www.xingxingedu.cn/Global/coin_shopping";
+    
+    NSDictionary *params = @{@"appkey":APPKEY,
+                             @"backtype":BACKTYPE,
+                             @"xid":parameterXid,
+                             @"user_id":parameterUser_Id,
+                             @"user_type":USER_TYPE,
+                             @"goods_id":good_id,
+                             @"goods_type":@"2"
+                             };
+    NSLog(@"params --- %@", params);
+    
+    [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
+        
+        NSLog(@"生成待支付订单 == %@", responseObj);
+        /*
+         data =     {
+         "order_id" = 594;
+         "order_index" = 39288589297;
+         "pay_coin" = 300;
+         "pay_price" = 0;
+         "user_coin_able" = 10708;
+         };
+         */
+        if ([responseObj[@"code"]  integerValue] == 1) {
+            daizhifuOrderDictInfo = responseObj[@"data"];
+            
+            XXEStorePayViewController *storePayVC = [[XXEStorePayViewController alloc] init];
+            storePayVC.dict = daizhifuOrderDictInfo;
+            storePayVC.order_id = daizhifuOrderDictInfo[@"order_id"];
+            
+            [self.navigationController pushViewController:storePayVC animated:YES];
+            
+            
+        }else if([responseObj[@"code"]  integerValue] == 7){
+            
+            [self showString:@"您猩币数量不足" forSecond:1.5];
+        }
+        
+    } failure:^(NSError *error) {
+        //
+        [self showString:@"获取数据失败!" forSecond:1.5];
+    }];
+    
 }
 
 #pragma mark ======= 收藏 商品 =============

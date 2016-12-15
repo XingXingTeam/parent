@@ -298,7 +298,6 @@
     //设置 背景图片
     [self settingBackgroundImageView];
     
-//    [self createData];
     //创建 通知
     [self creatNotification];
     
@@ -437,7 +436,7 @@
 
 
 - (void)createCircleHeadImageView{
-
+    
     //头像bgView
     headView = [[UIView alloc] initWithFrame:CGRectMake(35 * kWidth / 375, upBackgroundImageView.centerY - 30, 120 * kWidth / 375, 120 * kHeight / 667)];
     
@@ -492,9 +491,9 @@
                             coin_able = [NSString stringWithFormat:@"%.2f万", coinNum];
             
                         }else if(dict[@"coin_able"] != nil){
-                            coin_able =dict[@"coin_able"];
+                             coin_able =dict[@"coin_able"];
                         }else{
-                        coin_able = @"";
+                             coin_able = @"";
                         }
             
             if (dict[@"fbasket_able"] == nil) {
@@ -515,7 +514,7 @@
                         NSArray *baby_infoArr =dict[@"baby_info"];
             
             //            NSLog(@"aaaaa%@", baby_infoArr);
-            //            NSMutableArray *arrayM =[[NSMutableArray alloc]init];
+
                         //孩子 id
                         baby_idArray = [[NSMutableArray alloc] init];
                         //孩子 头像
@@ -639,47 +638,56 @@
     for (int a =0; a<(image.count+1); a++) {
         //添加➕号
         if (a==image.count) {
-            UserImage =[[UIImageView alloc]initWithFrame:CGRectMake(0 +image.count*(120 * kWidth / 375), 0, 120 * kWidth / 375, 120 * kWidth / 375)];
-            UserImage.image =[UIImage imageNamed:@"headplace240x240"];
-            [_scrollView addSubview:UserImage];
-            UserImage.userInteractionEnabled = YES;
-            UserImage.layer.cornerRadius = 60 * kWidth / 375;
-            UserImage.layer.masksToBounds = YES;
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickUserIm:)];
-            [UserImage addGestureRecognizer:tap];
-        }
-        else {
-            UserImage = [[UIImageView alloc]initWithFrame:CGRectMake(0 +a*(120 * kWidth / 375 ), 0, 120 * kWidth / 375, 120 * kWidth / 375)];
-            //            NSLog(@"宝贝 头像 %@", head_imgArray);
-            [UserImage sd_setImageWithURL:[NSURL URLWithString:head_imgArray[a]] placeholderImage:[UIImage imageNamed:@"头像"]];
-            [_scrollView addSubview:UserImage];
-            UserImage.userInteractionEnabled = YES;
-            UserImage.layer.cornerRadius = 60 * kWidth / 375;
-            UserImage.layer.masksToBounds = YES;
-            UserImage.tag = 100 + a;
-            //性别符号
-            manimage = [[UIImageView alloc] initWithFrame:CGRectMake(50 * kWidth / 375 , 95 * kWidth / 375, 20 * kWidth / 375 , 20 * kWidth / 375)];
-//            manimage.image = [UIImage imageNamed:@"man"];
-            NSString *sexString = babySexArray[a];
             
-            if ([sexString isEqualToString:@"男"]) {
-                
-                manimage.image = [UIImage imageNamed:@"男"];
-                
-            }else if ([sexString isEqualToString:@"女"]){
+//            if (UserImage == nil) {
+
+                UserImage =[[UIImageView alloc]initWithFrame:CGRectMake(0 +image.count*(120 * kWidth / 375), 0, 120 * kWidth / 375, 120 * kWidth / 375)];
+                UserImage.image =[UIImage imageNamed:@"headplace240x240"];
+                [_scrollView addSubview:UserImage];
+                UserImage.userInteractionEnabled = YES;
+                UserImage.layer.cornerRadius = 60 * kWidth / 375;
+                UserImage.layer.masksToBounds = YES;
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickUserIm:)];
+                [UserImage addGestureRecognizer:tap];
+//            }
     
-                manimage.image = [UIImage imageNamed:@"女"];
+        }else {
+            
+            if (UserImage == nil) {
+            UserImage = [[UIImageView alloc]initWithFrame:CGRectMake(0 +a*(120 * kWidth / 375 ), 0, 120 * kWidth / 375, 120 * kWidth / 375)];
+                //            NSLog(@"宝贝 头像 %@", head_imgArray);
+                [UserImage sd_setImageWithURL:[NSURL URLWithString:head_imgArray[a]] placeholderImage:[UIImage imageNamed:@"头像"]];
+                [_scrollView addSubview:UserImage];
+                UserImage.userInteractionEnabled = YES;
+                UserImage.layer.cornerRadius = 60 * kWidth / 375;
+                UserImage.layer.masksToBounds = YES;
+                UserImage.tag = 100 + a;
+                //性别符号
+                manimage = [[UIImageView alloc] initWithFrame:CGRectMake(50 * kWidth / 375 , 95 * kWidth / 375, 20 * kWidth / 375 , 20 * kWidth / 375)];
+                //            manimage.image = [UIImage imageNamed:@"man"];
+                NSString *sexString = babySexArray[a];
+                
+                if ([sexString isEqualToString:@"男"]) {
+                    
+                    manimage.image = [UIImage imageNamed:@"男"];
+                    
+                }else if ([sexString isEqualToString:@"女"]){
+                    
+                    manimage.image = [UIImage imageNamed:@"女"];
+                }
+                
+                manimage.layer.cornerRadius = 8 * kWidth / 375 ;
+                manimage.layer.masksToBounds = YES;
+                [UserImage addSubview:manimage];
+                
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickUserImage:)];
+                [UserImage addGestureRecognizer:tap];
+                //长按headImage
+                UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(clickWithLongTap:)];
+                [UserImage addGestureRecognizer:longTap];
             }
-            
-            manimage.layer.cornerRadius = 8 * kWidth / 375 ;
-            manimage.layer.masksToBounds = YES;
-            [UserImage addSubview:manimage];
-            
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickUserImage:)];
-            [UserImage addGestureRecognizer:tap];
-            //长按headImage
-            UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(clickWithLongTap:)];
-            [UserImage addGestureRecognizer:longTap];
+        
+
         }
         
     }
@@ -1335,39 +1343,7 @@
     XXESchoolTimetableViewController *schoolTimetableVC = [[XXESchoolTimetableViewController alloc] init];
     schoolTimetableVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:schoolTimetableVC animated:YES];
-//    NSString *nameStr =[DEFAULTS objectForKey:@"TT"];
-//    if ([nameStr isEqualToString:@""]) {
-//        //课程表
-//        ClassSubjectViewController *classSubjectVC =[[ClassSubjectViewController alloc]init];
-//
-//        classSubjectVC.hidesBottomBarWhenPushed =YES;
-//        [self.navigationController pushViewController:classSubjectVC animated:NO];
-//
-//    }
-//    else {
-//        switch ([nameStr integerValue]) {
-//            case 0:
-//            {
-//        //课程表
-//            ClassSubjectViewController *classSubjectVC =[[ClassSubjectViewController alloc]init];
-//                classSubjectVC.hidesBottomBarWhenPushed =YES;
-//            [self.navigationController pushViewController:classSubjectVC animated:NO];
-//
-//            }
-//                break;
-//            case 1:
-//            {
-//        //课程表
-//                ClassSubjectTimeTableViewController *classSubjectVC =[[ClassSubjectTimeTableViewController alloc]init];
-//                classSubjectVC.hidesBottomBarWhenPushed =YES;
-//                [self.navigationController pushViewController:classSubjectVC animated:NO];
-//            }
-//                break;
-//                
-//            default:
-//                break;
-//        }
-//    }
+
 }
 
 //通讯录

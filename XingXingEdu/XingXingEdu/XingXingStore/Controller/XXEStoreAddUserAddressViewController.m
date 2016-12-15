@@ -622,6 +622,8 @@
     {
         [self showString:@"亲,请输入您正确的手机号" forSecond:1.5];
         return;
+    }else if([self isChinaMobile:phoneText.text] == NO){
+        [self showString:@"请输入正确的电话号码" forSecond:1.5];
     }
     else if (mailText.text.length !=6)
     {
@@ -657,6 +659,8 @@
     {
         [self showString:@"亲,请输入您正确的手机号" forSecond:1.5];
         return;
+    }else if([self isChinaMobile:phoneText.text] == NO){
+        [self showString:@"请输入正确的电话号码" forSecond:1.5];
     }
     else if (mailText.text.length !=6)
     {

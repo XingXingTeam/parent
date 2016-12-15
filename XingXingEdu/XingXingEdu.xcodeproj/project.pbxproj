@@ -738,7 +738,6 @@
 		04B6218E1DBF019A00391616 /* zhifubaoZFB@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B620531DBF019A00391616 /* zhifubaoZFB@1x.png */; };
 		04B6218F1DBF019A00391616 /* zhifubaoZFB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B620541DBF019A00391616 /* zhifubaoZFB@2x.png */; };
 		04B621901DBF019A00391616 /* zhifubaoZFB@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B620551DBF019A00391616 /* zhifubaoZFB@3x.png */; };
-		04B621911DBF019A00391616 /* 转赠历史icon44x44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B620561DBF019A00391616 /* 转赠历史icon44x44@2x.png */; };
 		04B621921DBF019A00391616 /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B620591DBF019A00391616 /* AddressTableViewCell.m */; };
 		04B621931DBF019A00391616 /* ArticleInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B6205B1DBF019A00391616 /* ArticleInfoTableViewCell.m */; };
 		04B621941DBF019A00391616 /* ArticleInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B6205C1DBF019A00391616 /* ArticleInfoTableViewCell.xib */; };
@@ -837,7 +836,6 @@
 		04D5B1551D6B1F8900ABA89A /* HeaderFooterCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D5B1521D6B1F8900ABA89A /* HeaderFooterCollectionReusableView.m */; };
 		04D5B1561D6B1F8900ABA89A /* WZYAlbumDateISectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D5B1541D6B1F8900ABA89A /* WZYAlbumDateISectionViewController.m */; };
 		04D5B1931D6B1FF500ABA89A /* 个人描述40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D5B1591D6B1FF500ABA89A /* 个人描述40x40@2x.png */; };
-		04D5B1941D6B1FF500ABA89A /* 关系40x46@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D5B15A1D6B1FF500ABA89A /* 关系40x46@2x.png */; };
 		04D5B1951D6B1FF500ABA89A /* 删除icon34x42@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D5B15B1D6B1FF500ABA89A /* 删除icon34x42@2x.png */; };
 		04D5B1961D6B1FF500ABA89A /* 头像172x172@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D5B15C1D6B1FF500ABA89A /* 头像172x172@2x.png */; };
 		04D5B1981D6B1FF500ABA89A /* 女@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D5B15E1D6B1FF500ABA89A /* 女@2x.png */; };
@@ -1157,7 +1155,6 @@
 		6838FF951CE31DCF0034C54C /* 分享(H)icon48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838FF8D1CE31DCF0034C54C /* 分享(H)icon48x48.png */; };
 		6838FF961CE31DCF0034C54C /* 分享icon48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838FF8E1CE31DCF0034C54C /* 分享icon48x48.png */; };
 		6838FF981CE31DCF0034C54C /* 举报icon48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838FF901CE31DCF0034C54C /* 举报icon48x48.png */; };
-		6838FF9F1CE322E60034C54C /* 关系40x46.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838FF991CE322E60034C54C /* 关系40x46.png */; };
 		6838FFA01CE322E60034C54C /* 联系方式40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838FF9A1CE322E60034C54C /* 联系方式40x40.png */; };
 		6838FFA11CE322E60034C54C /* 昵称40x44.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838FF9B1CE322E60034C54C /* 昵称40x44.png */; };
 		6838FFA21CE322E60034C54C /* 设置40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 6838FF9C1CE322E60034C54C /* 设置40x40.png */; };
@@ -2656,7 +2653,6 @@
 		04B620531DBF019A00391616 /* zhifubaoZFB@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zhifubaoZFB@1x.png"; sourceTree = "<group>"; };
 		04B620541DBF019A00391616 /* zhifubaoZFB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zhifubaoZFB@2x.png"; sourceTree = "<group>"; };
 		04B620551DBF019A00391616 /* zhifubaoZFB@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zhifubaoZFB@3x.png"; sourceTree = "<group>"; };
-		04B620561DBF019A00391616 /* 转赠历史icon44x44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "转赠历史icon44x44@2x.png"; sourceTree = "<group>"; };
 		04B620581DBF019A00391616 /* AddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressTableViewCell.h; sourceTree = "<group>"; };
 		04B620591DBF019A00391616 /* AddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressTableViewCell.m; sourceTree = "<group>"; };
 		04B6205A1DBF019A00391616 /* ArticleInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -2791,7 +2787,6 @@
 		04D5B1531D6B1F8900ABA89A /* WZYAlbumDateISectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZYAlbumDateISectionViewController.h; sourceTree = "<group>"; };
 		04D5B1541D6B1F8900ABA89A /* WZYAlbumDateISectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZYAlbumDateISectionViewController.m; sourceTree = "<group>"; };
 		04D5B1591D6B1FF500ABA89A /* 个人描述40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人描述40x40@2x.png"; sourceTree = "<group>"; };
-		04D5B15A1D6B1FF500ABA89A /* 关系40x46@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "关系40x46@2x.png"; sourceTree = "<group>"; };
 		04D5B15B1D6B1FF500ABA89A /* 删除icon34x42@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "删除icon34x42@2x.png"; sourceTree = "<group>"; };
 		04D5B15C1D6B1FF500ABA89A /* 头像172x172@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "头像172x172@2x.png"; sourceTree = "<group>"; };
 		04D5B15E1D6B1FF500ABA89A /* 女@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "女@2x.png"; sourceTree = "<group>"; };
@@ -3157,7 +3152,6 @@
 		6838FF8D1CE31DCF0034C54C /* 分享(H)icon48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享(H)icon48x48.png"; sourceTree = "<group>"; };
 		6838FF8E1CE31DCF0034C54C /* 分享icon48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "分享icon48x48.png"; sourceTree = "<group>"; };
 		6838FF901CE31DCF0034C54C /* 举报icon48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "举报icon48x48.png"; sourceTree = "<group>"; };
-		6838FF991CE322E60034C54C /* 关系40x46.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "关系40x46.png"; sourceTree = "<group>"; };
 		6838FF9A1CE322E60034C54C /* 联系方式40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "联系方式40x40.png"; sourceTree = "<group>"; };
 		6838FF9B1CE322E60034C54C /* 昵称40x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "昵称40x44.png"; sourceTree = "<group>"; };
 		6838FF9C1CE322E60034C54C /* 设置40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "设置40x40.png"; sourceTree = "<group>"; };
@@ -5543,7 +5537,6 @@
 				04B6203E1DBF019900391616 /* xingMoney2.png */,
 				04B6203F1DBF019900391616 /* 商城订单 */,
 				04B620401DBF019900391616 /* 支付订单 */,
-				04B620561DBF019A00391616 /* 转赠历史icon44x44@2x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -6002,7 +5995,6 @@
 				043A7F5E1DF937B3003C4BF0 /* talk_icon@2x.png */,
 				043A7F5F1DF937B3003C4BF0 /* talk_icon@3x.png */,
 				04D5B1591D6B1FF500ABA89A /* 个人描述40x40@2x.png */,
-				04D5B15A1D6B1FF500ABA89A /* 关系40x46@2x.png */,
 				04D5B15B1D6B1FF500ABA89A /* 删除icon34x42@2x.png */,
 				04D5B15C1D6B1FF500ABA89A /* 头像172x172@2x.png */,
 				04D5B15E1D6B1FF500ABA89A /* 女@2x.png */,
@@ -6846,7 +6838,6 @@
 				68AECC921CE36D5C004F98D1 /* 提交icon650x84.png */,
 				68AECC931CE36D5C004F98D1 /* 未勾选34x34.png */,
 				68AECC941CE36D5C004F98D1 /* 已勾选34x34.png */,
-				6838FF991CE322E60034C54C /* 关系40x46.png */,
 				6838FF9A1CE322E60034C54C /* 联系方式40x40.png */,
 				6838FF9B1CE322E60034C54C /* 昵称40x44.png */,
 				6838FF9C1CE322E60034C54C /* 设置40x40.png */,
@@ -8412,7 +8403,6 @@
 				04D5B0FE1D6B1DE900ABA89A /* 注册学生40x40@2x.png in Resources */,
 				6844EA2C1CAD45320054B8C5 /* 1.png in Resources */,
 				6844EA2C1CAD45320054B8C5 /* 1.png in Resources */,
-				04B621911DBF019A00391616 /* 转赠历史icon44x44@2x.png in Resources */,
 				04B621441DBF019A00391616 /* tab4_selected@3x.png in Resources */,
 				04469A601D40DE9C0067615D /* commentInfo5.png in Resources */,
 				04D758BD1D3F1183005499ED /* 返回icon86x30@2x.png in Resources */,
@@ -8919,7 +8909,6 @@
 				04DE28641D2B7F7D002AE12A /* 支付失败icon120x120@3x.png in Resources */,
 				0463C3561DEC3D920035BEF6 /* LikeCmtBg@2x.png in Resources */,
 				04D5B0E51D6B1DE900ABA89A /* 下载icon48x48@2x.png in Resources */,
-				04D5B1941D6B1FF500ABA89A /* 关系40x46@2x.png in Resources */,
 				6844E8DF1CAD45150054B8C5 /* notSelected.png in Resources */,
 				0447772D1D2A76CC0018A459 /* starShow3.png in Resources */,
 				04B621061DBF019A00391616 /* havebeenpaid@2x.png in Resources */,
@@ -9018,7 +9007,6 @@
 				04D5B0E31D6B1DE900ABA89A /* QQ40x40@2x.png in Resources */,
 				048B194E1DEBDA03005A51FE /* XXEPhoneAddressBookTableViewCell.xib in Resources */,
 				6844E8E51CAD45150054B8C5 /* selected.png in Resources */,
-				6838FF9F1CE322E60034C54C /* 关系40x46.png in Resources */,
 				04D5E3E71D489FCB00921223 /* 早餐38x34@3x.png in Resources */,
 				0492ED331D49E2DE003E06D7 /* 科目按钮灰色（H）80x60@3x.png in Resources */,
 				04D758AA1D3F1183005499ED /* 已选择icon28x28@2x.png in Resources */,
