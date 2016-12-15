@@ -9,20 +9,52 @@
 #ifndef XXEHeaderApi_h
 #define XXEHeaderApi_h
 
-#define JPushAppKey @"4246476d42da75a98d9e01f2"
+
+#define UMSocialAppKey @"56d4096e67e58ef29300147c"
+
+//微博信息
+
+#define SinaWebAppKey @"2875286507"
+#define SinaWebAppSecret @"d26a462ef16055e1a9010a1d5489b3a6"
+
+//微信
+//AppID：wxed731a36270b5a4f
+//App Secret 55bf91c8002799d1fe13045e3f5cee7c
+/** 微信的APPID */
+#define WeChatAppId @"wx7c4249886c93e20e"
+/** 微信的APPSecret */
+#define WeChatAppSecret @"e452142ebe813f5dfab564a95b2ccc02"
+
+//QQ
+//APP ID1105651422
+//APP KEYk9FfqqGIWGNH6TDX
+#define QQAppId @"1105603411"
+#define QQAppSecret @"Xc9DlnWQqpG8hbH7"
+
+#define kRemoteNotification @"remoteNotification" //远程推送通知
+#define kSystemMessage @"systemMessage" //系统消息通知
+
+#define kChatNotification @"ChatNotification"
+#define kChatRemoteNotification @"ChatRemoteNotification"
+
+//#define JPushAppKey @"4246476d42da75a98d9e01f2"
 
 //访客登录XID不变
-#define XID  @"18886389"
+#define XID  @"18884982"
 #define APPKEY  @"U3k8Dgj7e934bh5Y"
 #define BACKTYPE @"json"
 #define USER_ID  @"1"
 #define USER_TYPE @"1"
-
+#define MyRongCloudAppKey @"4z3hlwrv3t0dt"
 //友盟分享 猩猩教室校园端
 
 #define XXEYouMengAppKey @"57c01a13f43e48118e000e55"
 
+//图片地址
+#define picURL    @"http://www.xingxingedu.cn/Public/"
 
+//版本号
+#define CheckoutVersionURL @"http://www.xingxingedu.cn/Parent/versionCheck"
 //登录
 #define XXELoginUrl @"http://www.xingxingedu.cn/Teacher/login"
 //忘记密码

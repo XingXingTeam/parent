@@ -20,5 +20,13 @@
 
 @property(nonatomic ,copy)NSString * phone;
 @property(nonatomic ,copy)NSString * pwd;
+@property(nonatomic ,copy)NSString * nickName;
+@property(nonatomic ,copy)NSString * t_head_img;
+@property(nonatomic ,copy)NSString * login_type;
+@property(nonatomic ,copy)NSString * QQToken;
+@property(nonatomic ,copy)NSString * weixinToken;
+@property(nonatomic ,copy)NSString * sinaToken;
+@property(nonatomic ,copy)NSString * whereFromController;
+
 
 @end
