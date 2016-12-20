@@ -101,6 +101,9 @@
         //
         if ([responseObj[@"code"] integerValue] == 1) {
             NSDictionary *dict = responseObj[@"data"];
+            
+//            NSLog(@"dict ==== %@", dict);
+            
             /*
              [cheeck_collect] => 1		//是否收藏过 1:收藏过  2:未收藏过
              */
@@ -127,7 +130,7 @@
                          //招生人数
              NSString * need_num =[NSString stringWithFormat:@"%@",dict[@"need_num"]];
                          //适用人群
-             NSString * age =[NSString stringWithFormat:@"%@岁到%@岁",dict[@"data"][@"age_up"],dict[@"age_down"]];
+             NSString * age =[NSString stringWithFormat:@"%@岁到%@岁",dict[@"age_up"],dict[@"age_down"]];
                          //教学目标
              NSString * teach_goal = [NSString stringWithFormat:@"%@",dict[@"teach_goal"]];
                          //上课时间

@@ -480,10 +480,9 @@
 
 - (void)onClickPicture:(UITapGestureRecognizer *)tap{
     
-//    XXEStoreGoodDetailInfoViewController*storeGoodDetailInfoVC=  [[XXEStoreGoodDetailInfoViewController alloc]init];
-////    XXEStoreListModel *model = _dataSourceArray[indexPath.row];
-//    storeGoodDetailInfoVC.orderNum = _order_id;
-//    [self.navigationController pushViewController:storeGoodDetailInfoVC animated:YES];
+    XXEStoreGoodDetailInfoViewController*storeGoodDetailInfoVC=  [[XXEStoreGoodDetailInfoViewController alloc]init];
+    storeGoodDetailInfoVC.orderNum = detailInfoDict[@"goods_id"];;
+    [self.navigationController pushViewController:storeGoodDetailInfoVC animated:YES];
     
 }
 #pragma mark ======= 创建 下部分 内容 =============

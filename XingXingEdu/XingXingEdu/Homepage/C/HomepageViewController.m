@@ -28,7 +28,6 @@
 #import "WZYBabyCenterViewController.h"
 #import "MainViewController.h"
 #import "VideoMonitorViewController.h"
-#import "XXEFriendMyCircleViewController.h"
 #import "MyHeadViewController.h"
 #import "OtherPeopleViewController.h"
 #import "ClassEditInfoViewController.h"
@@ -101,7 +100,8 @@
     MyTabBarController *_tbBar;
     NSString *coin_able;
     NSString *fbasket_able;
-    NSString *flower_able;
+    //孩子 得到的小红花
+    NSString *flower;
     NSString *lv;
     NSString *baby_id1;
     NSString *coin_total;
@@ -114,6 +114,8 @@
     NSMutableArray *head_imgArray;
     //孩子年龄
     NSMutableArray *ageArray;
+    //孩子 得到 的小红花
+    NSMutableArray *flowerNumArray;
     //孩子 名称
     NSMutableArray *tnameArray;
     //个性签名
@@ -207,14 +209,18 @@
      [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
-    flower_able = @"";
+    flower = @"";
     fbasket_able = @"";
     coin_able = @"";
+    
+    if (UserImage) {
+        [UserImage removeFromSuperview];
+    }
     
     [self createData];
     
     //花数
-    fnumberLabel.text = [NSString stringWithFormat:@": %@", flower_able];
+    fnumberLabel.text = [NSString stringWithFormat:@": %@", flower];
     
     //花篮数
     fsnumberLabel.text = [NSString stringWithFormat:@": %@", fbasket_able];
@@ -298,7 +304,6 @@
     //设置 背景图片
     [self settingBackgroundImageView];
     
-//    [self createData];
     //创建 通知
     [self creatNotification];
     
@@ -437,7 +442,7 @@
 
 
 - (void)createCircleHeadImageView{
-
+    
     //头像bgView
     headView = [[UIView alloc] initWithFrame:CGRectMake(35 * kWidth / 375, upBackgroundImageView.centerY - 30, 120 * kWidth / 375, 120 * kHeight / 667)];
     
@@ -460,10 +465,8 @@
     
 }
 
-
-//加载数据
+#pragma mark ================ //加载数据 =============
 - (void)createData{
-    
     //路径
     NSString *urlStr = DATA_URL;
     
@@ -488,14 +491,14 @@
             
             if ([dict[@"coin_able"]  length] >= 5) {
             
-                            CGFloat coinNum = [dict[@"coin_able"] floatValue] / 10000;
-                            coin_able = [NSString stringWithFormat:@"%.2f万", coinNum];
+                    CGFloat coinNum = [dict[@"coin_able"] floatValue] / 10000;
+                    coin_able = [NSString stringWithFormat:@"%.2f万", coinNum];
             
-                        }else if(dict[@"coin_able"] != nil){
-                            coin_able =dict[@"coin_able"];
-                        }else{
-                        coin_able = @"";
-                        }
+                }else if(dict[@"coin_able"] != nil){
+                   coin_able =dict[@"coin_able"];
+                }else{
+                   coin_able = @"";
+                }
             
             if (dict[@"fbasket_able"] == nil) {
                 fbasket_able = @"";
@@ -503,25 +506,22 @@
                 fbasket_able = dict[@"fbasket_able"];
             }
             
-            if (dict[@"flower_able"] == nil) {
-                flower_able = @"";
-            }else{
-                flower_able = dict[@"flower_able"];
-            }
                         lv =dict[@"lv"];
                         coin_total =dict[@"coin_total"];
                         next_grade_coin =dict[@"next_grade_coin"];
                         //宝贝信息  里面是一个个字典 每个孩子的具体信息
                         NSArray *baby_infoArr =dict[@"baby_info"];
             
-            //            NSLog(@"aaaaa%@", baby_infoArr);
-            //            NSMutableArray *arrayM =[[NSMutableArray alloc]init];
+//                        NSLog(@"aaaaa%@", baby_infoArr);
+
                         //孩子 id
                         baby_idArray = [[NSMutableArray alloc] init];
                         //孩子 头像
                         head_imgArray =[[NSMutableArray alloc]init];
                         //孩子 年龄
                         ageArray = [[NSMutableArray alloc] init];
+                        //孩子 小红花
+                        flowerNumArray = [[NSMutableArray alloc] init];
                         //孩子 名称
                         tnameArray = [[NSMutableArray alloc] init];
                         //孩子 签名
@@ -533,6 +533,8 @@
             
                         //孩子 性别
                         babySexArray = [[NSMutableArray alloc] init];
+            
+//            NSLog(@"baby_infoArr === %@", baby_infoArr);
             
                        if (baby_infoArr.count != 0) {
                            for (NSDictionary *dic in baby_infoArr) {
@@ -551,6 +553,8 @@
                                
                                //宝贝 年龄
                                [ageArray addObject:dic[@"age"]];
+                               //孩子 得到 小红花
+                               [flowerNumArray addObject:dic[@"flower"]];
                                
                                //名称
                                [tnameArray addObject:dic[@"tname"]];
@@ -575,6 +579,11 @@
             
             
                     }
+        
+        
+//        NSLog(@"ageArray **** %@", ageArray);
+        
+//        NSLog(@"flowerNumArray ==== %@", flowerNumArray);
                     //刷新放在主线程执行
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
@@ -611,6 +620,10 @@
     if (ageArray.count != 0) {
         ageLabel.text = [NSString stringWithFormat:@"年龄:%@岁",ageArray[0]];
     }
+    //花数
+    if (flowerNumArray.count != 0) {
+        fnumberLabel.text = [NSString stringWithFormat:@": %@",flowerNumArray[0]];
+    }
     
     
        //签名
@@ -620,9 +633,6 @@
     float t =  [coin_total floatValue]/[next_grade_coin floatValue];
     ysView.progressValue = t * ysView.frame.size.width;
     
-    //花数
-    fnumberLabel.text = [NSString stringWithFormat:@": %@",flower_able];
-
     //花篮数
     fsnumberLabel.text = [NSString stringWithFormat:@": %@",fbasket_able];
     
@@ -630,7 +640,7 @@
     xnumberLabel.text = [NSString stringWithFormat:@": %@",coin_able];
     
     //头像
-    //    NSLog(@"head_imgArray -- %@", head_imgArray);
+//        NSLog(@"head_imgArray -- %@", head_imgArray);
     NSArray * image =head_imgArray;
     
     //scrollView
@@ -639,47 +649,56 @@
     for (int a =0; a<(image.count+1); a++) {
         //添加➕号
         if (a==image.count) {
-            UserImage =[[UIImageView alloc]initWithFrame:CGRectMake(0 +image.count*(120 * kWidth / 375), 0, 120 * kWidth / 375, 120 * kWidth / 375)];
-            UserImage.image =[UIImage imageNamed:@"headplace240x240"];
-            [_scrollView addSubview:UserImage];
-            UserImage.userInteractionEnabled = YES;
-            UserImage.layer.cornerRadius = 60 * kWidth / 375;
-            UserImage.layer.masksToBounds = YES;
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickUserIm:)];
-            [UserImage addGestureRecognizer:tap];
-        }
-        else {
-            UserImage = [[UIImageView alloc]initWithFrame:CGRectMake(0 +a*(120 * kWidth / 375 ), 0, 120 * kWidth / 375, 120 * kWidth / 375)];
-            //            NSLog(@"宝贝 头像 %@", head_imgArray);
-            [UserImage sd_setImageWithURL:[NSURL URLWithString:head_imgArray[a]] placeholderImage:[UIImage imageNamed:@"头像"]];
-            [_scrollView addSubview:UserImage];
-            UserImage.userInteractionEnabled = YES;
-            UserImage.layer.cornerRadius = 60 * kWidth / 375;
-            UserImage.layer.masksToBounds = YES;
-            UserImage.tag = 100 + a;
-            //性别符号
-            manimage = [[UIImageView alloc] initWithFrame:CGRectMake(50 * kWidth / 375 , 95 * kWidth / 375, 20 * kWidth / 375 , 20 * kWidth / 375)];
-//            manimage.image = [UIImage imageNamed:@"man"];
-            NSString *sexString = babySexArray[a];
             
-            if ([sexString isEqualToString:@"男"]) {
-                
-                manimage.image = [UIImage imageNamed:@"男"];
-                
-            }else if ([sexString isEqualToString:@"女"]){
+//            if (UserImage == nil) {
+
+                UserImage =[[UIImageView alloc]initWithFrame:CGRectMake(0 +image.count*(120 * kWidth / 375), 0, 120 * kWidth / 375, 120 * kWidth / 375)];
+                UserImage.image =[UIImage imageNamed:@"headplace240x240"];
+                [_scrollView addSubview:UserImage];
+                UserImage.userInteractionEnabled = YES;
+                UserImage.layer.cornerRadius = 60 * kWidth / 375;
+                UserImage.layer.masksToBounds = YES;
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickUserIm:)];
+                [UserImage addGestureRecognizer:tap];
+//            }
     
-                manimage.image = [UIImage imageNamed:@"女"];
-            }
+        }else {
             
-            manimage.layer.cornerRadius = 8 * kWidth / 375 ;
-            manimage.layer.masksToBounds = YES;
-            [UserImage addSubview:manimage];
-            
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickUserImage:)];
-            [UserImage addGestureRecognizer:tap];
-            //长按headImage
-            UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(clickWithLongTap:)];
-            [UserImage addGestureRecognizer:longTap];
+//            if (UserImage == nil) {
+            UserImage = [[UIImageView alloc]initWithFrame:CGRectMake(0 +a*(120 * kWidth / 375 ), 0, 120 * kWidth / 375, 120 * kWidth / 375)];
+//                NSLog(@"宝贝 头像 %@", head_imgArray);
+                [UserImage sd_setImageWithURL:[NSURL URLWithString:head_imgArray[a]] placeholderImage:[UIImage imageNamed:@"headplace240x240"]];
+                [_scrollView addSubview:UserImage];
+                UserImage.userInteractionEnabled = YES;
+                UserImage.layer.cornerRadius = 60 * kWidth / 375;
+                UserImage.layer.masksToBounds = YES;
+                UserImage.tag = 100 + a;
+                //性别符号
+                manimage = [[UIImageView alloc] initWithFrame:CGRectMake(50 * kWidth / 375 , 95 * kWidth / 375, 20 * kWidth / 375 , 20 * kWidth / 375)];
+                //            manimage.image = [UIImage imageNamed:@"man"];
+                NSString *sexString = babySexArray[a];
+                
+                if ([sexString isEqualToString:@"男"]) {
+                    
+                    manimage.image = [UIImage imageNamed:@"男"];
+                    
+                }else if ([sexString isEqualToString:@"女"]){
+                    
+                    manimage.image = [UIImage imageNamed:@"女"];
+                }
+                
+                manimage.layer.cornerRadius = 8 * kWidth / 375 ;
+                manimage.layer.masksToBounds = YES;
+                [UserImage addSubview:manimage];
+                
+                UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickUserImage:)];
+                [UserImage addGestureRecognizer:tap];
+                //长按headImage
+                UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(clickWithLongTap:)];
+                [UserImage addGestureRecognizer:longTap];
+//            }
+        
+
         }
         
     }
@@ -749,8 +768,11 @@
 
     
     if (commboxGradeAndClassArray.count != 0) {
-        
-    self.gradeAndClassbox.dataArray = commboxGradeAndClassArray[didSelectedSchoolRow];
+//        NSLog(@"qqq %@", commboxGradeAndClassArray[0][0]);
+//        
+//        if (![commboxGradeAndClassArray[0][0] isEqualToString:@"编辑班级"]) {
+               self.gradeAndClassbox.dataArray = commboxGradeAndClassArray[didSelectedSchoolRow];
+//        }
 
     }
  
@@ -795,12 +817,19 @@
         [self.view addSubview:logoImageView];
 }
 
+
+#pragma mark ======== 学校 logo =========
 - (void)logoTap:(UITapGestureRecognizer *)logoTap{
+    if (school_infoArray.count != 0){
     
-    LogoTabBarController *logoViewController = [[LogoTabBarController alloc] init];
-    logoViewController.hidesBottomBarWhenPushed = YES;
-    
-    [self presentViewController:logoViewController animated:NO completion:nil];
+        [SVProgressHUD showInfoWithStatus:@"请先完善班级信息"];
+    }else{
+        LogoTabBarController *logoViewController = [[LogoTabBarController alloc] init];
+        logoViewController.hidesBottomBarWhenPushed = YES;
+        
+        [self presentViewController:logoViewController animated:NO completion:nil];
+    }
+
     
 }
 
@@ -826,6 +855,10 @@
             self.gradeAndClassbox.textField.text = @"";
             self.gradeAndClassbox.textField.placeholder = GRADE_CLASS;
             self.gradeAndClassbox.textField.enabled = NO;
+//            classNameArray = [[NSMutableArray alloc] init];
+//            [classNameArray addObject:@"编辑班级"];
+//            [commboxGradeAndClassArray addObject:classNameArray];
+//            _gradeAndClassbox.dataArray = commboxGradeAndClassArray;
             
             logoImageView.image = [UIImage imageNamed:@"schoollogo(1)172x172"];
             
@@ -866,8 +899,6 @@
 
     }
     
-    
-    
 }
 
 #pragma mark -
@@ -890,6 +921,7 @@
             //确定
             ClassEditViewController *classEditVC = [[ClassEditViewController alloc] init];
             classEditVC.hidesBottomBarWhenPushed = YES;
+            classEditVC.fromPerfectInfo = @"fromHomePage";
             [self.navigationController pushViewController:classEditVC animated:YES];
             
             break;
@@ -909,7 +941,7 @@
             NSString * newNameOne=[change objectForKey:@"new"];
             //            NSLog(@"object:%@,new:%@",object,newNameOne);
             
-            if (commboxSchoolArray.count != 0 && commboxGradeAndClassArray.count != 0) {
+            if (commboxSchoolArray.count != 0 && commboxGradeAndClassArray.count != 1) {
                 didSelectedSchoolRow =[commboxSchoolArray indexOfObject:newNameOne];
                 self.gradeAndClassbox.textField.text = commboxGradeAndClassArray[didSelectedSchoolRow][0];
                 
@@ -980,16 +1012,21 @@
 //                NSLog(@"%ld", [commboxGradeAndClassArray indexOfObject:newNameTwo]);
             
                 if (commboxGradeAndClassArray.count != 0) {
-                    didSelectedClassRow =[commboxGradeAndClassArray[didSelectedSchoolRow] indexOfObject:newNameTwo];
-                    if (commboxIDArray.count != 0) {
-                        NSArray *arr = commboxIDArray[didSelectedSchoolRow];
-                        
-                        _classStr = arr[didSelectedClassRow];
-                    }else{
-                        _classStr = @"";
-                    }
+//                    NSLog(@"bbbb %@", commboxGradeAndClassArray[0][0]);
+//                    
+//                    if (![commboxGradeAndClassArray[0][0] isEqualToString:@"编辑班级"]) {
+                        didSelectedClassRow =[commboxGradeAndClassArray[didSelectedSchoolRow] indexOfObject:newNameTwo];
+                        if (commboxIDArray.count != 0) {
+                            NSArray *arr = commboxIDArray[didSelectedSchoolRow];
+                            
+                            _classStr = arr[didSelectedClassRow];
+                        }else{
+                            _classStr = @"";
+                        }
+
+//                    }
                     
-                    NSLog(@"_classStr ***** %@", _classStr);
+//                    NSLog(@"_classStr ***** %@", _classStr);
                     
                     [DEFAULTS setObject:_classStr forKey:@"CLASS_ID"];
                     
@@ -1026,6 +1063,7 @@
  */
 - (void)updateBayInfomaion:(NSInteger)i{
     
+    
     if (i>=ageArray.count) {
         
         //学校 年级 下拉框 无信息
@@ -1039,11 +1077,18 @@
         self.gradeAndClassbox.textField.placeholder = GRADE_CLASS;
         self.gradeAndClassbox.textField.enabled = NO;
         
+//        classNameArray = [[NSMutableArray alloc] init];
+//        [classNameArray addObject:@"编辑班级"];
+//        [commboxGradeAndClassArray addObject:classNameArray];
+//        _gradeAndClassbox.dataArray = commboxGradeAndClassArray;
+//        _gradeAndClassbox.dataArray = [[NSMutableArray alloc] initWithObjects:@"编辑班级", nil];
+        
         logoImageView.image = [UIImage imageNamed:@"schoollogo(1)172x172"];
         
         ageLabel.text = [NSString stringWithFormat:@"年龄:%@",@""];
         nameLabel.text =[NSString stringWithFormat:@"%@",@""];
         titleLabel.text =[NSString stringWithFormat:@"签名:%@",@""];
+        fnumberLabel.text = @"0";
     }
     else{
         self.schoolNameCombox.textField.enabled = YES;
@@ -1061,10 +1106,16 @@
 
 //        NSLog(@"%@", _gradeAndClassbox.dataArray[0]);
         if (commboxGradeAndClassArray.count != 0) {
-            _gradeAndClassbox.dataArray = commboxGradeAndClassArray[didSelectedSchoolRow];
-            _gradeAndClassbox.textField.text = _gradeAndClassbox.dataArray[0];
+//            NSLog(@"hhhh %@", commboxGradeAndClassArray[0][0]);
+//            
+//            if (![commboxGradeAndClassArray[0][0] isEqualToString:@"编辑班级"]) {
             
-            [_gradeAndClassbox.listTableView reloadData];
+                _gradeAndClassbox.dataArray = commboxGradeAndClassArray[didSelectedSchoolRow];
+                _gradeAndClassbox.textField.text = _gradeAndClassbox.dataArray[0];
+                
+                [_gradeAndClassbox.listTableView reloadData];
+//            }
+
         }
         
 
@@ -1080,6 +1131,8 @@
         ageLabel.text = [NSString stringWithFormat:@"年龄:%@岁",ageArray[i]];
         nameLabel.text =[NSString stringWithFormat:@"%@",tnameArray[i]];
         titleLabel.text =[NSString stringWithFormat:@"签名:%@",personl_signArray[i]];
+        //花数
+        fnumberLabel.text = [NSString stringWithFormat:@": %@",flowerNumArray[i]];
 //        NSLog(@"%@", baby_idArray);
        
 //        NSLog(@"%@", baby_idArray[i]);
@@ -1335,39 +1388,7 @@
     XXESchoolTimetableViewController *schoolTimetableVC = [[XXESchoolTimetableViewController alloc] init];
     schoolTimetableVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:schoolTimetableVC animated:YES];
-//    NSString *nameStr =[DEFAULTS objectForKey:@"TT"];
-//    if ([nameStr isEqualToString:@""]) {
-//        //课程表
-//        ClassSubjectViewController *classSubjectVC =[[ClassSubjectViewController alloc]init];
-//
-//        classSubjectVC.hidesBottomBarWhenPushed =YES;
-//        [self.navigationController pushViewController:classSubjectVC animated:NO];
-//
-//    }
-//    else {
-//        switch ([nameStr integerValue]) {
-//            case 0:
-//            {
-//        //课程表
-//            ClassSubjectViewController *classSubjectVC =[[ClassSubjectViewController alloc]init];
-//                classSubjectVC.hidesBottomBarWhenPushed =YES;
-//            [self.navigationController pushViewController:classSubjectVC animated:NO];
-//
-//            }
-//                break;
-//            case 1:
-//            {
-//        //课程表
-//                ClassSubjectTimeTableViewController *classSubjectVC =[[ClassSubjectTimeTableViewController alloc]init];
-//                classSubjectVC.hidesBottomBarWhenPushed =YES;
-//                [self.navigationController pushViewController:classSubjectVC animated:NO];
-//            }
-//                break;
-//                
-//            default:
-//                break;
-//        }
-//    }
+
 }
 
 //通讯录
@@ -1482,15 +1503,11 @@
     xnumberLabel = [HHControl createLabelWithFrame:CGRectMake(Width * 2 + Width / 2, 5 * kWidth / 375, Width / 2 + 40, 30 * kWidth / 375) Font:16 * kWidth / 375 Text:@""];
     [middleBackgroundView addSubview:xnumberLabel];
 
-
-
- 
 }
 
 
 #pragma mark - 首页 宝贝 头像 动画--------------------------
 //******************************首页 宝贝 头像 动画***************
-
 //点击宝贝头像 跳转
 -(void)onClickUserImage:(UITapGestureRecognizer *)tap
 {

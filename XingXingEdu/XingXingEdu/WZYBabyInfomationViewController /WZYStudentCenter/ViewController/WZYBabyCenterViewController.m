@@ -557,15 +557,13 @@
 
 - (void)upLoadNetData{
     
-//        /*
-    
+//
 //    【编辑孩子信息】
-//    
 //    接口:
 //    http://www.xingxingedu.cn/Parent/edit_baby_info
 //    
 //    传参:
-//    baby_id		//孩子id
+//    baby_id   //孩子id
 //    nickname	//昵称
 //    personal_sign	//个性签名
 //    pdescribe	//个人描述
@@ -669,7 +667,7 @@
             [formData appendPartWithFileData:data name:@"file" fileName:fileName mimeType:@"image/png"];
         } success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             NSDictionary *dict =responseObject;
-//                        NSLog(@"哈哈哈哈啊<<<<<<<<<<<<<<<<<<<<<<<<<<<<<%@",dict);
+//    NSLog(@"哈哈哈哈啊<<<<<<<<<<<<<<<<<<<<<<<<<<<<<%@",dict);
             if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
             {
 //  NSLog(@"data=====================================%@",dict[@"data"]);

@@ -11,7 +11,7 @@
 //
 #import "SchoolInfoViewController.h"
 
-#define GET_SCHOOL_Url @"http://www.xingxingedu.cn/Parent/get_school_info"
+#define GET_SCHOOL_Url @"http://www.xingxingedu.cn/Global/get_school_info"
 #define Audit_TEACHER_URL @"http://www.xingxingedu.cn/Parent/get_examine_teacher"
 #define  kDropDownListTag 1000
 #import "LMContainsLMComboxScrollView.h"
@@ -117,7 +117,7 @@
 }
 
 - (void)pickup{
-    UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:@"是否完善信息赚取200猩币?" delegate:self cancelButtonTitle:@"跳过" otherButtonTitles:@"完善", nil];
+    UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:@"是否完善信息赚取100猩币?" delegate:self cancelButtonTitle:@"跳过" otherButtonTitles:@"完善", nil];
     alert.delegate =self;
     [alert show];
 }
@@ -454,7 +454,7 @@
     /**
      确定按钮
      */
-    UIButton * defineBtn =[HHControl createButtonWithFrame:CGRectMake(25, 410, self.view.frame.size.width-50, 42) backGruondImageName:@"按钮big650x84" Target:self Action:@selector(defineBtnPressed:) Title:@"确定"];
+    UIButton * defineBtn =[HHControl createButtonWithFrame:CGRectMake(25, 410, self.view.frame.size.width-50, 42) backGruondImageName:@"按钮big650x84" Target:self Action:@selector(defineBtnPressed:) Title:@"确        定"];
     defineBtn.layer.cornerRadius =2;
     [defineBtn.layer setMasksToBounds:YES];
     
@@ -479,6 +479,12 @@
             if([newName isEqualToString:@"幼儿园"]){
                 //获取数据 上海理想幼儿园
                 //创建一个Url
+                //@"http://www.xingxingedu.cn/Global/get_school_info"
+                
+                //获取 幼儿园 信息
+//                [self kindergartenInfo];
+                
+                
                 NSURL *url =[NSURL URLWithString:GET_SCHOOL_Url];
                 //创建请求
                 NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:url];
@@ -730,6 +736,15 @@
    
 }
 
+#pragma mark ================ 获取 幼儿园 信息 ===============
+- (void)kindergartenInfo{
+        
+        
+        
+}
+        
+        
+        
 - (void)commboxAction:(NSNotification *)notif{
 
     switch ([notif.object integerValue]) {
@@ -853,6 +868,10 @@
             else if ([textFiel.text isEqualToString:@"培训机构"]){
                 int i=4;
                   NSLog(@"i%d",i);
+            }
+            else if ([textFiel.text isEqualToString:@"高中"]){
+                int i=5;
+                NSLog(@"i%d",i);
             }
             break;
         case 1200:

@@ -390,7 +390,7 @@ self.navigationController.navigationBarHidden =NO;
     
     QQBtn = [HHControl createButtonWithFrame:CGRectMake((kWidth - (50 * 4 + 25 * 3) * kWidth / 375) / 2, kHeight - 100, 50 * kWidth / 375, 50 * kWidth / 375) backGruondImageName:@"扣扣" Target:self Action:@selector(onClickQQ:) Title:nil];
 #pragma Mark ***************第三方登录***********
-    CGFloat btnW = 50 * kWidth / 375;
+//    CGFloat btnW = 50 * kWidth / 375;
      [self.view addSubview:QQBtn];
     QQBtn.layer.cornerRadius= QQBtn.frame.size.width / 2;
     QQBtn.layer.masksToBounds =YES;
@@ -434,11 +434,11 @@ self.navigationController.navigationBarHidden =NO;
 
 
 
-- (void)registration{
-    AuthenticationViewController *registerVC=[[AuthenticationViewController alloc]init];
-    [self.navigationController pushViewController:registerVC animated:YES];
-    
-}
+//- (void)registration{
+//    AuthenticationViewController *registerVC=[[AuthenticationViewController alloc]init];
+//    [self.navigationController pushViewController:registerVC animated:YES];
+//    
+//}
 
 - (void)onClickQQ:(UIButton *)button
 {
@@ -545,22 +545,40 @@ self.navigationController.navigationBarHidden =NO;
 -(void)onClickvisitorsBtn:(UIButton *)button
 {
     
-//    HomepageViewController*forVC= [[HomepageViewController alloc]init];
     XXETabBarViewController *myTableVC =[[XXETabBarViewController alloc]init];
     [self presentViewController:myTableVC animated:YES completion:nil];
-}
-
--(void)registration:(UIButton *)button
-{
-    AuthenticationViewController *registerVC=[[AuthenticationViewController alloc]init];
-    //    UINavigationController *navi=[[UINavigationController alloc]initWithRootViewController:registerVC];
-    [self.navigationController pushViewController:registerVC animated:YES];
-
+    
     
 }
+
+#pragma mark ======= 免费注册 =========
+-(void)registration:(UIButton *)button
+{
+//    NSLog(@"00000");
+//    AuthenticationViewController *registerVC=[[AuthenticationViewController alloc]init];
+    //    UINavigationController *navi=[[UINavigationController alloc]initWithRootViewController:registerVC];
+//    [self.navigationController pushViewController:registerVC animated:YES];
+    AuthenticationViewController *registerVC = [[AuthenticationViewController alloc]init];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    XXENavigationViewController *navi = [[XXENavigationViewController alloc]initWithRootViewController:registerVC];
+    window.rootViewController = navi;
+
+
+}
+
+#pragma Mark ========= 忘记密码 ********
 -(void)fogetPwd{
-    ForgetPassWordViewController * forVC=[[ForgetPassWordViewController alloc]init];
-    [self.navigationController pushViewController:forVC animated:YES];
+    
+//    NSLog(@"忘记 密码");
+    
+//    ForgetPassWordViewController * forVC=[[ForgetPassWordViewController alloc]init];
+//    [self.navigationController pushViewController:forVC animated:YES];
+    ForgetPassWordViewController *forgetVC = [[ForgetPassWordViewController alloc]init];
+//    forgetVC.loginType = LoginNot;
+//    forgetVC.passwordType = LoginPassword;
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    XXENavigationViewController *navi = [[XXENavigationViewController alloc]initWithRootViewController:forgetVC];
+    window.rootViewController = navi;
 }
 
 
@@ -575,6 +593,8 @@ self.navigationController.navigationBarHidden =NO;
     });
 }
 
+
+#pragma mark ========= 账号登录 (非第三方登录) =============
 - (void)LoginView{
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
 
@@ -775,25 +795,31 @@ self.navigationController.navigationBarHidden =NO;
             NSString * logintimes = [data objectForKey:@"login_times"];
             [self LoginSetupUserInfoDict:data SnsAccessToken:parameters[@"account"] LoginType:_login_type];
             NSLog(@"%@",logintimes);
-#warning wzy   =======  完善 学校 信息 =========
             if ([logintimes integerValue]==1 ) {
-                SchoolInfoViewController *schoolInfoVC = [[SchoolInfoViewController alloc] init];
-                XXENavigationViewController *navi = [[XXENavigationViewController alloc]initWithRootViewController:schoolInfoVC];
-                UIWindow *window = [UIApplication sharedApplication].keyWindow;
-                window.rootViewController = navi;
-                [self.view removeFromSuperview];
+//                SchoolInfoViewController *schoolInfoVC = [[SchoolInfoViewController alloc] init];
+//                XXENavigationViewController *navi = [[XXENavigationViewController alloc]initWithRootViewController:schoolInfoVC];
+//                UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//                window.rootViewController = navi;
+//                [self.view removeFromSuperview];
+            
+            //ClassEditViewController
+            ClassEditViewController *classEditVC = [[ClassEditViewController alloc] init];
+            [self presentViewController:classEditVC animated:YES completion:nil];
+//            classEditVC.fromPerfectInfo = @"fromPerfectInfo";
+//            XXENavigationViewController *navi = [[XXENavigationViewController alloc]initWithRootViewController:classEditVC];
+//            UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//            window.rootViewController = navi;
+//            [self.view removeFromSuperview];
+
             }else{
-                
+
                 XXETabBarViewController *tabBarControllerConfig = [[XXETabBarViewController alloc]init];
                 UIWindow *window = [UIApplication sharedApplication].keyWindow;
                 window.rootViewController = tabBarControllerConfig;
                 [self.view removeFromSuperview];
-                //                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                //
-                //
-                //                });
+
             }
-            
+        
         }else{
             //进入注册的第三个
             SettingPersonInfoViewController *settingVC = [[SettingPersonInfoViewController alloc]init];
@@ -873,44 +899,21 @@ self.navigationController.navigationBarHidden =NO;
 }
 
 - (void)LoginButton{
+
     
-//    SchoolInfoViewController * passWordResetVC = [[SchoolInfoViewController alloc]init];
-//    passWordResetVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-//    passWordResetVC.transitioningDelegate = self;
-//    NSLog(@"登录 次数 -- %@", [XXEUserInfo user].login_times);
-//    if ([[XXEUserInfo user].login_times integerValue] == 1) {
-//        [self.navigationController pushViewController:passWordResetVC animated:YES];
-//    }else{
-//        XXETabBarViewController *myTableVC =[[XXETabBarViewController alloc]init];
-//        [self presentViewController:myTableVC animated:YES completion:nil];
-//    }
-//    BOOL isNotFirstLauch = [[NSUserDefaults standardUserDefaults] boolForKey:@"isNotFirstL"];
-//    if (isNotFirstLauch) {
-//        /*
-//         判断第一次登录
-//         */
-//        XXETabBarViewController *myTableVC =[[XXETabBarViewController alloc]init];
-//        [self presentViewController:myTableVC animated:YES completion:nil];
-//    }
-//    else{
-//        isNotFirstLauch = !isNotFirstLauch;
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isNotFirstL"];
-//        
-//        [self.navigationController pushViewController:passWordResetVC animated:YES];
-//    }
-    ClassEditViewController *classEditVC = [[ClassEditViewController alloc] init];
-        classEditVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        classEditVC.transitioningDelegate = self;
+    if ([[XXEUserInfo user].login_times integerValue] == 1){
+        ClassEditViewController *classEditVC = [[ClassEditViewController alloc] init];
+        classEditVC.fromPerfectInfo = @"fromPerfectInfo";
+        [self.navigationController pushViewController:classEditVC animated:YES];
+
     
-        NSLog(@"登录 次数 -- %@", [XXEUserInfo user].login_times);
-    if ([[XXEUserInfo user].login_times integerValue] == 1) {
-//            [self.navigationController pushViewController:classEditVC animated:YES];
-        [self presentViewController:classEditVC animated:YES completion:nil];
-        }else{
-        XXETabBarViewController *myTableVC =[[XXETabBarViewController alloc]init];
-            [self presentViewController:myTableVC animated:YES completion:nil];
+    }else{
+        XXETabBarViewController *tabBarControllerConfig = [[XXETabBarViewController alloc]init];
+        UIWindow *window = [UIApplication sharedApplication].keyWindow;
+        window.rootViewController = tabBarControllerConfig;
+        [self.view removeFromSuperview];
     }
-    
+
 }
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
                                                                   presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source

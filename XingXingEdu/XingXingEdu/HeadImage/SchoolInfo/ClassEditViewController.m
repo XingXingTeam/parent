@@ -16,7 +16,7 @@
 #import "AppDelegate.h"
 #import "UtilityFunc.h"
 #import "HHControl.h"
-#import "MyTabBarController.h"
+#import "XXETabBarViewController.h"
 
 #import "WZYSearchSchoolViewController.h"
 
@@ -78,7 +78,7 @@
     //
     UIAlertView *_perfectAlert;
     MBProgressHUD *HUD;
-    
+    NSString *babyId;
     //
     NSString *parameterXid;
     NSString *parameterUser_Id;
@@ -126,7 +126,7 @@
     [super viewWillAppear:animated];
 //    [self createSchoolTypeCombox];
     
-
+    [self.navigationController.navigationBar setTintColor:UIColorFromRGB(0, 170, 42)];
 }
 
 
@@ -141,25 +141,30 @@
         parameterUser_Id = USER_ID;
     }
     
-    NSLog(@"%@ == %@ ", parameterXid, parameterUser_Id);
-
+//    NSLog(@"%@ == %@ ", parameterXid, parameterUser_Id);
     
     searchArray = [[NSMutableArray alloc] init];
-    
-    [self.navigationController.navigationBar setTintColor:UIColorFromRGB(255, 255, 255)];
-    self.view.backgroundColor = UIColorFromRGB(116,205, 169);
-//    NSLog(@"&&&&&&&");
-    
-    if ([[XXEUserInfo user].login_times integerValue] == 1) {
-    self.title =@"完善班级";
-        [self performSelector:@selector(pickup) withObject:self afterDelay:1];
-    
+    //请求参数  无
+    if (_addBabyId) {
+        babyId = _addBabyId;
     }else{
+        babyId  = [[NSUserDefaults standardUserDefaults] objectForKey:@"BABYID"];
+    }
+
+    self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
+    
+
+    if ([[XXEUserInfo user].login_times integerValue] == 1) {
+    self.title =@"完善信息";
+        if ([_fromPerfectInfo isEqualToString:@"fromPerfectInfo"]) {
+                [self performSelector:@selector(pickup) withObject:self afterDelay:1];
+        }
+    }else{
+        
     self.title =@"添加班级";
     
     }
     
-//    [self reloadD];
     bgScrollView = [[LMContainsLMComboxScrollView alloc]initWithFrame:CGRectMake(0, 0, kWidth, kHeight)];
     bgScrollView.backgroundColor = UIColorFromRGB(255, 255, 255);
     bgScrollView.showsHorizontalScrollIndicator =NO;
@@ -172,7 +177,6 @@
     
     [self fetchProvinceData];
     
-//    [self setBgScrollView];
     [self commBoxInfo];
     bgView.userInteractionEnabled = YES;
     [self createRightBar];
@@ -180,30 +184,42 @@
 }
 
 - (void)pickup{
-    _perfectAlert =[[UIAlertView alloc]initWithTitle:@"提示" message:@"是否完善信息赚取200猩币?" delegate:self cancelButtonTitle:@"跳过" otherButtonTitles:@"完善", nil];
+        
+    _perfectAlert =[[UIAlertView alloc]initWithTitle:@"提示" message:@"是否完善信息赚取100猩币?" delegate:self cancelButtonTitle:@"跳过" otherButtonTitles:@"完善", nil];
     _perfectAlert.delegate =self;
     [_perfectAlert show];
 }
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-//    
-//    switch (buttonIndex) {
-//        case 0:
-//        {
-//            MyTabBarController *myTableVC =[[MyTabBarController alloc]init];
-//            [self presentViewController:myTableVC animated:YES completion:nil];
-//        }
-//            break;
-//        case 1:
-//        {
-//            NSLog(@"完善");
-//        }
-//            break;
-//        default:
-//            break;
-//    }
-//    
-//}
-//
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (alertView == _perfectAlert) {
+        switch (buttonIndex) {
+            case 0:
+            {
+                //HomepageViewController
+                HomepageViewController *homepageVC =[[HomepageViewController alloc]init];
+                [self presentViewController:homepageVC animated:YES completion:nil];
+//                MyTabBarController *myTableVC =[[MyTabBarController alloc]init];
+//                [self presentViewController:myTableVC animated:YES completion:nil];
+//                MyTabBarController *tabBarControllerConfig = [[MyTabBarController alloc]init];
+//                UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//                window.rootViewController = tabBarControllerConfig;
+//                [self.view removeFromSuperview];
+            }
+                break;
+            case 1:
+            {
+                NSLog(@"完善");
+            }
+                break;
+            default:
+                break;
+        }
+
+    }
+    
+    
+}
+
 - (void)createRightBar{
     
     UIButton*rightButton = [[UIButton alloc]initWithFrame:CGRectMake(-10,0,22,22)];
@@ -251,40 +267,6 @@
 }
 
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if (alertView == _alert) {
-        switch (buttonIndex) {
-            case 0:
-                NSLog(@"取消");
-                break;
-            case 1:
-                [self.navigationController popViewControllerAnimated:YES];
-                break;
-            default:
-                break;
-        }
-    }else if (alertView == _perfectAlert){
-        switch (buttonIndex) {
-            case 0:
-               {
-               MyTabBarController *myTableVC =[[MyTabBarController alloc]init];
-               [self presentViewController:myTableVC animated:YES completion:nil];
-               }
-               break;
-             case 1:
-             {
-              NSLog(@"完善");
-             }
-              break;
-              default:
-              break;
-              }
-
-    
-    }
-    
-}
 
 
 -(void)commBoxInfo{
@@ -299,7 +281,6 @@
     [bgScrollView addSubview:starImgV];
     
     /**省   98  */
-    
     [self createProvinceCombox];
 //    [self fetchProvinceData];
     
@@ -349,10 +330,9 @@
 - (void)createProvinceCombox{
     self.provinceCombox = [[WJCommboxView alloc] initWithFrame:CGRectMake(100 * kWidth / 375+(80+10)*0, 70 * kWidth / 375, 80 * kWidth / 375, 30 * kWidth / 375)];
     CGRect rect =  self.provinceCombox.listTableView.frame;
-    rect = CGRectMake(rect.origin.x - 10, rect.origin.y , rect.size.width + 20, rect.size.height);
+    rect = CGRectMake(rect.origin.x - 20 * kScreenRatioWidth, rect.origin.y , rect.size.width + 40 * kScreenRatioWidth, rect.size.height);
     self.provinceCombox.listTableView.frame = rect;
     
-//    self.provinceCombox.listTableView =[[UITableView alloc] initWithFrame:CGRectMake(-10, 30, frame.size.width, 0) style:UITableViewStyleGrouped];
     self.provinceCombox.textField.backgroundColor =UIColorFromRGB(246, 246, 246);
     self.provinceCombox.textField.placeholder= @"省";
     self.provinceCombox.textField.textAlignment = NSTextAlignmentLeft;
@@ -384,9 +364,8 @@
     self.cityCombox = [[WJCommboxView alloc]initWithFrame:CGRectMake((100+(80+10)*1) * kWidth / 375, 70 * kWidth / 375, 80 * kWidth / 375, 30 * kWidth / 375)];
     
     CGRect rect =  self.cityCombox.listTableView.frame;
-    rect = CGRectMake(rect.origin.x - 10, rect.origin.y , rect.size.width + 20, rect.size.height);
+    rect = CGRectMake(rect.origin.x - 20 * kScreenRatioWidth, rect.origin.y , rect.size.width + 40 * kScreenRatioWidth, rect.size.height);
     self.cityCombox.listTableView.frame = rect;
-    
     
     self.cityCombox.textField.backgroundColor =UIColorFromRGB(246, 246, 246);
     self.cityCombox.textField.placeholder= @"市";
@@ -413,7 +392,7 @@
     self.areaCombox = [[WJCommboxView alloc]initWithFrame:CGRectMake((100+(80+10)*2) * kWidth / 375, 70 * kWidth / 375, 80 * kWidth / 375, 30 * kWidth / 375)];
     
     CGRect rect =  self.areaCombox.listTableView.frame;
-    rect = CGRectMake(rect.origin.x - 10, rect.origin.y , rect.size.width + 20, rect.size.height);
+    rect = CGRectMake(rect.origin.x - 30 * kScreenRatioWidth, rect.origin.y , rect.size.width + 40 * kScreenRatioWidth, rect.size.height);
     self.areaCombox.listTableView.frame = rect;
     
     self.areaCombox.textField.backgroundColor =UIColorFromRGB(246, 246, 246);
@@ -468,8 +447,6 @@
     [self.schoolTypeView addGestureRecognizer:singleTouch];
     
     [self.schoolTypeCombox.textField addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:@"13"];
-
-
 }
 
 //学校 名称 14
@@ -508,7 +485,6 @@
 - (void)createGradeNameCombox{
 
     UILabel * gradeNameLabel=[[UILabel alloc]initWithFrame:CGRectMake(30 * kWidth / 375, 256 * kWidth / 375, 92 * kWidth / 375, 30 * kWidth / 375)];
-//    self.gradeNameArr = [[NSArray alloc]initWithObjects:@"小班",@"中班",@"大班",@"一年级",@"二年级",@"三年级",@"四年级",@"五年级",@"六年级",nil];
     gradeNameLabel.text=@"班级信息";
     gradeNameLabel.font = [UIFont systemFontOfSize:14 * kWidth / 375];
     [bgScrollView addSubview:gradeNameLabel];
@@ -518,8 +494,11 @@
     self.gradeNameCombox.textField.placeholder = @"年级";
     self.gradeNameCombox.textField.textAlignment = NSTextAlignmentCenter;
     self.gradeNameCombox.textField.tag = 103;
-//    self.gradeNameCombox.textField.delegate = self;
-//    self.gradeNameCombox.dataArray = self.gradeNameArr;
+
+    CGRect gradeRect = _gradeNameCombox.listTableView.frame;
+    gradeRect = CGRectMake(gradeRect.origin.x - 20 * kScreenRatioWidth, gradeRect.origin.y, gradeRect.size.width + 40 * kScreenRatioWidth, gradeRect.size.height);
+    _gradeNameCombox.listTableView.frame = gradeRect;
+    
     [bgScrollView addSubview:self.gradeNameCombox];
     self.gradeNameView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kWidth, kHeight+300)];
     self.gradeNameView.backgroundColor = UIColorFromRGB(246, 246, 246);
@@ -557,7 +536,7 @@
     _auditNameLabel.font = [UIFont systemFontOfSize:14 * kWidth / 375];
     [bgScrollView addSubview:self.auditNameLabel];
     
-    self.auditNameCombox = [[WJCommboxView alloc] initWithFrame:CGRectMake(100 * kWidth / 375, 318 * kWidth / 375, 230 * kWidth / 375, 30 * kWidth / 375)];
+    self.auditNameCombox = [[WJCommboxView alloc] initWithFrame:CGRectMake(100 * kWidth / 375, 318 * kWidth / 375, 260 * kWidth / 375, 30 * kWidth / 375)];
     self.auditNameCombox.textField.placeholder = @"请选择审核人员";
     self.auditNameCombox.textField.textAlignment = NSTextAlignmentCenter;
     self.auditNameCombox.textField.tag = 105;
@@ -582,13 +561,14 @@
 //确定 按钮
 - (void)createDefineBtn{
 
-    UIButton * defineBtn=[[UIButton alloc]initWithFrame:CGRectMake(10, 420, self.view.frame.size.width-20, 36)];
-    [defineBtn setTitle:@"确 定" forState:UIControlStateNormal];
-    [defineBtn setTitleColor:UIColorFromRGB(255, 255, 255) forState:UIControlStateNormal];
-    defineBtn.backgroundColor = UIColorFromRGB(0, 169, 66);
-    defineBtn.layer.cornerRadius =18;
-    defineBtn.layer.masksToBounds =YES;
-    [defineBtn addTarget:self action:@selector(defineBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+    CGFloat buttonW = 325 * kScreenRatioWidth;
+    CGFloat buttonH = 42 * kScreenRatioHeight;
+    CGFloat buttonX = (KScreenWidth - buttonW) / 2;
+    CGFloat buttonY = KScreenHeight - 150 * kScreenRatioHeight;
+    
+    
+    UIButton * defineBtn= [HHControl createButtonWithFrame:CGRectMake(buttonX, buttonY, buttonW, buttonH) backGruondImageName:@"按钮big650x84" Target:self Action:@selector(defineBtnPressed:) Title:@"确    定"];
+    [defineBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [bgScrollView addSubview:defineBtn];
 
 }
@@ -675,12 +655,14 @@
                             str = @"幼儿园";
                         }else if ([searchArray[3] isEqualToString:@"2"]){
                             str = @"小学";
-                            
                         }else if ([searchArray[3] isEqualToString:@"3"]){
-                            str = @"中学";
+                            str = @"初中";
                             
                         }else if ([searchArray[3] isEqualToString:@"4"]){
                             str = @"培训机构";
+                            
+                        }else if ([searchArray[3] isEqualToString:@"5"]){
+                            str = @"高中";
                             
                         }
                         
@@ -812,9 +794,10 @@
             if (classStr) {
                 NSInteger index = [_classNameArr indexOfObject: classStr];
                 
-                NSString *newStr = [NSString stringWithFormat:@"%ld", index + 1];
+//                NSString *newStr = [NSString stringWithFormat:@"%ld", index + 1];
                 
-                classIdStr = newStr;
+//                NSLog(@"auditorIdArray === %@", classIdArray);
+                classIdStr = classIdArray[index];
                 
                 //获取 审核人员 数据
                 [self fetchAuditData];
@@ -838,10 +821,8 @@
             
             if (auditorNameStr) {
                 NSInteger index = [auditorNameArray indexOfObject: auditorNameStr];
-                
-                NSString *newStr = [NSString stringWithFormat:@"%ld", index + 1];
-                
-                auditorIdStr = newStr;
+
+                auditorIdStr = auditorIdArray[index];
                 
             }
             }else{
@@ -914,6 +895,13 @@
     
 }
 -(void)defineBtnPressed:(id)sender{
+    /*
+     baby_id		//孩子id
+     school_id	//学校id
+     sch_type	//学校类型代号 (幼儿园/小学/初中/培训机构/高中 1/2/3/4/5)
+     class_id	//班级id
+     examine_id	//审核老师的id
+     */
     if ([self.schoolTypeCombox.textField.text isEqualToString:@""]) {
         [SVProgressHUD showErrorWithStatus:@"学校类型不能为空!"];
         return;
@@ -922,6 +910,19 @@
            [SVProgressHUD showErrorWithStatus:@"学校名称不能为空!"];
         return;
     }
+    if ([self.gradeNameCombox.textField.text isEqualToString:@""]) {
+        [SVProgressHUD showErrorWithStatus:@"年级名称不能为空!"];
+        return;
+    }
+    if ([self.classNameCombox.textField.text isEqualToString:@""]) {
+        [SVProgressHUD showErrorWithStatus:@"班级名称不能为空!"];
+        return;
+    }
+    if ([self.auditNameCombox.textField.text isEqualToString:@""]) {
+        [SVProgressHUD showErrorWithStatus:@"审核人员不能为空!"];
+        return;
+    }
+    
 
     
 //    if (_isFromAddBaby) {
@@ -1029,51 +1030,41 @@
     //路径
     NSString *urlStr = @"http://www.xingxingedu.cn/Parent/baby_study_sch";
     
-    //请求参数  无
-    
-    NSString *babyId = [[NSUserDefaults standardUserDefaults] objectForKey:@"BABYID"];
-    
     NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"school_id":schoolIdStr, @"sch_type":schoolTypeStr, @"class_id":classIdStr, @"examine_id":auditorIdStr, @"baby_id":babyId};
-    NSLog(@" params --  %@", params);
+//    NSLog(@" params --  %@", params);
     
-[WZYHttpTool post:urlStr params:params success:^(id responseObj) {
+    [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
     
 //    NSLog(@"rrrrrrtttttyyyuiujk---   %@", responseObj);
 
     NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
     
     if ([codeStr isEqualToString:@"1"]) {
-    
-//        [SVProgressHUD showInfoWithStatus:@"保存成功!"];
-        _alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"你的信息已经提交成功,请耐心等待审核,谢谢您的支持!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        [SVProgressHUD showSuccessWithStatus:@"您的信息已经提交成功,请耐心等待审核,谢谢您的支持!"];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            XXETabBarViewController *tabBarControllerConfig = [[XXETabBarViewController alloc]init];
+            [self presentViewController:tabBarControllerConfig animated:YES completion:nil];
+
+        });
+
+        
         
        //上海
     }else if([codeStr isEqualToString:@"5"]){
         
-       _alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"已添加过这个班级!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
-        
+        [SVProgressHUD showErrorWithStatus:@"您已添加过这个班级!"];
     }else{
-        _alert=[[UIAlertView alloc]initWithTitle:@"提示" message:@"你的信息已经提交失败,请重新提交!" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        [SVProgressHUD showErrorWithStatus:@"您的信息提交失败,请重新提交!"];
         
     }
     
-      [_alert show];
     
-    
-        [HUD showAnimated:YES whileExecutingBlock:^{
-            sleep(1.5);
-        } completionBlock:^{
-            [HUD removeFromSuperview];
-            HUD =nil;
-            [_alert dismissWithClickedButtonIndex:0 animated:NO];
-            [self.navigationController popViewControllerAnimated:YES];
-        }];
-
-    
-} failure:^(NSError *error) {
+     } failure:^(NSError *error) {
     //
-    NSLog(@"%@", error);
-}];
+//    NSLog(@"%@", error);
+         [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
+    }];
     
     
 }
@@ -1083,7 +1074,6 @@
  *  省
  */
 - (void)fetchProvinceData{
-
 /*
  【获取省,城市,区】
  接口:
@@ -1096,7 +1086,6 @@
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/provinces_city_area";
     
     //请求参数  无
-    
     NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"action_type":@"1"};
     
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
@@ -1231,14 +1220,14 @@
         areaIDArray = [[NSMutableArray alloc] init];
         //
 //                NSLog(@"区---responseObj --- %@", responseObj);
-        NSArray *dataSource = responseObj[@"data"];
+        NSArray *dataSource = [NSArray array];
+        dataSource = responseObj[@"data"];
         
         NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
         
         if ([codeStr isEqualToString:@"1"]) {
             
             for (NSDictionary *dic in dataSource) {
-                
                 [areaArr addObject:dic[@"area"]];
                 [areaIDArray addObject:dic[@"areaID"]];
             }
@@ -1455,6 +1444,8 @@
     NSString *urlStr = @"http://www.xingxingedu.cn/Parent/get_examine_teacher";
     
     NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"class_id":classIdStr, @"school_id":schoolIdStr};
+    
+//    NSLog(@"传参 === %@", params);
     
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         auditorIdArray = [[NSMutableArray alloc] init];

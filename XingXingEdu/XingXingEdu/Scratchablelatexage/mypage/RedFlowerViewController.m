@@ -213,7 +213,7 @@
     reportPicVC.picUrlStr = _ittms[d];
     reportPicVC.origin_pageStr = _origin_pageStr;
     
-    //    NSLog(@"当前 图片 URL %@  ---  举报 来源  %@", _ittms[d], _origin_pageStr);
+//        NSLog(@"当前 图片 URL %@  ---  举报 来源  %@", _ittms[d], _origin_pageStr);
     
     [self.navigationController pushViewController:reportPicVC animated:YES];
     

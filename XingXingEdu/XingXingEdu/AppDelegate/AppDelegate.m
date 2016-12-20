@@ -89,7 +89,6 @@ static int currentVersion = 100;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     
-    
     //初始化应用，appKey和appSecret从后台申请得
     [SMSSDK registerApp:@"ec9c9a472b8c"
              withSecret:@"7930e91cbd30596d903c06e5613635db"];

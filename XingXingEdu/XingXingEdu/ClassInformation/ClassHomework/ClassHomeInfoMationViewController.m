@@ -34,6 +34,8 @@
     NSString *tnameStr;
     NSInteger x;
     NSInteger y;
+    CGFloat picWidth;
+    CGFloat picHeight;
     
     NSArray *headArr;
     NSArray *titleArr;
@@ -150,7 +152,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row==3) {
-        return 40 + picRow * 80;
+        return 40 + picRow * (picHeight + 10);
     }
     else{
         return 40;
@@ -185,8 +187,8 @@
         //              int totalLine = 4;
         //              int buttonCount = 12;
         int margin = 5;
-        CGFloat picWidth = (kWidth - 5 * margin) / 4;
-        CGFloat picHeight = picWidth;
+        picWidth = (kWidth  - 20 - 5 * margin) / 4;
+        picHeight = picWidth;
         
         for (int i = 0; i < picMArr.count; i++) {
             
@@ -196,7 +198,7 @@
             //列
             int buttonLine = i % 4;
             
-            CGFloat buttonX = (picWidth + margin) * buttonLine;
+            CGFloat buttonX = 10 + (picWidth + margin) * buttonLine;
             CGFloat buttonY = 40 + (picHeight + margin) * buttonRow;
             
             UIImageView *pictureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(buttonX, buttonY, picWidth, picHeight)];

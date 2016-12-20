@@ -159,6 +159,7 @@
     imageView1.image = [UIImage imageNamed:@"必填符号60x60"];
     self.parentsIDCardCombox.textField.leftView = imageView1;
     self.parentsIDCardCombox.textField.leftViewMode = UITextFieldViewModeAlways;
+    [self.parentsIDCardCombox.textField addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:@"1"];
     
     self.parentsIDCardCombox.dataArray = self.parentsIDCardArray;
     self.parentsIDCardCombox.backgroundColor = [UIColor clearColor];
@@ -213,6 +214,7 @@
     imageView.image = [UIImage imageNamed:@"必填符号60x60"];
     self.studentIDCardCombox.textField.leftView = imageView;
     self.studentIDCardCombox.textField.leftViewMode = UITextFieldViewModeAlways;
+    [self.studentIDCardCombox.textField addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:@"2"];
     self.studentIDCardCombox.dataArray = self.studentIDCardArray;
     self.studentIDCardCombox.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.studentIDCardCombox];
@@ -267,6 +269,50 @@
     [self.view addSubview:landBtn];
 }
 
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
+    switch ([[NSString stringWithFormat:@"%@", context] integerValue]) {
+        case 1:
+            //家长 身份证 或者 护照
+        {
+            if ([keyPath isEqualToString:@"text"]) {
+                NSString *new = [change objectForKey:@"new"];
+                if ([new isEqualToString:@"家长身份证"]) {
+                    parentsIDCard.text = @"";
+                    parentsIDCard.placeholder = @"请输入您的身份证号";
+                }else if([new isEqualToString:@"家长护照"]){
+                    parentsIDCard.text = @"";
+                    parentsIDCard.placeholder = @"请输入您的护照号码";
+                }
+                
+            }
+        
+        }
+            break;
+        case 2:
+            //孩子 身份证 或者 护照
+        {
+            
+            if ([keyPath isEqualToString:@"text"]) {
+                NSString *new = [change objectForKey:@"new"];
+                if ([new isEqualToString:@"学生身份证"]) {
+                    studentIDCard.text = @"";
+                    studentIDCard.placeholder = @"请输入学生身份证";
+                }else if([new isEqualToString:@"学生护照"]){
+                    studentIDCard.text = @"";
+                    studentIDCard.placeholder = @"请输入学生护照号码";
+                }
+                
+            }
+        }
+            break;
+
+            
+        default:
+            break;
+    }
+    
+}
 
 - (void) textFieldDidChange:(id) sender {
     UITextField *_field = (UITextField *)sender;
@@ -355,6 +401,12 @@
         [SVProgressHUD showInfoWithStatus:@"您输入的身份证号码格式不正确"];
         return;
     }
+    else if ([self.studentIDCardCombox.textField.text isEqualToString:@"学生护照"]&&studentIDCard.text.length != 9)
+    {
+        [SVProgressHUD showInfoWithStatus:@"请输入9位数的护照号码"];
+        return;
+    }
+
     else if ([self.parentsIDCardCombox.textField.text isEqualToString:@"家长身份证"]&&![CheckIDCard checkIDCard:parentsIDCard.text]){
         [SVProgressHUD showInfoWithStatus:@"您输入的家长身份证号码不存在"];
         return;
@@ -364,7 +416,7 @@
         return;
     }
     else if ([self.studentIDCardCombox.textField.text isEqualToString:@"学生身份证"]&&![[self rangeString:studentIDCard.text begin:6 length:2] isEqualToString:@"20"]){
-        [SVProgressHUD showInfoWithStatus:@"您输入的学生身份证号码不正确"];
+        [SVProgressHUD showInfoWithStatus:@"请输入2000年以后的宝贝身份证号"];
         return;
     }
     
@@ -784,8 +836,8 @@
     }else{
         [dict setObject:studentIDCard.text forKey:@"baby_passport"];
     }
-    
-    //    NSLog(@"%@",dict);
+    [SVProgressHUD showInfoWithStatus:@"提交中..."];
+//        NSLog(@"刚刚灌灌灌灌灌 ==== %@",dict);
     
     // 请求时提交的数据格式
     //    mgr.requestSerializer = [AFJSONRequestSerializer serializer];// JSON
@@ -799,10 +851,8 @@
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
-         
-         
          NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-         //        NSLog(@"%@",dict);
+//                 NSLog(@"注册 结果 === %@",dict);
          //        NSLog(@"%@",dict[@"code"]);
          
          if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
@@ -810,7 +860,14 @@
              
              [SVProgressHUD showSuccessWithStatus:@"注册成功，请前往首页登录"];
              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                 [self.navigationController pushViewController:[LandingpageViewController alloc] animated:YES];
+                 
+                 LandingpageViewController *landVC = [[LandingpageViewController alloc] init];
+                 NSString *registBabyId = dict[@"data"][@"baby_id"];
+                 [DEFAULTS setObject:registBabyId forKey:@"BABYID"];
+                 [DEFAULTS synchronize];
+                 [self.navigationController pushViewController:landVC animated:YES];
+                 
+//                 [self.navigationController pushViewController:[LandingpageViewController alloc] animated:YES];
              });
              
          }
@@ -824,6 +881,15 @@
          [SVProgressHUD showErrorWithStatus:@"网络不通，请检查网络！"];
          
      }];
+}
+
+- (void)dealloc{
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.parentsIDCardCombox.textField removeObserver:self forKeyPath:@"text"];
+    
+    [self.studentIDCardCombox.textField removeObserver:self forKeyPath:@"text"];
+
 }
 
 
