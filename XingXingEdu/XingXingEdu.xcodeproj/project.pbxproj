@@ -316,6 +316,7 @@
 		045140C41D3E44720050F284 /* xiaohonghua45x45@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 045140C11D3E44720050F284 /* xiaohonghua45x45@2x.png */; };
 		045140C51D3E44720050F284 /* xiaohonghua45x45@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 045140C21D3E44720050F284 /* xiaohonghua45x45@3x.png */; };
 		0453ACF41D477C3200A076A9 /* KTClassTelephoneBabyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453ACF31D477C3200A076A9 /* KTClassTelephoneBabyViewController.m */; };
+		0459FC591E097B780029FF55 /* XXENavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459FC581E097B780029FF55 /* XXENavigationViewController.m */; };
 		045DCA9A1D54B3FF00433933 /* CommentsRecordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045DCA991D54B3FF00433933 /* CommentsRecordTableViewController.m */; };
 		045DCA9E1D54B49100433933 /* CommentRequestRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045DCA9C1D54B49100433933 /* CommentRequestRecordViewController.m */; };
 		045DCAA21D54B56200433933 /* PersonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045DCAA11D54B56200433933 /* PersonCenterViewController.m */; };
@@ -2064,6 +2065,8 @@
 		045140C21D3E44720050F284 /* xiaohonghua45x45@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xiaohonghua45x45@3x.png"; sourceTree = "<group>"; };
 		0453ACF21D477C3200A076A9 /* KTClassTelephoneBabyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTClassTelephoneBabyViewController.h; sourceTree = "<group>"; };
 		0453ACF31D477C3200A076A9 /* KTClassTelephoneBabyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTClassTelephoneBabyViewController.m; sourceTree = "<group>"; };
+		0459FC571E097B780029FF55 /* XXENavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXENavigationViewController.h; sourceTree = "<group>"; };
+		0459FC581E097B780029FF55 /* XXENavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXENavigationViewController.m; sourceTree = "<group>"; };
 		045DCA981D54B3FF00433933 /* CommentsRecordTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsRecordTableViewController.h; sourceTree = "<group>"; };
 		045DCA991D54B3FF00433933 /* CommentsRecordTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsRecordTableViewController.m; sourceTree = "<group>"; };
 		045DCA9B1D54B49100433933 /* CommentRequestRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentRequestRecordViewController.h; sourceTree = "<group>"; };
@@ -4642,6 +4645,16 @@
 			);
 			path = View;
 			sourceTree = "<group>";
+		};
+		0459FC561E097B780029FF55 /* BaseNavigationcontroller */ = {
+			isa = PBXGroup;
+			children = (
+				0459FC571E097B780029FF55 /* XXENavigationViewController.h */,
+				0459FC581E097B780029FF55 /* XXENavigationViewController.m */,
+			);
+			name = BaseNavigationcontroller;
+			path = XingXingEdu/BaseNavigationcontroller;
+			sourceTree = SOURCE_ROOT;
 		};
 		045FC5481D4B758500DF1E26 /* Controller */ = {
 			isa = PBXGroup;
@@ -7639,6 +7652,7 @@
 		68E2A8F01C45F67300EA8DF3 /* xingxingEdu */ = {
 			isa = PBXGroup;
 			children = (
+				0459FC561E097B780029FF55 /* BaseNavigationcontroller */,
 				9E65BA981DED74DD00463BA5 /* Homepage */,
 				9E65BA931DED6FCC00463BA5 /* FirstStarView */,
 				0463C38D1DEC48420035BEF6 /* XXEUser */,
@@ -9432,6 +9446,7 @@
 				6844E82D1CAD45150054B8C5 /* Cell.m in Sources */,
 				0463C3141DEC3D920035BEF6 /* XXETimeUserViewController.m in Sources */,
 				0499F08D1D2FAEBC00EFF631 /* AuditSetViewController.m in Sources */,
+				0459FC591E097B780029FF55 /* XXENavigationViewController.m in Sources */,
 				04D5B1CE1D6B240900ABA89A /* WZYRequestCommentTableViewCell.m in Sources */,
 				0463C3821DEC3D930035BEF6 /* UIColor+RCColor.m in Sources */,
 				04B6209C1DBF019A00391616 /* MultilevelTableViewCell.m in Sources */,

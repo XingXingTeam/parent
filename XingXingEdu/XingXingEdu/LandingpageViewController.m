@@ -31,6 +31,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "XXETabBarViewController.h"
 #import "ClassEditViewController.h"
+#import "XXENavigationViewController.h"
 
 
 #import "XXEUserInfo.h"
@@ -673,6 +674,8 @@ self.navigationController.navigationBarHidden =NO;
 -(void)registration:(UIButton *)button
 {
     AuthenticationViewController *registerVC=[[AuthenticationViewController alloc]init];
+    
+//    [self presentViewController:registerVC animated:YES completion:nil];
     //    UINavigationController *navi=[[UINavigationController alloc]initWithRootViewController:registerVC];
     [self.navigationController pushViewController:registerVC animated:YES];
 
@@ -680,6 +683,7 @@ self.navigationController.navigationBarHidden =NO;
 }
 -(void)fogetPwd{
     ForgetPassWordViewController * forVC=[[ForgetPassWordViewController alloc]init];
+//    [self presentViewController:forVC animated:YES completion:nil];
     [self.navigationController pushViewController:forVC animated:YES];
 }
 

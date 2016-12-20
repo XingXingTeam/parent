@@ -59,6 +59,7 @@
 #import "XXETabBarViewController.h"
 #import "XXEUserInfo.h"
 #import "XXEStarImageViewController.h"
+#import "XXENavigationViewController.h"
 
 //#import"PayMannerViewController.h"
 @interface AppDelegate ()
@@ -195,7 +196,7 @@
     [self.window makeKeyAndVisible];
     
     LandingpageViewController *login=[[LandingpageViewController alloc]init];
-//    XXENavigationViewController *navi = [[XXENavigationViewController alloc] initWithRootViewController:loginVC];
+    XXENavigationViewController *navi = [[XXENavigationViewController alloc] initWithRootViewController:login];
 //    XXETabBarControllerConfig *tarVC = [[XXETabBarControllerConfig alloc] init];
     
     if ([XXEUserInfo user].login) {
@@ -203,7 +204,7 @@
         initViewController = [[XXETabBarViewController alloc] init];
     }else {
         
-        initViewController = login;
+        initViewController = navi;
     }
     
     self.window.rootViewController = initViewController;
