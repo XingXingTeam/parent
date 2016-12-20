@@ -568,17 +568,20 @@ self.navigationController.navigationBarHidden =NO;
 
 #pragma Mark ========= 忘记密码 ********
 -(void)fogetPwd{
-    
 //    NSLog(@"忘记 密码");
     
 //    ForgetPassWordViewController * forVC=[[ForgetPassWordViewController alloc]init];
 //    [self.navigationController pushViewController:forVC animated:YES];
-    ForgetPassWordViewController *forgetVC = [[ForgetPassWordViewController alloc]init];
-//    forgetVC.loginType = LoginNot;
-//    forgetVC.passwordType = LoginPassword;
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    XXENavigationViewController *navi = [[XXENavigationViewController alloc]initWithRootViewController:forgetVC];
-    window.rootViewController = navi;
+//    ForgetPassWordViewController *forgetVC = [[ForgetPassWordViewController alloc]init];
+////    forgetVC.loginType = LoginNot;
+////    forgetVC.passwordType = LoginPassword;
+//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//    XXENavigationViewController *navi = [[XXENavigationViewController alloc]initWithRootViewController:forgetVC];
+//    window.rootViewController = navi;
+    
+    ForgetPassWordViewController * forVC=[[ForgetPassWordViewController alloc]init];
+//    [self presentViewController:forVC animated:YES completion:nil];
+    [self.navigationController pushViewController:forVC animated:YES];
 }
 
 
