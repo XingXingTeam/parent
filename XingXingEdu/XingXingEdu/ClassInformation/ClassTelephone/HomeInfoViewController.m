@@ -87,8 +87,8 @@
     if (cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
     }
-    cell.imageView.layer.cornerRadius = 30;
-    cell.imageView.clipsToBounds = YES;
+//    cell.imageView.layer.cornerRadius = 30;
+//    cell.imageView.clipsToBounds = YES;
     
     cell.textLabel.text =[NSString stringWithFormat:@"%@-%@",[self.familyMArr[indexPath.row] objectForKey:@"relation_name"],[self.familyMArr[indexPath.row] objectForKey:@"tname"]];
     cell.detailTextLabel.textColor =UIColorFromRGB(168, 254, 84);

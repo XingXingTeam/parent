@@ -165,7 +165,7 @@
     } failure:^(NSError *error) {
         
         NSLog(@"%@", error);
-        [SVProgressHUD showWithStatus:@"获取数据失败!"];
+        [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
         
     }];
 

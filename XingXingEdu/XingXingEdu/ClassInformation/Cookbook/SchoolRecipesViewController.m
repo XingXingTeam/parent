@@ -117,7 +117,7 @@
         iconImageViewDataSource = [[NSMutableArray alloc] init];
         contentDataSource = [[NSMutableArray alloc] init];
         
-//        NSLog(@"hhhh %@", responseObj);
+        NSLog(@"hhhh %@", responseObj);
         
         if([[NSString stringWithFormat:@"%@",responseObj[@"code"]]isEqualToString:@"1"] )
         {

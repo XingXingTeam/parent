@@ -28,7 +28,7 @@
 #define headLabelSize 80.f
 #define klabelH 30.0f
 #define klabelW 120.0f
-@interface SettingPersonInfoViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, VPImageCropperDelegate>
+@interface SettingPersonInfoViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, VPImageCropperDelegate,UITextFieldDelegate>
 
 {
     UIView *bgView;
@@ -44,6 +44,10 @@
     UITextField *studentName;   //学生姓名
     UITextField *studentIDCard;   //学生身份证号
     UITextField *inviteCode;   //邀请码
+    
+    //记录当前的输入框
+    UITextField *currentTextField;
+    
 }
 @property (nonatomic,strong) UIButton *head; //头像
 @property(nonatomic,strong)WJCommboxView *relationCombox;//下拉选择框
@@ -55,6 +59,59 @@
 
 @implementation SettingPersonInfoViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //增加通知中心监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+    //删除通知中心 的监听
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark ======== 键盘 即将 显示 ========
+- (void)keyboardWillShow:(NSNotification *)notification{
+
+//    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+//    CGFloat height = keyboardFrame.origin.y;
+    CGFloat textField_maxY = 0.00;//studentName
+    
+    if (currentTextField == studentName) {
+      textField_maxY  =  60;
+    }else if (currentTextField == studentIDCard){
+        textField_maxY = 120;
+    }else if (currentTextField == inviteCode){
+        textField_maxY = 180;
+    }
+
+//    CGFloat space = - self.view.frame.origin.y + textField_maxY;
+//    CGFloat transformY = height - space;
+//    if (transformY < 0) {
+        CGRect frame = self.view.frame;
+        frame.origin.y = frame.origin.y - textField_maxY ;
+        self.view.frame = frame;
+//    }
+
+}
+
+
+#pragma mark ********* 键盘 即将 消失 ********
+- (void)keyboardWillHide:(NSNotification *)notification{
+    //恢复到默认y为0的状态，有时候要考虑导航栏要+64
+    CGRect frame = self.view.frame;
+    frame.origin.y = 0;
+    self.view.frame = frame;
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title=@"注册3/3";
@@ -64,10 +121,38 @@
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     self.navigationController.navigationBar.barTintColor =UIColorFromRGB(0, 170, 42);
     
+    if ([self.whereFromController isEqualToString:@"loginVC"]) {
+        [self setbackBtn];
+    }
     
     [self createTextFields];
     [self loadPortrait];
     
+}
+
+- (void)setbackBtn {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:@"返回" forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"navigationButtonReturn"] forState:UIControlStateNormal];
+    //    [button setImage:[UIImage imageNamed:@"navigationButtonReturn"] forState:UIControlStateHighlighted];
+    button.size = CGSizeMake(70, 30);
+    // 让按钮内部的所有内容左对齐
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    //        [button sizeToFit];
+    // 让按钮的内容往左边偏移10
+    button.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    button.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
+    
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //    [button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
+    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    
+    // 修改导航栏左边的item
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
+- (void)back {
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 -(void)createTextFields
@@ -109,6 +194,7 @@
     [self.view addSubview:parentsNameLabel];
     
     parentsName = [self createTextFielfFrame:CGRectMake(CGRectGetMaxX(parentsNameLabel.frame) + spaceX, CGRectGetMaxY(label.frame) + spaceX, kWidth - parentsNameLabel.size.width - awayX * 2, klabelH) font:[UIFont systemFontOfSize:14] placeholder:@"请输入您的姓名"  alignment:NSTextAlignmentCenter clearButtonMode:UITextFieldViewModeWhileEditing];
+    parentsName.delegate = self;
     parentsName.layer.cornerRadius = 17.0f;
     parentsName.layer.borderWidth = 0.1f;
     parentsName.clipsToBounds = YES;
@@ -130,6 +216,7 @@
     imageView1.image = [UIImage imageNamed:@"必填符号60x60"];
     self.parentsIDCardCombox.textField.leftView = imageView1;
     self.parentsIDCardCombox.textField.leftViewMode = UITextFieldViewModeAlways;
+    [self.parentsIDCardCombox.textField addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:@"1"];
     
     self.parentsIDCardCombox.dataArray = self.parentsIDCardArray;
     self.parentsIDCardCombox.backgroundColor = [UIColor clearColor];
@@ -140,6 +227,7 @@
     
     //家长身份证号
     parentsIDCard = [self createTextFielfFrame:CGRectMake(CGRectGetMaxX(self.parentsIDCardCombox.frame) + spaceX, CGRectGetMaxY(parentsNameLabel.frame) + spaceX, kWidth - parentsNameLabel.size.width - awayX * 2, klabelH) font:[UIFont systemFontOfSize:14] placeholder:@"请输入您的身份号"  alignment:NSTextAlignmentCenter clearButtonMode:UITextFieldViewModeWhileEditing];
+    parentsIDCard.delegate = self;
     parentsIDCard.layer.cornerRadius = 17.0f;
     parentsIDCard.layer.borderWidth = 0.1f;
     parentsIDCard.clipsToBounds = YES;
@@ -161,6 +249,7 @@
     [self.view addSubview:studentNameLabel];
     
     studentName=[self createTextFielfFrame:CGRectMake(CGRectGetMaxX(studentNameLabel.frame) + spaceX, CGRectGetMaxY(parentsIDCard.frame) + spaceX, kWidth - studentNameLabel.size.width - awayX * 2, klabelH) font:[UIFont systemFontOfSize:14] placeholder:@"请输入学生姓名"  alignment:NSTextAlignmentCenter clearButtonMode:UITextFieldViewModeWhileEditing];
+    studentName.delegate = self;
     studentName.layer.cornerRadius = 17.0f;
     studentName.layer.borderWidth = 0.1f;
     studentName.clipsToBounds = YES;
@@ -182,6 +271,7 @@
     imageView.image = [UIImage imageNamed:@"必填符号60x60"];
     self.studentIDCardCombox.textField.leftView = imageView;
     self.studentIDCardCombox.textField.leftViewMode = UITextFieldViewModeAlways;
+    [self.studentIDCardCombox.textField addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:@"2"];
     self.studentIDCardCombox.dataArray = self.studentIDCardArray;
     self.studentIDCardCombox.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.studentIDCardCombox];
@@ -190,6 +280,7 @@
     self.studentIDCardComBackView.alpha = 0.5;
     
     studentIDCard=[self createTextFielfFrame:CGRectMake(CGRectGetMaxX(self.studentIDCardCombox.frame) + spaceX, CGRectGetMaxY(studentNameLabel.frame) + spaceX, kWidth - studentNameLabel.size.width - awayX * 2, klabelH) font:[UIFont systemFontOfSize:14] placeholder:@"请输入学生身份号"  alignment:NSTextAlignmentCenter clearButtonMode:UITextFieldViewModeWhileEditing];
+    studentIDCard.delegate = self;
     studentIDCard.backgroundColor = [UIColor whiteColor];
     studentIDCard.textAlignment = NSTextAlignmentCenter ;
     studentIDCard.layer.cornerRadius = 17.0f;
@@ -221,6 +312,7 @@
     
     
     inviteCode=[self createTextFielfFrame:CGRectMake(CGRectGetMaxX(inviteCodeLabel.frame) + spaceX, CGRectGetMaxY(studentRelationLabel.frame) + spaceX, kWidth - studentNameLabel.size.width - awayX * 2, klabelH) font:[UIFont systemFontOfSize:14] placeholder:@"可不填"  alignment:NSTextAlignmentCenter clearButtonMode:UITextFieldViewModeWhileEditing];
+    inviteCode.delegate = self;
     inviteCode.layer.cornerRadius = 17.0f;
     inviteCode.layer.borderWidth = 0.1f;
     inviteCode.clipsToBounds = YES;
@@ -235,6 +327,50 @@
     [self.view addSubview:landBtn];
 }
 
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
+    switch ([[NSString stringWithFormat:@"%@", context] integerValue]) {
+        case 1:
+            //家长 身份证 或者 护照
+        {
+            if ([keyPath isEqualToString:@"text"]) {
+                NSString *new = [change objectForKey:@"new"];
+                if ([new isEqualToString:@"家长身份证"]) {
+                    parentsIDCard.text = @"";
+                    parentsIDCard.placeholder = @"请输入您的身份证号";
+                }else if([new isEqualToString:@"家长护照"]){
+                    parentsIDCard.text = @"";
+                    parentsIDCard.placeholder = @"请输入您的护照号码";
+                }
+                
+            }
+        
+        }
+            break;
+        case 2:
+            //孩子 身份证 或者 护照
+        {
+            
+            if ([keyPath isEqualToString:@"text"]) {
+                NSString *new = [change objectForKey:@"new"];
+                if ([new isEqualToString:@"学生身份证"]) {
+                    studentIDCard.text = @"";
+                    studentIDCard.placeholder = @"请输入学生身份证";
+                }else if([new isEqualToString:@"学生护照"]){
+                    studentIDCard.text = @"";
+                    studentIDCard.placeholder = @"请输入学生护照号码";
+                }
+                
+            }
+        }
+            break;
+
+            
+        default:
+            break;
+    }
+    
+}
 
 - (void) textFieldDidChange:(id) sender {
     UITextField *_field = (UITextField *)sender;
@@ -323,6 +459,12 @@
         [SVProgressHUD showInfoWithStatus:@"您输入的身份证号码格式不正确"];
         return;
     }
+    else if ([self.studentIDCardCombox.textField.text isEqualToString:@"学生护照"]&&studentIDCard.text.length != 9)
+    {
+        [SVProgressHUD showInfoWithStatus:@"请输入9位数的护照号码"];
+        return;
+    }
+
     else if ([self.parentsIDCardCombox.textField.text isEqualToString:@"家长身份证"]&&![CheckIDCard checkIDCard:parentsIDCard.text]){
         [SVProgressHUD showInfoWithStatus:@"您输入的家长身份证号码不存在"];
         return;
@@ -332,15 +474,48 @@
         return;
     }
     else if ([self.studentIDCardCombox.textField.text isEqualToString:@"学生身份证"]&&![[self rangeString:studentIDCard.text begin:6 length:2] isEqualToString:@"20"]){
-        [SVProgressHUD showInfoWithStatus:@"您输入的学生身份证号码不正确"];
+        [SVProgressHUD showInfoWithStatus:@"请输入2000年以后的宝贝身份证号"];
         return;
     }
     
     [self upload];
-    
-    
-    
 }
+
+//MARK: - UITextFieldDelegate
+//- (void)textFieldDidBeginEditing:(UITextField *)textField {
+//    
+//        [UIView animateWithDuration:0.3 animations:^{
+//            self.view.transform = CGAffineTransformMakeTranslation(0, -212);
+//        }];
+//    
+//}
+//
+//- (void)textFieldDidEndEditing:(UITextField *)textField {
+//    
+//    
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.view.transform = CGAffineTransformIdentity;
+//    }];
+//}
+
+
+#pragma mark ========== 监听 键盘 上升 ==========
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+
+    currentTextField = textField;
+    
+    return YES;
+
+}
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self.view endEditing:YES];
+    return YES;
+}
+
+
+
 
 -(NSString * )rangeString:(NSString *)str begin:(NSInteger )begin  length:(NSInteger)length{
     NSRange r1 = {begin,length};
@@ -742,8 +917,8 @@
     }else{
         [dict setObject:studentIDCard.text forKey:@"baby_passport"];
     }
-    
-    //    NSLog(@"%@",dict);
+    [SVProgressHUD showInfoWithStatus:@"提交中..."];
+//        NSLog(@"刚刚灌灌灌灌灌 ==== %@",dict);
     
     // 请求时提交的数据格式
     //    mgr.requestSerializer = [AFJSONRequestSerializer serializer];// JSON
@@ -757,10 +932,8 @@
         
     } success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
-         
-         
          NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-         //        NSLog(@"%@",dict);
+//                 NSLog(@"注册 结果 === %@",dict);
          //        NSLog(@"%@",dict[@"code"]);
          
          if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
@@ -768,7 +941,14 @@
              
              [SVProgressHUD showSuccessWithStatus:@"注册成功，请前往首页登录"];
              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                 [self.navigationController pushViewController:[LandingpageViewController alloc] animated:YES];
+                 
+                 LandingpageViewController *landVC = [[LandingpageViewController alloc] init];
+                 NSString *registBabyId = dict[@"data"][@"baby_id"];
+                 [DEFAULTS setObject:registBabyId forKey:@"BABYID"];
+                 [DEFAULTS synchronize];
+                 [self.navigationController pushViewController:landVC animated:YES];
+                 
+//                 [self.navigationController pushViewController:[LandingpageViewController alloc] animated:YES];
              });
              
          }
@@ -782,6 +962,15 @@
          [SVProgressHUD showErrorWithStatus:@"网络不通，请检查网络！"];
          
      }];
+}
+
+- (void)dealloc{
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.parentsIDCardCombox.textField removeObserver:self forKeyPath:@"text"];
+    
+    [self.studentIDCardCombox.textField removeObserver:self forKeyPath:@"text"];
+
 }
 
 

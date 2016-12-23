@@ -208,7 +208,7 @@
         [self customContent];
     } failure:^(NSError *error) {
         //
-        [SVProgressHUD showWithStatus:@"获取数据失败"];
+        [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
     }];
     
 }
@@ -373,47 +373,48 @@
          code:7	//您已经在对方黑名单中,无法发起请求!
          code:8	//不能重复对同一个人发起请求!
          code:9	//对方已同意,可以直接聊天了 (对方设置了任何人请求直接通过)
+         code:10	//添加成功 (单方面删除好友,又添加好友)
          */
 
         NSString *codeStr =[NSString stringWithFormat:@"%@", responseObj[@"code"]];
         
          if ([codeStr isEqualToString:@"1"]) {
-             [SVProgressHUD showWithStatus:@"请求发送成功!"];
             
+             [SVProgressHUD showInfoWithStatus:@"请求发送成功!"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
         }else if ([codeStr isEqualToString:@"4"]) {
-            [SVProgressHUD showWithStatus:@"不能请求自己!"];
+            [SVProgressHUD showInfoWithStatus:@"不能请求自己!"];
             
 //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //                [self.navigationController popViewControllerAnimated:YES];
 //            });
         }else if ([codeStr isEqualToString:@"5"]) {
-            [SVProgressHUD showWithStatus:@"对方已经是您的好友!"];
+            [SVProgressHUD showInfoWithStatus:@"对方已经是您的好友!"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
         }else if ([codeStr isEqualToString:@"6"]) {
-            [SVProgressHUD showWithStatus:@"对方在我的黑名单中,无法发起请求!"];
+            [SVProgressHUD showInfoWithStatus:@"对方在我的黑名单中,无法发起请求!"];
 //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //                [self.navigationController popViewControllerAnimated:YES];
 //            });
         }else if ([codeStr isEqualToString:@"7"]) {
-            [SVProgressHUD showWithStatus:@"您已经在对方黑名单中,无法发起请求!"];
+            [SVProgressHUD showInfoWithStatus:@"您已经在对方黑名单中,无法发起请求!"];
 //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //                [self.navigationController popViewControllerAnimated:YES];
 //            });
         }else if ([codeStr isEqualToString:@"8"]) {
-            [SVProgressHUD showWithStatus:@"不能重复对同一个人发起请求!"];
+            [SVProgressHUD showInfoWithStatus:@"不能重复对同一个人发起请求!"];
 
         }else if ([codeStr isEqualToString:@"9"]) {
-            [SVProgressHUD showWithStatus:@"对方已同意,可以直接聊天了!"];
+            [SVProgressHUD showInfoWithStatus:@"对方已同意,可以直接聊天了!"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
         }else if ([codeStr isEqualToString:@"10"]) {
-            [SVProgressHUD showWithStatus:@"添加成功!"];
+            [SVProgressHUD showInfoWithStatus:@"添加成功!"];
             
            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                [self.navigationController popViewControllerAnimated:YES];
@@ -421,12 +422,12 @@
 
 
         }else{
-            [SVProgressHUD showWithStatus:@"请求发送失败!"];
+            [SVProgressHUD showErrorWithStatus:@"请求发送失败!"];
         }
 
     } failure:^(NSError *error) {
         //
-        [SVProgressHUD showWithStatus:@"获取数据失败!"];
+        [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
     }];
     
     

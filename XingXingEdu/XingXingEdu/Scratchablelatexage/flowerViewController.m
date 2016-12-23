@@ -81,7 +81,7 @@
 
     [self.jiluTabelView reloadData];
     
-//    [self.navigationController.navigationBar setBarTintColor:UIColorFromRGB(0, 170, 42)];
+    [self.navigationController.navigationBar setBarTintColor:UIColorFromRGB(0, 170, 42)];
 }
 -(void)viewDidAppear:(BOOL)animated
 {

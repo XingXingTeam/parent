@@ -107,14 +107,16 @@
     codeImage.image=[UIImage imageNamed:@"验证码46x46.png"];
     [codelabel addSubview:codeImage];
     
-    code =[HHControl createTextFielfFrame:CGRectMake(CGRectGetMaxX(codelabel.frame) + kmagr, CGRectGetMaxY(phone.frame) + kmagr*2, bgView.size.width*0.4, kmagrH) font:[UIFont systemFontOfSize:14]  placeholder:@"4位数字" ];
+    code =[HHControl createTextFielfFrame:CGRectMake(CGRectGetMaxX(codelabel.frame) + kmagr, CGRectGetMaxY(phone.frame) + kmagr*2, bgView.size.width*0.3, kmagrH) font:[UIFont systemFontOfSize:14]  placeholder:@"4位数字" ];
+//    code.backgroundColor = [UIColor greenColor];
     code.clearButtonMode = UITextFieldViewModeWhileEditing;
     //密文样式
     code.secureTextEntry=YES;
     code.keyboardType=UIKeyboardTypeNumberPad;
     
     
-    yzButton = [HHControl createButtonWithFrame:CGRectMake(CGRectGetMaxX(code.frame), CGRectGetMaxY(phone.frame) + kmagr*2, 100, kmagrH) backGruondImageName:@"" Target:self Action:@selector(getValidCode:) Title:@"获取验证码"];
+    yzButton = [HHControl createButtonWithFrame:CGRectMake(CGRectGetMaxX(code.frame), CGRectGetMaxY(phone.frame) + kmagr*2, 110, kmagrH) backGruondImageName:@"" Target:self Action:@selector(getValidCode:) Title:@"获取验证码"];
+//    yzButton.backgroundColor = [UIColor yellowColor];
     yzButton.titleLabel.font=[UIFont systemFontOfSize:13];
     [yzButton setTitleColor:[UIColor colorWithRed:248/255.0f green:144/255.0f blue:34/255.0f alpha:1] forState:UIControlStateNormal];
     [bgView addSubview:yzButton];
@@ -185,8 +187,12 @@
         [SVProgressHUD showInfoWithStatus:@"您输入的手机号码格式不正确"];
         [self performSelector:@selector(dismiss:) withObject:nil afterDelay:1.5];
         return;
+    }else if(![self isChinaMobile:phone.text]){
+        [SVProgressHUD showInfoWithStatus:@"请输入正确的手机号"];
+        [self performSelector:@selector(dismiss:) withObject:nil afterDelay:1.5];
+        return;
     }
-    else if (phone.text.length == 11)
+    else
     {
         NSString *urlStr = @"http://www.xingxingedu.cn/Parent/register_check_phone";
         AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
@@ -204,25 +210,9 @@
              
              if([[NSString stringWithFormat:@"%@",dict[@"code"]] isEqualToString:@"1"] ){
                  
-                 //短信验证码
-                 [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:phone.text zone:@"86" customIdentifier:nil
-                                              result:^(NSError *error){
-                                                  if (!error) {
-                                                      NSLog(@"获取验证码成功");
-                                                  }
-                                                  else {
-                                                      NSLog(@"错误信息：%@",error);
-                                                  }
-                                              }];
-                 
-                 _oUserPhoneNum =phone.text;
-                 sender.userInteractionEnabled = NO;
-                 self.timeCount = 60;
-                 self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(reduceTime:) userInfo:sender repeats:YES];
-                 
-                 [self netManage:phone.text];
-                 
-                 
+                 //获取验证码
+                 [self GetVerificationCode];
+                
              }else{
                  [SVProgressHUD showInfoWithStatus:@"此手机号已经注册!"];
                  return ;
@@ -236,6 +226,31 @@
     
     
 }
+
+#pragma mark ======== 获取 验证码 =========
+- (void)GetVerificationCode{
+
+    //短信验证码
+    [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:phone.text zone:@"86" customIdentifier:nil
+                                 result:^(NSError *error){
+                                     if (!error) {
+                                         NSLog(@"获取验证码成功");
+                                     }
+                                     else {
+                                         NSLog(@"错误信息：%@",error);
+                                     }
+                                 }];
+    
+    _oUserPhoneNum =phone.text;
+    yzButton.userInteractionEnabled = NO;
+    self.timeCount = 60;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(reduceTime:) userInfo:yzButton repeats:YES];
+    //======== 获取 验证码 的次数 ======
+    [self netManage:phone.text];
+
+
+}
+
 
 - (void)reduceTime:(NSTimer *)codeTimer {
     self.timeCount--;
@@ -279,6 +294,8 @@
      {
          NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
          
+         NSLog(@"dict === %@", dict);
+         
          if([[NSString stringWithFormat:@"%@",dict[@"code"]] isEqualToString:@"4"] ){
              
              [SVProgressHUD showInfoWithStatus:@"今日获取验证码已上限"];
@@ -306,6 +323,10 @@
         [SVProgressHUD showInfoWithStatus:@"您输入的手机号码格式不正确"];
         [self performSelector:@selector(dismiss:) withObject:nil afterDelay:1.5];
         return;
+    }else if(![self isChinaMobile:phone.text]){
+        [SVProgressHUD showInfoWithStatus:@"请输入正确的手机号"];
+        [self performSelector:@selector(dismiss:) withObject:nil afterDelay:1.5];
+        return;
     }
     else if ([code.text isEqualToString:@""])
     {
@@ -331,6 +352,8 @@
     
     [SMSSDK commitVerificationCode:code.text phoneNumber:phone.text zone:@"86" result:^(NSError *error) {
         
+        NSLog(@"error == %@", error);
+        
         if (!error) {
             [SVProgressHUD showSuccessWithStatus:@"验证成功"];
             [self performSelector:@selector(dismiss:) withObject:nil afterDelay:1.5];
@@ -351,6 +374,35 @@
 - (void)dismiss:(id)sender {
     [SVProgressHUD dismiss];
 }
+
+/** 判断用户名 */
+- (BOOL)isChinaMobile:(NSString *)phoneNum{
+    BOOL isChinaMobile = NO;
+    
+    NSString *CM = @"(^1(3[4-9]|4[7]|5[0-27-9]|7[8]|8[2-478])\\d{8}$)|(^1705\\d{7}$)";
+    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
+    if([regextestcm evaluateWithObject:phoneNum] == YES){
+        isChinaMobile = YES;
+        //        NSLog(@"中国移动");
+    }
+    
+    NSString *CU = @"(^1(3[0-2]|4[5]|5[56]|7[6]|8[56])\\d{8}$)|(^1709\\d{7}$)";
+    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
+    if([regextestcu evaluateWithObject:phoneNum] == YES){
+        isChinaMobile = YES;
+        //        NSLog(@"中国联通");
+    }
+    
+    NSString *CT = @"(^1(33|53|77|8[019])\\d{8}$)|(^1700\\d{7}$)";
+    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
+    if([regextestct evaluateWithObject:phoneNum] == YES){
+        isChinaMobile = YES;
+        //        NSLog(@"中国电信");
+    }
+    return isChinaMobile;
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

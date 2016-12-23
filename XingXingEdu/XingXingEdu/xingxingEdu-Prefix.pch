@@ -39,5 +39,9 @@
 #import "FriendCircleHeader.h"
 
 #import "StringHeight.h"
+#import "GlobalVariable.h"
+#import "XXEHeaderApi.h"
+#import "UIButton+XXExtension.h"
+#import "XXEXingCommunityHeader.h"
 
 #endif

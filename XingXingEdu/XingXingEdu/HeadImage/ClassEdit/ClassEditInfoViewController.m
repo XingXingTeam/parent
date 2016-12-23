@@ -73,6 +73,12 @@
 @implementation ClassEditInfoViewController
 
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self fetchNetData];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -87,13 +93,8 @@
     }
     _dataSourceArray = [[NSMutableArray alloc] init];
     
-    
     // Do any additional setup after loading the view.
     [self.navigationController.navigationBar setTintColor:UIColorFromRGB(255, 255, 255)];
-    
-    
-    [self fetchNetData];
-    
     
     [self createTableView];
 }
@@ -121,6 +122,10 @@
 //        NSLog(@"获取数据成功!-------%@", responseObj);
 
         if ([[NSString stringWithFormat:@"%@", responseObj[@"code"]] isEqualToString:@"1"]) {
+            
+            if ([_dataSourceArray count] != 0) {
+                [_dataSourceArray removeAllObjects];
+            }
             
             NSArray *modelArray = [[NSArray alloc] init];
             modelArray = [ClassEditInfoModel parseResondsData:responseObj[@"data"]];
@@ -214,8 +219,9 @@
     }
     
     ClassEditInfoModel *model = _dataSourceArray[indexPath.row];
-    
-    [cell.picIamgeV sd_setImageWithURL:[NSURL URLWithString:model.school_logo] placeholderImage:[UIImage imageNamed:@"书籍126x128"]];
+
+    NSString *schoolLogo = [NSString stringWithFormat:@"%@%@", picURL, model.school_logo];
+    [cell.picIamgeV sd_setImageWithURL:[NSURL URLWithString:schoolLogo] placeholderImage:[UIImage imageNamed:@"书籍126x128"]];
     
     //班级
     cell.dataLabel.text = model.class_name;
@@ -225,7 +231,7 @@
     
     cell.teachLabel.text =[NSString stringWithFormat:@"授课老师: %@", model.teacher];
 
-    //0:未审核  1:审核通过
+    //0:未审核  1:审核通过  2:未通过
     NSString *stateStr = model.condit;
     if ([stateStr isEqualToString:@"0"]) {
     
@@ -235,6 +241,10 @@
         
        cell.stateImag.image =[UIImage imageNamed:@"yishenghe"];
     
+    }else if ([stateStr isEqualToString:@"2"]){
+        
+        cell.stateImag.image =[UIImage imageNamed:@"no_pass"];
+        
     }
 
     return cell;

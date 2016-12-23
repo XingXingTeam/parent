@@ -15,5 +15,9 @@
 @property (nonatomic, assign) BOOL codeFlag;
 @property (nonatomic, strong) NSMutableArray *babyInfoArray;
 
+@property (nonatomic, copy) NSString *fromPerfectInfo;
+
+@property (nonatomic, copy) NSString *addBabyId;
+
 
 @end

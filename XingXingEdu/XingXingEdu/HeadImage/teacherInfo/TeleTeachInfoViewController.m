@@ -115,7 +115,6 @@
          NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
 //                 NSLog(@"~~~~~~~~~~_______________________%@",dict);
          if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] ){
-             
              //1代表收藏过, 2代表未收藏
              if([[NSString stringWithFormat:@"%@",dict[@"data"][@"cheeck_collect"]] isEqualToString:@"1"]){
                  UIButton*rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,22,22)];
@@ -136,7 +135,18 @@
                  
              }
              //头像
-             NSString * head_img = dict[@"data"][@"head_img"];
+             /*
+              0 :表示 自己 头像 ，需要添加 前缀
+              1 :表示 第三方 头像 ，不需要 添加 前缀
+              //判断是否是第三方头像
+              */
+
+             NSString * head_img ;
+             if ([dict[@"data"][@"head_img_type"] integerValue] == 0) {
+                 head_img = [NSString stringWithFormat:@"%@%@", picURL, dict[@"data"][@"head_img"]];
+             }else{
+                 head_img = [NSString stringWithFormat:@"%@",dict[@"data"][@"head_img"]];
+             }
              //老师名字
              NSString * tname = [NSString stringWithFormat:@"%@",dict[@"data"][@"tname"]];
              //个性签名
@@ -222,8 +232,7 @@
     
     //头像
     headimageview = [[UIImageView alloc] initWithFrame:CGRectMake(Kmarg - 5, Kmarg, KheadViewH, KheadViewH)];
-    NSString *imgName = [picURL stringByAppendingString:headDetailArr[0]];
-    [headimageview sd_setImageWithURL:[NSURL URLWithString:imgName] placeholderImage:nil];
+    [headimageview sd_setImageWithURL:[NSURL URLWithString:headDetailArr[0]] placeholderImage:[UIImage imageNamed:@"人物头像172x172"]];
     headbgimageview.userInteractionEnabled =YES;
     headimageview.contentMode = UIViewContentModeScaleAspectFill;
     headimageview.layer.cornerRadius= headimageview.bounds.size.width/2;

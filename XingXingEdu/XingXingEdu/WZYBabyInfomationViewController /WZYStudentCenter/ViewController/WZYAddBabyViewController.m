@@ -38,6 +38,10 @@
 
 @interface WZYAddBabyViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,VPImageCropperDelegate, UITextViewDelegate, UITextFieldDelegate>
 {
+    //宝贝描述
+    WZYTextView *contentTextView;
+    NSString *picUrl;
+    
     NSString *parameterXid;
     NSString *parameterUser_Id;
 }
@@ -84,6 +88,7 @@
         parameterXid = XID;
         parameterUser_Id = USER_ID;
     }
+    picUrl = @"";
     //设置头像
     CGFloat iconWidth = 97.0;
     CGFloat iconHeight = 97.0;
@@ -192,7 +197,7 @@
         if ([_flagCodeStr isEqualToString:@"学生护照"]) {
             if (sexString.length !=9)
             {
-                [SVProgressHUD showInfoWithStatus:@"您输入的学生护照号码格式不正确"];
+                [SVProgressHUD showInfoWithStatus:@"请输入9个字符的护照号码"];
                 return;
             }
             
@@ -229,34 +234,45 @@
 - (void)setupTextView
 {
     // 1.创建输入控件
-    WZYTextView *textView = [[WZYTextView alloc] init];
-    textView.alwaysBounceVertical = YES; // 垂直方向上拥有有弹簧效果
+    contentTextView = [[WZYTextView alloc] init];
+    contentTextView.alwaysBounceVertical = YES; // 垂直方向上拥有有弹簧效果
 //    textView.frame = self.view.bounds;
 //    textView.frame = CGRectMake(17, 408, 340, 100);
-    textView.frame = CGRectMake(17, _leftLabel4.frame.origin.y + _leftLabel4.frame.size.height + 20, WinWidth - 18 - 17, 100 * WinWidth / 375);
-    textView.delegate = self;
+    contentTextView.frame = CGRectMake(17, _leftLabel4.frame.origin.y + _leftLabel4.frame.size.height + 20, WinWidth - 18 - 17, 100 * WinWidth / 375);
+    contentTextView.delegate = self;
     
-    [self.view addSubview:textView];
-    self.textView = textView;
+    [self.view addSubview:contentTextView];
+    self.textView = contentTextView;
     
     // 2.设置提醒文字（占位文字）
-    textView.placehoder = @"个人描述:";
+    contentTextView.placehoder = @"个人描述:";
     
     // 3.设置字体
-    textView.font = [UIFont systemFontOfSize:14];
+    contentTextView.font = [UIFont systemFontOfSize:14];
     
-    textView.backgroundColor = [UIColor whiteColor];
+    contentTextView.backgroundColor = [UIColor whiteColor];
     
-    self.myLabel = [[UILabel alloc] initWithFrame:CGRectMake(textView.frame.origin.x + textView.frame.size.width - 70, 70, 60, 20)];
+    self.myLabel = [[UILabel alloc] initWithFrame:CGRectMake(contentTextView.frame.origin.x + contentTextView.frame.size.width - 70, 70, 60, 20)];
     self.myLabel.text = @"0/200";
     self.myLabel.textColor = [UIColor lightGrayColor];
     self.myLabel.font = [UIFont systemFontOfSize:14];
-    [textView addSubview:self.myLabel];
+    [contentTextView addSubview:self.myLabel];
 }
+
+
 - (void)textViewDidChange:(UITextView *)textView{
-    
-    self.myLabel.text = [NSString stringWithFormat:@"%ld/200", textView.text.length];
+    if (textView == contentTextView) {
+        
+        if (contentTextView.text.length <= 200) {
+            self.myLabel.text=[NSString stringWithFormat:@"%lu/200",(unsigned long)textView.text.length];
+        }else{
+//            [self showHudWithString:@"最多可输入200个字符"];
+            contentTextView.text = [contentTextView.text substringToIndex:200];
+        }
+//        conStr = contentTextView.text;
+    }
 }
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -451,25 +467,21 @@
 - (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage {
     self.portraitImageView.image = editedImage;
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
-        // TO DO
-        
         /////////////////////////////更换头像///////
         /*
-         【添加孩子】
-         ★注:后面紧跟着的添加班级,请用baby_study_sch接口
+         【上传文件】
          接口:
-         http://www.xingxingedu.cn/Parent/add_baby
-         传参:
-         baby_nickname		//孩子昵称
-         tname			//真实姓名
-         id_card			//身份证
-         passport		//护照
-         age			//年龄
-         sex			//性别
-         relation		//关系
-         pdescribe		//个人描述
-         file			//上传头像
+         http://www.xingxingedu.cn/Global/uploadFile
+         ★注: 默认传参只要appkey和backtype
+         接口类型:2
+         传参
+         file_type	//文件类型,1图片,2视频 			  (必须)
+         page_origin	//页面来源,传数字 			  (必须)
+         11//学校食谱
+         upload_format	//上传格式, 传数字,1:单个上传  2:批量上传 (必须)
+         file		//文件数据的数组名 			  (必须)
          */
+
         //NSLog(@">>>>>>>>>>>>editedImage>>>>>%@",editedImage);
         NSData *data =UIImagePNGRepresentation(editedImage);
         NSDateFormatter *formatter =[[NSDateFormatter alloc]init];
@@ -477,34 +489,40 @@
         NSString *str =[formatter stringFromDate:[NSDate date]];
         NSString *fileName =[NSString stringWithFormat:@"%@.png", str];
         
-        NSString *urlStr = @"http://www.xingxingedu.cn/Parent/add_baby";
-        NSDictionary *prag = @{   @"appkey":APPKEY,
-                                  @"backtype":BACKTYPE,
-                                  @"xid":parameterXid,
-                                  @"user_id":parameterUser_Id,
-                                  @"user_type":USER_TYPE,
-                                  };
+        NSString *urlStr = @"http://www.xingxingedu.cn/Global/uploadFile";
+        NSDictionary *parameter = @{
+                                    @"appkey":APPKEY,
+                                    @"backtype":BACKTYPE,
+                                    @"xid":parameterXid,
+                                    @"user_id":parameterUser_Id,
+                                    @"user_type":USER_TYPE,
+                                    @"file_type":@"1",
+                                    @"page_origin":@"1",
+                                    @"upload_format":@"1"
+                                    };
         
         AFHTTPRequestOperationManager *mgr =[AFHTTPRequestOperationManager manager];
         mgr.responseSerializer.acceptableContentTypes = [mgr.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-        [mgr POST:urlStr parameters:prag constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [mgr POST:urlStr parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             [formData appendPartWithFileData:data name:@"file" fileName:fileName mimeType:@"image/png"];
         } success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
             NSDictionary *dict =responseObject;
 //                        NSLog(@"头像<<<<<<<<<<<<<<<<<<<<<%@",dict);
             if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
             {
-//                  NSLog(@"头像=====================================%@",dict[@"data"]);
+//                  NSLog(@"头像================%@",dict[@"data"]);
+                picUrl = dict[@"data"];
             }
             
         } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//             NSLog(@"EROOROROOREROOROROOREROOROROOREROOROROOREROOROROORE");
 //                        NSLog(@"ffff更换头像  失败=======%@", error);
-            
+            [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
         }];
-
+//
     }];
 }
+
+
 
 - (void)imageCropperDidCancel:(VPImageCropperViewController *)cropperViewController {
     [cropperViewController dismissViewControllerAnimated:YES completion:^{
@@ -560,9 +578,7 @@
         imgEditorVC.delegate = self;
         [self presentViewController:imgEditorVC animated:YES completion:^{
             // TO DO
-            
-            
-            
+    
         }];
     }];
 }
@@ -716,7 +732,10 @@
 
 - (void)nextBtnClick{
     //学生姓名 的判断
-    if ([self.rightTextField2.text isEqualToString:@""]){
+    if ([self.rightTextField1.text isEqualToString:@""]){
+        [SVProgressHUD showInfoWithStatus:@"亲,请输入学生的昵称"];
+        return;
+    }else if ([self.rightTextField2.text isEqualToString:@""]){
         [SVProgressHUD showInfoWithStatus:@"亲,请输入学生的姓名"];
         return;
     }else if (self.rightTextField2.text.length >5||self.rightTextField2.text.length <2){
@@ -741,8 +760,6 @@
             }
         }else{
             //学生 身份证 的判断
-            
-            
             if ([self.rightTextField3.text isEqualToString:@""]) {
                 [SVProgressHUD showInfoWithStatus:@"亲,请输入学生的身份证号"];
                 return;
@@ -768,6 +785,13 @@
             return;
         }
     }
+    
+    //判断 关系 必须
+    if ([self.relationCombox.textField.text isEqualToString:@""]) {
+        [SVProgressHUD showInfoWithStatus:@"请选择与宝贝的关系"];
+        return;
+ 
+    }
 
     [self upLoadNetData];
     
@@ -785,18 +809,19 @@
     // http://www.xingxingedu.cn/Parent/add_baby
     //
     // 传参:
-    //	baby_nickname		//孩子昵称
-    //	tname			//真实姓名
+    //	baby_nickname		//孩子昵称(必须)
+    //	tname			//真实姓名(必须)
     //	id_card			//身份证
     //	passport		//护照
-    //	age			//年龄
-    //	sex			//性别
-    //	relation		//关系
+    //	age			    //年龄
+    //	sex			    //性别
+    //	relation		//关系(必须)
     //	pdescribe		//个人描述
-    //	file			//上传头像
+    //	file			//上传头像 ////
+    //  url_group      头像 url
     // */
         //        //路径
-        NSString *urlStr = @"http://www.xingxingedu.cn/Parent/add_baby";
+    NSString *urlStr = @"http://www.xingxingedu.cn/Parent/add_baby";
     
     //请求参数
     NSDictionary *params = [[NSDictionary alloc] init];
@@ -804,24 +829,48 @@
     NSString *sexStr;
     NSString *ageStr;
     
+//    NSLog(@"picUrl **** %@", picUrl);
+    
+    
     if (_codeFlag == YES) {
         //护照
-        params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"baby_nickname":_rightTextField1.text, @"tname":_rightTextField2.text, @"passport":_rightTextField3.text, @"relation":self.relationCombox.textField.text};
+        params = @{@"appkey":APPKEY,
+                   @"backtype":BACKTYPE,
+                   @"xid":parameterXid,
+                   @"user_id":parameterUser_Id,
+                   @"user_type":USER_TYPE,
+                   @"baby_nickname":_rightTextField1.text,
+                   @"tname":_rightTextField2.text,
+                   @"passport":_rightTextField3.text,
+                   @"relation":self.relationCombox.textField.text,
+                   @"url_group":picUrl
+                   };
         //昵称 /名称 /护照 / 关系
         
     }else if (_codeFlag == NO){
         
         //身份证 信息
-        
         sexStr = [CheckIDCard checkIDCardSex:_rightTextField3.text];
         ageStr = [CheckIDCard checkIDCardAge:_rightTextField3.text];
         
-        params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"baby_nickname":_rightTextField1.text, @"tname":_rightTextField2.text, @"id_card":_rightTextField3.text, @"relation":self.relationCombox.textField.text, @"sex":sexStr, @"age":ageStr};
+        params = @{@"appkey":APPKEY,
+                   @"backtype":BACKTYPE,
+                   @"xid":parameterXid,
+                   @"user_id":parameterUser_Id,
+                   @"user_type":USER_TYPE,
+                   @"baby_nickname":_rightTextField1.text,
+                   @"tname":_rightTextField2.text,
+                   @"id_card":_rightTextField3.text,
+                   @"relation":self.relationCombox.textField.text,
+                   @"sex":sexStr,
+                   @"age":ageStr,
+                   @"url_group":picUrl
+                   };
         
     }
 
     
-//    NSLog(@"%@", params);
+//    NSLog(@"chuancan  === %@", params);
         [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
             NSDictionary *dict =responseObj;
 //             NSLog(@"添加孩子*****data======================%@",dict);
@@ -829,6 +878,9 @@
             {
               //进行下一步 完善信息
             ClassEditViewController *ClassEditVC = [[ClassEditViewController alloc] init];
+                
+                ClassEditVC.addBabyId = responseObj[@"data"][@"baby_id"];
+                
             [self.navigationController pushViewController:ClassEditVC animated:YES];
     
             }else if ([[NSString stringWithFormat:@"%@",dict[@"code"]] isEqualToString:@"3"]){
@@ -841,8 +893,8 @@
             
         } failure:^(NSError *error) {
 //               NSLog(@"error====error=================================");
-            
-            NSLog(@"%@", error);
+            [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
+//            NSLog(@"%@", error);
         }];
     
 }
@@ -855,14 +907,7 @@
 }
 
 
-////
-//- (void)nextBtnClick{
-//
-//    WZYNewBabyDetailViewController *newBabyDetailVC = [[WZYNewBabyDetailViewController alloc] init];
-//    [self.navigationController pushViewController:newBabyDetailVC animated:YES];
-//
-//
-//}
+
 
 
 

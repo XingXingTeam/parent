@@ -7,7 +7,8 @@
 //
 
 #import "TeacherAppearViewController.h"
-
+//图片 浏览
+#import "RedFlowerViewController.h"
 #import "SJAvatarBrowser.h"
 #define Kmarg 10.0f
 #define KLabelH 25.0f
@@ -27,7 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorFromRGB(225, 225, 225);
-
+//    NSLog(@"teacher_pic_group === %@", _teacher_pic_group);
+    
     [self createLbl];
 
 }
@@ -106,10 +108,12 @@
         NSString *imgName = [picURL stringByAppendingString:self.teacher_pic_group[j]];
         [_picImageArr addObject:imgName];
         
-        [imgView sd_setImageWithURL:[NSURL URLWithString:imgName] placeholderImage:nil];
+        [imgView sd_setImageWithURL:[NSURL URLWithString:imgName] placeholderImage:[UIImage imageNamed:@""]];
         CGFloat imgX = j * imgW;
         imgView.tag = j;
         imgView.userInteractionEnabled = YES;
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
         UITapGestureRecognizer *singleTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(buttonpress:)];
         [imgView addGestureRecognizer:singleTap1];
         imgView.frame = CGRectMake(imgX, imgY, imgW, imgH);
@@ -129,12 +133,22 @@
 
 
 
--(void)buttonpress:(UIButton *)sender {
-    UITapGestureRecognizer *tap = (UITapGestureRecognizer *)sender;
-    int tag = tap.view.tag;
-    UIImageView *imgView = [[UIImageView alloc] init];
-    [imgView sd_setImageWithURL:[NSURL URLWithString:_picImageArr[tag]] placeholderImage:nil];
-    [SJAvatarBrowser showImage:imgView];//调用方法
+-(void)buttonpress:(UITapGestureRecognizer *)tap {
+//    UITapGestureRecognizer *tap = (UITapGestureRecognizer *)sender;
+//    int tag = tap.view.tag;
+//    UIImageView *imgView = [[UIImageView alloc] init];
+//    [imgView sd_setImageWithURL:[NSURL URLWithString:_picImageArr[tag]] placeholderImage:nil];
+//    [SJAvatarBrowser showImage:imgView];//调用方法
+    
+    
+    RedFlowerViewController *redFlowerVC =[[RedFlowerViewController alloc]init];
+    redFlowerVC.imageArr = _teacher_pic_group;
+    redFlowerVC.index = tap.view.tag;
+    redFlowerVC.hidesBottomBarWhenPushed = YES;
+    //图片 举报 来源 9:教师风采 照片
+    redFlowerVC.origin_pageStr = @"9";
+    
+    [self.navigationController pushViewController:redFlowerVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

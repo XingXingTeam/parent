@@ -208,7 +208,7 @@
         NSString *codeStr = [NSString stringWithFormat:@"%@",responseObj[@"code"]];
         
         if ([codeStr isEqualToString:@"1"]) {
-            [SVProgressHUD showInfoWithStatus:@"请求发送成功!"];
+            [SVProgressHUD showSuccessWithStatus:@"请求发送成功!"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
@@ -243,12 +243,13 @@
                 [self.navigationController popViewControllerAnimated:YES];
             });
         }else{
-            [SVProgressHUD showInfoWithStatus:@"请求发送失败!"];
+            [SVProgressHUD showErrorWithStatus:@"请求发送失败!"];
         }
 
     } failure:^(NSError *error) {
         //
         NSLog(@"%@", error);
+        [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
     }];
 
 

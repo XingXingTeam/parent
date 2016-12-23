@@ -236,7 +236,7 @@
     
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
-//        NSLog(@"%@", responseObj);
+//        NSLog(@"jb %@", responseObj);
         
         NSString *codeStr = [NSString stringWithFormat:@"%@", responseObj[@"code"]];
         
@@ -246,7 +246,7 @@
             [_alert show];
             
             [HUD showAnimated:YES whileExecutingBlock:^{
-                sleep(2);
+                sleep(1.5);
             } completionBlock:^{
                 [HUD removeFromSuperview];
                 HUD =nil;
@@ -265,7 +265,7 @@
         [_alert show];
         
         [HUD showAnimated:YES whileExecutingBlock:^{
-            sleep(2);
+            sleep(1.5);
         } completionBlock:^{
             [HUD removeFromSuperview];
             HUD =nil;

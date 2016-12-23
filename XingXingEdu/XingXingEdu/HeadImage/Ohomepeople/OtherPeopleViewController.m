@@ -8,7 +8,7 @@
 
 #import "OtherPeopleViewController.h"
 #import "AuditSetViewController.h"
-#import "OthePeopleCell.h"
+#import "XXERedFlowerDetialInfoTableViewCell.h"
 #import "ReportPicViewController.h"
 #import "HHControl.h"
 // UM
@@ -115,10 +115,14 @@
         //路径
         NSString *urlStr = @"http://www.xingxingedu.cn/Parent/parent_detail";
 
+    if (_babyIdStr == nil) {
+        _babyIdStr = @"";
+    }
+    
         NSDictionary *params = @{@"appkey":APPKEY, @"backtype":BACKTYPE, @"xid":parameterXid, @"user_id":parameterUser_Id, @"user_type":USER_TYPE, @"baby_id": _babyIdStr , @"parent_id":_familyIdStr};
         [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
             //
-//            NSLog(@" 家人 详情 --  %@", responseObj);
+            NSLog(@" 家人 详情 --  %@", responseObj);
             if ([[NSString stringWithFormat:@"%@", [responseObj objectForKey:@"code"]] isEqualToString:@"1"]) {
                 NSDictionary *dic = responseObj[@"data"];
                 
@@ -221,15 +225,14 @@
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellID =@"cellID";
-    OthePeopleCell *cell = (OthePeopleCell*)[tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
-        NSArray *nib =[[NSBundle mainBundle] loadNibNamed:@"OthePeopleCell" owner:[OthePeopleCell class] options:nil];
-        cell =(OthePeopleCell*)[nib objectAtIndex:0];
+
+    XXERedFlowerDetialInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (cell == nil) {
+        cell = [[XXERedFlowerDetialInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
-    
-    cell.nameLbl.text =dataArray[indexPath.row];
-    cell.detailLbl.text =detailArray[indexPath.row];
-    cell.headImagV.image =[UIImage imageNamed:headArray[indexPath.row]];
+    cell.titleLabel.text =dataArray[indexPath.row];
+    cell.contentLabel.text =detailArray[indexPath.row];
+    cell.iconImageView.image =[UIImage imageNamed:headArray[indexPath.row]];
     if (indexPath.row == 5) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
@@ -251,9 +254,9 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    headerView = [HHControl createViewWithFrame:CGRectMake(0, 0, kWidth, 150 * kWidth / 375)];
+    headerView = [HHControl createViewWithFrame:CGRectMake(0, 0, kWidth, 150 * kScreenRatioHeight)];
     
-    imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kWidth, 150 * kWidth / 375)];
+    imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kWidth, 150 * kScreenRatioHeight)];
     imageView.image = [UIImage imageNamed:@"banner"];
 //    _tableView.tableHeaderView =imageView;
     imageView.userInteractionEnabled =YES;
@@ -263,14 +266,14 @@
     icon = [[UIImageView alloc] init];
     [icon sd_setImageWithURL:[NSURL URLWithString:iconStr] placeholderImage:[UIImage imageNamed:@"人物头像172x172"]];
     
-    [icon setFrame:CGRectMake(30, 30, 86,86)];
-    icon.layer.cornerRadius =43;
+    [icon setFrame:CGRectMake(30 * kScreenRatioWidth, 30 * kScreenRatioWidth, 86 * kScreenRatioWidth,86 * kScreenRatioWidth)];
+    icon.layer.cornerRadius =43 * kScreenRatioWidth;
     icon.layer.masksToBounds =YES;
     [headerView addSubview:icon];
     icon.userInteractionEnabled =YES;
     
     //添加性别
-    UIImageView *manimage = [[UIImageView alloc]initWithFrame:CGRectMake(35, 60, 20, 20)];
+    UIImageView *manimage = [[UIImageView alloc]initWithFrame:CGRectMake(35 * kScreenRatioWidth, 60 * kScreenRatioHeight, 20 * kScreenRatioWidth, 20 * kScreenRatioWidth)];
     //    manimage.image = [UIImage imageNamed:@"man"];
     manimage.image = sexPic;
     [icon addSubview:manimage];
@@ -282,7 +285,7 @@
     
     //用户名
     
-    UILabel *nameLbl =[HHControl createLabelWithFrame:CGRectMake(150, 40, 50, 20) Font:18 Text:nil];
+    UILabel *nameLbl =[HHControl createLabelWithFrame:CGRectMake(150 * kScreenRatioWidth, 40 * kScreenRatioHeight, 150 * kScreenRatioWidth, 20 * kScreenRatioHeight) Font:18 * kScreenRatioWidth Text:nil];
     nameLbl.text = detailArray[1];
 //    nameLbl.backgroundColor = [UIColor whiteColor];
     nameLbl.textAlignment = NSTextAlignmentLeft;
@@ -292,7 +295,7 @@
     //等级
     
     NSString *lvString = [NSString stringWithFormat:@"LV%@", lvStr];
-    UILabel *lvLabel = [HHControl createLabelWithFrame:CGRectMake(200, 42, 30, 15) Font:12 Text:lvString];
+    UILabel *lvLabel = [HHControl createLabelWithFrame:CGRectMake(300 * kScreenRatioWidth, 42 * kScreenRatioHeight, 30 * kScreenRatioWidth, 15 * kScreenRatioHeight) Font:12 * kScreenRatioWidth Text:lvString];
     lvLabel.textColor = UIColorFromRGB(3, 169, 244);
     lvLabel.textAlignment = NSTextAlignmentCenter;
     lvLabel.backgroundColor = [UIColor whiteColor];
@@ -323,9 +326,6 @@
 - (void)createToolBar{
     
     CGFloat Width = kWidth / 4;
-    
-    
-    
     UIImageView *imageV= [[UIImageView alloc]initWithFrame:CGRectMake(0, kHeight-44, kWidth, 44)];
     imageV.backgroundColor = UIColorFromRGB(255, 255, 255 );
     [self.view addSubview:imageV];
@@ -446,17 +446,21 @@
     
 }
 - (void)right:(UIButton*)sender{
-    
-    if (_isCollected== NO) {
-        
-        [self collectArticle];
-        
+    //判断  :不能收藏自己
+    if ([_familyXidStr isEqualToString:parameterXid]) {
+        [SVProgressHUD showInfoWithStatus:@"不能收藏自己"];
+    }else{
+        if (_isCollected== NO) {
+            
+            [self collectArticle];
+            
+        }
+        else  if (_isCollected== YES) {
+            [self deleteCollectArticle];
+            
+        }
+
     }
-    else  if (_isCollected== YES) {
-        [self deleteCollectArticle];
-        
-    }
-    
 }
 
 //收藏机构

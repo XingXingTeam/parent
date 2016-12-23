@@ -10,6 +10,7 @@
 
 #ifndef Constants_h
 #define Constants_h
+
 //屏幕宽度
 #define kWidth [UIScreen mainScreen].bounds.size.width
 //屏幕高度
@@ -34,17 +35,7 @@
 #define W(x) WinWidth*(x)/375.0
 #define H(y) WinHeight*(y)/667.0
 
-#define XID  @"18884982"
-#define APPKEY  @"U3k8Dgj7e934bh5Y"
-#define BACKTYPE @"json"
-#define USER_ID  @"1"
-#define USER_TYPE @"1"
-#define MyRongCloudAppKey @"4z3hlwrv3t0dt"
-
-
 #define DEFAULTS [NSUserDefaults standardUserDefaults]
-
-#define UMSocialAppKey @"57c01a13f43e48118e000e55"
 
 #define kXXEPicURL @"http://www.xingxingedu.cn/Public/"
 
@@ -86,7 +77,6 @@
 //#define MyRongCloudToken @"J01ZcEH+xvE3J2RDgjjdyiMfl6Wang6DqF0T9GLD+MJT6ja2L/UbbLGcZwTxRBRK2HjnDGlqqy5Egm7zF/Z7lg=="
 
 
-//图片地址
-#define picURL    @"http://www.xingxingedu.cn/Public/"
+
 
 

@@ -335,7 +335,6 @@
 		045FC5641D4B758500DF1E26 /* XXECommentRequestInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045FC5591D4B758500DF1E26 /* XXECommentRequestInfoViewController.m */; };
 		045FC5651D4B758500DF1E26 /* XXECommentRequestInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045FC55A1D4B758500DF1E26 /* XXECommentRequestInfoViewController.xib */; };
 		045FC5701D4B779C00DF1E26 /* MyHeadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045FC56F1D4B779C00DF1E26 /* MyHeadViewController.m */; };
-		045FC5761D4B799900DF1E26 /* ClassHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045FC5751D4B799900DF1E26 /* ClassHomeworkViewController.m */; };
 		0463C30A1DEC3D920035BEF6 /* CommentInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0463C2041DEC3D920035BEF6 /* CommentInputViewController.m */; };
 		0463C30B1DEC3D920035BEF6 /* dian@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0463C2051DEC3D920035BEF6 /* dian@2x.png */; };
 		0463C30C1DEC3D920035BEF6 /* MessageListDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0463C2071DEC3D920035BEF6 /* MessageListDetailController.m */; };
@@ -753,6 +752,32 @@
 		04B6219D1DBF019A00391616 /* StoreCollectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B620691DBF019A00391616 /* StoreCollectTableViewCell.m */; };
 		04B6219E1DBF019A00391616 /* StoreCollectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B6206A1DBF019A00391616 /* StoreCollectTableViewCell.xib */; };
 		04B795101DDED60000E5B2E5 /* ClassEditInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B7950F1DDED60000E5B2E5 /* ClassEditInfoModel.m */; };
+		04BF25F41E0CCB36002B81C0 /* XXEHomeworkListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF25F31E0CCB36002B81C0 /* XXEHomeworkListModel.m */; };
+		04BF25F71E0CCCB8002B81C0 /* XXEHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF25F61E0CCCB8002B81C0 /* XXEHomeworkViewController.m */; };
+		04BF25FA1E0CCCD6002B81C0 /* XXEHomeworkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF25F91E0CCCD6002B81C0 /* XXEHomeworkTableViewCell.m */; };
+		04BF25FD1E0CD190002B81C0 /* XXEHomeworkDetailInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF25FC1E0CD190002B81C0 /* XXEHomeworkDetailInfoViewController.m */; };
+		04BF26001E0CD312002B81C0 /* XXERedFlowerDetialInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF25FF1E0CD312002B81C0 /* XXERedFlowerDetialInfoTableViewCell.m */; };
+		04BF26271E0D1FE9002B81C0 /* XXEKindergartenDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF26051E0D1FE9002B81C0 /* XXEKindergartenDetailViewController.m */; };
+		04BF26281E0D1FE9002B81C0 /* XXEXingCommunityBabyCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF26071E0D1FE9002B81C0 /* XXEXingCommunityBabyCommunityViewController.m */; };
+		04BF26291E0D1FE9002B81C0 /* XXEXingCommunityBabyLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF26091E0D1FE9002B81C0 /* XXEXingCommunityBabyLibraryViewController.m */; };
+		04BF262A1E0D1FE9002B81C0 /* XXEXingCommunityChildrenSongViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF260B1E0D1FE9002B81C0 /* XXEXingCommunityChildrenSongViewController.m */; };
+		04BF262B1E0D1FE9002B81C0 /* XXEXingCommunityConsultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF260D1E0D1FE9002B81C0 /* XXEXingCommunityConsultViewController.m */; };
+		04BF262C1E0D1FE9002B81C0 /* XXEXingCommunityCookingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF260F1E0D1FE9002B81C0 /* XXEXingCommunityCookingViewController.m */; };
+		04BF262D1E0D1FE9002B81C0 /* XXEXingCommunityEnglishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF26111E0D1FE9002B81C0 /* XXEXingCommunityEnglishViewController.m */; };
+		04BF262E1E0D1FE9002B81C0 /* XXEXingCommunityHighSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF26131E0D1FE9002B81C0 /* XXEXingCommunityHighSchoolViewController.m */; };
+		04BF262F1E0D1FE9002B81C0 /* XXEXingCommunityInstitutionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF26151E0D1FE9002B81C0 /* XXEXingCommunityInstitutionsViewController.m */; };
+		04BF26301E0D1FE9002B81C0 /* XXEXingCommunityKindergartenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF26171E0D1FE9002B81C0 /* XXEXingCommunityKindergartenViewController.m */; };
+		04BF26311E0D1FE9002B81C0 /* XXEXingCommunityPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF26191E0D1FE9002B81C0 /* XXEXingCommunityPlayViewController.m */; };
+		04BF26321E0D1FE9002B81C0 /* XXEXingCommunityPrimaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF261B1E0D1FE9002B81C0 /* XXEXingCommunityPrimaryViewController.m */; };
+		04BF26331E0D1FE9002B81C0 /* XXEXingCommunityStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF261D1E0D1FE9002B81C0 /* XXEXingCommunityStoryViewController.m */; };
+		04BF26341E0D1FE9002B81C0 /* XXEXingCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF261F1E0D1FE9002B81C0 /* XXEXingCommunityViewController.m */; };
+		04BF26351E0D1FE9002B81C0 /* XXEXingCommunityClassesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF26221E0D1FE9002B81C0 /* XXEXingCommunityClassesModel.m */; };
+		04BF26361E0D1FE9002B81C0 /* XXEXingCommunityClassesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF26251E0D1FE9002B81C0 /* XXEXingCommunityClassesTableViewCell.m */; };
+		04BF263C1E0D3CAC002B81C0 /* XXEMyselfInfoNewPhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF26391E0D3CAC002B81C0 /* XXEMyselfInfoNewPhoneNumViewController.m */; };
+		04BF263D1E0D3CAC002B81C0 /* XXEMyselfInfoOldPhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF263B1E0D3CAC002B81C0 /* XXEMyselfInfoOldPhoneNumViewController.m */; };
+		04BF26421E0D44BE002B81C0 /* UIButton+XXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF26411E0D44BE002B81C0 /* UIButton+XXExtension.m */; };
+		04CFF8451E093A4F0006235D /* no_pass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04CFF8431E093A4F0006235D /* no_pass@2x.png */; };
+		04CFF8461E093A4F0006235D /* no_pass@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04CFF8441E093A4F0006235D /* no_pass@3x.png */; };
 		04D5B0831D6B1D7E00ABA89A /* WZYSearchSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D5B0821D6B1D7E00ABA89A /* WZYSearchSchoolViewController.m */; };
 		04D5B0D61D6B1DE900ABA89A /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D5B0871D6B1DE900ABA89A /* AlbumViewController.m */; };
 		04D5B0D71D6B1DE900ABA89A /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D5B0891D6B1DE900ABA89A /* CourseViewController.m */; };
@@ -842,7 +867,6 @@
 		04D5B1981D6B1FF500ABA89A /* 女@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D5B15E1D6B1FF500ABA89A /* 女@2x.png */; };
 		04D5B1991D6B1FF500ABA89A /* 姓名40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D5B15F1D6B1FF500ABA89A /* 姓名40x40@2x.png */; };
 		04D5B19E1D6B1FF500ABA89A /* 开课中状态60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D5B1641D6B1FF500ABA89A /* 开课中状态60x60@2x.png */; };
-		04D5B19F1D6B1FF500ABA89A /* 必填符号60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D5B1651D6B1FF500ABA89A /* 必填符号60x60@2x.png */; };
 		04D5B1A01D6B1FF500ABA89A /* 按钮big650x84@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D5B1661D6B1FF500ABA89A /* 按钮big650x84@2x.png */; };
 		04D5B1A31D6B1FF500ABA89A /* 添加完成icon650x84@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D5B1691D6B1FF500ABA89A /* 添加完成icon650x84@2x.png */; };
 		04D5B1A51D6B1FF500ABA89A /* 班级历史44x44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D5B16B1D6B1FF500ABA89A /* 班级历史44x44@2x.png */; };
@@ -1092,9 +1116,6 @@
 		04F100B31D45C0E400CBED22 /* SchoolRecipeInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F100AB1D45C0E400CBED22 /* SchoolRecipeInfoViewController.m */; };
 		04F100B41D45C0E400CBED22 /* SchoolRecipeInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F100AC1D45C0E400CBED22 /* SchoolRecipeInfoViewController.xib */; };
 		04F100B51D45C0E400CBED22 /* SchoolRecipesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F100AE1D45C0E400CBED22 /* SchoolRecipesViewController.m */; };
-		04F100C41D45D6A000CBED22 /* ClassHomeInfoMationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F100B81D45D6A000CBED22 /* ClassHomeInfoMationViewController.m */; };
-		04F100C51D45D6A000CBED22 /* ClassHomeWorkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F100BA1D45D6A000CBED22 /* ClassHomeWorkCell.m */; };
-		04F100C61D45D6A000CBED22 /* ClassHomeWorkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F100BB1D45D6A000CBED22 /* ClassHomeWorkCell.xib */; };
 		04F100C71D45D6A000CBED22 /* ClassHomeWorkContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F100BD1D45D6A000CBED22 /* ClassHomeWorkContentViewController.m */; };
 		04F100C81D45D6A000CBED22 /* ClassHomeWorkContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F100BE1D45D6A000CBED22 /* ClassHomeWorkContentViewController.xib */; };
 		04F100CA1D45D6A000CBED22 /* HomeWorkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F100C21D45D6A000CBED22 /* HomeWorkCell.m */; };
@@ -1255,8 +1276,6 @@
 		6844E95C1CAD451E0054B8C5 /* MyHeadInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6844E91B1CAD451E0054B8C5 /* MyHeadInfoCell.xib */; };
 		6844E95E1CAD451E0054B8C5 /* MyInfomationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844E91F1CAD451E0054B8C5 /* MyInfomationCell.m */; };
 		6844E95F1CAD451E0054B8C5 /* MyInfomationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6844E9201CAD451E0054B8C5 /* MyInfomationCell.xib */; };
-		6844E9611CAD451E0054B8C5 /* OthePeopleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844E9251CAD451E0054B8C5 /* OthePeopleCell.m */; };
-		6844E9621CAD451E0054B8C5 /* OthePeopleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6844E9261CAD451E0054B8C5 /* OthePeopleCell.xib */; };
 		6844E9661CAD451E0054B8C5 /* PrivacySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844E92D1CAD451E0054B8C5 /* PrivacySettingViewController.m */; };
 		6844E9671CAD451E0054B8C5 /* PWRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844E92F1CAD451E0054B8C5 /* PWRViewController.m */; };
 		6844E9681CAD451E0054B8C5 /* SaveInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844E9321CAD451E0054B8C5 /* SaveInfoViewController.m */; };
@@ -1269,12 +1288,6 @@
 		6844EA261CAD45320054B8C5 /* SpinerLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA0C1CAD45320054B8C5 /* SpinerLayer.m */; };
 		6844EA271CAD45320054B8C5 /* UtilityFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA0E1CAD45320054B8C5 /* UtilityFunc.m */; };
 		6844EA281CAD45320054B8C5 /* YZZUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA101CAD45320054B8C5 /* YZZUtilities.m */; };
-		6844EA291CAD45320054B8C5 /* FirstLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA131CAD45320054B8C5 /* FirstLaunchViewController.m */; };
-		6844EA2A1CAD45320054B8C5 /* PassWordResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA151CAD45320054B8C5 /* PassWordResetViewController.m */; };
-		6844EA2C1CAD45320054B8C5 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA191CAD45320054B8C5 /* 1.png */; };
-		6844EA2D1CAD45320054B8C5 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA1A1CAD45320054B8C5 /* 2.png */; };
-		6844EA2E1CAD45320054B8C5 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA1B1CAD45320054B8C5 /* 3.png */; };
-		6844EA2F1CAD45320054B8C5 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA1C1CAD45320054B8C5 /* 4.png */; };
 		6844EA301CAD45320054B8C5 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA1D1CAD45320054B8C5 /* area.plist */; };
 		6844EA351CAD45320054B8C5 /* SNS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA221CAD45320054B8C5 /* SNS@2x.png */; };
 		6844EA4A1CAD45390054B8C5 /* SSVideoPlayContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA381CAD45390054B8C5 /* SSVideoPlayContainer.m */; };
@@ -1344,7 +1357,6 @@
 		68926B251CE9749300201E80 /* AddClassSubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68926B231CE9749300201E80 /* AddClassSubjectCell.m */; };
 		68926B261CE9749300201E80 /* AddClassSubjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68926B241CE9749300201E80 /* AddClassSubjectCell.xib */; };
 		68926B311CE9767200201E80 /* 老师icon40x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B2B1CE9767200201E80 /* 老师icon40x50@2x.png */; };
-		68926B321CE9767200201E80 /* 上下课时间icon40x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B2C1CE9767200201E80 /* 上下课时间icon40x50@2x.png */; };
 		68926B351CE99DA400201E80 /* ChangeEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68926B341CE99DA400201E80 /* ChangeEmailViewController.m */; };
 		68926B381CE9B3EF00201E80 /* 截屏grap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B361CE9B3EF00201E80 /* 截屏grap@2x.png */; };
 		68926B391CE9B3EF00201E80 /* 收藏save@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68926B371CE9B3EF00201E80 /* 收藏save@2x.png */; };
@@ -1521,7 +1533,6 @@
 		68BACED91CEDCB500008DDA6 /* 小红花详情人物头像（1）174x174@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEC01CEDCB500008DDA6 /* 小红花详情人物头像（1）174x174@2x.png */; };
 		68BACEDA1CEDCB500008DDA6 /* 收藏(H)36x32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEC11CEDCB500008DDA6 /* 收藏(H)36x32@2x.png */; };
 		68BACEDC1CEDCB500008DDA6 /* 收藏36x32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEC31CEDCB500008DDA6 /* 收藏36x32@2x.png */; };
-		68BACEDF1CEDCB500008DDA6 /* 时间40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEC61CEDCB500008DDA6 /* 时间40x40@2x.png */; };
 		68BACEE01CEDCB500008DDA6 /* 添加照片icon182x182@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEC71CEDCB500008DDA6 /* 添加照片icon182x182@2x.png */; };
 		68BACEE11CEDCB500008DDA6 /* 照片(1)182x182@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEC81CEDCB500008DDA6 /* 照片(1)182x182@2x.png */; };
 		68BACEE21CEDCB500008DDA6 /* 照片182x182@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACEC91CEDCB500008DDA6 /* 照片182x182@2x.png */; };
@@ -1529,10 +1540,7 @@
 		68BACEE61CEDCB500008DDA6 /* 线框@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACECD1CEDCB500008DDA6 /* 线框@2x.png */; };
 		68BACEE71CEDCB500008DDA6 /* 赠言40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACECE1CEDCB500008DDA6 /* 赠言40x40@2x.png */; };
 		68BACEE81CEDCB500008DDA6 /* 赠送人40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BACECF1CEDCB500008DDA6 /* 赠送人40x40@2x.png */; };
-		68BAD2111CEDCD660008DDA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BAD2101CEDCD660008DDA6 /* AppDelegate.m */; };
 		68BAD6BD1CEEB21F0008DDA6 /* 加号200x200@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BAD6BC1CEEB21F0008DDA6 /* 加号200x200@2x.png */; };
-		68C420771CC9CA310011552E /* SchoolInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C420761CC9CA310011552E /* SchoolInfoViewController.m */; };
-		68C4207A1CC9F8E70011552E /* MyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C420791CC9F8E70011552E /* MyTabBarController.m */; };
 		68C420861CCA17400011552E /* Album.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C420851CCA17400011552E /* Album.png */; };
 		68C4208B1CCA18790011552E /* Homework.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C420871CCA18790011552E /* Homework.png */; };
 		68C4208C1CCA18790011552E /* Recipes.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C420881CCA18790011552E /* Recipes.png */; };
@@ -1561,20 +1569,8 @@
 		68CD031F1CF83C7900AE7251 /* ZCTradeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CD03181CF83C7900AE7251 /* ZCTradeInputView.m */; };
 		68CD03201CF83C7900AE7251 /* ZCTradeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CD031A1CF83C7900AE7251 /* ZCTradeView.m */; };
 		68CD03221CF83ED300AE7251 /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68CD03211CF83ED300AE7251 /* AddAccountViewController.xib */; };
-		68D247AE1CC72BE0001E7294 /* 引导页01.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D247AB1CC72BE0001E7294 /* 引导页01.png */; };
-		68D247AF1CC72BE0001E7294 /* 引导页02.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D247AC1CC72BE0001E7294 /* 引导页02.png */; };
-		68D247B01CC72BE0001E7294 /* 引导页03.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D247AD1CC72BE0001E7294 /* 引导页03.png */; };
 		68D9F3EB1CE3801E00C2207B /* AdiutSetingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D9F3E91CE3801E00C2207B /* AdiutSetingCell.m */; };
 		68D9F3EC1CE3801E00C2207B /* AdiutSetingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68D9F3EA1CE3801E00C2207B /* AdiutSetingCell.xib */; };
-		68DCD9191D24F81B00ED0978 /* 引导页01@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DCD90A1D24F81B00ED0978 /* 引导页01@1x.png */; };
-		68DCD91A1D24F81B00ED0978 /* 引导页01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DCD90B1D24F81B00ED0978 /* 引导页01@2x.png */; };
-		68DCD91B1D24F81B00ED0978 /* 引导页01@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DCD90C1D24F81B00ED0978 /* 引导页01@3x.png */; };
-		68DCD91C1D24F81B00ED0978 /* 引导页02@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DCD90D1D24F81B00ED0978 /* 引导页02@1x.png */; };
-		68DCD91D1D24F81B00ED0978 /* 引导页02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DCD90E1D24F81B00ED0978 /* 引导页02@2x.png */; };
-		68DCD91E1D24F81B00ED0978 /* 引导页02@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DCD90F1D24F81B00ED0978 /* 引导页02@3x.png */; };
-		68DCD91F1D24F81B00ED0978 /* 引导页03@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DCD9101D24F81B00ED0978 /* 引导页03@1x.png */; };
-		68DCD9201D24F81B00ED0978 /* 引导页03@2x .png in Resources */ = {isa = PBXBuildFile; fileRef = 68DCD9111D24F81B00ED0978 /* 引导页03@2x .png */; };
-		68DCD9211D24F81B00ED0978 /* 引导页03@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DCD9121D24F81B00ED0978 /* 引导页03@3x.png */; };
 		68DCD9231D24F81B00ED0978 /* experience@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DCD9141D24F81B00ED0978 /* experience@2x.png */; };
 		68DCD9241D24F81B00ED0978 /* experience@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DCD9151D24F81B00ED0978 /* experience@3x.png */; };
 		68DCD9261D24F81B00ED0978 /* experienceH@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68DCD9171D24F81B00ED0978 /* experienceH@2x.png */; };
@@ -1601,7 +1597,19 @@
 		9E65BA9D1DED74DD00463BA5 /* HomepageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E65BA9B1DED74DD00463BA5 /* HomepageViewController.m */; };
 		9E65BAA01DED753300463BA5 /* XXENewCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E65BA9F1DED753300463BA5 /* XXENewCourseView.m */; };
 		9E65BAA31DED791300463BA5 /* AllImageCollectionServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E65BAA21DED791300463BA5 /* AllImageCollectionServer.m */; };
-		9E9D80861CB5F500004B3DFC /* jpush-ios-2.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9D80841CB5F500004B3DFC /* jpush-ios-2.1.0.a */; };
+		9E87C9BC1E02333500475F9B /* UpdatePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E87C9B91E02333500475F9B /* UpdatePopView.m */; };
+		9E87C9BD1E02333500475F9B /* WithoutCloseUpdatePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E87C9BB1E02333500475F9B /* WithoutCloseUpdatePopView.m */; };
+		9E87C9C21E02341C00475F9B /* jpush-ios-2.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E87C9BF1E02341C00475F9B /* jpush-ios-2.2.0.a */; };
+		9E87C9C31E02341D00475F9B /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9E87C9C11E02341C00475F9B /* sound.caf */; };
+		9E87C9CE1E023DD000475F9B /* NSDictionary+decription.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E87C9C51E023DD000475F9B /* NSDictionary+decription.m */; };
+		9E87C9CF1E023DD000475F9B /* NSArray+decription.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E87C9C71E023DD000475F9B /* NSArray+decription.m */; };
+		9E87C9D01E023DD000475F9B /* SystemPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E87C9C91E023DD000475F9B /* SystemPopView.m */; };
+		9E87C9D11E023DD000475F9B /* EmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E87C9CB1E023DD000475F9B /* EmptyView.m */; };
+		9E87C9D21E023DD000475F9B /* GlobalVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E87C9CD1E023DD000475F9B /* GlobalVariable.m */; };
+		9E87C9D31E0242BF00475F9B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E87C9B51E022BE200475F9B /* AppDelegate.m */; };
+		9E87C9D51E02472E00475F9B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E87C9D41E02472E00475F9B /* AdSupport.framework */; };
+		9E87C9D71E02473F00475F9B /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E87C9D61E02473F00475F9B /* UserNotifications.framework */; };
+		9E87C9D91E02475300475F9B /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E87C9D81E02475300475F9B /* libresolv.tbd */; };
 		9E9D80881CB5F53B004B3DFC /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9D80871CB5F53B004B3DFC /* CFNetwork.framework */; };
 		9E9D808A1CB5F567004B3DFC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9D80891CB5F567004B3DFC /* CoreTelephony.framework */; };
 		9E9D808C1CB5F573004B3DFC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9D808B1CB5F573004B3DFC /* CoreFoundation.framework */; };
@@ -2096,8 +2104,6 @@
 		045FC55A1D4B758500DF1E26 /* XXECommentRequestInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XXECommentRequestInfoViewController.xib; sourceTree = "<group>"; };
 		045FC56E1D4B779C00DF1E26 /* MyHeadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeadViewController.h; sourceTree = "<group>"; };
 		045FC56F1D4B779C00DF1E26 /* MyHeadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeadViewController.m; sourceTree = "<group>"; };
-		045FC5741D4B799900DF1E26 /* ClassHomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassHomeworkViewController.h; sourceTree = "<group>"; };
-		045FC5751D4B799900DF1E26 /* ClassHomeworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassHomeworkViewController.m; sourceTree = "<group>"; };
 		0463C2031DEC3D920035BEF6 /* CommentInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentInputViewController.h; sourceTree = "<group>"; };
 		0463C2041DEC3D920035BEF6 /* CommentInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentInputViewController.m; sourceTree = "<group>"; };
 		0463C2051DEC3D920035BEF6 /* dian@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dian@2x.png"; sourceTree = "<group>"; };
@@ -2675,6 +2681,57 @@
 		04B6206A1DBF019A00391616 /* StoreCollectTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreCollectTableViewCell.xib; sourceTree = "<group>"; };
 		04B7950E1DDED60000E5B2E5 /* ClassEditInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassEditInfoModel.h; sourceTree = "<group>"; };
 		04B7950F1DDED60000E5B2E5 /* ClassEditInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassEditInfoModel.m; sourceTree = "<group>"; };
+		04BF25F21E0CCB36002B81C0 /* XXEHomeworkListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEHomeworkListModel.h; sourceTree = "<group>"; };
+		04BF25F31E0CCB36002B81C0 /* XXEHomeworkListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEHomeworkListModel.m; sourceTree = "<group>"; };
+		04BF25F51E0CCCB8002B81C0 /* XXEHomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEHomeworkViewController.h; sourceTree = "<group>"; };
+		04BF25F61E0CCCB8002B81C0 /* XXEHomeworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEHomeworkViewController.m; sourceTree = "<group>"; };
+		04BF25F81E0CCCD6002B81C0 /* XXEHomeworkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEHomeworkTableViewCell.h; sourceTree = "<group>"; };
+		04BF25F91E0CCCD6002B81C0 /* XXEHomeworkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEHomeworkTableViewCell.m; sourceTree = "<group>"; };
+		04BF25FB1E0CD190002B81C0 /* XXEHomeworkDetailInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEHomeworkDetailInfoViewController.h; sourceTree = "<group>"; };
+		04BF25FC1E0CD190002B81C0 /* XXEHomeworkDetailInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEHomeworkDetailInfoViewController.m; sourceTree = "<group>"; };
+		04BF25FE1E0CD312002B81C0 /* XXERedFlowerDetialInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXERedFlowerDetialInfoTableViewCell.h; sourceTree = "<group>"; };
+		04BF25FF1E0CD312002B81C0 /* XXERedFlowerDetialInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXERedFlowerDetialInfoTableViewCell.m; sourceTree = "<group>"; };
+		04BF26041E0D1FE9002B81C0 /* XXEKindergartenDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEKindergartenDetailViewController.h; sourceTree = "<group>"; };
+		04BF26051E0D1FE9002B81C0 /* XXEKindergartenDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEKindergartenDetailViewController.m; sourceTree = "<group>"; };
+		04BF26061E0D1FE9002B81C0 /* XXEXingCommunityBabyCommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityBabyCommunityViewController.h; sourceTree = "<group>"; };
+		04BF26071E0D1FE9002B81C0 /* XXEXingCommunityBabyCommunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityBabyCommunityViewController.m; sourceTree = "<group>"; };
+		04BF26081E0D1FE9002B81C0 /* XXEXingCommunityBabyLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityBabyLibraryViewController.h; sourceTree = "<group>"; };
+		04BF26091E0D1FE9002B81C0 /* XXEXingCommunityBabyLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityBabyLibraryViewController.m; sourceTree = "<group>"; };
+		04BF260A1E0D1FE9002B81C0 /* XXEXingCommunityChildrenSongViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityChildrenSongViewController.h; sourceTree = "<group>"; };
+		04BF260B1E0D1FE9002B81C0 /* XXEXingCommunityChildrenSongViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityChildrenSongViewController.m; sourceTree = "<group>"; };
+		04BF260C1E0D1FE9002B81C0 /* XXEXingCommunityConsultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityConsultViewController.h; sourceTree = "<group>"; };
+		04BF260D1E0D1FE9002B81C0 /* XXEXingCommunityConsultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityConsultViewController.m; sourceTree = "<group>"; };
+		04BF260E1E0D1FE9002B81C0 /* XXEXingCommunityCookingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityCookingViewController.h; sourceTree = "<group>"; };
+		04BF260F1E0D1FE9002B81C0 /* XXEXingCommunityCookingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityCookingViewController.m; sourceTree = "<group>"; };
+		04BF26101E0D1FE9002B81C0 /* XXEXingCommunityEnglishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityEnglishViewController.h; sourceTree = "<group>"; };
+		04BF26111E0D1FE9002B81C0 /* XXEXingCommunityEnglishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityEnglishViewController.m; sourceTree = "<group>"; };
+		04BF26121E0D1FE9002B81C0 /* XXEXingCommunityHighSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityHighSchoolViewController.h; sourceTree = "<group>"; };
+		04BF26131E0D1FE9002B81C0 /* XXEXingCommunityHighSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityHighSchoolViewController.m; sourceTree = "<group>"; };
+		04BF26141E0D1FE9002B81C0 /* XXEXingCommunityInstitutionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityInstitutionsViewController.h; sourceTree = "<group>"; };
+		04BF26151E0D1FE9002B81C0 /* XXEXingCommunityInstitutionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityInstitutionsViewController.m; sourceTree = "<group>"; };
+		04BF26161E0D1FE9002B81C0 /* XXEXingCommunityKindergartenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityKindergartenViewController.h; sourceTree = "<group>"; };
+		04BF26171E0D1FE9002B81C0 /* XXEXingCommunityKindergartenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityKindergartenViewController.m; sourceTree = "<group>"; };
+		04BF26181E0D1FE9002B81C0 /* XXEXingCommunityPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityPlayViewController.h; sourceTree = "<group>"; };
+		04BF26191E0D1FE9002B81C0 /* XXEXingCommunityPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityPlayViewController.m; sourceTree = "<group>"; };
+		04BF261A1E0D1FE9002B81C0 /* XXEXingCommunityPrimaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityPrimaryViewController.h; sourceTree = "<group>"; };
+		04BF261B1E0D1FE9002B81C0 /* XXEXingCommunityPrimaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityPrimaryViewController.m; sourceTree = "<group>"; };
+		04BF261C1E0D1FE9002B81C0 /* XXEXingCommunityStoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityStoryViewController.h; sourceTree = "<group>"; };
+		04BF261D1E0D1FE9002B81C0 /* XXEXingCommunityStoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityStoryViewController.m; sourceTree = "<group>"; };
+		04BF261E1E0D1FE9002B81C0 /* XXEXingCommunityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityViewController.h; sourceTree = "<group>"; };
+		04BF261F1E0D1FE9002B81C0 /* XXEXingCommunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityViewController.m; sourceTree = "<group>"; };
+		04BF26211E0D1FE9002B81C0 /* XXEXingCommunityClassesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityClassesModel.h; sourceTree = "<group>"; };
+		04BF26221E0D1FE9002B81C0 /* XXEXingCommunityClassesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityClassesModel.m; sourceTree = "<group>"; };
+		04BF26241E0D1FE9002B81C0 /* XXEXingCommunityClassesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityClassesTableViewCell.h; sourceTree = "<group>"; };
+		04BF26251E0D1FE9002B81C0 /* XXEXingCommunityClassesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEXingCommunityClassesTableViewCell.m; sourceTree = "<group>"; };
+		04BF26261E0D1FE9002B81C0 /* XXEXingCommunityHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEXingCommunityHeader.h; sourceTree = "<group>"; };
+		04BF26381E0D3CAC002B81C0 /* XXEMyselfInfoNewPhoneNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEMyselfInfoNewPhoneNumViewController.h; sourceTree = "<group>"; };
+		04BF26391E0D3CAC002B81C0 /* XXEMyselfInfoNewPhoneNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEMyselfInfoNewPhoneNumViewController.m; sourceTree = "<group>"; };
+		04BF263A1E0D3CAC002B81C0 /* XXEMyselfInfoOldPhoneNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEMyselfInfoOldPhoneNumViewController.h; sourceTree = "<group>"; };
+		04BF263B1E0D3CAC002B81C0 /* XXEMyselfInfoOldPhoneNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEMyselfInfoOldPhoneNumViewController.m; sourceTree = "<group>"; };
+		04BF263E1E0D423A002B81C0 /* UIButton+XXExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+XXExtension.h"; sourceTree = "<group>"; };
+		04BF26411E0D44BE002B81C0 /* UIButton+XXExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+XXExtension.m"; sourceTree = "<group>"; };
+		04CFF8431E093A4F0006235D /* no_pass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "no_pass@2x.png"; path = "XingXingEdu/Images.xcassets/no_pass@2x.png"; sourceTree = SOURCE_ROOT; };
+		04CFF8441E093A4F0006235D /* no_pass@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "no_pass@3x.png"; path = "XingXingEdu/Images.xcassets/no_pass@3x.png"; sourceTree = SOURCE_ROOT; };
 		04D5B0811D6B1D7E00ABA89A /* WZYSearchSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZYSearchSchoolViewController.h; sourceTree = "<group>"; };
 		04D5B0821D6B1D7E00ABA89A /* WZYSearchSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WZYSearchSchoolViewController.m; sourceTree = "<group>"; };
 		04D5B0861D6B1DE900ABA89A /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
@@ -2793,7 +2850,6 @@
 		04D5B15E1D6B1FF500ABA89A /* 女@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "女@2x.png"; sourceTree = "<group>"; };
 		04D5B15F1D6B1FF500ABA89A /* 姓名40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "姓名40x40@2x.png"; sourceTree = "<group>"; };
 		04D5B1641D6B1FF500ABA89A /* 开课中状态60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "开课中状态60x60@2x.png"; sourceTree = "<group>"; };
-		04D5B1651D6B1FF500ABA89A /* 必填符号60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "必填符号60x60@2x.png"; sourceTree = "<group>"; };
 		04D5B1661D6B1FF500ABA89A /* 按钮big650x84@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "按钮big650x84@2x.png"; sourceTree = "<group>"; };
 		04D5B1691D6B1FF500ABA89A /* 添加完成icon650x84@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加完成icon650x84@2x.png"; sourceTree = "<group>"; };
 		04D5B16B1D6B1FF500ABA89A /* 班级历史44x44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "班级历史44x44@2x.png"; sourceTree = "<group>"; };
@@ -3072,11 +3128,6 @@
 		04F100AC1D45C0E400CBED22 /* SchoolRecipeInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SchoolRecipeInfoViewController.xib; sourceTree = "<group>"; };
 		04F100AD1D45C0E400CBED22 /* SchoolRecipesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolRecipesViewController.h; sourceTree = "<group>"; };
 		04F100AE1D45C0E400CBED22 /* SchoolRecipesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolRecipesViewController.m; sourceTree = "<group>"; };
-		04F100B71D45D6A000CBED22 /* ClassHomeInfoMationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassHomeInfoMationViewController.h; sourceTree = "<group>"; };
-		04F100B81D45D6A000CBED22 /* ClassHomeInfoMationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassHomeInfoMationViewController.m; sourceTree = "<group>"; };
-		04F100B91D45D6A000CBED22 /* ClassHomeWorkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassHomeWorkCell.h; sourceTree = "<group>"; };
-		04F100BA1D45D6A000CBED22 /* ClassHomeWorkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassHomeWorkCell.m; sourceTree = "<group>"; };
-		04F100BB1D45D6A000CBED22 /* ClassHomeWorkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClassHomeWorkCell.xib; sourceTree = "<group>"; };
 		04F100BC1D45D6A000CBED22 /* ClassHomeWorkContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassHomeWorkContentViewController.h; sourceTree = "<group>"; };
 		04F100BD1D45D6A000CBED22 /* ClassHomeWorkContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassHomeWorkContentViewController.m; sourceTree = "<group>"; };
 		04F100BE1D45D6A000CBED22 /* ClassHomeWorkContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClassHomeWorkContentViewController.xib; sourceTree = "<group>"; };
@@ -3310,9 +3361,6 @@
 		6844E91E1CAD451E0054B8C5 /* MyInfomationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfomationCell.h; sourceTree = "<group>"; };
 		6844E91F1CAD451E0054B8C5 /* MyInfomationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfomationCell.m; sourceTree = "<group>"; };
 		6844E9201CAD451E0054B8C5 /* MyInfomationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfomationCell.xib; sourceTree = "<group>"; };
-		6844E9241CAD451E0054B8C5 /* OthePeopleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OthePeopleCell.h; sourceTree = "<group>"; };
-		6844E9251CAD451E0054B8C5 /* OthePeopleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OthePeopleCell.m; sourceTree = "<group>"; };
-		6844E9261CAD451E0054B8C5 /* OthePeopleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OthePeopleCell.xib; sourceTree = "<group>"; };
 		6844E92C1CAD451E0054B8C5 /* PrivacySettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacySettingViewController.h; sourceTree = "<group>"; };
 		6844E92D1CAD451E0054B8C5 /* PrivacySettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivacySettingViewController.m; sourceTree = "<group>"; };
 		6844E92E1CAD451E0054B8C5 /* PWRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWRViewController.h; sourceTree = "<group>"; };
@@ -3337,14 +3385,6 @@
 		6844EA0E1CAD45320054B8C5 /* UtilityFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilityFunc.m; sourceTree = "<group>"; };
 		6844EA0F1CAD45320054B8C5 /* YZZUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZZUtilities.h; sourceTree = "<group>"; };
 		6844EA101CAD45320054B8C5 /* YZZUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZZUtilities.m; sourceTree = "<group>"; };
-		6844EA121CAD45320054B8C5 /* FirstLaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstLaunchViewController.h; sourceTree = "<group>"; };
-		6844EA131CAD45320054B8C5 /* FirstLaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstLaunchViewController.m; sourceTree = "<group>"; };
-		6844EA141CAD45320054B8C5 /* PassWordResetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassWordResetViewController.h; sourceTree = "<group>"; };
-		6844EA151CAD45320054B8C5 /* PassWordResetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassWordResetViewController.m; sourceTree = "<group>"; };
-		6844EA191CAD45320054B8C5 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
-		6844EA1A1CAD45320054B8C5 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
-		6844EA1B1CAD45320054B8C5 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
-		6844EA1C1CAD45320054B8C5 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
 		6844EA1D1CAD45320054B8C5 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		6844EA221CAD45320054B8C5 /* SNS@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SNS@2x.png"; sourceTree = "<group>"; };
 		6844EA371CAD45390054B8C5 /* SSVideoPlayContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSVideoPlayContainer.h; sourceTree = "<group>"; };
@@ -3435,7 +3475,6 @@
 		68926B231CE9749300201E80 /* AddClassSubjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddClassSubjectCell.m; sourceTree = "<group>"; };
 		68926B241CE9749300201E80 /* AddClassSubjectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddClassSubjectCell.xib; sourceTree = "<group>"; };
 		68926B2B1CE9767200201E80 /* 老师icon40x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "老师icon40x50@2x.png"; sourceTree = "<group>"; };
-		68926B2C1CE9767200201E80 /* 上下课时间icon40x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上下课时间icon40x50@2x.png"; sourceTree = "<group>"; };
 		68926B331CE99DA400201E80 /* ChangeEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeEmailViewController.h; sourceTree = "<group>"; };
 		68926B341CE99DA400201E80 /* ChangeEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeEmailViewController.m; sourceTree = "<group>"; };
 		68926B361CE9B3EF00201E80 /* 截屏grap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "截屏grap@2x.png"; sourceTree = "<group>"; };
@@ -3652,7 +3691,6 @@
 		68BACEC01CEDCB500008DDA6 /* 小红花详情人物头像（1）174x174@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "小红花详情人物头像（1）174x174@2x.png"; sourceTree = "<group>"; };
 		68BACEC11CEDCB500008DDA6 /* 收藏(H)36x32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "收藏(H)36x32@2x.png"; sourceTree = "<group>"; };
 		68BACEC31CEDCB500008DDA6 /* 收藏36x32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "收藏36x32@2x.png"; sourceTree = "<group>"; };
-		68BACEC61CEDCB500008DDA6 /* 时间40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "时间40x40@2x.png"; sourceTree = "<group>"; };
 		68BACEC71CEDCB500008DDA6 /* 添加照片icon182x182@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加照片icon182x182@2x.png"; sourceTree = "<group>"; };
 		68BACEC81CEDCB500008DDA6 /* 照片(1)182x182@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "照片(1)182x182@2x.png"; sourceTree = "<group>"; };
 		68BACEC91CEDCB500008DDA6 /* 照片182x182@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "照片182x182@2x.png"; sourceTree = "<group>"; };
@@ -3660,12 +3698,7 @@
 		68BACECD1CEDCB500008DDA6 /* 线框@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "线框@2x.png"; sourceTree = "<group>"; };
 		68BACECE1CEDCB500008DDA6 /* 赠言40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "赠言40x40@2x.png"; sourceTree = "<group>"; };
 		68BACECF1CEDCB500008DDA6 /* 赠送人40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "赠送人40x40@2x.png"; sourceTree = "<group>"; };
-		68BAD2101CEDCD660008DDA6 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = XingXingEdu/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		68BAD6BC1CEEB21F0008DDA6 /* 加号200x200@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "加号200x200@2x.png"; path = "XingXingEdu/Images.xcassets/加号200x200@2x.png"; sourceTree = SOURCE_ROOT; };
-		68C420751CC9CA310011552E /* SchoolInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolInfoViewController.h; sourceTree = "<group>"; };
-		68C420761CC9CA310011552E /* SchoolInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolInfoViewController.m; sourceTree = "<group>"; };
-		68C420781CC9F8E70011552E /* MyTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTabBarController.h; sourceTree = "<group>"; };
-		68C420791CC9F8E70011552E /* MyTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTabBarController.m; sourceTree = "<group>"; };
 		68C420851CCA17400011552E /* Album.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Album.png; sourceTree = "<group>"; };
 		68C420871CCA18790011552E /* Homework.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Homework.png; sourceTree = "<group>"; };
 		68C420881CCA18790011552E /* Recipes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Recipes.png; sourceTree = "<group>"; };
@@ -3704,28 +3737,15 @@
 		68CD03191CF83C7900AE7251 /* ZCTradeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCTradeView.h; sourceTree = "<group>"; };
 		68CD031A1CF83C7900AE7251 /* ZCTradeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCTradeView.m; sourceTree = "<group>"; };
 		68CD03211CF83ED300AE7251 /* AddAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountViewController.xib; sourceTree = "<group>"; };
-		68D247AB1CC72BE0001E7294 /* 引导页01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页01.png"; sourceTree = "<group>"; };
-		68D247AC1CC72BE0001E7294 /* 引导页02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页02.png"; sourceTree = "<group>"; };
-		68D247AD1CC72BE0001E7294 /* 引导页03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页03.png"; sourceTree = "<group>"; };
 		68D9F3E81CE3801E00C2207B /* AdiutSetingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdiutSetingCell.h; sourceTree = "<group>"; };
 		68D9F3E91CE3801E00C2207B /* AdiutSetingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdiutSetingCell.m; sourceTree = "<group>"; };
 		68D9F3EA1CE3801E00C2207B /* AdiutSetingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdiutSetingCell.xib; sourceTree = "<group>"; };
-		68DCD90A1D24F81B00ED0978 /* 引导页01@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页01@1x.png"; sourceTree = "<group>"; };
-		68DCD90B1D24F81B00ED0978 /* 引导页01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页01@2x.png"; sourceTree = "<group>"; };
-		68DCD90C1D24F81B00ED0978 /* 引导页01@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页01@3x.png"; sourceTree = "<group>"; };
-		68DCD90D1D24F81B00ED0978 /* 引导页02@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页02@1x.png"; sourceTree = "<group>"; };
-		68DCD90E1D24F81B00ED0978 /* 引导页02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页02@2x.png"; sourceTree = "<group>"; };
-		68DCD90F1D24F81B00ED0978 /* 引导页02@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页02@3x.png"; sourceTree = "<group>"; };
-		68DCD9101D24F81B00ED0978 /* 引导页03@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页03@1x.png"; sourceTree = "<group>"; };
-		68DCD9111D24F81B00ED0978 /* 引导页03@2x .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页03@2x .png"; sourceTree = "<group>"; };
-		68DCD9121D24F81B00ED0978 /* 引导页03@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "引导页03@3x.png"; sourceTree = "<group>"; };
 		68DCD9141D24F81B00ED0978 /* experience@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "experience@2x.png"; sourceTree = "<group>"; };
 		68DCD9151D24F81B00ED0978 /* experience@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "experience@3x.png"; sourceTree = "<group>"; };
 		68DCD9171D24F81B00ED0978 /* experienceH@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "experienceH@2x.png"; sourceTree = "<group>"; };
 		68DCD9181D24F81B00ED0978 /* experienceH@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "experienceH@3x.png"; sourceTree = "<group>"; };
 		68E2A8EE1C45F67300EA8DF3 /* 猩猩教室.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "猩猩教室.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		68E2A8F21C45F67300EA8DF3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		68E2A8F41C45F67300EA8DF3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		68E2A8FB1C45F67300EA8DF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		68E2A8FD1C45F67300EA8DF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68E2A9001C45F67300EA8DF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -3760,8 +3780,29 @@
 		9E65BA9F1DED753300463BA5 /* XXENewCourseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXENewCourseView.m; sourceTree = "<group>"; };
 		9E65BAA11DED791300463BA5 /* AllImageCollectionServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllImageCollectionServer.h; sourceTree = "<group>"; };
 		9E65BAA21DED791300463BA5 /* AllImageCollectionServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllImageCollectionServer.m; sourceTree = "<group>"; };
-		9E9D80841CB5F500004B3DFC /* jpush-ios-2.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.0.a"; sourceTree = "<group>"; };
-		9E9D80851CB5F500004B3DFC /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		9E87C9B41E022BE200475F9B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9E87C9B51E022BE200475F9B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9E87C9B81E02333500475F9B /* UpdatePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePopView.h; sourceTree = "<group>"; };
+		9E87C9B91E02333500475F9B /* UpdatePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePopView.m; sourceTree = "<group>"; };
+		9E87C9BA1E02333500475F9B /* WithoutCloseUpdatePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WithoutCloseUpdatePopView.h; sourceTree = "<group>"; };
+		9E87C9BB1E02333500475F9B /* WithoutCloseUpdatePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WithoutCloseUpdatePopView.m; sourceTree = "<group>"; };
+		9E87C9BF1E02341C00475F9B /* jpush-ios-2.2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.2.0.a"; sourceTree = "<group>"; };
+		9E87C9C01E02341C00475F9B /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		9E87C9C11E02341C00475F9B /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
+		9E87C9C41E023DD000475F9B /* NSDictionary+decription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+decription.h"; sourceTree = "<group>"; };
+		9E87C9C51E023DD000475F9B /* NSDictionary+decription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+decription.m"; sourceTree = "<group>"; };
+		9E87C9C61E023DD000475F9B /* NSArray+decription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+decription.h"; sourceTree = "<group>"; };
+		9E87C9C71E023DD000475F9B /* NSArray+decription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+decription.m"; sourceTree = "<group>"; };
+		9E87C9C81E023DD000475F9B /* SystemPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemPopView.h; sourceTree = "<group>"; };
+		9E87C9C91E023DD000475F9B /* SystemPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemPopView.m; sourceTree = "<group>"; };
+		9E87C9CA1E023DD000475F9B /* EmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyView.h; sourceTree = "<group>"; };
+		9E87C9CB1E023DD000475F9B /* EmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyView.m; sourceTree = "<group>"; };
+		9E87C9CC1E023DD000475F9B /* GlobalVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalVariable.h; sourceTree = "<group>"; };
+		9E87C9CD1E023DD000475F9B /* GlobalVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalVariable.m; sourceTree = "<group>"; };
+		9E87C9D41E02472E00475F9B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		9E87C9D61E02473F00475F9B /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		9E87C9D81E02475300475F9B /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		9E87C9DA1E024C2700475F9B /* 猩猩教室.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "猩猩教室.entitlements"; sourceTree = "<group>"; };
 		9E9D80871CB5F53B004B3DFC /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		9E9D80891CB5F567004B3DFC /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		9E9D808B1CB5F573004B3DFC /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -3797,18 +3838,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E87C9D91E02475300475F9B /* libresolv.tbd in Frameworks */,
+				9E87C9D71E02473F00475F9B /* UserNotifications.framework in Frameworks */,
+				9E87C9D51E02472E00475F9B /* AdSupport.framework in Frameworks */,
+				9E9D808A1CB5F567004B3DFC /* CoreTelephony.framework in Frameworks */,
 				9E9D80961CB5F5C2004B3DFC /* Security.framework in Frameworks */,
 				9E9D80941CB5F5B0004B3DFC /* UIKit.framework in Frameworks */,
 				9E9D80921CB5F5A9004B3DFC /* Foundation.framework in Frameworks */,
 				9E9D80901CB5F595004B3DFC /* CoreGraphics.framework in Frameworks */,
 				9E9D808E1CB5F584004B3DFC /* SystemConfiguration.framework in Frameworks */,
 				9E9D808C1CB5F573004B3DFC /* CoreFoundation.framework in Frameworks */,
-				9E9D808A1CB5F567004B3DFC /* CoreTelephony.framework in Frameworks */,
 				9E9D80881CB5F53B004B3DFC /* CFNetwork.framework in Frameworks */,
 				685073281C8C4D34005C31E4 /* libsqlite3.tbd in Frameworks */,
 				6844E7151CAD440C0054B8C5 /* libWeiboSDK.a in Frameworks */,
 				685073261C8C4D1F005C31E4 /* ImageIO.framework in Frameworks */,
-				9E9D80861CB5F500004B3DFC /* jpush-ios-2.1.0.a in Frameworks */,
 				6844E7101CAD440C0054B8C5 /* KakaoOpenSDK.framework in Frameworks */,
 				9E05463A1C48D57A00950C23 /* AddressBookUI.framework in Frameworks */,
 				6844E70C1CAD440C0054B8C5 /* ShareSDKUI.framework in Frameworks */,
@@ -3822,6 +3865,7 @@
 				9E0546341C48D55200950C23 /* JavaScriptCore.framework in Frameworks */,
 				6844E7081CAD440C0054B8C5 /* ShareSDK.framework in Frameworks */,
 				6844E7191CAD440C0054B8C5 /* libYixinSDK.a in Frameworks */,
+				9E87C9C21E02341C00475F9B /* jpush-ios-2.2.0.a in Frameworks */,
 				6844E70D1CAD440C0054B8C5 /* libAPOpenSdk.a in Frameworks */,
 				9E0546321C48D53500950C23 /* MessageUI.framework in Frameworks */,
 				9E0546301C48D52900950C23 /* libicucore.tbd in Frameworks */,
@@ -5170,6 +5214,16 @@
 				0463C3021DEC3D920035BEF6 /* XXETool.m */,
 				0463C3031DEC3D920035BEF6 /* XXEVerticalButton.h */,
 				0463C3041DEC3D920035BEF6 /* XXEVerticalButton.m */,
+				9E87C9C41E023DD000475F9B /* NSDictionary+decription.h */,
+				9E87C9C51E023DD000475F9B /* NSDictionary+decription.m */,
+				9E87C9C61E023DD000475F9B /* NSArray+decription.h */,
+				9E87C9C71E023DD000475F9B /* NSArray+decription.m */,
+				9E87C9C81E023DD000475F9B /* SystemPopView.h */,
+				9E87C9C91E023DD000475F9B /* SystemPopView.m */,
+				9E87C9CA1E023DD000475F9B /* EmptyView.h */,
+				9E87C9CB1E023DD000475F9B /* EmptyView.m */,
+				9E87C9CC1E023DD000475F9B /* GlobalVariable.h */,
+				9E87C9CD1E023DD000475F9B /* GlobalVariable.m */,
 			);
 			name = XXETools;
 			path = XingXingEdu/XXETools;
@@ -5778,6 +5832,112 @@
 			path = "猩商城花篮专区";
 			sourceTree = "<group>";
 		};
+		04BF25EF1E0CCB04002B81C0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04BF25FB1E0CD190002B81C0 /* XXEHomeworkDetailInfoViewController.h */,
+				04BF25FC1E0CD190002B81C0 /* XXEHomeworkDetailInfoViewController.m */,
+				04BF25F51E0CCCB8002B81C0 /* XXEHomeworkViewController.h */,
+				04BF25F61E0CCCB8002B81C0 /* XXEHomeworkViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		04BF25F01E0CCB04002B81C0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04BF25F21E0CCB36002B81C0 /* XXEHomeworkListModel.h */,
+				04BF25F31E0CCB36002B81C0 /* XXEHomeworkListModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		04BF25F11E0CCB04002B81C0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04BF25F81E0CCCD6002B81C0 /* XXEHomeworkTableViewCell.h */,
+				04BF25F91E0CCCD6002B81C0 /* XXEHomeworkTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04BF26011E0D1FE9002B81C0 /* XXEXingCommunity */ = {
+			isa = PBXGroup;
+			children = (
+				04BF26031E0D1FE9002B81C0 /* Controller */,
+				04BF26201E0D1FE9002B81C0 /* Model */,
+				04BF26231E0D1FE9002B81C0 /* View */,
+				04BF26261E0D1FE9002B81C0 /* XXEXingCommunityHeader.h */,
+			);
+			name = XXEXingCommunity;
+			path = XingXingEdu/XXEXingCommunity;
+			sourceTree = SOURCE_ROOT;
+		};
+		04BF26031E0D1FE9002B81C0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04BF26041E0D1FE9002B81C0 /* XXEKindergartenDetailViewController.h */,
+				04BF26051E0D1FE9002B81C0 /* XXEKindergartenDetailViewController.m */,
+				04BF26061E0D1FE9002B81C0 /* XXEXingCommunityBabyCommunityViewController.h */,
+				04BF26071E0D1FE9002B81C0 /* XXEXingCommunityBabyCommunityViewController.m */,
+				04BF26081E0D1FE9002B81C0 /* XXEXingCommunityBabyLibraryViewController.h */,
+				04BF26091E0D1FE9002B81C0 /* XXEXingCommunityBabyLibraryViewController.m */,
+				04BF260A1E0D1FE9002B81C0 /* XXEXingCommunityChildrenSongViewController.h */,
+				04BF260B1E0D1FE9002B81C0 /* XXEXingCommunityChildrenSongViewController.m */,
+				04BF260C1E0D1FE9002B81C0 /* XXEXingCommunityConsultViewController.h */,
+				04BF260D1E0D1FE9002B81C0 /* XXEXingCommunityConsultViewController.m */,
+				04BF260E1E0D1FE9002B81C0 /* XXEXingCommunityCookingViewController.h */,
+				04BF260F1E0D1FE9002B81C0 /* XXEXingCommunityCookingViewController.m */,
+				04BF26101E0D1FE9002B81C0 /* XXEXingCommunityEnglishViewController.h */,
+				04BF26111E0D1FE9002B81C0 /* XXEXingCommunityEnglishViewController.m */,
+				04BF26121E0D1FE9002B81C0 /* XXEXingCommunityHighSchoolViewController.h */,
+				04BF26131E0D1FE9002B81C0 /* XXEXingCommunityHighSchoolViewController.m */,
+				04BF26141E0D1FE9002B81C0 /* XXEXingCommunityInstitutionsViewController.h */,
+				04BF26151E0D1FE9002B81C0 /* XXEXingCommunityInstitutionsViewController.m */,
+				04BF26161E0D1FE9002B81C0 /* XXEXingCommunityKindergartenViewController.h */,
+				04BF26171E0D1FE9002B81C0 /* XXEXingCommunityKindergartenViewController.m */,
+				04BF26181E0D1FE9002B81C0 /* XXEXingCommunityPlayViewController.h */,
+				04BF26191E0D1FE9002B81C0 /* XXEXingCommunityPlayViewController.m */,
+				04BF261A1E0D1FE9002B81C0 /* XXEXingCommunityPrimaryViewController.h */,
+				04BF261B1E0D1FE9002B81C0 /* XXEXingCommunityPrimaryViewController.m */,
+				04BF261C1E0D1FE9002B81C0 /* XXEXingCommunityStoryViewController.h */,
+				04BF261D1E0D1FE9002B81C0 /* XXEXingCommunityStoryViewController.m */,
+				04BF261E1E0D1FE9002B81C0 /* XXEXingCommunityViewController.h */,
+				04BF261F1E0D1FE9002B81C0 /* XXEXingCommunityViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		04BF26201E0D1FE9002B81C0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04BF26211E0D1FE9002B81C0 /* XXEXingCommunityClassesModel.h */,
+				04BF26221E0D1FE9002B81C0 /* XXEXingCommunityClassesModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		04BF26231E0D1FE9002B81C0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04BF26241E0D1FE9002B81C0 /* XXEXingCommunityClassesTableViewCell.h */,
+				04BF26251E0D1FE9002B81C0 /* XXEXingCommunityClassesTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04BF26371E0D3C80002B81C0 /* MyHeadViewController */ = {
+			isa = PBXGroup;
+			children = (
+				04BF26381E0D3CAC002B81C0 /* XXEMyselfInfoNewPhoneNumViewController.h */,
+				04BF26391E0D3CAC002B81C0 /* XXEMyselfInfoNewPhoneNumViewController.m */,
+				04BF263A1E0D3CAC002B81C0 /* XXEMyselfInfoOldPhoneNumViewController.h */,
+				04BF263B1E0D3CAC002B81C0 /* XXEMyselfInfoOldPhoneNumViewController.m */,
+			);
+			name = MyHeadViewController;
+			path = XingXingEdu/MyHeadViewController;
+			sourceTree = SOURCE_ROOT;
+		};
 		04D5B0801D6B1D7E00ABA89A /* WZYSearchSchoolViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -6009,7 +6169,6 @@
 				04D5B15E1D6B1FF500ABA89A /* 女@2x.png */,
 				04D5B15F1D6B1FF500ABA89A /* 姓名40x40@2x.png */,
 				04D5B1641D6B1FF500ABA89A /* 开课中状态60x60@2x.png */,
-				04D5B1651D6B1FF500ABA89A /* 必填符号60x60@2x.png */,
 				04D5B1661D6B1FF500ABA89A /* 按钮big650x84@2x.png */,
 				04D5B1691D6B1FF500ABA89A /* 添加完成icon650x84@2x.png */,
 				04D5B16B1D6B1FF500ABA89A /* 班级历史44x44@2x.png */,
@@ -6419,13 +6578,9 @@
 		04F100B61D45D6A000CBED22 /* ClassHomework */ = {
 			isa = PBXGroup;
 			children = (
-				045FC5741D4B799900DF1E26 /* ClassHomeworkViewController.h */,
-				045FC5751D4B799900DF1E26 /* ClassHomeworkViewController.m */,
-				04F100B71D45D6A000CBED22 /* ClassHomeInfoMationViewController.h */,
-				04F100B81D45D6A000CBED22 /* ClassHomeInfoMationViewController.m */,
-				04F100B91D45D6A000CBED22 /* ClassHomeWorkCell.h */,
-				04F100BA1D45D6A000CBED22 /* ClassHomeWorkCell.m */,
-				04F100BB1D45D6A000CBED22 /* ClassHomeWorkCell.xib */,
+				04BF25EF1E0CCB04002B81C0 /* Controller */,
+				04BF25F01E0CCB04002B81C0 /* Model */,
+				04BF25F11E0CCB04002B81C0 /* View */,
 				04F100BC1D45D6A000CBED22 /* ClassHomeWorkContentViewController.h */,
 				04F100BD1D45D6A000CBED22 /* ClassHomeWorkContentViewController.m */,
 				04F100BE1D45D6A000CBED22 /* ClassHomeWorkContentViewController.xib */,
@@ -6439,6 +6594,9 @@
 		38B3DC06AD87E105FE51DD9E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9E87C9D81E02475300475F9B /* libresolv.tbd */,
+				9E87C9D61E02473F00475F9B /* UserNotifications.framework */,
+				9E87C9D41E02472E00475F9B /* AdSupport.framework */,
 				9E9D80951CB5F5C1004B3DFC /* Security.framework */,
 				9E9D80931CB5F5B0004B3DFC /* UIKit.framework */,
 				9E9D80911CB5F5A9004B3DFC /* Foundation.framework */,
@@ -6471,7 +6629,6 @@
 				68926B361CE9B3EF00201E80 /* 截屏grap@2x.png */,
 				68926B371CE9B3EF00201E80 /* 收藏save@2x.png */,
 				68926B2B1CE9767200201E80 /* 老师icon40x50@2x.png */,
-				68926B2C1CE9767200201E80 /* 上下课时间icon40x50@2x.png */,
 				683801261CE339DD0034C54C /* QQicon40x50.png */,
 				683801271CE339DD0034C54C /* 主页(H)icon72x72.png */,
 				683801281CE339DD0034C54C /* 主页icon72x72.png */,
@@ -7090,9 +7247,6 @@
 			children = (
 				0499F0831D2FACBF00EFF631 /* OtherPeopleViewController.h */,
 				0499F0841D2FACBF00EFF631 /* OtherPeopleViewController.m */,
-				6844E9241CAD451E0054B8C5 /* OthePeopleCell.h */,
-				6844E9251CAD451E0054B8C5 /* OthePeopleCell.m */,
-				6844E9261CAD451E0054B8C5 /* OthePeopleCell.xib */,
 			);
 			path = Ohomepeople;
 			sourceTree = "<group>";
@@ -7128,7 +7282,6 @@
 			isa = PBXGroup;
 			children = (
 				6844EA041CAD45320054B8C5 /* LoginBtnLib */,
-				6844EA111CAD45320054B8C5 /* LoginInfo */,
 				6844EA181CAD45320054B8C5 /* Resource */,
 			);
 			name = Utility;
@@ -7158,21 +7311,6 @@
 			path = LoginBtnLib;
 			sourceTree = "<group>";
 		};
-		6844EA111CAD45320054B8C5 /* LoginInfo */ = {
-			isa = PBXGroup;
-			children = (
-				6844EA121CAD45320054B8C5 /* FirstLaunchViewController.h */,
-				6844EA131CAD45320054B8C5 /* FirstLaunchViewController.m */,
-				6844EA141CAD45320054B8C5 /* PassWordResetViewController.h */,
-				6844EA151CAD45320054B8C5 /* PassWordResetViewController.m */,
-				68C420751CC9CA310011552E /* SchoolInfoViewController.h */,
-				68C420761CC9CA310011552E /* SchoolInfoViewController.m */,
-				68C420781CC9F8E70011552E /* MyTabBarController.h */,
-				68C420791CC9F8E70011552E /* MyTabBarController.m */,
-			);
-			path = LoginInfo;
-			sourceTree = "<group>";
-		};
 		6844EA181CAD45320054B8C5 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -7182,13 +7320,6 @@
 				68C420891CCA18790011552E /* Subject.png */,
 				68C4208A1CCA18790011552E /* Telephone.png */,
 				68C420851CCA17400011552E /* Album.png */,
-				68D247AB1CC72BE0001E7294 /* 引导页01.png */,
-				68D247AC1CC72BE0001E7294 /* 引导页02.png */,
-				68D247AD1CC72BE0001E7294 /* 引导页03.png */,
-				6844EA191CAD45320054B8C5 /* 1.png */,
-				6844EA1A1CAD45320054B8C5 /* 2.png */,
-				6844EA1B1CAD45320054B8C5 /* 3.png */,
-				6844EA1C1CAD45320054B8C5 /* 4.png */,
 				6844EA1D1CAD45320054B8C5 /* area.plist */,
 				6844EA221CAD45320054B8C5 /* SNS@2x.png */,
 			);
@@ -7230,6 +7361,8 @@
 		6844EA551CAD45420054B8C5 /* Scratchablelatexage */ = {
 			isa = PBXGroup;
 			children = (
+				04BF25FE1E0CD312002B81C0 /* XXERedFlowerDetialInfoTableViewCell.h */,
+				04BF25FF1E0CD312002B81C0 /* XXERedFlowerDetialInfoTableViewCell.m */,
 				04D5B1F31D6B29E200ABA89A /* flowerViewController.h */,
 				04D5B1F41D6B29E200ABA89A /* flowerViewController.m */,
 				04D5B1F51D6B29E200ABA89A /* flowerViewController.xib */,
@@ -7343,6 +7476,8 @@
 		689551AD1D06E370009241A5 /* WZYTool */ = {
 			isa = PBXGroup;
 			children = (
+				04BF26411E0D44BE002B81C0 /* UIButton+XXExtension.m */,
+				04BF263E1E0D423A002B81C0 /* UIButton+XXExtension.h */,
 				044412CB1D38F46600314884 /* UIColor+RCColor.h */,
 				044412CC1D38F46600314884 /* UIColor+RCColor.m */,
 				044412CD1D38F46600314884 /* UIImage+RCImage.h */,
@@ -7562,7 +7697,6 @@
 				68BACEC01CEDCB500008DDA6 /* 小红花详情人物头像（1）174x174@2x.png */,
 				68BACEC11CEDCB500008DDA6 /* 收藏(H)36x32@2x.png */,
 				68BACEC31CEDCB500008DDA6 /* 收藏36x32@2x.png */,
-				68BACEC61CEDCB500008DDA6 /* 时间40x40@2x.png */,
 				68BACEC71CEDCB500008DDA6 /* 添加照片icon182x182@2x.png */,
 				68BACEC81CEDCB500008DDA6 /* 照片(1)182x182@2x.png */,
 				68BACEC91CEDCB500008DDA6 /* 照片182x182@2x.png */,
@@ -7595,15 +7729,6 @@
 		68DCD9091D24F81B00ED0978 /* loadingPage */ = {
 			isa = PBXGroup;
 			children = (
-				68DCD90A1D24F81B00ED0978 /* 引导页01@1x.png */,
-				68DCD90B1D24F81B00ED0978 /* 引导页01@2x.png */,
-				68DCD90C1D24F81B00ED0978 /* 引导页01@3x.png */,
-				68DCD90D1D24F81B00ED0978 /* 引导页02@1x.png */,
-				68DCD90E1D24F81B00ED0978 /* 引导页02@2x.png */,
-				68DCD90F1D24F81B00ED0978 /* 引导页02@3x.png */,
-				68DCD9101D24F81B00ED0978 /* 引导页03@1x.png */,
-				68DCD9111D24F81B00ED0978 /* 引导页03@2x .png */,
-				68DCD9121D24F81B00ED0978 /* 引导页03@3x.png */,
 				68DCD9141D24F81B00ED0978 /* experience@2x.png */,
 				68DCD9151D24F81B00ED0978 /* experience@3x.png */,
 				68DCD9171D24F81B00ED0978 /* experienceH@2x.png */,
@@ -7646,6 +7771,10 @@
 		68E2A8F01C45F67300EA8DF3 /* xingxingEdu */ = {
 			isa = PBXGroup;
 			children = (
+				04BF26371E0D3C80002B81C0 /* MyHeadViewController */,
+				04BF26011E0D1FE9002B81C0 /* XXEXingCommunity */,
+				9E87C9DA1E024C2700475F9B /* 猩猩教室.entitlements */,
+				9E87C9B31E022BE200475F9B /* AppDelegate */,
 				0459FC561E097B780029FF55 /* BaseNavigationcontroller */,
 				9E65BA981DED74DD00463BA5 /* Homepage */,
 				9E65BA931DED6FCC00463BA5 /* FirstStarView */,
@@ -7677,8 +7806,6 @@
 				9E2966601CC4909700580776 /* Manage */,
 				68E2A9241C46227F00EA8DF3 /* Resources */,
 				0463C38C1DEC43780035BEF6 /* XXEHeaderApi.h */,
-				68E2A8F41C45F67300EA8DF3 /* AppDelegate.h */,
-				68BAD2101CEDCD660008DDA6 /* AppDelegate.m */,
 				044699F61D40D81B0067615D /* LandingpageViewController.h */,
 				044699F71D40D81B0067615D /* LandingpageViewController.m */,
 				0410B0F61D50BA2800924EBE /* XXETabBarViewController.h */,
@@ -7730,6 +7857,8 @@
 				68DCD9091D24F81B00ED0978 /* loadingPage */,
 				68A754281D2102C60062DBCA /* LoginResoure */,
 				68B4C2691D1CF92C000EA5F7 /* ico_list.png */,
+				04CFF8431E093A4F0006235D /* no_pass@2x.png */,
+				04CFF8441E093A4F0006235D /* no_pass@3x.png */,
 				044DEC371D9232D500DE101A /* narrow_icon@2x.png */,
 				044DEC381D9232D500DE101A /* narrow_icon@3x.png */,
 				04A9DD9E1D81186000544782 /* placeholder@2x.png */,
@@ -7825,7 +7954,7 @@
 		9E0546181C48D24300950C23 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				9E9D80831CB5F4F5004B3DFC /* JPush */,
+				9E87C9BE1E02341C00475F9B /* JPush-iOS-SDK-2.2.0 */,
 				6844E6D41CAD440B0054B8C5 /* ShareSDK */,
 				9E0546221C48D2E200950C23 /* SMS_SDK */,
 			);
@@ -7900,14 +8029,37 @@
 			path = V;
 			sourceTree = "<group>";
 		};
-		9E9D80831CB5F4F5004B3DFC /* JPush */ = {
+		9E87C9B31E022BE200475F9B /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				9E9D80841CB5F500004B3DFC /* jpush-ios-2.1.0.a */,
-				9E9D80851CB5F500004B3DFC /* JPUSHService.h */,
+				9E87C9B71E02333500475F9B /* VersionPopView */,
+				9E87C9B41E022BE200475F9B /* AppDelegate.h */,
+				9E87C9B51E022BE200475F9B /* AppDelegate.m */,
 			);
-			name = JPush;
-			path = XingXingEdu/SDK/JPush;
+			name = AppDelegate;
+			path = XingXingEdu/AppDelegate;
+			sourceTree = SOURCE_ROOT;
+		};
+		9E87C9B71E02333500475F9B /* VersionPopView */ = {
+			isa = PBXGroup;
+			children = (
+				9E87C9B81E02333500475F9B /* UpdatePopView.h */,
+				9E87C9B91E02333500475F9B /* UpdatePopView.m */,
+				9E87C9BA1E02333500475F9B /* WithoutCloseUpdatePopView.h */,
+				9E87C9BB1E02333500475F9B /* WithoutCloseUpdatePopView.m */,
+			);
+			path = VersionPopView;
+			sourceTree = "<group>";
+		};
+		9E87C9BE1E02341C00475F9B /* JPush-iOS-SDK-2.2.0 */ = {
+			isa = PBXGroup;
+			children = (
+				9E87C9BF1E02341C00475F9B /* jpush-ios-2.2.0.a */,
+				9E87C9C01E02341C00475F9B /* JPUSHService.h */,
+				9E87C9C11E02341C00475F9B /* sound.caf */,
+			);
+			name = "JPush-iOS-SDK-2.2.0";
+			path = "XingXingEdu/SDK/JPush-iOS-SDK-2.2.0";
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -7984,6 +8136,9 @@
 						DevelopmentTeam = T66J45HUSH;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -8109,6 +8264,7 @@
 				68A7544F1D2102C60062DBCA /* 微博@3x.png in Resources */,
 				04D5E4DE1D48A2D700921223 /* 确定(H)icon245x90@3x.png in Resources */,
 				0408620B1D4210F90060C70A /* 猩币50x46@3x.png in Resources */,
+				04CFF8451E093A4F0006235D /* no_pass@2x.png in Resources */,
 				045FC17D1D48BE7B00DF1E26 /* UpLoadPicCell.xib in Resources */,
 				6865414A1CE4305C003A06E5 /* 相册icon98x134@2x.png in Resources */,
 				689F6F061CF6962100166C06 /* community5.png in Resources */,
@@ -8123,8 +8279,6 @@
 				04D5E4201D48A13300921223 /* 写98c98@2x.png in Resources */,
 				6865413A1CE42BEA003A06E5 /* 圈子icon48x48@2x.png in Resources */,
 				68938B3B1CE1BA8A00661815 /* banner@2x.png in Resources */,
-				68DCD91E1D24F81B00ED0978 /* 引导页02@3x.png in Resources */,
-				68926B321CE9767200201E80 /* 上下课时间icon40x50@2x.png in Resources */,
 				0447773D1D2A76CC0018A459 /* zhuangtai@2x.png in Resources */,
 				04B621661DBF019A00391616 /* presenthistoryicon44.png in Resources */,
 				686541471CE4305C003A06E5 /* 实时监控icon98x134@2x.png in Resources */,
@@ -8205,7 +8359,6 @@
 				04B6218A1DBF019A00391616 /* yixuan@3x.png in Resources */,
 				04D758A71D3F1183005499ED /* 头像194x194@3x.png in Resources */,
 				0492ED1B1D49E2DE003E06D7 /* 添加按钮icon36x36@2x.png in Resources */,
-				68D247AE1CC72BE0001E7294 /* 引导页01.png in Resources */,
 				04D758B21D3F1183005499ED /* 手机36x58@3x.png in Resources */,
 				6865414E1CE430C5003A06E5 /* 作业icon98x134@2x.png in Resources */,
 				0492ED2F1D49E2DE003E06D7 /* 科目按钮灰色80x60@2x.png in Resources */,
@@ -8235,7 +8388,6 @@
 				044777291D2A76CC0018A459 /* pj_star_big_yellow@3x.png in Resources */,
 				04B6217E1DBF019A00391616 /* gouwuche@3x.png in Resources */,
 				04D5B0EB1D6B1DE900ABA89A /* 头像(1)174x174@2x.png in Resources */,
-				68DCD91C1D24F81B00ED0978 /* 引导页02@1x.png in Resources */,
 				04D5E4CE1D48A2D700921223 /* 教师风采40x40@1x.png in Resources */,
 				68A754441D2102C60062DBCA /* 头像@1x.png in Resources */,
 				0463C3571DEC3D920035BEF6 /* LikeCmtBg@3x.png in Resources */,
@@ -8302,7 +8454,6 @@
 				04469A721D40DE9C0067615D /* commenttab3h@2x.png in Resources */,
 				68A754531D2102C60062DBCA /* 支付宝@1x.png in Resources */,
 				04D5E4A11D48A2D700921223 /* 内容40x40@1x.png in Resources */,
-				68DCD91F1D24F81B00ED0978 /* 引导页03@1x.png in Resources */,
 				044776F01D2A76CC0018A459 /* PayInformationCell.xib in Resources */,
 				04D758B41D3F1183005499ED /* 未选择icon28x28@1x.png in Resources */,
 				04B6217C1DBF019A00391616 /* gouwuche@1x.png in Resources */,
@@ -8334,7 +8485,6 @@
 				68938B491CE1D0F100661815 /* 关系40x46@2x.png in Resources */,
 				04D5E4171D48A13300921223 /* 上交时间40x40@2x.png in Resources */,
 				68BACEE01CEDCB500008DDA6 /* 添加照片icon182x182@2x.png in Resources */,
-				68BACEDF1CEDCB500008DDA6 /* 时间40x40@2x.png in Resources */,
 				6844E9471CAD451E0054B8C5 /* 11111.png in Resources */,
 				6844E8DD1CAD45150054B8C5 /* NavBarIconSearchCircle_blue@2x.png in Resources */,
 				0408620A1D4210F90060C70A /* 猩币50x46@2x.png in Resources */,
@@ -8409,8 +8559,6 @@
 				68A1315E1CBE1DCE00A13358 /* MyBlackListCell.xib in Resources */,
 				6844E8D41CAD45150054B8C5 /* NavBarIconSearch_blue.png in Resources */,
 				04D5B0FE1D6B1DE900ABA89A /* 注册学生40x40@2x.png in Resources */,
-				6844EA2C1CAD45320054B8C5 /* 1.png in Resources */,
-				6844EA2C1CAD45320054B8C5 /* 1.png in Resources */,
 				04B621441DBF019A00391616 /* tab4_selected@3x.png in Resources */,
 				04469A601D40DE9C0067615D /* commentInfo5.png in Resources */,
 				04D758BD1D3F1183005499ED /* 返回icon86x30@2x.png in Resources */,
@@ -8495,7 +8643,6 @@
 				68938B3F1CE1BC3500661815 /* 修改头像36x30@2x.png in Resources */,
 				68C420861CCA17400011552E /* Album.png in Resources */,
 				689F6EF91CF6962100166C06 /* kindergartenViewController.xib in Resources */,
-				6844E9621CAD451E0054B8C5 /* OthePeopleCell.xib in Resources */,
 				04B6212D1DBF019A00391616 /* banner01@3x.png in Resources */,
 				688831441CFC51CA0060021D /* 点评icon98x134@2x.png in Resources */,
 				04D5B1011D6B1DE900ABA89A /* 点赞icon48x48@2x.png in Resources */,
@@ -8549,7 +8696,6 @@
 				6838015C1CE339DE0034C54C /* 教学感悟icon40x40.png in Resources */,
 				044412A51D38F2C400314884 /* rcim8.png in Resources */,
 				68DCD9271D24F81B00ED0978 /* experienceH@3x.png in Resources */,
-				6844EA2E1CAD45320054B8C5 /* 3.png in Resources */,
 				04B621021DBF019A00391616 /* flowerlanlittle36.png in Resources */,
 				04469A6D1D40DE9C0067615D /* commenttab1@2x.png in Resources */,
 				68CD03051CF8393300AE7251 /* AccountManagerCell.xib in Resources */,
@@ -8559,6 +8705,7 @@
 				68CD02F81CF82B5600AE7251 /* FlowersBuyViewController.xib in Resources */,
 				04D5E4AF1D48A2D700921223 /* 取消(H)icon245x90@3x.png in Resources */,
 				04D5B0E81D6B1DE900ABA89A /* 二级返回icon48x48@2x.png in Resources */,
+				9E87C9C31E02341D00475F9B /* sound.caf in Resources */,
 				04D5B0E71D6B1DE900ABA89A /* 二级返回(H)icon48x48@2x.png in Resources */,
 				04469A751D40DE9C0067615D /* nodatabg.png in Resources */,
 				0447778D1D2A76CC0018A459 /* ClassTeacherTableViewCell.xib in Resources */,
@@ -8570,7 +8717,6 @@
 				04B621181DBF019A00391616 /* 猩币icon26x26@3x.png in Resources */,
 				04B621391DBF019A00391616 /* tab0_selected（0）@3x.png in Resources */,
 				0463C3501DEC3D920035BEF6 /* AlbumOperateMoreHL@3x.png in Resources */,
-				68DCD9201D24F81B00ED0978 /* 引导页03@2x .png in Resources */,
 				044777821D2A76CC0018A459 /* 机构(H)icon48x48.png in Resources */,
 				04B621121DBF019A00391616 /* 搜索icon30x30@3x.png in Resources */,
 				6844E8BD1CAD45150054B8C5 /* changePhoneNumber_icon@2x.png in Resources */,
@@ -8582,13 +8728,13 @@
 				68B2E5591CD0A7D30075A37F /* nextList.png in Resources */,
 				04D758B81D3F1183005499ED /* 脚丫52x56@2x.png in Resources */,
 				040860131D3F1E8D00B27922 /* 小花篮46x46@3x.png in Resources */,
-				68D247B01CC72BE0001E7294 /* 引导页03.png in Resources */,
 				6838FFA71CE328940034C54C /* collect(H)icon44x44.png in Resources */,
 				04D5E3EB1D489FCB00921223 /* 箭头(H)20x36@1x.png in Resources */,
 				04469A5E1D40DE9C0067615D /* commentInfo3.png in Resources */,
 				68BAD6BD1CEEB21F0008DDA6 /* 加号200x200@2x.png in Resources */,
 				04B621401DBF019A00391616 /* tab4_selected(4)@2x.png in Resources */,
 				04B620841DBF019A00391616 /* StoreCollectTableViewController.xib in Resources */,
+				04CFF8461E093A4F0006235D /* no_pass@3x.png in Resources */,
 				686541521CE431CB003A06E5 /* 课程表icon98x134@2x.png in Resources */,
 				044777871D2A76CC0018A459 /* 课程icon48x48.png in Resources */,
 				BF41A4BD1C4631FF003B18F2 /* ic_landing_microblog.png in Resources */,
@@ -8602,7 +8748,6 @@
 				04F100C81D45D6A000CBED22 /* ClassHomeWorkContentViewController.xib in Resources */,
 				04B6213F1DBF019A00391616 /* tab4_selected(4)@1x.png in Resources */,
 				04D5E3ED1D489FCB00921223 /* 箭头(H)20x36@3x.png in Resources */,
-				04F100C61D45D6A000CBED22 /* ClassHomeWorkCell.xib in Resources */,
 				04D5B1041D6B1DE900ABA89A /* 特色40x40@2x.png in Resources */,
 				0447777C1D2A76CC0018A459 /* 购买(H)48x48@2x.png in Resources */,
 				04F100B41D45C0E400CBED22 /* SchoolRecipeInfoViewController.xib in Resources */,
@@ -8610,7 +8755,6 @@
 				6844E83E1CAD45150054B8C5 /* AddSubViewController.xib in Resources */,
 				04D758B61D3F1183005499ED /* 未选择icon28x28@3x.png in Resources */,
 				0444128F1D38F2C400314884 /* GroupListViewController.xib in Resources */,
-				68DCD91A1D24F81B00ED0978 /* 引导页01@2x.png in Resources */,
 				04D5B1991D6B1FF500ABA89A /* 姓名40x40@2x.png in Resources */,
 				6844E8DA1CAD45150054B8C5 /* NavBarIconSearchBar_blue.png in Resources */,
 				04D5E42D1D48A13300921223 /* 发布时间40x40@3x.png in Resources */,
@@ -8676,7 +8820,6 @@
 				0463C34E1DEC3D920035BEF6 /* AlbumOperateMore@3x.png in Resources */,
 				04B621281DBF019A00391616 /* 查看历史44x44@1x.png in Resources */,
 				04D5B1B21D6B1FF500ABA89A /* Triangle@3x.png in Resources */,
-				68DCD9211D24F81B00ED0978 /* 引导页03@3x.png in Resources */,
 				04D5E4BF1D48A2D700921223 /* 待点评106x106@1x.png in Resources */,
 				04B621881DBF019A00391616 /* yixuan@1x.png in Resources */,
 				04D5B1051D6B1DE900ABA89A /* 猩币icon28x30@2x.png in Resources */,
@@ -8684,7 +8827,6 @@
 				04B620FD1DBF019A00391616 /* deleteAdress.png in Resources */,
 				04D5E4E61D48A2D700921223 /* 老师40x45@1x.png in Resources */,
 				04B621901DBF019A00391616 /* zhifubaoZFB@3x.png in Resources */,
-				6844EA2F1CAD45320054B8C5 /* 4.png in Resources */,
 				04D5E4AC1D48A2D700921223 /* 历史点评icon48x48@3x.png in Resources */,
 				0499F09C1D2FB35600EFF631 /* daishenghe@1x.png in Resources */,
 				0447771D1D2A76CC0018A459 /* backButton.png in Resources */,
@@ -8699,12 +8841,10 @@
 				044412A81D38F2C400314884 /* tianjiahaoyou@2x.png in Resources */,
 				044412931D38F2C400314884 /* AvatarMask-1.png in Resources */,
 				04FD0F381D4F58EE00E4925F /* ClassDetailInfoViewController.xib in Resources */,
-				04D5B19F1D6B1FF500ABA89A /* 必填符号60x60@2x.png in Resources */,
 				04D5B1A61D6B1FF500ABA89A /* 班级历史icon650x84@2x.png in Resources */,
 				68CD031C1CF83C7900AE7251 /* trade.bundle in Resources */,
 				04469A6C1D40DE9C0067615D /* commentRequest8.png in Resources */,
 				6865415C1CE43563003A06E5 /* 猩币52x46@2x.png in Resources */,
-				68DCD91D1D24F81B00ED0978 /* 引导页02@2x.png in Resources */,
 				04D5E4E21D48A2D700921223 /* 确认发送icon650x84@2x.png in Resources */,
 				68A3DE131CE0936E00C01B8A /* 点赞icon48x48.png in Resources */,
 				04D5E4CF1D48A2D700921223 /* 教师风采40x40@2x.png in Resources */,
@@ -8733,7 +8873,6 @@
 				04469A761D40DE9C0067615D /* notComment.png in Resources */,
 				0447775B1D2A76CC0018A459 /* 取消icon245x90.png in Resources */,
 				6844EA4C1CAD45390054B8C5 /* SSVideoPlayer.bundle in Resources */,
-				68D247AF1CC72BE0001E7294 /* 引导页02.png in Resources */,
 				68B2E5571CD0880C0075A37F /* excheng.png in Resources */,
 				68E2A8FE1C45F67300EA8DF3 /* Assets.xcassets in Resources */,
 				04D5B1B41D6B1FF500ABA89A /* yijieke@3x.png in Resources */,
@@ -8837,7 +8976,6 @@
 				045140C51D3E44720050F284 /* xiaohonghua45x45@3x.png in Resources */,
 				04B621751DBF019A00391616 /* jiantou@3x.png in Resources */,
 				68926B381CE9B3EF00201E80 /* 截屏grap@2x.png in Resources */,
-				68DCD91B1D24F81B00ED0978 /* 引导页01@3x.png in Resources */,
 				04DE286F1D2B7F98002AE12A /* 叉36x36@2x.png in Resources */,
 				044412C51D38F2C400314884 /* WZYSearchPeopleInfoTableViewCell.xib in Resources */,
 				0492ED1A1D49E2DE003E06D7 /* 添加按钮icon26x26.png in Resources */,
@@ -8972,7 +9110,6 @@
 				68A7544D1D2102C60062DBCA /* 微博@1x.png in Resources */,
 				040860111D3F1E8D00B27922 /* 小花篮46x46@1x.png in Resources */,
 				04B621681DBF019A00391616 /* sdimg1.png in Resources */,
-				68DCD9191D24F81B00ED0978 /* 引导页01@1x.png in Resources */,
 				689F6F091CF6962100166C06 /* community8.png in Resources */,
 				68A3DDFB1CE05C7700C01B8A /* 待课状态136x136.png in Resources */,
 				04D758A21D3F1183005499ED /* 下拉箭头30x18@1x.png in Resources */,
@@ -9023,7 +9160,6 @@
 				04B620FB1DBF019A00391616 /* clockicon26x26.png in Resources */,
 				68938B4A1CE1D0F100661815 /* 联系方式40x40@2x.png in Resources */,
 				6865415A1CE43563003A06E5 /* 系统通知50x50@2x.png in Resources */,
-				6844EA2D1CAD45320054B8C5 /* 2.png in Resources */,
 				0408621B1D422DC10060C70A /* 人数40x40@1x.png in Resources */,
 				044777701D2A76CC0018A459 /* 满班icon28x30.png in Resources */,
 				04B6212C1DBF019A00391616 /* banner01@2x.png in Resources */,
@@ -9205,8 +9341,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E87C9D31E0242BF00475F9B /* AppDelegate.m in Sources */,
 				044777131D2A76CC0018A459 /* ClassRoomOrderNoAppraiseTableViewController.m in Sources */,
 				68CD031D1CF83C7900AE7251 /* UIAlertView+Quick.m in Sources */,
+				04BF262A1E0D1FE9002B81C0 /* XXEXingCommunityChildrenSongViewController.m in Sources */,
 				045FC1721D48BD3500DF1E26 /* ClassAlbumViewController.m in Sources */,
 				68CD03041CF8393300AE7251 /* AccountManagerCell.m in Sources */,
 				04B620961DBF019A00391616 /* NSObject+MJKeyValue.m in Sources */,
@@ -9214,7 +9352,6 @@
 				04D7C9121DE6FC41008D26DA /* XXESchoolTimetableViewController.m in Sources */,
 				04D5B1BC1D6B1FF500ABA89A /* WZYAddBabyViewController.m in Sources */,
 				0463C3411DEC3D920035BEF6 /* DFPlainGridImageView.m in Sources */,
-				6844E9611CAD451E0054B8C5 /* OthePeopleCell.m in Sources */,
 				04F100B11D45C0E400CBED22 /* SchoolRecipeCell.m in Sources */,
 				04B620891DBF019A00391616 /* CoreUMengLogin.m in Sources */,
 				044412AD1D38F2C400314884 /* WMUtil.m in Sources */,
@@ -9268,15 +9405,18 @@
 				6844EA4B1CAD45390054B8C5 /* SSVideoPlayController.m in Sources */,
 				6844EA4F1CAD45390054B8C5 /* TableHeadCell.m in Sources */,
 				04E31BE91DFA9AEA00691EB0 /* FlowerBascketCell.m in Sources */,
+				04BF25F41E0CCB36002B81C0 /* XXEHomeworkListModel.m in Sources */,
 				0463C35C1DEC3D920035BEF6 /* DFTextImageUserLineCell.m in Sources */,
 				04D5B13F1D6B1F4700ABA89A /* KTCommentViewController.m in Sources */,
 				0463C35D1DEC3D920035BEF6 /* DFUserLineCellManager.m in Sources */,
+				04BF26311E0D1FE9002B81C0 /* XXEXingCommunityPlayViewController.m in Sources */,
 				6844E70E1CAD440C0054B8C5 /* README.md in Sources */,
 				044776F51D2A76CC0018A459 /* BMKMapViewController.m in Sources */,
 				041D67331DFEB51C00119BCA /* XXESystemNotificationDetailViewController.m in Sources */,
 				0447778A1D2A76CC0018A459 /* ClassSubjectTableViewCell.m in Sources */,
 				68A012931D17F41A00A1EF00 /* LMComBoxView.m in Sources */,
 				044412AC1D38F2C400314884 /* PRTweenTimingFunctions.m in Sources */,
+				04BF263D1E0D3CAC002B81C0 /* XXEMyselfInfoOldPhoneNumViewController.m in Sources */,
 				044412801D38F2C400314884 /* NSString+TKUtilities.m in Sources */,
 				0463C3361DEC3D920035BEF6 /* YDEmojiCell.m in Sources */,
 				043A7F641DF94DED003C4BF0 /* XXEStoreGoodsListViewController.m in Sources */,
@@ -9287,6 +9427,7 @@
 				04B6209B1DBF019A00391616 /* MultilevelMenu.m in Sources */,
 				6844EAF91CAD45420054B8C5 /* CPTextViewPlaceholder.m in Sources */,
 				6844E84C1CAD45150054B8C5 /* HomePeopleInfoViewController.m in Sources */,
+				04BF263C1E0D3CAC002B81C0 /* XXEMyselfInfoNewPhoneNumViewController.m in Sources */,
 				6844E8661CAD45150054B8C5 /* UIView+QHUIViewCtg.m in Sources */,
 				6844EA271CAD45320054B8C5 /* UtilityFunc.m in Sources */,
 				044412C61D38F2C400314884 /* WZYSearchPeopleInfoViewController.m in Sources */,
@@ -9296,16 +9437,20 @@
 				044412821D38F2C400314884 /* PersonModel.m in Sources */,
 				68CD031B1CF83C7900AE7251 /* NSString+Extension.m in Sources */,
 				6844E95E1CAD451E0054B8C5 /* MyInfomationCell.m in Sources */,
+				04BF26331E0D1FE9002B81C0 /* XXEXingCommunityStoryViewController.m in Sources */,
 				0463C35F1DEC3D920035BEF6 /* DFBaseLineCell.m in Sources */,
 				0447773F1D2A76CC0018A459 /* Foundation+Log.m in Sources */,
+				04BF26421E0D44BE002B81C0 /* UIButton+XXExtension.m in Sources */,
 				68CD02F71CF82B5600AE7251 /* FlowersBuyViewController.m in Sources */,
 				0463C31E1DEC3D920035BEF6 /* XXEFriendCircleApi.m in Sources */,
+				04BF26321E0D1FE9002B81C0 /* XXEXingCommunityPrimaryViewController.m in Sources */,
 				04B620931DBF019A00391616 /* MJPropertyType.m in Sources */,
 				0463C3811DEC3D930035BEF6 /* StringHeight.m in Sources */,
 				04D5B1BA1D6B1FF500ABA89A /* WZYStudentCenterTableViewCell.m in Sources */,
 				04469A561D40DE9C0067615D /* MMDrawerVisualState.m in Sources */,
 				04FD0F5B1D4F610600E4925F /* VideoMonitorViewController.m in Sources */,
 				045DCA9E1D54B49100433933 /* CommentRequestRecordViewController.m in Sources */,
+				9E87C9CE1E023DD000475F9B /* NSDictionary+decription.m in Sources */,
 				68A74AED1CEA17A300B12FEE /* FGGImageCacheCleaner.m in Sources */,
 				0444128E1D38F2C400314884 /* GroupListViewController.m in Sources */,
 				04FD0F2D1D4F560000E4925F /* HomerRemarkCell.m in Sources */,
@@ -9330,7 +9475,6 @@
 				0464F54F1DE59DF0009D13A0 /* XXECourseManagerClassModel3.m in Sources */,
 				04E31BE51DFA908500691EB0 /* XXEFlowerbasketModel.m in Sources */,
 				04D5B1441D6B1F4700ABA89A /* KTCharactersCell.m in Sources */,
-				6844EA2A1CAD45320054B8C5 /* PassWordResetViewController.m in Sources */,
 				6844E84B1CAD45150054B8C5 /* HomeInfoViewController.m in Sources */,
 				043A7F571DF90A36003C4BF0 /* XXEStorePayViewController.m in Sources */,
 				6844EAF81CAD45420054B8C5 /* CCSegmentedControl.m in Sources */,
@@ -9342,13 +9486,14 @@
 				044776FC1D2A76CC0018A459 /* FSPhotoAssetsCell.m in Sources */,
 				0463C3271DEC3D920035BEF6 /* XXECommentModel.m in Sources */,
 				6896CC871D19506E00DB50D6 /* ShooClaViewController.m in Sources */,
+				04BF262D1E0D1FE9002B81C0 /* XXEXingCommunityEnglishViewController.m in Sources */,
 				68CD031E1CF83C7900AE7251 /* UIView+Extension.m in Sources */,
 				0463C31F1DEC3D920035BEF6 /* XXEFriendCircleCommentApi.m in Sources */,
 				6844E8431CAD45150054B8C5 /* FriendGroup.m in Sources */,
+				04BF26001E0CD312002B81C0 /* XXERedFlowerDetialInfoTableViewCell.m in Sources */,
 				0463C31C1DEC3D920035BEF6 /* XXEDeleteCommentApi.m in Sources */,
 				045DCAA61D54BABE00433933 /* CommentRequestViewController.m in Sources */,
 				04B6208B1DBF019A00391616 /* UIViewController+Umeng.m in Sources */,
-				04F100C41D45D6A000CBED22 /* ClassHomeInfoMationViewController.m in Sources */,
 				044412901D38F2C400314884 /* RcRootTabbarViewController.m in Sources */,
 				6844E8321CAD45150054B8C5 /* SampleCell.m in Sources */,
 				04D5B1421D6B1F4700ABA89A /* WZYCoureseCollectionViewController.m in Sources */,
@@ -9370,6 +9515,7 @@
 				043A7F701DF95266003C4BF0 /* XXEStoreReturnGoodsViewController.m in Sources */,
 				0463C3401DEC3D920035BEF6 /* DFImagesSendViewController.m in Sources */,
 				0463C3841DEC3D930035BEF6 /* UploadParam.m in Sources */,
+				04BF262B1E0D1FE9002B81C0 /* XXEXingCommunityConsultViewController.m in Sources */,
 				0463C3111DEC3D920035BEF6 /* XXELocationAddController.m in Sources */,
 				04B6219D1DBF019A00391616 /* StoreCollectTableViewCell.m in Sources */,
 				0464F5501DE59DF0009D13A0 /* XXEXingClassRoomCourseListModel.m in Sources */,
@@ -9396,6 +9542,7 @@
 				04E659A11DFEA2CB009C8684 /* XXESchoolNotificationDetailViewController.m in Sources */,
 				68A012881D17F41A00A1EF00 /* TermsViewController.m in Sources */,
 				0404F7C31DF7AA8F00A37B57 /* XXERedFlowerModel.m in Sources */,
+				04BF26281E0D1FE9002B81C0 /* XXEXingCommunityBabyCommunityViewController.m in Sources */,
 				689F6EFA1CF6962100166C06 /* primarySchoolViewController.m in Sources */,
 				04469A7E1D40DE9C0067615D /* DynamicScrollView.m in Sources */,
 				044777141D2A76CC0018A459 /* ClassRoomOrderNoPayInfo.m in Sources */,
@@ -9417,6 +9564,7 @@
 				04B620971DBF019A00391616 /* NSObject+MJProperty.m in Sources */,
 				04FD0F3B1D4F595300E4925F /* ClassEditViewController.m in Sources */,
 				044412891D38F2C400314884 /* WMConversationListViewController.m in Sources */,
+				04BF25FD1E0CD190002B81C0 /* XXEHomeworkDetailInfoViewController.m in Sources */,
 				0463C37B1DEC3D930035BEF6 /* YTKNetworkPrivate.m in Sources */,
 				044777111D2A76CC0018A459 /* ClassRoomOrderDidPayTableViewController.m in Sources */,
 				04B620991DBF019A00391616 /* MultilevelCollectionViewCell.m in Sources */,
@@ -9447,6 +9595,7 @@
 				0404F7D11DF81DED00A37B57 /* XXEStoreAddUserAddressViewController.m in Sources */,
 				0463C3591DEC3D920035BEF6 /* DFBaseUserLineItem.m in Sources */,
 				04D5B13C1D6B1F4700ABA89A /* CheractersNextViewController.m in Sources */,
+				04BF262C1E0D1FE9002B81C0 /* XXEXingCommunityCookingViewController.m in Sources */,
 				0463C32F1DEC3D920035BEF6 /* ViewUtil.m in Sources */,
 				0463C30D1DEC3D920035BEF6 /* XXEBaseViewController.m in Sources */,
 				68A012841D17F41A00A1EF00 /* ForgetPassWordViewController.m in Sources */,
@@ -9457,15 +9606,16 @@
 				689F6EF31CF6962100166C06 /* contentRepositoryViewController.m in Sources */,
 				0463C3661DEC3D930035BEF6 /* DFLikeCommentView.m in Sources */,
 				044777421D2A76CC0018A459 /* UILabel+LSSAdd.m in Sources */,
+				9E87C9BC1E02333500475F9B /* UpdatePopView.m in Sources */,
 				0447770F1D2A76CC0018A459 /* ClassRoomOrderDidAppraiseViewController.m in Sources */,
 				044412811D38F2C400314884 /* PersonCell.m in Sources */,
 				04D5B14E1D6B1F4700ABA89A /* WZYSchoolCollectionTableViewCell.m in Sources */,
 				044776FF1D2A76CC0018A459 /* FSPhotoBrowserViewController.m in Sources */,
 				689F6F0B1CF6962100166C06 /* trainingInstitutionsViewController.m in Sources */,
 				0463C32C1DEC3D920035BEF6 /* XXEReportSubmitMessageApi.m in Sources */,
-				045FC5761D4B799900DF1E26 /* ClassHomeworkViewController.m in Sources */,
 				0464F55C1DE5BAF8009D13A0 /* ClassRoomSearchViewController.m in Sources */,
 				04D5B1401D6B1F4700ABA89A /* KTConnectViewController.m in Sources */,
+				04BF26291E0D1FE9002B81C0 /* XXEXingCommunityBabyLibraryViewController.m in Sources */,
 				04B620941DBF019A00391616 /* NSObject+MJClass.m in Sources */,
 				0447778C1D2A76CC0018A459 /* ClassTeacherTableViewCell.m in Sources */,
 				044777431D2A76CC0018A459 /* UIView+MJ.m in Sources */,
@@ -9478,10 +9628,10 @@
 				6844E8421CAD45150054B8C5 /* Friend.m in Sources */,
 				0480A0741D87AA8C00D7589B /* XXESchoolNotificationModel.m in Sources */,
 				6844E8471CAD45150054B8C5 /* UIImage+ResizeImage.m in Sources */,
-				04F100C51D45D6A000CBED22 /* ClassHomeWorkCell.m in Sources */,
 				6844E96F1CAD451E0054B8C5 /* RegistTeacherViewController.m in Sources */,
 				044776F41D2A76CC0018A459 /* SubjectBuyViewController.m in Sources */,
 				68CD031F1CF83C7900AE7251 /* ZCTradeInputView.m in Sources */,
+				9E87C9D11E023DD000475F9B /* EmptyView.m in Sources */,
 				0463C30F1DEC3D920035BEF6 /* XXEFriendMyCircleViewController.m in Sources */,
 				04B795101DDED60000E5B2E5 /* ClassEditInfoModel.m in Sources */,
 				6844E8631CAD45150054B8C5 /* NullSafe.m in Sources */,
@@ -9498,8 +9648,11 @@
 				0453ACF41D477C3200A076A9 /* KTClassTelephoneBabyViewController.m in Sources */,
 				04B6207E1DBF019A00391616 /* ReturnOfGoodsDetaileViewController.m in Sources */,
 				0463C3691DEC3D930035BEF6 /* README.md in Sources */,
+				04BF25FA1E0CCCD6002B81C0 /* XXEHomeworkTableViewCell.m in Sources */,
 				6844EAFC1CAD45420054B8C5 /* myReleaseTableViewCell.m in Sources */,
+				04BF26271E0D1FE9002B81C0 /* XXEKindergartenDetailViewController.m in Sources */,
 				68CD030D1CF83BD900AE7251 /* KTMoneyViewController.m in Sources */,
+				04BF262E1E0D1FE9002B81C0 /* XXEXingCommunityHighSchoolViewController.m in Sources */,
 				6844E94D1CAD451E0054B8C5 /* addBabyCell.m in Sources */,
 				04D5B14C1D6B1F4700ABA89A /* WZYCoureseCollectionTableViewCell.m in Sources */,
 				0463C32B1DEC3D920035BEF6 /* XXEHomeReportListApi.m in Sources */,
@@ -9520,12 +9673,14 @@
 				68A012871D17F41A00A1EF00 /* SettingPersonInfoViewController.m in Sources */,
 				04FD0F321D4F587100E4925F /* ClassEditInfoCell.m in Sources */,
 				0463C35A1DEC3D920035BEF6 /* DFTextImageUserLineItem.m in Sources */,
+				04BF26341E0D1FE9002B81C0 /* XXEXingCommunityViewController.m in Sources */,
 				044777411D2A76CC0018A459 /* UIImage+MJ.m in Sources */,
 				6844EB021CAD45420054B8C5 /* tackTableViewCell.m in Sources */,
 				04D5B1131D6B1DE900ABA89A /* CourseTableViewCell.m in Sources */,
 				6844E8EF1CAD45150054B8C5 /* ClassSubjectCell.m in Sources */,
 				04B620741DBF019A00391616 /* FlowersHistoryTableViewController.m in Sources */,
 				04F100AF1D45C0E400CBED22 /* KTRecipeCell.m in Sources */,
+				9E87C9D21E023DD000475F9B /* GlobalVariable.m in Sources */,
 				0463C37A1DEC3D930035BEF6 /* YTKNetworkConfig.m in Sources */,
 				04D5B0D61D6B1DE900ABA89A /* AlbumViewController.m in Sources */,
 				6844EA4D1CAD45390054B8C5 /* SSVideoPlayer.m in Sources */,
@@ -9549,6 +9704,7 @@
 				0463C3391DEC3D920035BEF6 /* XXEImageBrowsingViewController.m in Sources */,
 				0463C33B1DEC3D920035BEF6 /* AFDownloadRequestOperation.m in Sources */,
 				04DE285E1D2B7ACA002AE12A /* LSSAlertView.m in Sources */,
+				04BF26351E0D1FE9002B81C0 /* XXEXingCommunityClassesModel.m in Sources */,
 				04469A571D40DE9C0067615D /* SUNTextField.m in Sources */,
 				0464F54E1DE59DF0009D13A0 /* XXECourseManagerClassModel2.m in Sources */,
 				0463C3651DEC3D930035BEF6 /* DFLikeCommentToolbar.m in Sources */,
@@ -9559,6 +9715,7 @@
 				6844E8F11CAD45150054B8C5 /* ClassSubjectTimeTableViewController.m in Sources */,
 				0464F55B1DE5BAF8009D13A0 /* ClassRoomSearchResultController.m in Sources */,
 				044777151D2A76CC0018A459 /* ClassRoomOrderNoPayTableViewController.m in Sources */,
+				04BF25F71E0CCCB8002B81C0 /* XXEHomeworkViewController.m in Sources */,
 				044412831D38F2C400314884 /* PhoneAddressBookViewController.m in Sources */,
 				044412BC1D38F2C400314884 /* LoginViewController.m in Sources */,
 				04B620881DBF019A00391616 /* CoreUMeng.m in Sources */,
@@ -9568,6 +9725,7 @@
 				0480A0771D87AAA100D7589B /* XXESystemNotificationModel.m in Sources */,
 				689F6EF41CF6962100166C06 /* juniorHighSchoolViewController.m in Sources */,
 				04B620781DBF019A00391616 /* MoneyHistoryTableViewController.m in Sources */,
+				9E87C9BD1E02333500475F9B /* WithoutCloseUpdatePopView.m in Sources */,
 				04D5B1B81D6B1FF500ABA89A /* CourseDetailViewController.m in Sources */,
 				04B620A11DBF019A00391616 /* XXEXingStoreCategoryModel.m in Sources */,
 				04B620921DBF019A00391616 /* MJPropertyKey.m in Sources */,
@@ -9582,6 +9740,7 @@
 				68926B1B1CE96F1A00201E80 /* HZQDatePickerView.m in Sources */,
 				04D5B1CC1D6B240900ABA89A /* WZYRequestCommentModel.m in Sources */,
 				04D5B1551D6B1F8900ABA89A /* HeaderFooterCollectionReusableView.m in Sources */,
+				9E87C9CF1E023DD000475F9B /* NSArray+decription.m in Sources */,
 				0463C3791DEC3D930035BEF6 /* YTKNetworkAgent.m in Sources */,
 				0463C3201DEC3D920035BEF6 /* XXEFriendCirclegoodApi.m in Sources */,
 				689F6EF81CF6962100166C06 /* kindergartenViewController.m in Sources */,
@@ -9591,7 +9750,6 @@
 				044777191D2A76CC0018A459 /* StarView.m in Sources */,
 				0464F5511DE59DF0009D13A0 /* XXEXingClassRoomSchoolListModel.m in Sources */,
 				0404F7D71DF82B4C00A37B57 /* XXEStoreConsigneeAddressTableViewCell.m in Sources */,
-				68C4207A1CC9F8E70011552E /* MyTabBarController.m in Sources */,
 				6844E8581CAD45150054B8C5 /* SubEditViewController.m in Sources */,
 				68808CE91CEB207400F51482 /* TeleViewController.m in Sources */,
 				689F6F0E1CF6962100166C06 /* XingXingXingXingCommunityViewController.m in Sources */,
@@ -9622,6 +9780,7 @@
 				04B620861DBF019A00391616 /* StoreSettngViewController.m in Sources */,
 				68926B251CE9749300201E80 /* AddClassSubjectCell.m in Sources */,
 				04D5B1431D6B1F4700ABA89A /* WZYSchoolCollectionViewController.m in Sources */,
+				04BF26301E0D1FE9002B81C0 /* XXEXingCommunityKindergartenViewController.m in Sources */,
 				0463C32D1DEC3D920035BEF6 /* XXEReportModel.m in Sources */,
 				04B620761DBF019A00391616 /* FlowersPresentViewController.m in Sources */,
 				04469A7F1D40DE9C0067615D /* SlideSwitchView.m in Sources */,
@@ -9646,6 +9805,7 @@
 				044776F91D2A76CC0018A459 /* FSImageCell.m in Sources */,
 				04B620A21DBF019A00391616 /* XXEXingStoreGoodInfoModel.m in Sources */,
 				045FC5701D4B779C00DF1E26 /* MyHeadViewController.m in Sources */,
+				04BF262F1E0D1FE9002B81C0 /* XXEXingCommunityInstitutionsViewController.m in Sources */,
 				0463C3801DEC3D930035BEF6 /* ServiceManager.m in Sources */,
 				0463C30A1DEC3D920035BEF6 /* CommentInputViewController.m in Sources */,
 				04AA996B1D3499B9001D8143 /* AddNewSubjeactIfonViewController.m in Sources */,
@@ -9654,6 +9814,8 @@
 				0463C33D1DEC3D920035BEF6 /* README.md in Sources */,
 				0463C31D1DEC3D920035BEF6 /* XXEEveryTalkDetailApi.m in Sources */,
 				6844E8481CAD45150054B8C5 /* CoursesViewController.m in Sources */,
+				9E87C9D01E023DD000475F9B /* SystemPopView.m in Sources */,
+				04BF26361E0D1FE9002B81C0 /* XXEXingCommunityClassesTableViewCell.m in Sources */,
 				04D758771D3F0C83005499ED /* AddBabyViewController.m in Sources */,
 				0463C3131DEC3D920035BEF6 /* XXEMessageListNewController.m in Sources */,
 				04B620A41DBF019A00391616 /* YSProgressView.m in Sources */,
@@ -9673,7 +9835,6 @@
 				04D5B1B61D6B1FF500ABA89A /* WZYHistoryClassesTableViewCell.m in Sources */,
 				6844EA531CAD45390054B8C5 /* VedioSaveViewController.m in Sources */,
 				68A012951D17F41A00A1EF00 /* QCheckBox.m in Sources */,
-				68BAD2111CEDCD660008DDA6 /* AppDelegate.m in Sources */,
 				9E2966661CC4914700580776 /* NetManager.m in Sources */,
 				6844E94A1CAD451E0054B8C5 /* AAShareBubbles.m in Sources */,
 				0463C30E1DEC3D920035BEF6 /* XXEFriendCirclePageViewController.m in Sources */,
@@ -9682,8 +9843,6 @@
 				044412CA1D38F3DB00314884 /* KxMenu.m in Sources */,
 				04B620831DBF019A00391616 /* StoreCollectTableViewController.m in Sources */,
 				68A012971D17F41A00A1EF00 /* WJCommboxView.m in Sources */,
-				6844EA291CAD45320054B8C5 /* FirstLaunchViewController.m in Sources */,
-				68C420771CC9CA310011552E /* SchoolInfoViewController.m in Sources */,
 				04FD0F4D1D4F5F6200E4925F /* VedioCell.m in Sources */,
 				044776EF1D2A76CC0018A459 /* PayInformationCell.m in Sources */,
 				0492ECC81D49D5D1003E06D7 /* SubjectInfoViewController.m in Sources */,
@@ -9856,6 +10015,7 @@
 			baseConfigurationReference = 4FEB389265AF8538D0A0B13F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "xingxingEdu/猩猩教室.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -9883,11 +10043,13 @@
 					"$(PROJECT_DIR)/XingXingEdu/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/XingXingEdu/SDK/ShareSDK/Support/PlatformSDK/YiXinSDK",
 					"$(PROJECT_DIR)/XingXingEdu/SDK/JPush",
+					"$(PROJECT_DIR)/XingXingEdu/SDK/JPush-iOS-SDK-2.2.0",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xingxingEdu.parentbb;
 				PRODUCT_NAME = "猩猩教室";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "41122743-7636-4f60-973d-80ea5a1e6f13";
+				PROVISIONING_PROFILE_SPECIFIER = parents_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "XingXingEdu/XXETools/XingXingEdu-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "XingXingEdu-Swift.h";
 				SWIFT_VERSION = 2.3;
@@ -9899,6 +10061,7 @@
 			baseConfigurationReference = A1E23C8268B05C4E8E8A1CC7 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "xingxingEdu/猩猩教室.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = T66J45HUSH;
@@ -9925,11 +10088,13 @@
 					"$(PROJECT_DIR)/XingXingEdu/SDK/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/XingXingEdu/SDK/ShareSDK/Support/PlatformSDK/YiXinSDK",
 					"$(PROJECT_DIR)/XingXingEdu/SDK/JPush",
+					"$(PROJECT_DIR)/XingXingEdu/SDK/JPush-iOS-SDK-2.2.0",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xingxingEdu.parentbb;
 				PRODUCT_NAME = "猩猩教室";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "41122743-7636-4f60-973d-80ea5a1e6f13";
+				PROVISIONING_PROFILE_SPECIFIER = parents_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "XingXingEdu/XXETools/XingXingEdu-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "XingXingEdu-Swift.h";
 				SWIFT_VERSION = 2.3;

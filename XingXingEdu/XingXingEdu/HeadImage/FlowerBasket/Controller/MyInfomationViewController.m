@@ -23,39 +23,43 @@
 #import "CheckInViewController.h"
 #import "ChangeEmailViewController.h"
 #import "LandingpageViewController.h"
+#import "XXENavigationViewController.h"
+//更换手机号
+#import "XXEMyselfInfoOldPhoneNumViewController.h"
+
+
 @interface MyInfomationViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,VPImageCropperDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 {
-   
+   //头像
     UIImageView *headPortraitView;
+    //性别
+    UIImageView *manimage;
+    //用户名
+    UILabel *nameLbl;
+    //用户等级
+    UILabel *lvLabel;
+    //注释
+    UILabel *titleLbl;
+    //已经签到 多少 天
+    UILabel *checkLbl;
+    //明天签到 将 ...
+    UILabel *checkInLbl;
+    
     UITableView *_tableView;
     NSMutableArray *dataArray;
-    NSMutableArray *detailArray;
     UIImageView *imageView;
     NSArray *headArr;
     UIAlertView *_alertView;
     NSString *urlStr;
     NSString *babyid;
     NSMutableArray *myFieldArr;
-//netdata
-    NSString *age;
-    NSString *coin_total;
-    NSString *continued;
-    NSString *email;
-    NSString *head_img;
-    NSString *head_img_type;
-    NSString *idKT;
-    NSString *lv;
-    NSString *next_get_coin;
-    NSString *next_grade_coin;
-    NSString *nickname;
-    NSString *phone;
-    NSString *reg_tm;
-    NSString *reKT;
-    NSString *sex;
-    NSString *tname;
-    NSString *xid;
+
     UITextField *nickNameTextFiled;//昵称
     UITextField *emailTextFiled;//邮箱
+    
+    NSDictionary *parent_myself_info_Dic;
+    //
+    NSMutableArray *contentArray;
     
     YSProgressView *ysView;
     NSString *parameterXid;
@@ -67,16 +71,27 @@
 
 @implementation MyInfomationViewController
 - (void)viewWillAppear:(BOOL)animated{
- 
-   
+    [super viewWillAppear:animated];
+
+    
+//    NSLog(@"jjjjj %@---- %@", parameterXid, parameterUser_Id);
+   [self loadNewData];
+    [_tableView reloadData];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title =@"我的资料";
       self.navigationController.navigationBar.barTintColor =UIColorFromRGB(0, 170, 42);
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
-     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+//     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    dataArray = [[NSMutableArray alloc]init];
+    headArr =[NSArray arrayWithObjects:@"ID40x40",@"昵称40x44",@"姓名40x40",@"年龄40x46",@"关系40x46",@"联系方式40x40",@"邮箱40x40",nil];
+    [dataArray addObject:headArr];
+    NSArray *arr = [NSArray arrayWithObjects:@"猩猩ID:",@"昵称:",@"姓名:",@"年龄:",@"关系:",@"手机号:",@"电子邮箱:",nil];
     
+    [dataArray addObject:arr];
+    
+    parent_myself_info_Dic = [[NSDictionary alloc] init];
 
     if ([XXEUserInfo user].login){
         parameterXid = [XXEUserInfo user].xid;
@@ -86,14 +101,18 @@
         parameterUser_Id = USER_ID;
     }
 
-    [self loadNewData];
+//    NSLog(@"%@---- %@", parameterXid, parameterUser_Id);
+    
     [self createTableView];
     
+    [self addHeadView];
+    
+    [self initUI];
     
 }
 - (void)loadNewData{
     babyid=  [[NSUserDefaults standardUserDefaults] objectForKey:@"BABYID"];
-    // NSLog(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~%@",babyid);
+//     NSLog(@"~~~~~~~~~~~~~~~~~~~~~~~~~~~%@",babyid);
     urlStr = @"http://www.xingxingedu.cn/Parent/my_info";
     NSDictionary *pragm = @{   @"appkey":APPKEY,
                                @"backtype":BACKTYPE,
@@ -105,116 +124,108 @@
     
     
     [WZYHttpTool post:urlStr params:pragm success:^(id responseObj) {
-        NSDictionary *dict =responseObj;
         
-        if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
+        
+//        NSLog(@"我的 == %@", responseObj);
+        
+        if([[NSString stringWithFormat:@"%@",responseObj[@"code"]]isEqualToString:@"1"] )
         {
-
-              coin_total =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"coin_total"]];
-              head_img =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"head_img"]];
-              head_img_type =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"head_img_type"]];
-               lv =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"lv"]];
-              next_grade_coin =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"next_grade_coin"]];
-              nickname =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"nickname"]];
-              age =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"age"]];
-              continued =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"continued"]];
-              email =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"email"]];
-              idKT =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"idKT"]];
-              next_get_coin =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"next_get_coin"]];
-              phone =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"phone"]];
-              reg_tm =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"reg_tm"]];
-              reKT =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"relation"]];
-              sex =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"sex"]];
-              tname =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"tname"]];
-              xid =[NSString stringWithFormat:@"%@",[dict[@"data"] objectForKey:@"xid"]];
+            NSDictionary *dict = [[NSDictionary alloc] init];
+            dict =responseObj[@"data"];
+            parent_myself_info_Dic = dict;
         
+            contentArray = [[NSMutableArray alloc] initWithObjects:dict[@"xid"], dict[@"nickname"], dict[@"tname"], dict[@"age"], dict[@"relation"], dict[@"phone"],dict[@"email"], nil];
+//            NSLog(@"contentArray == %@", contentArray);
+            
+            
+            [self updateViewInfo];
+
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
         }
-        [self initUI];
-      [_tableView reloadData];
+        [_tableView reloadData];
     } failure:^(NSError *error) {
         
        // NSLog(@"%@", error);
-        
+        [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
     }];
 
 }
+
+#pragma mark ======== 更新界面 数据信息 ======
+- (void)updateViewInfo{
+
+  //头像
+    NSString *headImage;
+    //head_img_type  0:需要加前缀
+    if ([parent_myself_info_Dic[@"head_img_type"] integerValue] ==0) {
+        headImage = [NSString stringWithFormat:@"%@%@",picURL,parent_myself_info_Dic[@"head_img"]];
+    }else if ([parent_myself_info_Dic[@"head_img_type"] integerValue] ==1){
+        headImage = [NSString stringWithFormat:@"%@",parent_myself_info_Dic[@"head_img"]];
+    }
+    [_portraitImageView sd_setImageWithURL:[NSURL URLWithString:headImage] placeholderImage:[UIImage imageNamed:@"人物头像172x172@2x"]];
+    
+    //性别
+    if ([parent_myself_info_Dic[@"sex"] isEqualToString:@"男"]) {
+        NSString *sexName =@"man";
+        manimage.image = [UIImage imageNamed:sexName];
+    }
+    else if ([parent_myself_info_Dic[@"sex"] isEqualToString:@"女"]) {
+        NSString *sexName =@"women";
+        manimage.image = [UIImage imageNamed:sexName];
+    }
+    //姓名
+    nameLbl.text = [NSString stringWithFormat:@"%@", parent_myself_info_Dic[@"nickname"]];
+    
+    //等级
+    lvLabel.text = [NSString stringWithFormat:@"%@", parent_myself_info_Dic[@"lv"]];
+    
+    //注释 还差 .....
+    titleLbl.text = [NSString stringWithFormat:@"还差%ld星币升级到%ld级会员",[parent_myself_info_Dic[@"next_grade_coin"] integerValue]-[parent_myself_info_Dic[@"coin_total"] integerValue], [parent_myself_info_Dic[@"lv"] integerValue] + 1];
+    
+    //签到按钮
+    
+    
+    //已经连续签到 多少天...
+    checkLbl.text = [NSString stringWithFormat:@"已连续签到%@天",parent_myself_info_Dic[@"continued"]];
+    
+    //明天签到将...
+    checkInLbl.text = [NSString stringWithFormat:@"明天继续签到将获得%@个猩币",parent_myself_info_Dic[@"next_get_coin"]];
+    
+    //进度条
+    float b =  [parent_myself_info_Dic[@"coin_total"] floatValue]/[parent_myself_info_Dic[@"next_grade_coin"] floatValue];
+    ysView.progressValue = b * ysView.frame.size.width;
+}
+
+
+
 - (void)initUI{
-    if (xid ==nil) {
-        xid =@"";
-    }
-    if (nickname==nil) {
-        nickname=@"";
-    }
-    if (tname==nil) {
-        tname =@"";
-    }
-    if (age==nil) {
-        age=@"";
-    }
-    if (reKT==nil) {
-        reKT=@"";
-    }
-    if (phone==nil) {
-        phone=@"";
-    }
-    if (email==nil) {
-        email=@"";
-    }
-    myFieldArr =[[NSMutableArray alloc]initWithObjects:xid,nickname,tname,age,reKT,phone,email, nil];
-    dataArray = [[NSMutableArray alloc]init];
-    detailArray = [[NSMutableArray alloc]init];
-    headArr =[NSArray arrayWithObjects:@"ID40x40",@"昵称40x44",@"姓名40x40",@"年龄40x46",@"关系40x46",@"联系方式40x40",@"邮箱40x40",nil];
-    [dataArray addObject:headArr];
-    NSArray *arr = [NSArray arrayWithObjects:@"猩猩ID:",@"昵称:",@"姓名:",@"年龄:",@"关系:",@"手机号:",@"电子邮箱:",nil];
-    
-    [dataArray addObject:arr];
-    [dataArray addObject:myFieldArr];
-    
-    _portraitImageView=[[UIImageView alloc]init];
-    
-    if ([head_img_type  integerValue] ==0) {
-        [_portraitImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",picURL,head_img]] placeholderImage:[UIImage imageNamed:@"人物头像172x172@2x"]];
-    }
-    else{
-        [_portraitImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",head_img]] placeholderImage:[UIImage imageNamed:@"人物头像172x172@2x"]];
-    }
-    [_portraitImageView setFrame:CGRectMake(20 * kWidth / 375, 30 * kWidth / 375, 100 * kWidth / 375,100 * kWidth / 375)];
+    _portraitImageView=[[UIImageView alloc]initWithFrame:CGRectMake(20 * kWidth / 375, 30 * kWidth / 375, 100 * kWidth / 375,100 * kWidth / 375)];
     _portraitImageView.layer.cornerRadius = _portraitImageView.frame.size.width / 2;;
     _portraitImageView.layer.masksToBounds =YES;
     _portraitImageView.userInteractionEnabled =YES;
     [imageView addSubview:_portraitImageView];
-    
+    //点击更换头像
     CGFloat iconBottom = _portraitImageView.frame.origin.y + _portraitImageView.frame.size.height;
-    
     UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(editPortrait)];
     [_portraitImageView addGestureRecognizer:tap];
     
     //添加性别40, 65, 20, 20
-    UIImageView *manimage = [[UIImageView alloc]initWithFrame:CGRectMake(40 * kWidth / 375, 75 * kWidth / 375, 20 * kWidth / 375, 20 * kWidth / 375)];
-    
-    if ([sex isEqualToString:@"男"]) {
-        NSString *sexName =@"man";
-        manimage.image = [UIImage imageNamed:sexName];
-    }
-    else if ([sex isEqualToString:@"女"]) {
-        NSString *sexName =@"women";
-        manimage.image = [UIImage imageNamed:sexName];
-    }
+   manimage = [[UIImageView alloc]initWithFrame:CGRectMake(40 * kWidth / 375, 75 * kWidth / 375, 20 * kWidth / 375, 20 * kWidth / 375)];
     [_portraitImageView addSubview:manimage];
     
+    
     UIButton *button=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    
     [button setFrame:CGRectMake(_portraitImageView.frame.origin.x+50 ,_portraitImageView.frame.size.width+_portraitImageView.frame.origin.y+10 , 80 * kWidth / 375, 30 * kWidth / 375)];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     
-    //用户名
-    UILabel *nameLbl =[HHControl createLabelWithFrame:CGRectMake(145 * kWidth / 375, 42 * kWidth / 375, 100 * kWidth / 375, 20 * kWidth / 375) Font:18 * kWidth / 375 Text:nickname];
+    nameLbl =[HHControl createLabelWithFrame:CGRectMake(145 * kWidth / 375, 42 * kWidth / 375, 100 * kWidth / 375, 20 * kWidth / 375) Font:18 * kWidth / 375 Text:@""];//
     nameLbl.textColor =UIColorFromRGB(255, 255, 255);
     [imageView addSubview:nameLbl];
     
     //宝贝 等级
 //    NSString *lvString = [NSString stringWithFormat:@"LV%@", lv];
-    UILabel *lvLabel = [HHControl createLabelWithFrame:CGRectMake(250 * kWidth / 375, 43 * kWidth / 375, 40 * kWidth / 375, 18 * kWidth / 375) Font:12 * kWidth / 375 Text:_lvString];
+    lvLabel = [HHControl createLabelWithFrame:CGRectMake(250 * kWidth / 375, 43 * kWidth / 375, 40 * kWidth / 375, 18 * kWidth / 375) Font:12 * kWidth / 375 Text:@""];//_lvString
     lvLabel.textColor = UIColorFromRGB(3, 169, 244);
     lvLabel.textAlignment = NSTextAlignmentCenter;
     lvLabel.backgroundColor = [UIColor whiteColor];
@@ -222,8 +233,8 @@
     lvLabel.layer.masksToBounds = YES;
     [imageView addSubview:lvLabel];
 
-    
-    UILabel *titleLbl =[HHControl createLabelWithFrame:CGRectMake(145 * kWidth / 375, 70 * kWidth / 375, 220 * kWidth / 375, 20 * kWidth / 375) Font:14 * kWidth / 375 Text:[NSString stringWithFormat:@"还差%ld星币升级到%ld级会员",[next_grade_coin integerValue]-[coin_total integerValue], [lv integerValue]+1]];
+   //还差多少个猩币....
+   titleLbl =[HHControl createLabelWithFrame:CGRectMake(145 * kWidth / 375, 70 * kWidth / 375, 220 * kWidth / 375, 20 * kWidth / 375) Font:14 * kWidth / 375 Text:@""];
     titleLbl.textColor =UIColorFromRGB(255, 255, 255);
     [imageView addSubview:titleLbl];
     
@@ -232,8 +243,7 @@
     ysView.progressHeight = 2;
     ysView.progressTintColor = [UIColor colorWithRed:0.0 / 255 green:0.0 / 255 blue:0.0 / 255 alpha:0.5];
     ysView.trackTintColor = [UIColor whiteColor];
-    float b =  [coin_total floatValue]/[next_grade_coin floatValue];
-    ysView.progressValue = b * ysView.frame.size.width;
+
     
     [imageView addSubview:ysView];
 
@@ -249,24 +259,24 @@
     [imageView addSubview:checkBtn];
     
     
-    UILabel *checkLbl =[HHControl createLabelWithFrame:CGRectMake(145 * kWidth / 375, iconBottom + 10, 120 * kWidth / 375, 15 * kWidth / 375) Font:12 * kWidth / 375 Text:[NSString stringWithFormat:@"已连续签到%@天",continued]];
+    checkLbl =[HHControl createLabelWithFrame:CGRectMake(145 * kWidth / 375, iconBottom + 10, 120 * kWidth / 375, 15 * kWidth / 375) Font:12 * kWidth / 375 Text:@""];
     checkLbl.textColor =UIColorFromRGB(255, 255, 255);
     [imageView addSubview:checkLbl];
     
-    UILabel *checkInLbl =[HHControl createLabelWithFrame:CGRectMake(145 * kWidth / 375, checkLbl.frame.origin.y + checkLbl.frame.size.height + 5, 200 * kWidth / 375, 15 * kWidth / 375) Font:12 * kWidth / 375 Text:[NSString stringWithFormat:@"明天继续签到将获得%@个猩币",next_get_coin]];
+     checkInLbl =[HHControl createLabelWithFrame:CGRectMake(145 * kWidth / 375, checkLbl.frame.origin.y + checkLbl.frame.size.height + 5, 200 * kWidth / 375, 15 * kWidth / 375) Font:12 * kWidth / 375 Text:@""];
     checkInLbl.textColor =UIColorFromRGB(255, 255, 255);
     [imageView addSubview:checkInLbl];
 
-    
-    
 }
+
+
 - (void)createTableView{
     _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 144 * kWidth / 375, kWidth, kHeight-144 * kWidth / 375) style:UITableViewStyleGrouped];
     _tableView.dataSource =self;
     _tableView.delegate =self;
     [self.view addSubview:_tableView];
     _tableView.separatorStyle =UITableViewCellSeparatorStyleSingleLine;
-    [self addHeadView];
+    
   
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -310,8 +320,13 @@
             
             [[XXEUserInfo user]cleanUserInfo];
             [XXEUserInfo user].login = NO;
+            
+            
             LandingpageViewController *landVC =[[LandingpageViewController alloc]init];
-            [self presentViewController:landVC animated:YES completion:nil];
+            XXENavigationViewController *navi = [[XXENavigationViewController alloc] initWithRootViewController:landVC];
+            
+            [self presentViewController:navi animated:YES completion:nil];
+//            [self.navigationController pushViewController:navi animated:YES];
         }
             break;
             
@@ -362,13 +377,14 @@
     }
     cell.headImageV.image =[UIImage imageNamed:dataArray[0][indexPath.row]];
     cell.MyLabel.text =dataArray[1][indexPath.row];
-    cell.MyTextField.text =dataArray[2][indexPath.row];
+    if ([contentArray count] != 0) {
+       cell.MyTextField.text =contentArray[indexPath.row];
+    }
     cell.MyTextField.tag =100+indexPath.row;
     cell.MyTextField.delegate =self;
    
     if (indexPath.row==1) {
        
- 
     }
     else{
     cell.MyTextField.userInteractionEnabled =NO;
@@ -415,8 +431,19 @@
     else if (indexPath.row ==5){
         // 手机号:
         NSLog(@"手机号");
-        ChangeTeleponeViewController *chengTeleVC =[[ChangeTeleponeViewController alloc]init];
-        [self.navigationController pushViewController:chengTeleVC animated:YES];
+        NSString *phone = [NSString stringWithFormat:@"%@", contentArray[5]];
+        
+        if ([phone isEqualToString:@""]) {
+//            [self showHudWithString:@"请绑定手机号" forSecond:1.5];
+            [SVProgressHUD showInfoWithStatus:@"请绑定手机号"];
+        }else{
+            XXEMyselfInfoOldPhoneNumViewController *oldPhoneNumVC = [[XXEMyselfInfoOldPhoneNumViewController alloc] init];
+            oldPhoneNumVC.phoneStr = contentArray[5];
+            [self.navigationController pushViewController:oldPhoneNumVC animated:YES];
+        }
+
+//        ChangeTeleponeViewController *chengTeleVC =[[ChangeTeleponeViewController alloc]init];
+//        [self.navigationController pushViewController:chengTeleVC animated:YES];
         
     }
     else if (indexPath.row ==6){
@@ -427,8 +454,10 @@
         [chengEmailVC returnText:^(NSString *showText) {
             if (![showText isEqualToString:@""]) {
                 
-                [dataArray[2] insertObject:showText atIndex:6];
-                [_tableView reloadData];
+                if ([contentArray count] != 0) {
+                    [contentArray replaceObjectAtIndex:6 withObject:showText];
+                    [_tableView reloadData];
+                }
             }
 //            else{
 //                [dataArray[2] insertObject:@"Keen_Team@163.com" atIndex:6];
