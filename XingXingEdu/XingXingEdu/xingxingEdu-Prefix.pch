@@ -43,4 +43,6 @@
 #import "XXEHeaderApi.h"
 #import "EmptyView.h"
 #import "XXETool.h"
+#import "NSString+ImgURL.h"
+#import "SystemPopView.h"
 #endif

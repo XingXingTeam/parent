@@ -1595,6 +1595,7 @@
 		9E0546381C48D57200950C23 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0546371C48D57200950C23 /* AddressBook.framework */; };
 		9E05463A1C48D57A00950C23 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0546391C48D57A00950C23 /* AddressBookUI.framework */; };
 		9E2966661CC4914700580776 /* NetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2966651CC4914700580776 /* NetManager.m */; };
+		9E32D97D1E0D44AF00CA6829 /* NSString+ImgURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E32D97C1E0D44AF00CA6829 /* NSString+ImgURL.m */; };
 		9E33D1FE1E0CBDE100114BCC /* SchoolNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E33D1FB1E0CBDE100114BCC /* SchoolNotificationViewController.m */; };
 		9E33D1FF1E0CBDE100114BCC /* SysteamNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E33D1FD1E0CBDE100114BCC /* SysteamNotificationViewController.m */; };
 		9E33D20A1E0CC17E00114BCC /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E33D2091E0CC17E00114BCC /* NotificationService.m */; };
@@ -3765,6 +3766,8 @@
 		9E0546391C48D57A00950C23 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		9E2966641CC4914700580776 /* NetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetManager.h; sourceTree = "<group>"; };
 		9E2966651CC4914700580776 /* NetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetManager.m; sourceTree = "<group>"; };
+		9E32D97B1E0D44AF00CA6829 /* NSString+ImgURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ImgURL.h"; sourceTree = "<group>"; };
+		9E32D97C1E0D44AF00CA6829 /* NSString+ImgURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ImgURL.m"; sourceTree = "<group>"; };
 		9E33D1FA1E0CBDE100114BCC /* SchoolNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolNotificationViewController.h; sourceTree = "<group>"; };
 		9E33D1FB1E0CBDE100114BCC /* SchoolNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolNotificationViewController.m; sourceTree = "<group>"; };
 		9E33D1FC1E0CBDE100114BCC /* SysteamNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SysteamNotificationViewController.h; sourceTree = "<group>"; };
@@ -5215,6 +5218,8 @@
 				0463C3001DEC3D920035BEF6 /* XXESearchHistoryWord.m */,
 				0463C3011DEC3D920035BEF6 /* XXETool.h */,
 				0463C3021DEC3D920035BEF6 /* XXETool.m */,
+				9E32D97B1E0D44AF00CA6829 /* NSString+ImgURL.h */,
+				9E32D97C1E0D44AF00CA6829 /* NSString+ImgURL.m */,
 				0463C3031DEC3D920035BEF6 /* XXEVerticalButton.h */,
 				0463C3041DEC3D920035BEF6 /* XXEVerticalButton.m */,
 				9E87C9C41E023DD000475F9B /* NSDictionary+decription.h */,
@@ -9613,6 +9618,7 @@
 				043A7F541DF8F825003C4BF0 /* XXEStoreAddressModel.m in Sources */,
 				0463C3751DEC3D930035BEF6 /* YTKBatchRequest.m in Sources */,
 				0410B0F71D50BA2800924EBE /* XXETabBarViewController.m in Sources */,
+				9E32D97D1E0D44AF00CA6829 /* NSString+ImgURL.m in Sources */,
 				68BACE9A1CEDA8340008DDA6 /* PurchasedViewController.m in Sources */,
 				044777881D2A76CC0018A459 /* ClassSchoolTableViewCell.m in Sources */,
 				04B6209F1DBF019A00391616 /* ArticleCategoryViewController.m in Sources */,
