@@ -56,9 +56,22 @@
 //空试图
 @property(nonatomic ,strong) UIView *emptyBackView;
 
+@property(nonatomic ,strong)EmptyView *emptyView;
+
 @end
 
 @implementation XXEFriendCirclePageViewController
+
+-(EmptyView *)emptyView {
+    if (!_emptyView) {
+        CGRect frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight - 64 - 44);
+        _emptyView = [EmptyView conveniceWithTitle:@"您的圈子暂无动态" frame:frame];
+        [self.tableView addSubview:_emptyView];
+        _emptyView.hidden = YES;
+    }
+    
+    return _emptyView;
+}
 
 - (NSMutableArray *)headerDatasource
 {
@@ -193,7 +206,6 @@
         NSString *code = [request objectForKey:@"code"];
         
         if (page == 1) {
-            self.maxPage = [[[request objectForKey:@"data"] objectForKey:@"max_page"] integerValue];
             if (self.emptyBackView) {
                 [self removeEmpty];
             }
@@ -201,6 +213,8 @@
         }
         
         if ([code intValue]==1 && [[request objectForKey:@"data"] isKindOfClass:[NSDictionary class]]) {
+            self.emptyView.hidden = YES;
+            self.maxPage = [[[request objectForKey:@"data"] objectForKey:@"max_page"] integerValue];
             [weakSelf detelAllSource];
             NSDictionary *data = [request objectForKey:@"data"];
             NSDictionary *userInfo = [data objectForKey:@"user_info"];
@@ -232,6 +246,9 @@
             }
             [weakSelf.tableView reloadData];
         }else {
+            if (page == 1) {
+                self.emptyView.hidden = NO;
+            }
             weakSelf.isMaxLoading = YES;
             [weakSelf hudShowText:@"获取数据错误" second:2.f];
             [weakSelf endRefresh];

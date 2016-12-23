@@ -20,7 +20,7 @@
 #import "ClassRoomSubjectInfoViewController.h"
 #import "TeleTeachInfoViewController.h"
 #import "LogoTabBarController.h"
-
+#import "MBProgressHUD.h"
 #import "WJDropdownMenu.h"
 
 
@@ -89,11 +89,19 @@
 
 
 @property (nonatomic, strong)UISegmentedControl *segentControl;
-
+@property(nonatomic ,strong) UIWindow *window;
 
 @end
 
 @implementation XXEChatPageViewController
+
+- (UIWindow *)window {
+    if (!_window) {
+        _window = [UIApplication sharedApplication].windows[1];
+    }
+    
+    return _window;
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -236,7 +244,7 @@
 }
 
 - (void)createTableView{
-    myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, kWidth, kHeight - 49 - 44) style:UITableViewStyleGrouped];
+    myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, kWidth, kHeight - 40) style:UITableViewStyleGrouped];
     myTableView.delegate = self;
     myTableView.dataSource = self;
     [self.view addSubview:myTableView];
@@ -249,19 +257,19 @@
 -(void)loadNewData{
     if (_segentControl.selectedSegmentIndex == 0) {
         //老师
-        _teacherPage ++;
+        _teacherPage = 1;
         [self fetchTeacherInfo];
         [myTableView.header endRefreshing];
         
     }else if (_segentControl.selectedSegmentIndex == 1) {
         //课程
-        _coursePage ++;
+        _coursePage = 1;
         [self fetchCourseInfo];
         [myTableView.header endRefreshing];
         
     }else if (_segentControl.selectedSegmentIndex == 2) {
         //机构
-        _schoolPage ++;
+        _schoolPage = 1;
         [self fetchSchoolInfo];
         [myTableView.header endRefreshing];
         
@@ -301,6 +309,10 @@
 #pragma mark - UISegmentedControl 代理方法=====================
 - (void)segentControlClick:(UISegmentedControl *)segment
 {
+    [teacherModelArray removeAllObjects];
+    [courseModelArray removeAllObjects];
+    [schoolModelArray removeAllObjects];
+    [myTableView reloadData];
     
     if (segment.selectedSegmentIndex == 0) {
         _search_words = @"";
@@ -458,7 +470,9 @@
     if ([_filter_distance isEqualToString:@"附近"]) {
         _filter_distance = @"";
     }
-    
+    if (_teacherPage == 1) {
+        [MBProgressHUD showHUDAddedTo:self.window animated:true];
+    }
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/xkt_teacher";
     NSDictionary *params = @{@"appkey":APPKEY,
                              @"backtype":BACKTYPE,
@@ -474,7 +488,7 @@
                              @"search_words": _search_words
                              };
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
-        
+        [MBProgressHUD hideHUDForView:self.window animated:true];
         if ([responseObj[@"code"] integerValue] == 1) {
             NSArray *modelArray = [[NSArray alloc] init];
             modelArray = [XXEXingClassRoomTeacherListModel parseResondsData:responseObj[@"data"]];
@@ -483,7 +497,7 @@
         }
         [self customContent:teacherModelArray];
     } failure:^(NSError *error) {
-        //
+        [MBProgressHUD hideHUDForView:self.window animated:true];
         [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
     }];
 }
@@ -495,6 +509,9 @@
 //    NSLog(@"_coursePage ==== %ld", _coursePage);
     if ([_filter_distance isEqualToString:@"附近"]) {
         _filter_distance = @"";
+    }
+    if (_coursePage == 1) {
+        [MBProgressHUD showHUDAddedTo:self.window animated:true];
     }
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/xkt_course";
     NSDictionary *params = @{@"appkey":APPKEY,
@@ -511,9 +528,7 @@
                              @"search_words": _search_words
                              };
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
-        //
-//        NSLog(@"jjjj %@", responseObj);
-        
+        [MBProgressHUD hideHUDForView:self.window animated:true];
         if ([responseObj[@"code"] integerValue] == 1) {
             NSArray *modelArray = [[NSArray alloc] init];
             modelArray = [XXEXingClassRoomCourseListModel parseResondsData:responseObj[@"data"]];
@@ -522,7 +537,7 @@
         }
         [self customContent:courseModelArray];
     } failure:^(NSError *error) {
-        //
+        [MBProgressHUD hideHUDForView:self.window animated:true];
         [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
     }];
 }
@@ -530,10 +545,14 @@
 
 - (void)fetchSchoolInfo{
     
-//    NSLog(@"_filter_distance ==== %@", _filter_distance); //附近
     if ([_filter_distance isEqualToString:@"附近"]) {
         _filter_distance = @"";
     }
+    
+    if (_schoolPage == 1) {
+        [MBProgressHUD showHUDAddedTo:self.window animated:true];
+    }
+    
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/xkt_school";
     NSDictionary *params = @{@"appkey":APPKEY,
                              @"backtype":BACKTYPE,
@@ -549,7 +568,7 @@
                              @"search_words": _search_words
                              };
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
-        
+        [MBProgressHUD hideHUDForView:self.window animated:true];
         if ([responseObj[@"code"] integerValue] == 1) {
             NSArray *modelArray = [[NSArray alloc] init];
             modelArray = [XXEXingClassRoomSchoolListModel parseResondsData:responseObj[@"data"]];
@@ -559,7 +578,7 @@
         [self customContent:schoolModelArray];
         
     } failure:^(NSError *error) {
-        //
+        [MBProgressHUD hideHUDForView:self.window animated:true];
         [SVProgressHUD showInfoWithStatus:@"获取数据失败!"];
     }];
 
@@ -923,7 +942,7 @@
         
         NSString *coursePicStr = [NSString stringWithFormat:@"%@%@", picURL, model.pic];
         //        NSLog(@"hhh %@", coursePicStr);
-        [cell.iconImg sd_setImageWithURL:[NSURL URLWithString:coursePicStr] placeholderImage:[UIImage imageNamed:@"home_logo_course_icon80x80"]];
+        [cell.iconImg sd_setImageWithURL:[NSURL URLWithString:coursePicStr] placeholderImage:[UIImage imageNamed:@"school_logo"]];
         
         //
         cell.nameLabel.text = model.course_name;
@@ -967,7 +986,7 @@
         cell.iconImg.layer.cornerRadius = cell.iconImg.frame.size.width / 2;
         cell.iconImg.layer.masksToBounds = YES;
         
-        [cell.iconImg sd_setImageWithURL:[NSURL URLWithString:head_img] placeholderImage:[UIImage imageNamed:@"headplaceholder"]];
+        [cell.iconImg sd_setImageWithURL:[NSURL URLWithString:head_img] placeholderImage:[UIImage imageNamed:@"school_logo"]];
         
         //                NSLog(@"课程  %@", model.teach_course);
         cell.nameLabel.text = model.name;
@@ -995,10 +1014,14 @@
     return 0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     return 0.000001;
     
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.000001;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

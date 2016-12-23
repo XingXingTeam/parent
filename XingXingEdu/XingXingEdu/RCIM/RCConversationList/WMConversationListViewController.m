@@ -100,9 +100,10 @@
 //    UIView *view1=[HHControl createViewWithFrame:CGRectMake(0, 0, WinWidth, WinHeight)];
 //    view1.backgroundColor=[UIColor whiteColor];
 //    [self.view sendSubviewToBack:view1];
-    
+//    self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationController.title=@"会话列表";
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
+//    self.conversationListTableView.frame = CGRectMake(0, 64, KScreenWidth, KScreenHeight - 44 - 64);
     self.conversationListTableView.tableFooterView = [UIView new];
 //    self.conversationListTableView.frame=CGRectMake(0, 0, WinWidth, WinHeight);
     

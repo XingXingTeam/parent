@@ -44,7 +44,7 @@
  */
 #define kAppFirstLoadKey @"kAppFirstLoadKey"
 
-#define XXEBackgroundColor [[UIColor colorWithRed:229.0/255.0f green:232.0/255.0f blue:233.0/255.0f alpha:1]]
+#define XXEBackgroundColor [UIColor colorWithRed:229.0/255.0f green:232.0/255.0f blue:233.0/255.0f alpha:1]
 
 /**
  *  颜色:粉红色
@@ -76,7 +76,31 @@
 
 //#define MyRongCloudToken @"J01ZcEH+xvE3J2RDgjjdyiMfl6Wang6DqF0T9GLD+MJT6ja2L/UbbLGcZwTxRBRK2HjnDGlqqy5Egm7zF/Z7lg=="
 
+typedef enum : NSUInteger {
+    SchoolInfoNone,
+    SchoolInfoHave,
+} SchoolInfo;
 
+/**
+ *  已登录
+ */
+typedef NS_ENUM(NSUInteger,LoginType) {
+    /**
+     *  已登录
+     */
+    LoginSure = 0,
+    /**
+     *  没有登录
+     */
+    LoginNot
+};
+
+typedef NS_ENUM(NSUInteger,PasswordType) {
+    //登录密码
+    LoginPassword = 0,
+    //支付密码
+    PayPassword
+};
 
 
 

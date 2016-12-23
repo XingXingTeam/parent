@@ -75,7 +75,7 @@
     self.title =@"我的资料";
       self.navigationController.navigationBar.barTintColor =UIColorFromRGB(0, 170, 42);
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
-     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
 
     if ([XXEUserInfo user].login){

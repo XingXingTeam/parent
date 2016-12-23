@@ -16,6 +16,7 @@
 #import "RcRootTabbarViewController.h"
 #import "RCDataManager.h"
 #import "WMUtil.h"
+#import <UserNotifications/UserNotifications.h>
 
 static NSString *appKey = @"fdab3a52561b68cc14d8a4ae";
 static NSString *channel = @"Publish channel";

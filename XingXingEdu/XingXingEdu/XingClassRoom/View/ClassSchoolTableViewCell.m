@@ -25,7 +25,7 @@
 //    _iconImg.layer.cornerRadius= _iconImg.bounds.size.width/2;
 //    _iconImg.layer.masksToBounds=YES;
     
-    
+    self.buttomBackground.hidden = YES;
 //距离的字体颜色
     _distanceLabel.textColor = [UIColor redColor];
     

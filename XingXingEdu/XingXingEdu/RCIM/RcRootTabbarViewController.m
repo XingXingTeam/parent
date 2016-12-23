@@ -131,7 +131,7 @@
     //    [personCenterVC.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tab4_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"tab4_unselected"]];
     
     
-    self.viewControllers = @[FriendsListVC,wmConversationListVC];
+    self.viewControllers = @[wmConversationListVC,FriendsListVC];
     self.tabBar.backgroundColor =[UIColor whiteColor];
     
     if ([[UIDevice currentDevice].systemVersion floatValue]<8.0) {

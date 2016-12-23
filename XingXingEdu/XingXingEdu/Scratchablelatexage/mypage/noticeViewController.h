@@ -10,4 +10,6 @@
 
 @interface noticeViewController : UIViewController
 
+@property (nonatomic)SchoolInfo schoolInfo;
+
 @end

@@ -123,7 +123,6 @@
 		044412B81D38F2C400314884 /* WZYRCAddFriendDetialInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044412661D38F2C400314884 /* WZYRCAddFriendDetialInfoViewController.m */; };
 		044412B91D38F2C400314884 /* WZYRCAddFriendDetialInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044412671D38F2C400314884 /* WZYRCAddFriendDetialInfoViewController.xib */; };
 		044412BA1D38F2C400314884 /* FriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0444126B1D38F2C400314884 /* FriendsListViewController.m */; };
-		044412BB1D38F2C400314884 /* FriendsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444126C1D38F2C400314884 /* FriendsListViewController.xib */; };
 		044412BC1D38F2C400314884 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0444126E1D38F2C400314884 /* LoginViewController.m */; };
 		044412BD1D38F2C400314884 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444126F1D38F2C400314884 /* LoginViewController.xib */; };
 		044412BE1D38F2C400314884 /* LookNearUserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044412711D38F2C400314884 /* LookNearUserTableViewController.m */; };
@@ -1291,7 +1290,6 @@
 		6844EA531CAD45390054B8C5 /* VedioSaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA471CAD45390054B8C5 /* VedioSaveViewController.m */; };
 		6844EAE81CAD45420054B8C5 /* feedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA8B1CAD45420054B8C5 /* feedbackViewController.m */; };
 		6844EAEF1CAD45420054B8C5 /* noticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EA971CAD45420054B8C5 /* noticeViewController.m */; };
-		6844EAF01CAD45420054B8C5 /* noticeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6844EA981CAD45420054B8C5 /* noticeViewController.xib */; };
 		6844EAF81CAD45420054B8C5 /* CCSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EAA81CAD45420054B8C5 /* CCSegmentedControl.m */; };
 		6844EAF91CAD45420054B8C5 /* CPTextViewPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EAAA1CAD45420054B8C5 /* CPTextViewPlaceholder.m */; };
 		6844EAFA1CAD45420054B8C5 /* ImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6844EAAD1CAD45420054B8C5 /* ImageTableViewCell.m */; };
@@ -1600,12 +1598,17 @@
 		9E0546381C48D57200950C23 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0546371C48D57200950C23 /* AddressBook.framework */; };
 		9E05463A1C48D57A00950C23 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0546391C48D57A00950C23 /* AddressBookUI.framework */; };
 		9E2966661CC4914700580776 /* NetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2966651CC4914700580776 /* NetManager.m */; };
+		9E33D1FE1E0CBDE100114BCC /* SchoolNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E33D1FB1E0CBDE100114BCC /* SchoolNotificationViewController.m */; };
+		9E33D1FF1E0CBDE100114BCC /* SysteamNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E33D1FD1E0CBDE100114BCC /* SysteamNotificationViewController.m */; };
+		9E33D20A1E0CC17E00114BCC /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E33D2091E0CC17E00114BCC /* NotificationService.m */; };
+		9E33D20F1E0CD12300114BCC /* XXERedFlowerSentHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E33D20D1E0CD12300114BCC /* XXERedFlowerSentHistoryTableViewCell.m */; };
+		9E33D2101E0CD12300114BCC /* XXERedFlowerSentHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E33D20E1E0CD12300114BCC /* XXERedFlowerSentHistoryTableViewCell.xib */; };
+		9E33D2161E0CF26400114BCC /* UpdatePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E33D2131E0CF26400114BCC /* UpdatePopView.m */; };
+		9E33D2171E0CF26400114BCC /* WithoutCloseUpdatePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E33D2151E0CF26400114BCC /* WithoutCloseUpdatePopView.m */; };
 		9E65BA971DED6FE000463BA5 /* XXEStarImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E65BA961DED6FE000463BA5 /* XXEStarImageViewController.m */; };
 		9E65BA9D1DED74DD00463BA5 /* HomepageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E65BA9B1DED74DD00463BA5 /* HomepageViewController.m */; };
 		9E65BAA01DED753300463BA5 /* XXENewCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E65BA9F1DED753300463BA5 /* XXENewCourseView.m */; };
 		9E65BAA31DED791300463BA5 /* AllImageCollectionServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E65BAA21DED791300463BA5 /* AllImageCollectionServer.m */; };
-		9E87C9BC1E02333500475F9B /* UpdatePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E87C9B91E02333500475F9B /* UpdatePopView.m */; };
-		9E87C9BD1E02333500475F9B /* WithoutCloseUpdatePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E87C9BB1E02333500475F9B /* WithoutCloseUpdatePopView.m */; };
 		9E87C9C21E02341C00475F9B /* jpush-ios-2.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E87C9BF1E02341C00475F9B /* jpush-ios-2.2.0.a */; };
 		9E87C9C31E02341D00475F9B /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9E87C9C11E02341C00475F9B /* sound.caf */; };
 		9E87C9CE1E023DD000475F9B /* NSDictionary+decription.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E87C9C51E023DD000475F9B /* NSDictionary+decription.m */; };
@@ -1626,6 +1629,7 @@
 		9E9D80921CB5F5A9004B3DFC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9D80911CB5F5A9004B3DFC /* Foundation.framework */; };
 		9E9D80941CB5F5B0004B3DFC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9D80931CB5F5B0004B3DFC /* UIKit.framework */; };
 		9E9D80961CB5F5C2004B3DFC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9D80951CB5F5C1004B3DFC /* Security.framework */; };
+		9EC8025D1E03D45D006DBD29 /* FriendsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EC8025C1E03D45D006DBD29 /* FriendsListViewController.xib */; };
 		BF41A4B91C4631F2003B18F2 /* goback_back_orange_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF41A4B81C4631F2003B18F2 /* goback_back_orange_on@2x.png */; };
 		BF41A4BD1C4631FF003B18F2 /* ic_landing_microblog.png in Resources */ = {isa = PBXBuildFile; fileRef = BF41A4BA1C4631FF003B18F2 /* ic_landing_microblog.png */; };
 		BF41A4BE1C4631FF003B18F2 /* ic_landing_microblog@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF41A4BB1C4631FF003B18F2 /* ic_landing_microblog@2x.png */; };
@@ -1827,7 +1831,6 @@
 		044412671D38F2C400314884 /* WZYRCAddFriendDetialInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WZYRCAddFriendDetialInfoViewController.xib; sourceTree = "<group>"; };
 		0444126A1D38F2C400314884 /* FriendsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsListViewController.h; sourceTree = "<group>"; };
 		0444126B1D38F2C400314884 /* FriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsListViewController.m; sourceTree = "<group>"; };
-		0444126C1D38F2C400314884 /* FriendsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsListViewController.xib; sourceTree = "<group>"; };
 		0444126D1D38F2C400314884 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		0444126E1D38F2C400314884 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		0444126F1D38F2C400314884 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -3383,7 +3386,6 @@
 		6844EA8A1CAD45420054B8C5 /* feedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = feedbackViewController.h; sourceTree = "<group>"; };
 		6844EA8B1CAD45420054B8C5 /* feedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = feedbackViewController.m; sourceTree = "<group>"; };
 		6844EA971CAD45420054B8C5 /* noticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = noticeViewController.m; sourceTree = "<group>"; };
-		6844EA981CAD45420054B8C5 /* noticeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = noticeViewController.xib; sourceTree = "<group>"; };
 		6844EAA71CAD45420054B8C5 /* CCSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSegmentedControl.h; sourceTree = "<group>"; };
 		6844EAA81CAD45420054B8C5 /* CCSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSegmentedControl.m; sourceTree = "<group>"; };
 		6844EAA91CAD45420054B8C5 /* CPTextViewPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTextViewPlaceholder.h; sourceTree = "<group>"; };
@@ -3769,6 +3771,19 @@
 		9E0546391C48D57A00950C23 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		9E2966641CC4914700580776 /* NetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetManager.h; sourceTree = "<group>"; };
 		9E2966651CC4914700580776 /* NetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetManager.m; sourceTree = "<group>"; };
+		9E33D1FA1E0CBDE100114BCC /* SchoolNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolNotificationViewController.h; sourceTree = "<group>"; };
+		9E33D1FB1E0CBDE100114BCC /* SchoolNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolNotificationViewController.m; sourceTree = "<group>"; };
+		9E33D1FC1E0CBDE100114BCC /* SysteamNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SysteamNotificationViewController.h; sourceTree = "<group>"; };
+		9E33D1FD1E0CBDE100114BCC /* SysteamNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SysteamNotificationViewController.m; sourceTree = "<group>"; };
+		9E33D2081E0CC17E00114BCC /* NotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		9E33D2091E0CC17E00114BCC /* NotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		9E33D20C1E0CD12300114BCC /* XXERedFlowerSentHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXERedFlowerSentHistoryTableViewCell.h; sourceTree = "<group>"; };
+		9E33D20D1E0CD12300114BCC /* XXERedFlowerSentHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXERedFlowerSentHistoryTableViewCell.m; sourceTree = "<group>"; };
+		9E33D20E1E0CD12300114BCC /* XXERedFlowerSentHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XXERedFlowerSentHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		9E33D2121E0CF26400114BCC /* UpdatePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePopView.h; sourceTree = "<group>"; };
+		9E33D2131E0CF26400114BCC /* UpdatePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePopView.m; sourceTree = "<group>"; };
+		9E33D2141E0CF26400114BCC /* WithoutCloseUpdatePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WithoutCloseUpdatePopView.h; sourceTree = "<group>"; };
+		9E33D2151E0CF26400114BCC /* WithoutCloseUpdatePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WithoutCloseUpdatePopView.m; sourceTree = "<group>"; };
 		9E65BA951DED6FE000463BA5 /* XXEStarImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEStarImageViewController.h; sourceTree = "<group>"; };
 		9E65BA961DED6FE000463BA5 /* XXEStarImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEStarImageViewController.m; sourceTree = "<group>"; };
 		9E65BA9A1DED74DD00463BA5 /* HomepageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomepageViewController.h; sourceTree = "<group>"; };
@@ -3779,10 +3794,6 @@
 		9E65BAA21DED791300463BA5 /* AllImageCollectionServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllImageCollectionServer.m; sourceTree = "<group>"; };
 		9E87C9B41E022BE200475F9B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9E87C9B51E022BE200475F9B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9E87C9B81E02333500475F9B /* UpdatePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePopView.h; sourceTree = "<group>"; };
-		9E87C9B91E02333500475F9B /* UpdatePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePopView.m; sourceTree = "<group>"; };
-		9E87C9BA1E02333500475F9B /* WithoutCloseUpdatePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WithoutCloseUpdatePopView.h; sourceTree = "<group>"; };
-		9E87C9BB1E02333500475F9B /* WithoutCloseUpdatePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WithoutCloseUpdatePopView.m; sourceTree = "<group>"; };
 		9E87C9BF1E02341C00475F9B /* jpush-ios-2.2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.2.0.a"; sourceTree = "<group>"; };
 		9E87C9C01E02341C00475F9B /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		9E87C9C11E02341C00475F9B /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sound.caf; sourceTree = "<group>"; };
@@ -3810,6 +3821,7 @@
 		9E9D80911CB5F5A9004B3DFC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9E9D80931CB5F5B0004B3DFC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9E9D80951CB5F5C1004B3DFC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		9EC8025C1E03D45D006DBD29 /* FriendsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsListViewController.xib; sourceTree = "<group>"; };
 		A1E23C8268B05C4E8E8A1CC7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BF41A4B81C4631F2003B18F2 /* goback_back_orange_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "goback_back_orange_on@2x.png"; path = "xingxingEdu/Images.xcassets/goback_back_orange_on.imageset/goback_back_orange_on@2x.png"; sourceTree = SOURCE_ROOT; };
 		BF41A4BA1C4631FF003B18F2 /* ic_landing_microblog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_landing_microblog.png; path = xingxingEdu/Images.xcassets/ic_landing_microblog.imageset/ic_landing_microblog.png; sourceTree = SOURCE_ROOT; };
@@ -4206,7 +4218,7 @@
 				045DCAA11D54B56200433933 /* PersonCenterViewController.m */,
 				0444126A1D38F2C400314884 /* FriendsListViewController.h */,
 				0444126B1D38F2C400314884 /* FriendsListViewController.m */,
-				0444126C1D38F2C400314884 /* FriendsListViewController.xib */,
+				9EC8025C1E03D45D006DBD29 /* FriendsListViewController.xib */,
 				0444126D1D38F2C400314884 /* LoginViewController.h */,
 				0444126E1D38F2C400314884 /* LoginViewController.m */,
 				0444126F1D38F2C400314884 /* LoginViewController.xib */,
@@ -7307,6 +7319,8 @@
 		6844EA7F1CAD45420054B8C5 /* mypage */ = {
 			isa = PBXGroup;
 			children = (
+				9E33D20B1E0CD11500114BCC /* Cell */,
+				9E33D2071E0CC15400114BCC /* NotificationService */,
 				04FD0F641D4F63DA00E4925F /* ProbromBackViewController.h */,
 				04FD0F651D4F63DA00E4925F /* ProbromBackViewController.m */,
 				04FD0F661D4F63DA00E4925F /* ProbromBackViewController.xib */,
@@ -7329,7 +7343,10 @@
 				6844EA8B1CAD45420054B8C5 /* feedbackViewController.m */,
 				040862161D421B570060C70A /* noticeViewController.h */,
 				6844EA971CAD45420054B8C5 /* noticeViewController.m */,
-				6844EA981CAD45420054B8C5 /* noticeViewController.xib */,
+				9E33D1FA1E0CBDE100114BCC /* SchoolNotificationViewController.h */,
+				9E33D1FB1E0CBDE100114BCC /* SchoolNotificationViewController.m */,
+				9E33D1FC1E0CBDE100114BCC /* SysteamNotificationViewController.h */,
+				9E33D1FD1E0CBDE100114BCC /* SysteamNotificationViewController.m */,
 				0480A0721D87AA8C00D7589B /* XXESchoolNotificationModel.h */,
 				0480A0731D87AA8C00D7589B /* XXESchoolNotificationModel.m */,
 				0480A0751D87AAA100D7589B /* XXESystemNotificationModel.h */,
@@ -7905,6 +7922,36 @@
 			path = XingXingEdu/Manage;
 			sourceTree = SOURCE_ROOT;
 		};
+		9E33D2071E0CC15400114BCC /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				9E33D2081E0CC17E00114BCC /* NotificationService.h */,
+				9E33D2091E0CC17E00114BCC /* NotificationService.m */,
+			);
+			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		9E33D20B1E0CD11500114BCC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9E33D20C1E0CD12300114BCC /* XXERedFlowerSentHistoryTableViewCell.h */,
+				9E33D20D1E0CD12300114BCC /* XXERedFlowerSentHistoryTableViewCell.m */,
+				9E33D20E1E0CD12300114BCC /* XXERedFlowerSentHistoryTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		9E33D2111E0CF26400114BCC /* VersionPopView */ = {
+			isa = PBXGroup;
+			children = (
+				9E33D2121E0CF26400114BCC /* UpdatePopView.h */,
+				9E33D2131E0CF26400114BCC /* UpdatePopView.m */,
+				9E33D2141E0CF26400114BCC /* WithoutCloseUpdatePopView.h */,
+				9E33D2151E0CF26400114BCC /* WithoutCloseUpdatePopView.m */,
+			);
+			path = VersionPopView;
+			sourceTree = "<group>";
+		};
 		9E65BA931DED6FCC00463BA5 /* FirstStarView */ = {
 			isa = PBXGroup;
 			children = (
@@ -7954,24 +8001,13 @@
 		9E87C9B31E022BE200475F9B /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				9E87C9B71E02333500475F9B /* VersionPopView */,
+				9E33D2111E0CF26400114BCC /* VersionPopView */,
 				9E87C9B41E022BE200475F9B /* AppDelegate.h */,
 				9E87C9B51E022BE200475F9B /* AppDelegate.m */,
 			);
 			name = AppDelegate;
 			path = XingXingEdu/AppDelegate;
 			sourceTree = SOURCE_ROOT;
-		};
-		9E87C9B71E02333500475F9B /* VersionPopView */ = {
-			isa = PBXGroup;
-			children = (
-				9E87C9B81E02333500475F9B /* UpdatePopView.h */,
-				9E87C9B91E02333500475F9B /* UpdatePopView.m */,
-				9E87C9BA1E02333500475F9B /* WithoutCloseUpdatePopView.h */,
-				9E87C9BB1E02333500475F9B /* WithoutCloseUpdatePopView.m */,
-			);
-			path = VersionPopView;
-			sourceTree = "<group>";
 		};
 		9E87C9BE1E02341C00475F9B /* JPush-iOS-SDK-2.2.0 */ = {
 			isa = PBXGroup;
@@ -8368,7 +8404,6 @@
 				04B621141DBF019A00391616 /* 收藏icon26x26@2x.png in Resources */,
 				044777481D2A76CC0018A459 /* 小箭头22x24.png in Resources */,
 				04D5B14B1D6B1F4700ABA89A /* KTPicterCell.xib in Resources */,
-				6844EAF01CAD45420054B8C5 /* noticeViewController.xib in Resources */,
 				04D5B1141D6B1DE900ABA89A /* CourseTableViewCell.xib in Resources */,
 				04D5E4261D48A13300921223 /* 初始男头像134x134@2x.png in Resources */,
 				0492ED071D49E2DE003E06D7 /* 下拉按钮icon24x22@3x.png in Resources */,
@@ -8411,6 +8446,7 @@
 				04B621481DBF019A00391616 /* 抢购倒计时icon@1x.png in Resources */,
 				044777731D2A76CC0018A459 /* 现在离开icon290x90.png in Resources */,
 				044412B41D38F2C400314884 /* RCAddFriendInfoViewController.xib in Resources */,
+				9EC8025D1E03D45D006DBD29 /* FriendsListViewController.xib in Resources */,
 				04A9DD9C1D8117A500544782 /* home_recipe_placehoder_icon@2x.png in Resources */,
 				04DE28701D2B7F98002AE12A /* 叉36x36@3x.png in Resources */,
 				687C68F51CE48D84008210BD /* schoolTableViewCell.xib in Resources */,
@@ -8712,7 +8748,6 @@
 				6844E71B1CAD440C0054B8C5 /* ShareSDK.bundle in Resources */,
 				68BACE8D1CED9E8F0008DDA6 /* 已点评92x92@2x.png in Resources */,
 				683801571CE339DE0034C54C /* 手机号icon40x50.png in Resources */,
-				044412BB1D38F2C400314884 /* FriendsListViewController.xib in Resources */,
 				04469A671D40DE9C0067615D /* commentRequest3.png in Resources */,
 				04B621101DBF019A00391616 /* 搜索icon30x30@1x.png in Resources */,
 				044777371D2A76CC0018A459 /* dingdan@2x.png in Resources */,
@@ -8793,6 +8828,7 @@
 				68CD031C1CF83C7900AE7251 /* trade.bundle in Resources */,
 				04469A6C1D40DE9C0067615D /* commentRequest8.png in Resources */,
 				6865415C1CE43563003A06E5 /* 猩币52x46@2x.png in Resources */,
+				9E33D2101E0CD12300114BCC /* XXERedFlowerSentHistoryTableViewCell.xib in Resources */,
 				68DCD91D1D24F81B00ED0978 /* 引导页02@2x.png in Resources */,
 				04D5E4E21D48A2D700921223 /* 确认发送icon650x84@2x.png in Resources */,
 				68A3DE131CE0936E00C01B8A /* 点赞icon48x48.png in Resources */,
@@ -9366,6 +9402,7 @@
 				04D5B13F1D6B1F4700ABA89A /* KTCommentViewController.m in Sources */,
 				0463C35D1DEC3D920035BEF6 /* DFUserLineCellManager.m in Sources */,
 				6844E70E1CAD440C0054B8C5 /* README.md in Sources */,
+				9E33D1FE1E0CBDE100114BCC /* SchoolNotificationViewController.m in Sources */,
 				044776F51D2A76CC0018A459 /* BMKMapViewController.m in Sources */,
 				041D67331DFEB51C00119BCA /* XXESystemNotificationDetailViewController.m in Sources */,
 				0447778A1D2A76CC0018A459 /* ClassSubjectTableViewCell.m in Sources */,
@@ -9430,6 +9467,7 @@
 				043A7F571DF90A36003C4BF0 /* XXEStorePayViewController.m in Sources */,
 				6844EAF81CAD45420054B8C5 /* CCSegmentedControl.m in Sources */,
 				0463C3471DEC3D920035BEF6 /* DFFaceManager.m in Sources */,
+				9E33D2171E0CF26400114BCC /* WithoutCloseUpdatePopView.m in Sources */,
 				0463C3781DEC3D930035BEF6 /* YTKChainRequestAgent.m in Sources */,
 				04B620911DBF019A00391616 /* MJProperty.m in Sources */,
 				043A7F6A1DF95070003C4BF0 /* XXEStoreGoodsOrderListModel.m in Sources */,
@@ -9445,6 +9483,7 @@
 				04B6208B1DBF019A00391616 /* UIViewController+Umeng.m in Sources */,
 				04F100C41D45D6A000CBED22 /* ClassHomeInfoMationViewController.m in Sources */,
 				044412901D38F2C400314884 /* RcRootTabbarViewController.m in Sources */,
+				9E33D1FF1E0CBDE100114BCC /* SysteamNotificationViewController.m in Sources */,
 				6844E8321CAD45150054B8C5 /* SampleCell.m in Sources */,
 				04D5B1421D6B1F4700ABA89A /* WZYCoureseCollectionViewController.m in Sources */,
 				04D5B0DE1D6B1DE900ABA89A /* SchoolVideoViewController.m in Sources */,
@@ -9523,6 +9562,7 @@
 				0463C3121DEC3D920035BEF6 /* XXEMessageHistoryController.m in Sources */,
 				68CD03071CF8393300AE7251 /* AddAccountViewController.m in Sources */,
 				044412BA1D38F2C400314884 /* FriendsListViewController.m in Sources */,
+				9E33D20F1E0CD12300114BCC /* XXERedFlowerSentHistoryTableViewCell.m in Sources */,
 				045FC5641D4B758500DF1E26 /* XXECommentRequestInfoViewController.m in Sources */,
 				04D5B0DF1D6B1DE900ABA89A /* SpeechViewController.m in Sources */,
 				6844E8501CAD45150054B8C5 /* OtherTeacherViewController.m in Sources */,
@@ -9551,7 +9591,6 @@
 				689F6EF31CF6962100166C06 /* contentRepositoryViewController.m in Sources */,
 				0463C3661DEC3D930035BEF6 /* DFLikeCommentView.m in Sources */,
 				044777421D2A76CC0018A459 /* UILabel+LSSAdd.m in Sources */,
-				9E87C9BC1E02333500475F9B /* UpdatePopView.m in Sources */,
 				0447770F1D2A76CC0018A459 /* ClassRoomOrderDidAppraiseViewController.m in Sources */,
 				044412811D38F2C400314884 /* PersonCell.m in Sources */,
 				04D5B14E1D6B1F4700ABA89A /* WZYSchoolCollectionTableViewCell.m in Sources */,
@@ -9622,6 +9661,7 @@
 				04D5B1131D6B1DE900ABA89A /* CourseTableViewCell.m in Sources */,
 				6844E8EF1CAD45150054B8C5 /* ClassSubjectCell.m in Sources */,
 				04B620741DBF019A00391616 /* FlowersHistoryTableViewController.m in Sources */,
+				9E33D2161E0CF26400114BCC /* UpdatePopView.m in Sources */,
 				04F100AF1D45C0E400CBED22 /* KTRecipeCell.m in Sources */,
 				9E87C9D21E023DD000475F9B /* GlobalVariable.m in Sources */,
 				0463C37A1DEC3D930035BEF6 /* YTKNetworkConfig.m in Sources */,
@@ -9666,7 +9706,6 @@
 				0480A0771D87AAA100D7589B /* XXESystemNotificationModel.m in Sources */,
 				689F6EF41CF6962100166C06 /* juniorHighSchoolViewController.m in Sources */,
 				04B620781DBF019A00391616 /* MoneyHistoryTableViewController.m in Sources */,
-				9E87C9BD1E02333500475F9B /* WithoutCloseUpdatePopView.m in Sources */,
 				04D5B1B81D6B1FF500ABA89A /* CourseDetailViewController.m in Sources */,
 				04B620A11DBF019A00391616 /* XXEXingStoreCategoryModel.m in Sources */,
 				04B620921DBF019A00391616 /* MJPropertyKey.m in Sources */,
@@ -9699,6 +9738,7 @@
 				689F6EF11CF6962100166C06 /* CommunityImageTableViewCell.m in Sources */,
 				04B6219B1DBF019A00391616 /* PresentHistoryTableViewCell.m in Sources */,
 				0463C33E1DEC3D920035BEF6 /* DFBaseTimeLineViewController.m in Sources */,
+				9E33D20A1E0CC17E00114BCC /* NotificationService.m in Sources */,
 				04FD0F521D4F5FAF00E4925F /* SettingCell.m in Sources */,
 				04B620951DBF019A00391616 /* NSObject+MJCoding.m in Sources */,
 				6896CC881D19506E00DB50D6 /* TeacherAppearViewController.m in Sources */,
@@ -9898,7 +9938,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "40f0197c-7088-47ef-a641-a37767dcb21f";
@@ -9942,7 +9982,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "40f0197c-7088-47ef-a641-a37767dcb21f";
 				SDKROOT = iphoneos;
