@@ -156,7 +156,7 @@
             if ([img isKindOfClass:[UIImage class]]) {
                 imageUnitView.imageView.image = img;
             }else{
-                [imageUnitView.imageView sd_setImageWithURL:[NSURL URLWithString:[images objectAtIndex:0]]];
+                [imageUnitView.imageView sd_setImageWithURL:[NSURL URLWithString:[[images objectAtIndex:0] URL80]]];
             }
             
             imageUnitView.imageButton.tag = 0;
@@ -172,7 +172,7 @@
                     if ([img isKindOfClass:[UIImage class]]) {
                         imageUnitView.imageView.image = img;
                     }else{
-                        [imageUnitView.imageView sd_setImageWithURL:[NSURL URLWithString:[images objectAtIndex:i]]];
+                        [imageUnitView.imageView sd_setImageWithURL:[NSURL URLWithString:[[images objectAtIndex:i] URL80]]];
                     }
                     imageUnitView.hidden = NO;
                     imageUnitView.imageButton.tag = i;
@@ -182,7 +182,7 @@
                     if ([img isKindOfClass:[UIImage class]]) {
                         imageUnitView.imageView.image = img;
                     }else{
-                        [imageUnitView.imageView sd_setImageWithURL:[NSURL URLWithString:[images objectAtIndex:i-1]]];
+                        [imageUnitView.imageView sd_setImageWithURL:[NSURL URLWithString:[[images objectAtIndex:i-1] URL80]]];
                     }
                     
                     imageUnitView.hidden = NO;
@@ -197,7 +197,7 @@
                     if ([img isKindOfClass:[UIImage class]]) {
                         imageUnitView.imageView.image = img;
                     }else{
-                        [imageUnitView.imageView sd_setImageWithURL:[NSURL URLWithString:[images objectAtIndex:i]]];
+                        [imageUnitView.imageView sd_setImageWithURL:[NSURL URLWithString:[[images objectAtIndex:i] URL80]]];
                     }
                     
                     imageUnitView.imageButton.tag = i;
