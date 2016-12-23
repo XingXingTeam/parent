@@ -96,12 +96,12 @@
     self.title =@"我的资料";
       self.navigationController.navigationBar.barTintColor =UIColorFromRGB(0, 170, 42);
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
-//     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     dataArray = [[NSMutableArray alloc]init];
     detailArray = [[NSMutableArray alloc]init];
     headArr =[NSArray arrayWithObjects:@"ID40x40",@"昵称40x44",@"姓名40x40",@"年龄40x46",@"关系40x46",@"联系方式40x40",@"邮箱40x40",nil];
     [dataArray addObject:headArr];
     NSArray *arr = [NSArray arrayWithObjects:@"猩猩ID:",@"昵称:",@"姓名:",@"年龄:",@"关系:",@"手机号:",@"电子邮箱:",nil];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
     [dataArray addObject:arr];
     

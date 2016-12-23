@@ -72,32 +72,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XingXingEdu/AppDelegate/AppDelegate.m"
-            timestampString = "503466863.278941"
+            filePath = "XingXingEdu/Homepage/C/HomepageViewController.m"
+            timestampString = "504182472.378179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "468"
-            endingLineNumber = "468"
-            landmarkName = "-application:didFailToRegisterForRemoteNotificationsWithError:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "XingXingEdu/Register/Controller/SettingPersonInfoViewController.m"
-            timestampString = "503488633.860806"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "-setbackBtn"
+            startingLineNumber = "1332"
+            endingLineNumber = "1332"
+            landmarkName = "-createButtons"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

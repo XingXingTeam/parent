@@ -63,6 +63,8 @@
 
 #import "XXENewCourseView.h"
 
+#import "AppDelegate.h"
+
 @interface HomepageViewController ()<UIScrollViewDelegate, ZJCircularBtnDelegate, UIAlertViewDelegate>
 {
 
@@ -184,6 +186,8 @@
 @property (nonatomic, strong) UIView *dimBackgroundView;
 @property (nonatomic, strong) NSMutableArray *pictureArray;
 
+@property(nonatomic ,strong)UIView *systemNotificationBadgeView;
+@property(nonatomic ,strong)UIView *chatBadgeView;
 
 @end
 
@@ -232,6 +236,14 @@
     [_schoolNameCombox.listTableView reloadData];
     [_gradeAndClassbox.listTableView reloadData];
     [self initNewCourseView];
+    
+    if ([RCIMClient sharedRCIMClient].getTotalUnreadCount != 0) {
+        self.chatBadgeView.hidden = NO;
+    }else {
+        self.chatBadgeView.hidden = YES;
+    }
+    
+    [self createData];
 
 }
 - (void)dealloc{
@@ -276,20 +288,31 @@
 //    NSLog(@"%@ == %@ == %@", [DEFAULTS objectForKey:@"SCHOOL_ID"], [DEFAULTS objectForKey:@"CLASS"], [DEFAULTS objectForKey:@"BABYID"]);
 }
 
-//创建通知
--(void)creatNotification{
-    UILocalNotification *n = [[UILocalNotification alloc] init];
-    n.fireDate = [NSDate dateWithTimeIntervalSinceNow:100000000000000];
-    n.repeatInterval = 0;
-    n.alertBody = @"生日快乐！";
-//@"生日快乐";
-    n.applicationIconBadgeNumber = [UIApplication sharedApplication].scheduledLocalNotifications.count + 1;
-    n.userInfo = @{@"notiId":@"1"};
-    [[UIApplication sharedApplication] scheduleLocalNotification:n];
-    
-}
+////创建通知
+//-(void)creatNotification{
+//    UILocalNotification *n = [[UILocalNotification alloc] init];
+//    n.fireDate = [NSDate dateWithTimeIntervalSinceNow:100000000000000];
+//    n.repeatInterval = 0;
+//    n.alertBody = @"生日快乐！";
+////@"生日快乐";
+//    n.applicationIconBadgeNumber = [UIApplication sharedApplication].scheduledLocalNotifications.count + 1;
+//    n.userInfo = @{@"notiId":@"1"};
+//    [[UIApplication sharedApplication] scheduleLocalNotification:n];
+//    
+//}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteNotification:) name:kRemoteNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(systemMessage:) name:kSystemMessage object:nil];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatNotification:) name:kChatNotification object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatRemoteNotification:) name:kChatRemoteNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didReceiveMessageNotification:)name:RCKitDispatchMessageNotification object:nil];
     
     if ([XXEUserInfo user].login){
         parameterXid = [XXEUserInfo user].xid;
@@ -305,7 +328,7 @@
     [self settingBackgroundImageView];
     
     //创建 通知
-    [self creatNotification];
+//    [self creatNotification];
     
     [self createLabels];
     
@@ -314,6 +337,51 @@
 //    融云的初始化
    [self connectionFromRongServer];
     
+}
+
+
+- (void)remoteNotification:(NSNotification *)notification {
+    //    NSString *type = notification.userInfo[@"type"];
+    //    if ([type isEqualToString:@"1"] || [type isEqualToString:@"2"] ||[type isEqualToString:@"4"] ) {
+    //    }else if ([type isEqualToString:@"3"]) {
+    //
+    //    }
+    [self pushToXXENotificationViewController];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRemoteNotification object:nil];
+}
+
+- (void)systemMessage:(NSNotification *)notification {
+    self.systemNotificationBadgeView.hidden = NO;
+    //    [[NSNotificationCenter defaultCenter] removeObserver:self name:kSystemMessage object:nil];
+}
+
+- (void)chatNotification:(NSNotification *)notification {
+    //    [self pushToChatVC];
+    
+    //    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatNotification object:nil];
+}
+
+- (void)chatRemoteNotification:(NSNotification *)notification {
+//    [self pushToChatVC];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatRemoteNotification object:nil];
+}
+
+- (void)didReceiveMessageNotification:(NSNotification *)notification {
+    //获取数据
+    [self createData];
+}
+
+- (void)pushToXXENotificationViewController {
+    
+    if (self.systemNotificationBadgeView) {
+        self.systemNotificationBadgeView.hidden = YES;
+    }
+    
+    noticeViewController * forVC = [[noticeViewController alloc]init];
+    forVC.hidesBottomBarWhenPushed =YES;
+    [self.navigationController pushViewController:forVC animated:YES];
 }
 
 //MARK: - 新手教程
@@ -479,6 +547,9 @@
     
 //    NSLog(@"params === %@", params);
     
+    //远程推送跳转
+    AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
 //        NSLog(@"首页  数据 ==== %@", responseObj);
@@ -590,10 +661,16 @@
                         [self updateLabelInfo];
 
                         [self updateBayInfomaion:offSet];
-                    
+                        
+                        if ([appdelegate.userInfo[@"aps"][@"sound"] isEqualToString:@"sound"]) {
+                            [self pushToXXENotificationViewController];
+                        }else if ([appdelegate.userInfo[@"aps"][@"sound"] isEqualToString:@"default"]){
+                            //            [self pushToChatVC];
+                        }
+                        appdelegate.userInfo = nil;
                     });
         
-       
+        
         
     } failure:^(NSError *error) {
         //
@@ -1232,10 +1309,22 @@
     /**
      *  通知
      */
+    UIImage *notificationIcon = [UIImage imageNamed:@"通知38x50"];
     hurnBtn = [HHControl createButtonWithFrame:CGRectMake(Width * 3 + Width / 2 - 25 * kWidth / 375 / 2, 5, 25 * kWidth / 375, 32 * kWidth / 375) backGruondImageName:@"通知38x50" Target:self Action:@selector(onClickhurn:) Title:nil];
     [middleBackgroundView addSubview:hurnBtn];
 
-    
+    self.systemNotificationBadgeView = [[UIView alloc] init];
+    self.systemNotificationBadgeView.backgroundColor = [UIColor redColor];
+    self.systemNotificationBadgeView.layer.cornerRadius = 4;
+    self.systemNotificationBadgeView.layer.masksToBounds = YES;
+    [hurnBtn addSubview:self.systemNotificationBadgeView];
+    [self.systemNotificationBadgeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(hurnBtn).offset(notificationIcon.size.width / 2 + 6);
+        make.centerY.equalTo(hurnBtn).offset(-notificationIcon.size.height/2);
+        make.width.mas_equalTo(8);
+        make.height.mas_equalTo(8);
+    }];
+    self.systemNotificationBadgeView.hidden = YES;
 }
 
 
@@ -1284,6 +1373,26 @@
             
         }else if (i == 4){
             //聊天
+            
+            self.chatBadgeView = [[UIView alloc] init];
+            self.chatBadgeView.layer.cornerRadius = 4;
+            self.chatBadgeView.layer.masksToBounds = YES;
+            self.chatBadgeView.backgroundColor = [UIColor redColor];
+            [button addSubview:self.chatBadgeView];
+            [self.chatBadgeView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(button).offset(2.5 + 2);
+                make.trailing.equalTo(button).offset(-2.5 - 7);
+                make.width.mas_equalTo(8);
+                make.height.mas_equalTo(8);
+            }];
+            
+            if ([RCIMClient sharedRCIMClient].getTotalUnreadCount == 0) {
+                self.chatBadgeView.hidden = YES;
+            }else {
+                self.chatBadgeView.hidden = NO;
+            }
+            
+            
             [button addTarget:self action:@selector(onClickxt:) forControlEvents:UIControlEventTouchUpInside];
             
         }else if (i == 5){
@@ -1399,16 +1508,13 @@
 }
 - (void)onClickxt:(UIButton *)button
 {
-
-//    NSLog(@"----====---  %@", [NSNumber numberWithBool:[XXEUserInfo user].login]);
+    RcRootTabbarViewController *tabVC = [[RcRootTabbarViewController alloc] init];
+    tabVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:tabVC animated:YES];
     
-    if ([XXEUserInfo user].login) {
-        RcRootTabbarViewController *classRoomVC =[[RcRootTabbarViewController alloc]init];
-        classRoomVC.hidesBottomBarWhenPushed =YES;
-        [self.navigationController pushViewController:classRoomVC animated:NO];
-    }else {
-        [SVProgressHUD showInfoWithStatus:@"请用账号登录"];
-    }
+//    NSLog(@"----====---  %@", [NSNumber numberWithBool:[XXEUserInfo user].login]);
+//    [self pushToXXENotificationViewController];
+    
 }
 -(void)onClickflower:(UIButton *)button
 {
@@ -1434,9 +1540,7 @@
 -(void)onClickhurn:(UIButton *)button
 {
     
-     noticeViewController * forVC = [[noticeViewController alloc]init];
-    forVC.hidesBottomBarWhenPushed =YES;
-    [self.navigationController pushViewController:forVC animated:NO];
+    [self pushToXXENotificationViewController];
 }
 //LOGO
 -(void)onClickLOGO:(UIButton *)button
