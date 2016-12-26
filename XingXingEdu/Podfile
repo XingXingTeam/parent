@@ -2,7 +2,7 @@ platform :ios, '8.0'
 
 use_frameworks!
 
-target 'XingXingEdu' do
+target 'xingxingEdu' do
     pod 'BaiduMapKit'
     pod 'DFCommon', '~> 1.3.9'
     pod 'UMengSocial'
