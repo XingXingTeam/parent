@@ -96,7 +96,7 @@ static int currentVersion = 100;
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [self setRCIMPush];
-    
+    [self showUpdatePopView];
     //初始化应用，appKey和appSecret从后台申请得
     [SMSSDK registerApp:@"ec9c9a472b8c"
              withSecret:@"7930e91cbd30596d903c06e5613635db"];
@@ -120,9 +120,9 @@ static int currentVersion = 100;
     NSDictionary* remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     self.userInfo = remoteNotification;
     
+    
     [self toMainAPP];
     [self loadStarView];
-    [self showUpdatePopView];
     /**
      *  keenteam，请移步到登录keen_team.com进行应用注册，
      */
@@ -289,15 +289,16 @@ static int currentVersion = 100;
 
 //MARK: - 版本更新提示框
 - (void)showUpdatePopView {
-    
+    [GlobalVariable shareInstance].isVersionRequestDone = NO;
+    [GlobalVariable shareInstance].appleVerify = AppleVerifyNo;
     [[ServiceManager sharedInstance] requestWithURLString:CheckoutVersionURL parameters:nil type:HttpRequestTypeGet success:^(id responseObject) {
-        
+        [GlobalVariable shareInstance].isVersionRequestDone = YES;
         if ([responseObject[@"code"] integerValue] == 1) {
             [GlobalVariable shareInstance].appStoreURL = responseObject[@"data"][@"url"];
             NSString *appStoreURL = responseObject[@"data"][@"url"];
             int nowVersion = [responseObject[@"data"][@"now_version"] intValue];
             int allowVersion = [responseObject[@"data"][@"allow_version"] intValue];// 支持最低版本号
-            
+            //设置友盟
             if (currentVersion < nowVersion) {//更新
                 if (currentVersion < allowVersion) {//强制更新
                     [self mustJumpToAppStoreWithNowVerson:nowVersion appStoreURL:appStoreURL];
@@ -305,12 +306,15 @@ static int currentVersion = 100;
                 }
                 [self jumpToAppStoreWithNowVerson:nowVersion appStoreURL:appStoreURL];
             }else if (currentVersion > nowVersion){ //苹果审核中
+                [GlobalVariable shareInstance].appleVerify = AppleVerifyHave;
                 //code...
+            }else {
+                [GlobalVariable shareInstance].appleVerify = AppleVerifyNo;
             }
         }
-        
     } failure:^(NSError *error) {
-        
+        [GlobalVariable shareInstance].isVersionRequestDone = YES;
+        [GlobalVariable shareInstance].appleVerify = AppleVerifyNo;
     }];
 }
 

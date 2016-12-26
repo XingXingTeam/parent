@@ -6500,6 +6500,14 @@
 		38B3DC06AD87E105FE51DD9E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9E0546391C48D57A00950C23 /* AddressBookUI.framework */,
+				9E0546371C48D57200950C23 /* AddressBook.framework */,
+				9E0546351C48D56600950C23 /* libstdc++.tbd */,
+				9E0546331C48D55200950C23 /* JavaScriptCore.framework */,
+				9E0546311C48D53500950C23 /* MessageUI.framework */,
+				9E05462F1C48D52900950C23 /* libicucore.tbd */,
+				9E05462D1C48D4E800950C23 /* libz.tbd */,
+				9E05462B1C48D38D00950C23 /* libz.1.2.5.tbd */,
 				9E87C9D81E02475300475F9B /* libresolv.tbd */,
 				9E87C9D61E02473F00475F9B /* UserNotifications.framework */,
 				9E87C9D41E02472E00475F9B /* AdSupport.framework */,
@@ -7685,14 +7693,6 @@
 		68E2A8E51C45F67300EA8DF3 = {
 			isa = PBXGroup;
 			children = (
-				9E0546391C48D57A00950C23 /* AddressBookUI.framework */,
-				9E0546371C48D57200950C23 /* AddressBook.framework */,
-				9E0546351C48D56600950C23 /* libstdc++.tbd */,
-				9E0546331C48D55200950C23 /* JavaScriptCore.framework */,
-				9E0546311C48D53500950C23 /* MessageUI.framework */,
-				9E05462F1C48D52900950C23 /* libicucore.tbd */,
-				9E05462D1C48D4E800950C23 /* libz.tbd */,
-				9E05462B1C48D38D00950C23 /* libz.1.2.5.tbd */,
 				68E2A8F01C45F67300EA8DF3 /* xingxingEdu */,
 				68E2A90A1C45F67300EA8DF3 /* xingxingEduTests */,
 				68E2A9151C45F67300EA8DF3 /* xingxingEduUITests */,
@@ -10025,6 +10025,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "XingXingEdu/XXETools/XingXingEdu-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "XingXingEdu-Swift.h";
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -10070,6 +10071,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "XingXingEdu/XXETools/XingXingEdu-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "XingXingEdu-Swift.h";
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

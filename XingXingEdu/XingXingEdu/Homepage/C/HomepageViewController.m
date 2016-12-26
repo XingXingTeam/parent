@@ -172,7 +172,7 @@
 
 @property(nonatomic,strong) WJCommboxView *schoolNameCombox;
 @property (nonatomic,strong) WJCommboxView *gradeAndClassbox;
-
+@property(nonatomic ,strong)RcRootTabbarViewController *tabVC;
 //学校id
 @property (nonatomic, copy) NSString *schoolId;
 //年级
@@ -212,6 +212,12 @@
     self.navigationController.navigationBar.barTintColor =UIColorFromRGB(0, 170, 42);
      [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+//    if (self.tabVC != nil) {
+//        self.tabVC = nil;
+//    }
+    
+//    self.tabVC = [[RcRootTabbarViewController alloc] init];
     
     flower = @"";
     fbasket_able = @"";
@@ -323,6 +329,8 @@
     }
 
     buttonPicArray = [[NSArray alloc] initWithObjects:@"实时监控icon98x134", @"相册icon98x134", @"课程表icon98x134", @"通讯录icon98x134", @"聊天icon98x134", @"点评icon98x134", @"作业icon98x134", @"食谱icon98x134", @"猩天地icon98x134", @"猩猩商城icon98x134", @"", @"", nil];
+    
+    self.tabVC = [[RcRootTabbarViewController alloc] init];
     
     //设置 背景图片
     [self settingBackgroundImageView];
@@ -485,8 +493,10 @@
     downBackgroundImageView.userInteractionEnabled = YES;
 
     [self.view addSubview:downBackgroundImageView];
+    
     //创建 十个 按钮
-    [self  createButtons];
+    [self createButtons];
+
     
 }
 
@@ -722,6 +732,12 @@
     
     //scrollView
     _scrollView.contentSize =CGSizeMake(120 * kWidth / 375 *(image.count+1), 0);
+    
+    if (_scrollView.subviews.count != 0) {
+        for (UIView *view in _scrollView.subviews) {
+            [view removeFromSuperview];
+        }
+    }
     
     for (int a =0; a<(image.count+1); a++) {
         //添加➕号
@@ -1331,6 +1347,16 @@
 #pragma mark - createButtons---------------------------------------
 - (void)createButtons{
 
+//    int buttonCount;
+//    switch ([GlobalVariable shareInstance].appleVerify) {
+//        case AppleVerifyHave:
+//            buttonCount = 11;
+//            break;
+//        default:
+//            buttonCount =  12;
+//            break;
+//    }
+    
     //创建 十二宫格  三行、四列
     int totalLine = 4;
     int buttonCount = 12;
@@ -1354,7 +1380,19 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(buttonX, buttonY, buttonWidth, buttonHeight);
         button.backgroundColor = [UIColor whiteColor];
-        [button setImage: [UIImage imageNamed:buttonPicArray[i]] forState:UIControlStateNormal];
+        
+        switch ([GlobalVariable shareInstance].appleVerify) {
+            case AppleVerifyHave:
+                if (i != 9) {
+                    [button setImage: [UIImage imageNamed:buttonPicArray[i]] forState:UIControlStateNormal];
+                }
+                break;
+            default:
+                [button setImage: [UIImage imageNamed:buttonPicArray[i]] forState:UIControlStateNormal];
+                break;
+        }
+        
+        
         
         if (i == 0) {
             //实时监控
@@ -1413,7 +1451,15 @@
             
         }else if (i == 9){
             //猩商城
-            [button addTarget:self action:@selector(onClickxs:) forControlEvents:UIControlEventTouchUpInside];
+            
+            switch ([GlobalVariable shareInstance].appleVerify) {
+                case AppleVerifyHave:
+                    break;
+                default:
+                    [button addTarget:self action:@selector(onClickxs:) forControlEvents:UIControlEventTouchUpInside];
+                    break;
+            }
+
             
         }
         
@@ -1508,9 +1554,21 @@
 }
 - (void)onClickxt:(UIButton *)button
 {
-    RcRootTabbarViewController *tabVC = [[RcRootTabbarViewController alloc] init];
-    tabVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:tabVC animated:YES];
+    
+    NSLog(@"----聊天----");
+    //            [GlobalVariable shareInstance].chatBagdeType = ChatBadgeNone;
+    if ([XXEUserInfo user].login) {
+        if (self.tabVC == nil) {
+            self.tabVC = [[RcRootTabbarViewController alloc] init];
+        }
+        self.tabVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:self.tabVC animated:YES];
+    }else{
+        [SystemPopView showSystemPopViewWithTitle:@"请先登录" vc:self];
+    }
+    
+    
+    
     
 //    NSLog(@"----====---  %@", [NSNumber numberWithBool:[XXEUserInfo user].login]);
 //    [self pushToXXENotificationViewController];

@@ -329,7 +329,7 @@
 //MARK: - 提示框
 - (void)showAlertView {
     //初始化提示框；
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"视频功能暂没开放, 尽情期待!" preferredStyle:  UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"校方暂未接入视频!" preferredStyle:  UIAlertControllerStyleAlert];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //点击按钮的响应事件；

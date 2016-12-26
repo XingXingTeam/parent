@@ -14,10 +14,20 @@ typedef enum : NSUInteger {
     
 } ChatBadgeType;
 
+//苹果审核状态
+typedef NS_ENUM(NSInteger, AppleVerify){
+    AppleVerifyHave,
+    AppleVerifyNo
+};
+
 @interface GlobalVariable : NSObject
 + (GlobalVariable *)shareInstance;
 
 @property(nonatomic ,copy)NSString *appStoreURL;
 @property(nonatomic)ChatBadgeType chatBagdeType;
+@property(nonatomic)AppleVerify appleVerify;
+
+//版本号请求完成
+@property(nonatomic)BOOL isVersionRequestDone;
 
 @end
