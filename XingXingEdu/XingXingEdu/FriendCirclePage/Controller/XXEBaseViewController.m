@@ -60,6 +60,7 @@
     if (self.hud) {
         self.hud.mode = MBProgressHUDModeText;
         self.hud.labelText = text;
+    
         [self.hud show:YES];
         [self.view bringSubviewToFront:self.hud];
         [self hideHudAfterSeconds:seconds];

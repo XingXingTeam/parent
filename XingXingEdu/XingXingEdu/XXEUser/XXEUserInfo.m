@@ -60,7 +60,7 @@ static NSString *userInfo_key = @"userInfo";
             _zhifubao = nil;
             _login_times = nil;
             _login = NO;
-            
+            _login_type = nil;
         }
     }
     return self;
@@ -82,6 +82,7 @@ static NSString *userInfo_key = @"userInfo";
     _user_id = userInfo[@"user_id"];
     _login = [userInfo[@"loginStatus"] boolValue]?:NO;
     _login_times = userInfo[@"login_times"];
+    _login_type = userInfo[@"login_type"];
     YTKKeyValueStore *store = [[YTKKeyValueStore alloc]initDBWithName:@"data.db"];
     [store createTableWithName:tableName];
      
@@ -103,7 +104,8 @@ static NSString *userInfo_key = @"userInfo";
                                    @"password":self.passWord?self.passWord:@"",
                                    @"zhifubao":self.zhifubao?self.zhifubao:@"",
                                    @"loginStatus":[NSNumber numberWithBool:self.login],
-                                   @"login_times":self.login_times
+                                   @"login_times":self.login_times,
+                                   @"login_type":self.login_type,
                                    };
         YTKKeyValueStore *store = [[YTKKeyValueStore alloc]initDBWithName:@"data.db"];
         [store putObject:userInfo withId:userInfo_key intoTable:tableName];

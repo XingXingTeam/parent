@@ -40,6 +40,8 @@
 @property (nonatomic, assign, getter=isLogin) BOOL login;
 /** 判断是否注册 */
 @property (nonatomic, assign, getter=isRegiste) BOOL registe;
+/** 登录类型 */
+@property (nonatomic, copy)NSString *login_type;
 
 
 + (instancetype)user;

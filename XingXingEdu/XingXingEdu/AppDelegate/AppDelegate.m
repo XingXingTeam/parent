@@ -27,7 +27,6 @@
 #import "AppDelegate.h"
 #import "LandingpageViewController.h"
 #import "SettingPersonInfoViewController.h"
-#import "SchoolInfoViewController.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
 #import <TencentOpenAPI/TencentOAuth.h>
@@ -46,7 +45,6 @@
 #import "HomepageViewController.h"
 #import "LoginViewController.h"
 #import "ClassRoomOrderViewController.h"
-#import "SchoolInfoViewController.h"
 #import "UMSocial.h"
 #import "UMSocialSinaHandler.h"
 #import "UMSocialWechatHandler.h"
@@ -54,13 +52,13 @@
 #import "UMSocialQQHandler.h"
 #import "UMSocialAlipayShareHandler.h"
 #import "APOpenAPIObject.h"
-#import "FirstLaunchViewController.h"
 #import "XXETabBarViewController.h"
 #import "XXEUserInfo.h"
 #import "XXEStarImageViewController.h"
+#import "XXENavigationViewController.h"
 
 
-//MARK - mxw
+//Mark - mxw
 #define JPushAppKey @"26acc9ecd08e6e81d26c5279"
 #define kIsProduction NO //0 (默认值)表示采用的是开发证书，1 表示采用生产证书发布应用
 //极光推送
@@ -74,18 +72,12 @@
 #import "ServiceManager.h"
 #import "UpdatePopView.h"
 #import "WithoutCloseUpdatePopView.h"
-#import "XXENavigationViewController.h"
-
-// define macro
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-
 //MARK - 当前系统版本号 规定为三位数整数 如: 1.0.0 为100
 static int currentVersion = 100;
 
 
 //#import"PayMannerViewController.h"
-@interface AppDelegate ()<JPUSHRegisterDelegate,UNUserNotificationCenterDelegate>
+@interface AppDelegate ()<JPUSHRegisterDelegate>
 
 @end
 
@@ -94,9 +86,7 @@ static int currentVersion = 100;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    [self setRCIMPush];
-    [self showUpdatePopView];
+    
     //初始化应用，appKey和appSecret从后台申请得
     [SMSSDK registerApp:@"ec9c9a472b8c"
              withSecret:@"7930e91cbd30596d903c06e5613635db"];
@@ -120,9 +110,9 @@ static int currentVersion = 100;
     NSDictionary* remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     self.userInfo = remoteNotification;
     
-    
     [self toMainAPP];
     [self loadStarView];
+    [self showUpdatePopView];
     /**
      *  keenteam，请移步到登录keen_team.com进行应用注册，
      */
@@ -183,39 +173,6 @@ static int currentVersion = 100;
     return YES;
 }
 
-//MARK: - 10.0推送
-- (void)setRCIMPush {
-    if( SYSTEM_VERSION_LESS_THAN( @"10.0" ) )
-    {
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound |    UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-        
-        //if( option != nil )
-        //{
-        //    NSLog( @"registerForPushWithOptions:" );
-        //}
-    }
-    else
-    {
-        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-        center.delegate = self;
-        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error)
-         {
-             if( !error )
-             {
-                 [[UIApplication sharedApplication] registerForRemoteNotifications];  // required to get the app to do anything at all about push notifications
-                 NSLog( @"Push registration success." );
-             }
-             else
-             {
-                 NSLog( @"Push registration FAILED" );
-                 NSLog( @"ERROR: %@ - %@", error.localizedFailureReason, error.localizedDescription );
-                 NSLog( @"SUGGESTIONS: %@ - %@", error.localizedRecoveryOptions, error.localizedRecoverySuggestion );
-             }
-         }];
-    }
-}
-
 - (void)setUMSDK {
     [UMSocialData setAppKey:UMSocialAppKey];
     [UMSocialData openLog:YES];
@@ -274,7 +231,7 @@ static int currentVersion = 100;
     
     LandingpageViewController *login=[[LandingpageViewController alloc]init];
     XXENavigationViewController *navi = [[XXENavigationViewController alloc] initWithRootViewController:login];
-//    XXETabBarViewController *tarVC = [[XXETabBarViewController alloc] init];
+//    XXETabBarControllerConfig *tarVC = [[XXETabBarControllerConfig alloc] init];
     
     if ([XXEUserInfo user].login) {
         // 设置窗口的根控制器
@@ -289,16 +246,15 @@ static int currentVersion = 100;
 
 //MARK: - 版本更新提示框
 - (void)showUpdatePopView {
-    [GlobalVariable shareInstance].isVersionRequestDone = NO;
-    [GlobalVariable shareInstance].appleVerify = AppleVerifyNo;
+    
     [[ServiceManager sharedInstance] requestWithURLString:CheckoutVersionURL parameters:nil type:HttpRequestTypeGet success:^(id responseObject) {
-        [GlobalVariable shareInstance].isVersionRequestDone = YES;
+        
         if ([responseObject[@"code"] integerValue] == 1) {
             [GlobalVariable shareInstance].appStoreURL = responseObject[@"data"][@"url"];
             NSString *appStoreURL = responseObject[@"data"][@"url"];
             int nowVersion = [responseObject[@"data"][@"now_version"] intValue];
             int allowVersion = [responseObject[@"data"][@"allow_version"] intValue];// 支持最低版本号
-            //设置友盟
+            
             if (currentVersion < nowVersion) {//更新
                 if (currentVersion < allowVersion) {//强制更新
                     [self mustJumpToAppStoreWithNowVerson:nowVersion appStoreURL:appStoreURL];
@@ -306,15 +262,12 @@ static int currentVersion = 100;
                 }
                 [self jumpToAppStoreWithNowVerson:nowVersion appStoreURL:appStoreURL];
             }else if (currentVersion > nowVersion){ //苹果审核中
-                [GlobalVariable shareInstance].appleVerify = AppleVerifyHave;
                 //code...
-            }else {
-                [GlobalVariable shareInstance].appleVerify = AppleVerifyNo;
             }
         }
+        
     } failure:^(NSError *error) {
-        [GlobalVariable shareInstance].isVersionRequestDone = YES;
-        [GlobalVariable shareInstance].appleVerify = AppleVerifyNo;
+        
     }];
 }
 
@@ -456,6 +409,19 @@ static int currentVersion = 100;
 //- (void)applicationWillTerminate:(UIApplication *)application {
 //    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 //}
+
+//-(void)initRongClould{
+//    // 初始化 SDK，传入 AppKey
+//    self.friendsArray = [[NSMutableArray alloc]init];
+//    self.groupsArray = [[NSMutableArray alloc]init];
+//    [[RCIM sharedRCIM] initWithAppKey:MyRongCloudAppKey];
+//    //设置用户信息提供者为 [RCDataManager shareManager]
+//    [RCIM sharedRCIM].userInfoDataSource = [XXERCDataManager shareManager];
+//    //设置群组信息提供者为 [RCDataManager shareManager]
+//    [RCIM sharedRCIM].groupInfoDataSource = [XXERCDataManager shareManager];
+//    [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
+//}
+
 + (AppDelegate* )shareAppDelegate {
     return (AppDelegate*)[UIApplication sharedApplication].delegate;
 }
@@ -536,39 +502,10 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
     // Required, iOS 7 Support
     [JPUSHService handleRemoteNotification:userInfo];
-    // iOS 10 will handle notifications through other methods
-    
-    if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO( @"10.0" ) )
-    {
-        NSLog( @"iOS version >= 10. Let NotificationCenter handle this one." );
-        // set a member variable to tell the new delegate that this is background
-        return;
-    }
-    NSLog( @"HANDLE PUSH, didReceiveRemoteNotification: %@", userInfo );
-    
-    // custom code to handle notification content
-    
-    if( [UIApplication sharedApplication].applicationState == UIApplicationStateInactive )
-    {
-        NSLog( @"INACTIVE" );
-        completionHandler( UIBackgroundFetchResultNewData );
-    }
-    else if( [UIApplication sharedApplication].applicationState == UIApplicationStateBackground )
-    {
-        NSLog( @"BACKGROUND" );
-        completionHandler( UIBackgroundFetchResultNewData );
-    }
-    else
-    {
-        NSLog( @"FOREGROUND" );
-        completionHandler( UIBackgroundFetchResultNewData );
-    }
-    
-    
-    
-    //    completionHandler(UIBackgroundFetchResultNewData);
+    completionHandler(UIBackgroundFetchResultNewData);
     
     if ([userInfo[@"aps"][@"sound"] isEqualToString:@"default"]) {
         if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
@@ -577,7 +514,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         }else if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kChatRemoteNotification object:nil userInfo:userInfo];
         }else if ([UIApplication sharedApplication].applicationState == UIApplicationStateInactive) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kChatNotification object:nil userInfo:userInfo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kChatRemoteNotification object:nil userInfo:userInfo];
         }
     }else {
         if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
@@ -586,7 +523,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         }else if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kRemoteNotification object:nil userInfo:userInfo];
         }else if ([UIApplication sharedApplication].applicationState == UIApplicationStateInactive) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kSystemMessage object:nil userInfo:userInfo];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRemoteNotification object:nil userInfo:userInfo];
         }
     }
     //
@@ -609,52 +546,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     //    //弹出消息框提示用户有订阅通知消息。主要用于用户在使用应用时，弹出提示框
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNotification:) name:@"Notification" object:nil];
 }
-
-
-
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center
-       willPresentNotification:(UNNotification *)notification
-         withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
-{
-    NSLog( @"Handle push from foreground" );
-    // custom code to handle push while app is in the foreground
-    NSLog(@"%@", notification.request.content.userInfo);
-}
-
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center
-didReceiveNotificationResponse:(UNNotificationResponse *)response
-         withCompletionHandler:(void (^)())completionHandler
-{
-    NSLog( @"Handle push from background or closed" );
-    // if you set a member variable in didReceiveRemoteNotification, you  will know if this is from closed or background
-    NSLog(@"%@", response.notification.request.content.userInfo);
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [self application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:^(UIBackgroundFetchResult result) {
-    }];
-    // Required,For systems with less than or equal to iOS6
-    [JPUSHService handleRemoteNotification:userInfo];
-}
-    //
-    //    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
-    //        [[NSNotificationCenter defaultCenter] postNotificationName:kSystemMessage object:nil userInfo:userInfo];
-    //        AudioServicesPlayAlertSound(1007);
-    //    }else if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
-    //        [[NSNotificationCenter defaultCenter] postNotificationName:kRemoteNotification object:nil userInfo:userInfo];
-    //    }else if ([UIApplication sharedApplication].applicationState == UIApplicationStateInactive) {
-    //        [[NSNotificationCenter defaultCenter] postNotificationName:kRemoteNotification object:nil userInfo:userInfo];
-    //    }
-    
-    
-    
-    //    [self saveFMDBWithUserInfo:userInfo];
-    
-    
-    //订阅展示视图消息，将直接打开某个分支视图
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentView:) name:@"PresentView" object:nil];
-    //    //弹出消息框提示用户有订阅通知消息。主要用于用户在使用应用时，弹出提示框
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNotification:) name:@"Notification" object:nil];
 
 //- (void)saveFMDBWithUserInfo:(NSDictionary *)userInfo {
 //    [JPUSHService setBadge:0];

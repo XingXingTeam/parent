@@ -50,7 +50,7 @@
     self.updateBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.updateBtn setTitle:@"立即更新" forState:UIControlStateNormal];
     [self.updateBtn setTitleColor:UIColorFromHex(0x000000) forState:0];
-    self.updateBtn.backgroundColor = UIColorFromHex(0x36d82a);
+    self.updateBtn.backgroundColor = UIColorFromHex(0xff7f00);
     [IV addSubview:self.updateBtn];
 }
 
@@ -70,12 +70,12 @@
 }
 
 - (void)clickAction {
-    self.updateBtn.backgroundColor = UIColorFromHex(0x36d82a);
+    self.updateBtn.backgroundColor = UIColorFromHex(0xff7f00);
     self.updateClickAction();
 }
 
 - (void)clickDown {
-    self.updateBtn.backgroundColor = UIColorFromHex(0x29bd1e);
+    self.updateBtn.backgroundColor = UIColorFromHex(0xd56a02);
 }
 
 - (void)dissmispopView {

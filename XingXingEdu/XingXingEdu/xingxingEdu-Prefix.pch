@@ -41,8 +41,7 @@
 #import "StringHeight.h"
 #import "GlobalVariable.h"
 #import "XXEHeaderApi.h"
-#import "EmptyView.h"
-#import "XXETool.h"
-#import "NSString+ImgURL.h"
-#import "SystemPopView.h"
+#import "UIButton+XXExtension.h"
+#import "XXEXingCommunityHeader.h"
+
 #endif

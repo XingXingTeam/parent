@@ -133,10 +133,6 @@
 
 -(void) onLongPressCamera:(UIGestureRecognizer *) gesture
 {
-    if (![XXEUserInfo user].login){
-        [SystemPopView showSystemPopViewWithTitle:@"请先登录" vc:self];
-        return;
-    }
     DFImagesSendViewController *controller = [[DFImagesSendViewController alloc] initWithImages:nil];
     controller.delegate = self;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller];
@@ -147,10 +143,6 @@
 
 -(void) onClickCamera:(id) sender
 {
-    if (![XXEUserInfo user].login){
-        [SystemPopView showSystemPopViewWithTitle:@"请先登录" vc:self];
-        return;
-    }
     MMPopupItemHandler block = ^(NSInteger index){
         switch (index) {
             case 0:

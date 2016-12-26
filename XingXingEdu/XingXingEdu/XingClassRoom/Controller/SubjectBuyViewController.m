@@ -128,7 +128,7 @@
     UIButton *iconImageView = [[UIButton alloc] initWithFrame:CGRectMake(bgView.size.width/2 - 55, label.y + label.size.height + 22, 18, 18)];
     
     if ([_infoData[1] isEqual:0]) {
-        [SVProgressHUD showWithStatus:@"不允许猩币抵扣"];
+        [SVProgressHUD showErrorWithStatus:@"不允许猩币抵扣"];
         iconImageView.userInteractionEnabled = NO;
     }else{
         iconImageView.userInteractionEnabled = YES;

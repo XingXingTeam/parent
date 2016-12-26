@@ -90,6 +90,8 @@
     titleArray = [NSMutableArray arrayWithObjects:@"我的资料",@"我的订单",@"我的好友",@"我的聊天",@"我的收藏",@"我的圈子",@"我的黑名单",@"系统设置",@"隐私设置",nil];
     myselfInfoDict = [[NSDictionary alloc] init];
 
+//    NSLog(@"数据库 存储的电话:%@", [XXEUserInfo user].account);
+
     [self createContent];
 
     [self createTableView];
@@ -165,7 +167,7 @@
     } failure:^(NSError *error) {
         
         NSLog(@"%@", error);
-        [SVProgressHUD showWithStatus:@"获取数据失败!"];
+        [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
         
     }];
 

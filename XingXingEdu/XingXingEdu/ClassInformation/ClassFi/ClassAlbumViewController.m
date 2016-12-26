@@ -25,7 +25,6 @@
 #import "OtherTeacherViewController.h"
 #import "LandingpageViewController.h"
 
-
 @interface ClassAlbumViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView * _tableView;
@@ -36,8 +35,8 @@
 
 }
 @property (nonatomic, retain) NSMutableArray* teachNameMArr;
+@property (nonatomic, strong) NSMutableArray *class_idArray;
 @property (nonatomic, retain) NSMutableArray* picterMArr;
-@property (nonatomic, retain) NSMutableArray* dataArr;
 @property (nonatomic, retain) NSMutableArray* teacheIDArr;
 
 
@@ -58,7 +57,6 @@
         parameterUser_Id = USER_ID;
     }
     self.title =@"相册";
-    self.dataArr = [[NSMutableArray alloc]init];
 
     [self createTableView];
     [self initData];
@@ -67,8 +65,8 @@
 - (void)initData{
     
     self.teachNameMArr = [[NSMutableArray alloc]init];
+    self.class_idArray = [[NSMutableArray alloc] init];
     self.picterMArr = [[NSMutableArray alloc]init];
-
     self.teacheIDArr =[[NSMutableArray alloc]init];
     
     /*
@@ -102,13 +100,12 @@
         //
 //        NSLog(@"%@", responseObj);
         
-        NSDictionary *dict = responseObj;
+        if([responseObj[@"code"] integerValue] == 1 ){
 
-        if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] ){
-            for (NSDictionary *dictItem in dict[@"data"]) {
+            for (NSDictionary *dictItem in responseObj[@"data"]) {
               
-                [_teachNameMArr addObject:dictItem[@"tname"]];
-                
+                [_teachNameMArr addObject:[NSString stringWithFormat:@"%@%@", dictItem[@"tname"], dictItem[@"position_name"]]];
+                [_class_idArray addObject:dictItem[@"class_id"]];
                 [_teacheIDArr addObject:dictItem[@"teacher_id"]];
                 
 //                _picterMArr = dictItem[@"pic_arr"];
@@ -188,13 +185,16 @@
     return 15;
     }
 }
+
+//返回 几组
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
  
     return self.teachNameMArr.count;
 }
+//组标题
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-   
-    return   self.teachNameMArr[section];
+    return [NSString stringWithFormat:@"%@的相册", self.teachNameMArr[section]];
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -215,14 +215,11 @@
         cell = (SampleCell *)[nib objectAtIndex:0];
     }
     
-//    NSLog(@"%@", _picterMArr[indexPath.section]);
-    
     NSArray *pictureArray = _picterMArr[indexPath.section];
-    
     CGFloat imageViewWidth = (kWidth - 10 * 2) / 3;
     CGFloat imageViewHeight = 120 * kWidth / 375;
     
-    for (int i = 0; i < pictureArray.count; i ++) {
+    for (int i = 0; i < [pictureArray count]; i ++) {
 
         UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake((imageViewWidth + 10) * i , 0, imageViewWidth, imageViewHeight)];
 
@@ -256,14 +253,11 @@
         OtherTeacherViewController *otherTeacherVC =[[OtherTeacherViewController alloc]init];
         otherTeacherVC.KTitle =self.teachNameMArr[indexPath.section];
         otherTeacherVC.teacherID =self.teacheIDArr[indexPath.section];
+        otherTeacherVC.class_idStr = self.class_idArray[indexPath.section];
         [self.navigationController pushViewController:otherTeacherVC animated:YES];
     }else{
         [SVProgressHUD showInfoWithStatus:@"请用账号登录后查看"];
          }
-    
-    
-
-  
 }
 
 

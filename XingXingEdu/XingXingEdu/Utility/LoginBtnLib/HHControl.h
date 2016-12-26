@@ -27,6 +27,7 @@
 +(UISlider *)createSliderWithFrame:(CGRect)frame andImgaeName:(UIImage *)name;
 +(UITextField *)createTextFielfFrame:(CGRect)frame font:(UIFont *)font placeholder:(NSString *)placeholder;
 +(UIImageView *)createImageViewFrame:(CGRect)frame imageName:(NSString *)imageName color:(UIColor *)color;
+
 @end
 
 

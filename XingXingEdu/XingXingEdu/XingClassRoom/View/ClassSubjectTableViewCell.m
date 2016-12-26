@@ -18,8 +18,7 @@
     _separator2.frame = CGRectMake(0,0,250,2);
     _separator3.frame = CGRectMake(0,0,250,2);
     
-    
-    self.buttomBackground.hidden = YES;
+
     
     _distanceLabel.textColor = [UIColor redColor];
     // Initialization code

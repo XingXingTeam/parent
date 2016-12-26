@@ -88,7 +88,7 @@ static NSString * const reuseIdentifier = @"Cell";
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 2;
     flowLayout.minimumLineSpacing = 2;
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kWidth, kHeight - 64 - 49) collectionViewLayout:flowLayout];
     collectionView.alwaysBounceVertical = YES;
     collectionView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:collectionView];

@@ -8,6 +8,11 @@
 #define KPATA @"KTConnectCell"
 #import "ContactPersonViewController.h"
 #import "KTConnectCell.h"
+//家人 详情
+#import "OtherPeopleViewController.h"
+//老师 详情
+#import "TeleTeachInfoViewController.h"
+
 @interface ContactPersonViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UITableView *_tableView;
@@ -20,6 +25,9 @@
     NSMutableArray *idArray;
     NSMutableArray *xingIdArray;
     NSMutableArray *timeArray;
+    
+    UIImageView *placeholderImageView;
+    
     NSString *parameterXid;
     NSString *parameterUser_Id;
 }
@@ -44,11 +52,6 @@
     [_tableView.header beginRefreshing];
 }
 
-- (void)viewDidDisappear:(BOOL)animated{
-
-    [super viewDidDisappear:animated];
-
-}
 
 
 - (void)viewDidLoad {
@@ -101,10 +104,8 @@
 
     /*
      【我的收藏---用户列表】
-     
      接口:
      http://www.xingxingedu.cn/Global/col_user_list
-     
      传参:
      */
     NSString *urlStr = @"http://www.xingxingedu.cn/Global/col_user_list";
@@ -176,7 +177,7 @@
             
         }
         
-        [_tableView reloadData];
+        [self customContent];
         
     } failure:^(NSError *error) {
         //
@@ -185,6 +186,44 @@
     
     
 
+}
+
+// 有数据 和 无数据 进行判断
+- (void)customContent{
+    // 如果 有占位图 先 移除
+    [self removePlaceholderImageView];
+    
+    if (nameArray.count == 0) {
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        // 1、无数据的时候
+        [self createPlaceholderView];
+        
+    }else{
+        //2、有数据的时候
+    }
+    
+    [_tableView reloadData];
+    
+}
+
+
+//没有 数据 时,创建 占位图
+- (void)createPlaceholderView{
+    // 1、无数据的时候
+    UIImage *myImage = [UIImage imageNamed:@"人物"];
+    CGFloat myImageWidth = myImage.size.width;
+    CGFloat myImageHeight = myImage.size.height;
+    
+    placeholderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth / 2 - myImageWidth / 2, (kHeight - 64 - 49) / 2 - myImageHeight / 2, myImageWidth, myImageHeight)];
+    placeholderImageView.image = myImage;
+    [self.view addSubview:placeholderImageView];
+}
+
+//去除 占位图
+- (void)removePlaceholderImageView{
+    if (placeholderImageView != nil) {
+        [placeholderImageView removeFromSuperview];
+    }
 }
 
 
@@ -230,8 +269,25 @@
     
     return cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([typeArray[indexPath.row] isEqualToString:@"1"]) {
+    //家长
+        OtherPeopleViewController *otherPeopleVC = [[OtherPeopleViewController alloc] init];
+        otherPeopleVC.familyIdStr = idArray[indexPath.row];
+        [self.navigationController pushViewController:otherPeopleVC animated:YES];
+    
+    }else if ([typeArray[indexPath.row] isEqualToString:@"2"]){
+    //老师
+        TeleTeachInfoViewController *teleTeachVC =[[TeleTeachInfoViewController alloc]init];
+//        XXEXingClassRoomTeacherListModel *model = teacherModelArray[indexPath.row];
+//        teleTeachVC.hidesBottomBarWhenPushed =YES;
+        teleTeachVC.teacherId = idArray[indexPath.row];
+        teleTeachVC.teacherXid = xingIdArray[indexPath.row];
+        [self.navigationController pushViewController:teleTeachVC animated:YES];
+        
+    }
     
 }
 

@@ -114,6 +114,11 @@
 - (void)navSliderMenuDidSelectAtRow:(NSInteger)row {
     //让scrollview滚到相应的位置
     [contentScrollView setContentOffset:CGPointMake(row*screenWidth, contentScrollView.contentOffset.y)  animated:NO];
+    
+    //用scrollView的滑动大小与屏幕宽度取整数 得到滑动的页数
+    [navSliderMenu selectAtRow:(int)((contentScrollView.contentOffset.x+screenWidth/2.f)/screenWidth) andDelegate:NO];
+    //根据页数添加相应的视图
+    [self addListVCWithIndex:(int)(contentScrollView.contentOffset.x/screenWidth)];
 }
 
 #pragma mark scrollViewDelegate

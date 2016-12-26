@@ -8,6 +8,7 @@
 
 #import "PrivacySettingViewController.h"
 //#import "WhoViewController.h"
+#import "XXEWhoCanSeeMyNameViewController.h"
 #import "PrivacySettingCell.h"
 @interface PrivacySettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -171,29 +172,29 @@
     [self performSelector:@selector(delect) withObject:nil afterDelay:0.5f];
     if (indexPath.row ==1) {
         //手机号对谁可见
-//        WhoViewController *whoVC =[[WhoViewController alloc]init];
-//        [whoVC returnText:^(NSString *showText) {
-//            if (showText) {
-//                //[whoBtn setTitle:showText forState:UIControlStateNormal];
-//                [nameArr insertObject:showText atIndex:1];
-//                [tableView reloadData];
-//            }
-//            
-//        }];
-//        [self.navigationController pushViewController:whoVC animated:YES];
+        XXEWhoCanSeeMyNameViewController *whoVC =[[XXEWhoCanSeeMyNameViewController alloc]init];
+        [whoVC returnText:^(NSString *showText) {
+            if (showText) {
+                //[whoBtn setTitle:showText forState:UIControlStateNormal];
+                [nameArr insertObject:showText atIndex:1];
+                [tableView reloadData];
+            }
+            
+        }];
+        [self.navigationController pushViewController:whoVC animated:YES];
     }
     else if (indexPath.row==0){
         //实名对谁可见
-//        WhoViewController *whoVC =[[WhoViewController alloc]init];
-//        [whoVC returnText:^(NSString *showText) {
-//            if (showText) {
-//                // [nameArr setTitle:showText forState:UIControlStateNormal];
-//                [nameArr insertObject:showText atIndex:0];
-//                [tableView reloadData];
-//            }
-//            
-//        }];
-//        [self.navigationController pushViewController:whoVC animated:YES];
+        XXEWhoCanSeeMyNameViewController *whoVC =[[XXEWhoCanSeeMyNameViewController alloc]init];
+        [whoVC returnText:^(NSString *showText) {
+            if (showText) {
+                // [nameArr setTitle:showText forState:UIControlStateNormal];
+                [nameArr insertObject:showText atIndex:0];
+                [tableView reloadData];
+            }
+            
+        }];
+        [self.navigationController pushViewController:whoVC animated:YES];
     }
 
 }

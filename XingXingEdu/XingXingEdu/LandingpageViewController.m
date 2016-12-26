@@ -8,7 +8,6 @@
 #define LoginUrl @"http://www.xingxingedu.cn/Parent/login"
 #define NUMBERS @"0123456789\n"
 #import "LandingpageViewController.h"
-#import "PassWordResetViewController.h"
 #import "MainViewController.h"
 #import "HyLoglnButton.h"
 #import "HyTransitions.h"
@@ -25,9 +24,7 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WXApi.h"
 #import "WeiboSDK.h"
-#import "SchoolInfoViewController.h"
 #import "HHControl.h"
-#import "MyTabBarController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "XXETabBarViewController.h"
 #import "ClassEditViewController.h"
@@ -554,33 +551,17 @@ self.navigationController.navigationBarHidden =NO;
 #pragma mark ======= 免费注册 =========
 -(void)registration:(UIButton *)button
 {
-//    NSLog(@"00000");
-//    AuthenticationViewController *registerVC=[[AuthenticationViewController alloc]init];
-    //    UINavigationController *navi=[[UINavigationController alloc]initWithRootViewController:registerVC];
-//    [self.navigationController pushViewController:registerVC animated:YES];
     AuthenticationViewController *registerVC = [[AuthenticationViewController alloc]init];
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    XXENavigationViewController *navi = [[XXENavigationViewController alloc]initWithRootViewController:registerVC];
-    window.rootViewController = navi;
+
+    [self.navigationController pushViewController:registerVC animated:YES];
 
 
 }
 
 #pragma Mark ========= 忘记密码 ********
 -(void)fogetPwd{
-//    NSLog(@"忘记 密码");
-    
-//    ForgetPassWordViewController * forVC=[[ForgetPassWordViewController alloc]init];
-//    [self.navigationController pushViewController:forVC animated:YES];
-//    ForgetPassWordViewController *forgetVC = [[ForgetPassWordViewController alloc]init];
-////    forgetVC.loginType = LoginNot;
-////    forgetVC.passwordType = LoginPassword;
-//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-//    XXENavigationViewController *navi = [[XXENavigationViewController alloc]initWithRootViewController:forgetVC];
-//    window.rootViewController = navi;
     
     ForgetPassWordViewController * forVC=[[ForgetPassWordViewController alloc]init];
-//    [self presentViewController:forVC animated:YES completion:nil];
     [self.navigationController pushViewController:forVC animated:YES];
 }
 
@@ -672,7 +653,7 @@ self.navigationController.navigationBarHidden =NO;
             }
             
             NSDictionary *dict =[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-            NSLog(@"账户 信息  *****   dict:%@",dict);
+//            NSLog(@"账户 信息  *****   dict:%@",dict);
             
             NSString *codeStr = [NSString stringWithFormat:@"%@", dict[@"code"]];
             
@@ -786,9 +767,9 @@ self.navigationController.navigationBarHidden =NO;
 - (void)thirdLoginRequestWithParameters:(NSDictionary *)parameters {
     //微博第三方蹦是因为没有审核通过没有unionId 为空
     [[ServiceManager sharedInstance] requestWithURLString:LoginUrl parameters:parameters type:HttpRequestTypePost success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+//        NSLog(@"%@",responseObject);
         
-        NSLog(@"%@",[responseObject objectForKey:@"msg"]);
+//        NSLog(@"%@",[responseObject objectForKey:@"msg"]);
         NSString *code = [responseObject objectForKey:@"code"];
         if ([code intValue] == 1) {
             //存储数据直接进入首页
@@ -797,22 +778,14 @@ self.navigationController.navigationBarHidden =NO;
             NSDictionary *data = [responseObject objectForKey:@"data"];
             NSString * logintimes = [data objectForKey:@"login_times"];
             [self LoginSetupUserInfoDict:data SnsAccessToken:parameters[@"account"] LoginType:_login_type];
-            NSLog(@"%@",logintimes);
+//            NSLog(@"%@",logintimes);
             if ([logintimes integerValue]==1 ) {
-//                SchoolInfoViewController *schoolInfoVC = [[SchoolInfoViewController alloc] init];
-//                XXENavigationViewController *navi = [[XXENavigationViewController alloc]initWithRootViewController:schoolInfoVC];
-//                UIWindow *window = [UIApplication sharedApplication].keyWindow;
-//                window.rootViewController = navi;
-//                [self.view removeFromSuperview];
+
             
             //ClassEditViewController
             ClassEditViewController *classEditVC = [[ClassEditViewController alloc] init];
             [self presentViewController:classEditVC animated:YES completion:nil];
-//            classEditVC.fromPerfectInfo = @"fromPerfectInfo";
-//            XXENavigationViewController *navi = [[XXENavigationViewController alloc]initWithRootViewController:classEditVC];
-//            UIWindow *window = [UIApplication sharedApplication].keyWindow;
-//            window.rootViewController = navi;
-//            [self.view removeFromSuperview];
+
 
             }else{
 
@@ -861,7 +834,7 @@ self.navigationController.navigationBarHidden =NO;
     NSString *xid = [data objectForKey:@"xid"];
     NSString *login_type = logintype;
     
-    NSLog(@"登录次数%@ 昵称%@ token%@ 用头像%@ 用户Id%@ 用户类型%@ XID%@ ",login_times,nickname,token,user_head_img, user_id, user_type,xid);
+//    NSLog(@"登录次数%@ 昵称%@ token%@ 用头像%@ 用户Id%@ 用户类型%@ XID%@ ",login_times,nickname,token,user_head_img, user_id, user_type,xid);
     
     if ([logintype  isEqualToString: @"1"]) {
         [XXEUserInfo user].login = YES;
@@ -897,7 +870,7 @@ self.navigationController.navigationBarHidden =NO;
                                @"xid":xid,
                                @"loginStatus":[NSNumber numberWithBool:[XXEUserInfo user].login]
                                };
-    NSLog(@"%@",userInfo);
+//    NSLog(@"%@",userInfo);
     [[XXEUserInfo user] setupUserInfoWithUserInfo:userInfo];
 }
 

@@ -44,6 +44,10 @@
     UITextField *studentName;   //学生姓名
     UITextField *studentIDCard;   //学生身份证号
     UITextField *inviteCode;   //邀请码
+    
+    //记录当前的输入框
+    UITextField *currentTextField;
+    
 }
 @property (nonatomic,strong) UIButton *head; //头像
 @property(nonatomic,strong)WJCommboxView *relationCombox;//下拉选择框
@@ -54,6 +58,59 @@
 @end
 
 @implementation SettingPersonInfoViewController
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //增加通知中心监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+    //删除通知中心 的监听
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark ======== 键盘 即将 显示 ========
+- (void)keyboardWillShow:(NSNotification *)notification{
+
+//    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+//    CGFloat height = keyboardFrame.origin.y;
+    CGFloat textField_maxY = 0.00;//studentName
+    
+    if (currentTextField == studentName) {
+      textField_maxY  =  60;
+    }else if (currentTextField == studentIDCard){
+        textField_maxY = 120;
+    }else if (currentTextField == inviteCode){
+        textField_maxY = 180;
+    }
+
+//    CGFloat space = - self.view.frame.origin.y + textField_maxY;
+//    CGFloat transformY = height - space;
+//    if (transformY < 0) {
+        CGRect frame = self.view.frame;
+        frame.origin.y = frame.origin.y - textField_maxY ;
+        self.view.frame = frame;
+//    }
+
+}
+
+
+#pragma mark ********* 键盘 即将 消失 ********
+- (void)keyboardWillHide:(NSNotification *)notification{
+    //恢复到默认y为0的状态，有时候要考虑导航栏要+64
+    CGRect frame = self.view.frame;
+    frame.origin.y = 0;
+    self.view.frame = frame;
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -255,6 +312,7 @@
     
     
     inviteCode=[self createTextFielfFrame:CGRectMake(CGRectGetMaxX(inviteCodeLabel.frame) + spaceX, CGRectGetMaxY(studentRelationLabel.frame) + spaceX, kWidth - studentNameLabel.size.width - awayX * 2, klabelH) font:[UIFont systemFontOfSize:14] placeholder:@"可不填"  alignment:NSTextAlignmentCenter clearButtonMode:UITextFieldViewModeWhileEditing];
+    inviteCode.delegate = self;
     inviteCode.layer.cornerRadius = 17.0f;
     inviteCode.layer.borderWidth = 0.1f;
     inviteCode.clipsToBounds = YES;
@@ -424,17 +482,40 @@
 }
 
 //MARK: - UITextFieldDelegate
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [UIView animateWithDuration:0.3 animations:^{
-        self.view.transform = CGAffineTransformMakeTranslation(0, -212);
-    }];
+//- (void)textFieldDidBeginEditing:(UITextField *)textField {
+//    
+//        [UIView animateWithDuration:0.3 animations:^{
+//            self.view.transform = CGAffineTransformMakeTranslation(0, -212);
+//        }];
+//    
+//}
+//
+//- (void)textFieldDidEndEditing:(UITextField *)textField {
+//    
+//    
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.view.transform = CGAffineTransformIdentity;
+//    }];
+//}
+
+
+#pragma mark ========== 监听 键盘 上升 ==========
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+
+    currentTextField = textField;
+    
+    return YES;
+
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    [UIView animateWithDuration:0.3 animations:^{
-        self.view.transform = CGAffineTransformIdentity;
-    }];
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self.view endEditing:YES];
+    return YES;
 }
+
+
+
 
 -(NSString * )rangeString:(NSString *)str begin:(NSInteger )begin  length:(NSInteger)length{
     NSRange r1 = {begin,length};

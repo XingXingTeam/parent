@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface OtherTeacherViewController : UIViewController
-@property (nonatomic, copy)NSString *KTitle;
-@property (nonatomic, copy)NSString *teacherID;
+@property (nonatomic, copy) NSString *KTitle;
+@property (nonatomic, copy) NSString *teacherID;
+@property (nonatomic, copy) NSString *class_idStr;
+
 @end

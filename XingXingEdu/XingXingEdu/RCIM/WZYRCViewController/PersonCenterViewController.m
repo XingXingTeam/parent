@@ -121,28 +121,213 @@
 
 }
 
+#pragma mark ********** 聊天 按钮 先判断 身份 **********
 - (void)chatButttonClick:(UIButton *)button{
     
 //    NSLog(@"userInfo == %@", _showUserInfo);
-    
-    if (self.showUserInfo) {
-                WMConversationViewController *_conversationVC = [[WMConversationViewController alloc]init];
-                _conversationVC.conversationType = ConversationType_PRIVATE;
-        
-                _conversationVC.targetId = self.showUserInfo.userId;
-                _conversationVC.title = [NSString stringWithFormat:@"%@",self.showUserInfo.name];
-                [self.navigationController pushViewController:_conversationVC animated:YES];
-            }else{
-                WMConversationViewController *_conversationVC = [[WMConversationViewController alloc]init];
-                _conversationVC.conversationType = ConversationType_PRIVATE;
-                _conversationVC.targetId = [RCIM sharedRCIM].currentUserInfo.userId;
-                _conversationVC.title = [NSString stringWithFormat:@"%@",[RCIM sharedRCIM].currentUserInfo.name];
-                [self.navigationController pushViewController:_conversationVC animated:YES];
-            }
-
+    [self judgePosition];
 
 }
 
+
+#pragma Mark========== 判断身份 ========
+- (void)judgePosition{
+    /*
+     【聊天--发起聊天(获取双方token)]
+     接口类型:2
+     接口:
+     http://www.xingxingedu.cn/Global/chat_token
+     传参:
+     other_xid	//对方xid
+     
+     ★其他结果需提醒用户
+     code:5	//对方不在你的好友名单中,不能发起聊天,是否要添加好友?(触发添加好友请求接口)
+     code:6	//对方设置了不接受您的消息!无法发起聊天!
+     code:7	//你不在对方的好友名单中,是否要添加好友?
+     code:8 //你在对方的黑名单中,无法发起聊天!
+     */
+    NSString *urlStr = @"http://www.xingxingedu.cn/Global/chat_token";
+    
+    NSString *otherXid = _showUserInfo.userId;
+    NSDictionary *params = @{@"appkey":APPKEY,
+                             @"backtype":BACKTYPE,
+                             @"xid":parameterXid,
+                             @"user_id":parameterUser_Id,
+                             @"user_type":USER_TYPE,
+                             @"other_xid":otherXid
+                             };
+    [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
+        //
+        NSLog(@"%@", responseObj);
+        
+        if ([responseObj[@"code"] integerValue] == 1) {
+            //开始聊天
+            [self startChart];
+        }else if ([responseObj[@"code"] integerValue] == 5){
+            
+            [SVProgressHUD showInfoWithStatus:@"不是好友,不能发起聊天!"];
+            //添加好友
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                //请求 添加 好友
+            [self addFriendRequest];
+            });
+
+        }else if ([responseObj[@"code"] integerValue] == 6){
+            [SVProgressHUD showInfoWithStatus:@"对方设置了不接受您的消息!无法发起聊天!"];
+        }else if ([responseObj[@"code"] integerValue] == 7){
+            [SVProgressHUD showInfoWithStatus:@"你不在对方的好友名单中,不能发起聊天!"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                //请求 添加 好友
+            [self addFriendRequest];
+            });
+        }else if ([responseObj[@"code"] integerValue] == 8){
+            [SVProgressHUD showInfoWithStatus:@"你在对方的黑名单中,无法发起聊天!"];
+        }
+        
+        
+    } failure:^(NSError *error) {
+        //
+        [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
+    }];
+    
+
+}
+
+#pragma Mark %%%%%%%%%%%%%%%% //请求 添加 好友 %%%%%%%%%%%%%%%%%
+- (void)addFriendRequest{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"添加好友" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        //
+        textField.placeholder = @"申请备注";
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //
+        [self requestAddFriend];
+    }];
+    [alert addAction:cancel];
+    [alert addAction:ok];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+- (void)requestAddFriend{
+    /*
+     【聊天--发起添加好友请求】
+     接口类型:2
+     接口:
+     http://www.xingxingedu.cn/Global/action_friend_request
+     传参:
+     other_xid	//对方xid  (测试可用xid: 18886390,18886391,18886393(允许任何人通过),18886378(已是好友),18886177(在对方黑名单中))
+     
+     //         ★其他结果需提醒用户
+     //         code:4	//不能请求自己
+     //         code:5	//已经是好友了(不能对好友发起请求)
+     //         code:6	//对方在我的黑名单中,无法发起请求!
+     //         code:7	//您已经在对方黑名单中,无法发起请求!
+     //         code:8	//不能重复对同一个人发起请求!
+     //         code:9	//对方已同意,可以直接聊天了 (对方设置了任何人请求直接通过)
+     //         code:10	//添加成功 (单方面删除好友,又添加好友)
+     */
+    NSString *urlStr = @"http://www.xingxingedu.cn/Global/action_friend_request";
+    
+    NSString *otherXid = _showUserInfo.userId;
+    NSDictionary *params = @{@"appkey":APPKEY,
+                             @"backtype":BACKTYPE,
+                             @"xid":parameterXid,
+                             @"user_id":parameterUser_Id,
+                             @"user_type":USER_TYPE,
+                             @"other_xid":otherXid
+                             };
+    [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
+        //
+//        NSLog(@"%@", responseObj);
+        if ([responseObj[@"code"] integerValue] == 1) {
+            [SVProgressHUD showSuccessWithStatus:@"请求发送成功!"];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        }else if ([responseObj[@"code"] integerValue] == 4){
+            [SVProgressHUD showInfoWithStatus:@"不能请求自己!"];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+
+        }else if ([responseObj[@"code"] integerValue] == 5){
+            [SVProgressHUD showInfoWithStatus:@"对方已经是您的好友!"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+
+        }else if ([responseObj[@"code"] integerValue] == 6){
+            [SVProgressHUD showInfoWithStatus:@"对方在您的黑名单中,无法发起请求!"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+
+        }else if ([responseObj[@"code"] integerValue] == 7){
+            [SVProgressHUD showInfoWithStatus:@"您已经在对方黑名单中,无法发起请求!"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+
+        }else if ([responseObj[@"code"] integerValue] == 8){
+            [SVProgressHUD showInfoWithStatus:@"不能重复对同一个人发起请求!"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+
+        }else if ([responseObj[@"code"] integerValue] == 9){
+            [SVProgressHUD showInfoWithStatus:@"对方已同意,可以直接聊天了(对方设置了任何人请求直接通过)"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+
+        }else if ([responseObj[@"code"] integerValue] == 10){
+            [SVProgressHUD showInfoWithStatus:@"添加成功!"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+            
+        }
+
+        
+    } failure:^(NSError *error) {
+        //
+        [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
+    }];
+    
+}
+
+
+
+
+#pragma mark ========== 开始聊天 ============
+- (void)startChart{
+
+    if (self.showUserInfo) {
+        WMConversationViewController *_conversationVC = [[WMConversationViewController alloc]init];
+        _conversationVC.conversationType = ConversationType_PRIVATE;
+        
+        _conversationVC.targetId = self.showUserInfo.userId;
+        _conversationVC.title = [NSString stringWithFormat:@"%@",self.showUserInfo.name];
+        [self.navigationController pushViewController:_conversationVC animated:YES];
+    }else{
+        WMConversationViewController *_conversationVC = [[WMConversationViewController alloc]init];
+        _conversationVC.conversationType = ConversationType_PRIVATE;
+        _conversationVC.targetId = [RCIM sharedRCIM].currentUserInfo.userId;
+        _conversationVC.title = [NSString stringWithFormat:@"%@",[RCIM sharedRCIM].currentUserInfo.name];
+        [self.navigationController pushViewController:_conversationVC animated:YES];
+    }
+
+}
+
+#pragma mark ======= 查看朋友圈 =============
 - (void)seeFriendCirileButtonClick:(UIButton *)button{
     XXEFriendMyCircleViewController *myCircleVc = [[XXEFriendMyCircleViewController alloc] init];
     myCircleVc.otherXid = self.showUserInfo.userId;

@@ -138,7 +138,7 @@
         
     } failure:^(NSError *error) {
         //
-        [SVProgressHUD showWithStatus:@"网络不通,请检查网络!"];
+        [SVProgressHUD showErrorWithStatus:@"网络不通,请检查网络!"];
     }];
 }
 

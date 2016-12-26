@@ -1,0 +1,55 @@
+dependencies: \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/Homepage/C/HomepageViewController.m \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/Homepage/C/HomepageViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/Scratchablelatexage/mypage/shezhiViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/Scratchablelatexage/flowerViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/Scratchablelatexage/uniltyi/CPTextViewPlaceholder.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/Register/View/WJCommboxView.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/XXEXingCommunity/Controller/XXEXingCommunityViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/FriendCirclePage/Controller/XXEBaseViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/Scratchablelatexage/mypage/noticeViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/HeadImage/AddBabyViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/XingXingStore/Controller/StoreHomePageViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Base.framework/Headers/BMKBaseComponent.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Base.framework/Headers/BMKGeneralDelegate.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Base.framework/Headers/BMKMapManager.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Base.framework/Headers/BMKTypes.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Base.framework/Headers/BMKUserLocation.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/Pods/BaiduMapKit/BaiduMapKit/BaiduMapAPI_Base.framework/Headers/BMKVersion.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/XingClassRoom/Map/BMKMapViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/Comments/Controller/CommentsRootTabbarViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/XingXingStore/Controller/CheckInViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/WZYBabyInfomationViewController\ /WZYStudentCenter/ViewController/WZYBabyCenterViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/MainViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/QHNavKT/QHNavSliderMenu.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/QHNavKT/QHUtil/QHHead.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/QHNavKT/QHUtil/macrodefine.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/QHNavKT/QHUtil/Util/QHUtil.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/QHNavKT/QHUtil/Util/QHUtilAss.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/QHNavKT/QHUtil/Categorys/NSObject+DataSecurity.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/QHNavKT/QHUtil/Categorys/AlertViewWithBlockOrSEL.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/QHNavKT/QHUtil/Categorys/UIView+QHUIViewCtg.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/QHNavKT/QHUtil/Categorys/NSString+QHNSStringCtg.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/QHNavKT/QHUtil/Categorys/UILabel+QHLabelCtg.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/QHNavKT/QHUtil/Categorys/UIButton+QHButtonCtg.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/VideoMonitor/VideoMonitorViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/HeadImage/addbaby/MyHeadViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/HeadImage/Ohomepeople/OtherPeopleViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/HeadImage/ClassEdit/ClassEditInfoViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/HeadImage/SchoolInfo/ClassEditViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/HeadImage/FlowerBasket/Controller/FlowerBasketViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/RCIM/RcRootTabbarViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/XingXingStore/Controller/RootTabbarViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/ClassFi/ClassAlbumViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/ClassFi/ClassTelephoneViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/ClassHomework/Controller/XXEHomeworkViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/Cookbook/SchoolRecipesViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/WZYLogoDetail\ /Controller/LogoTabBarController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/Register/Controller/AuthenticationViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/WZYBabyInfomationViewController\ /WZYStudentCenter/ViewController/WZYAddBabyViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/xingxingEdu/LandingpageViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/ClassInformation/XXESchoolTimetableViewController.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/WZYHomePageHeadImageAnimation/ZJCircularBtn.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/RCIM/RCDataManager/RCDataManager.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/RCIM/View/RCUserInfo+Addition.h \
+  /Users/mac/Desktop/teacher备份/parent-12-26/XingXingEdu/XingXingEdu/Homepage/V/XXENewCourseView.h

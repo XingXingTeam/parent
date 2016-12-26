@@ -50,7 +50,7 @@
         imageView.x = i * scrollW;
         //显示图片
         NSString *name = [NSString stringWithFormat:@"qidongtu%d",i+1];
-        NSLog(@"%@",name);
+//        NSLog(@"%@",name);
         imageView.image = [UIImage imageNamed:name];
         [scrollView addSubview:imageView];
         //如果是最后一个ImageView,就往里面加入左划手势

@@ -125,8 +125,10 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 //    [self createSchoolTypeCombox];
-    
-    [self.navigationController.navigationBar setTintColor:UIColorFromRGB(0, 170, 42)];
+//    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor],
+//                                               NSFontAttributeName :[UIFont systemFontOfSize:18]
+//                                               };
+//    [self.navigationController.navigationBar setTintColor:UIColorFromRGB(0, 170, 42)];
 }
 
 
@@ -1020,7 +1022,7 @@
  http://www.xingxingedu.cn/Parent/baby_study_sch
  
  传参:
- baby_id		//孩子id
+ baby_id	//孩子id
  school_id	//学校id
  sch_type	//学校类型代号 (幼儿园/小学/中学/培训机构 1/2/3/4)
  class_id	//班级id
@@ -1047,13 +1049,15 @@
             [self presentViewController:tabBarControllerConfig animated:YES completion:nil];
 
         });
-
-        
-        
        //上海
     }else if([codeStr isEqualToString:@"5"]){
         
-        [SVProgressHUD showErrorWithStatus:@"您已添加过这个班级!"];
+        [SVProgressHUD showErrorWithStatus:@"您已申请过,正在审核中!"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            XXETabBarViewController *tabBarControllerConfig = [[XXETabBarViewController alloc]init];
+            [self presentViewController:tabBarControllerConfig animated:YES completion:nil];
+            
+        });
     }else{
         [SVProgressHUD showErrorWithStatus:@"您的信息提交失败,请重新提交!"];
         

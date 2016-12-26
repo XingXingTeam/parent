@@ -16,7 +16,8 @@
 #import "CPTextViewPlaceholder.h"
 #import "WJCommboxView.h"
 
-#import "XingXingXingXingCommunityViewController.h"
+//#import "XingXingXingXingCommunityViewController.h"
+#import "XXEXingCommunityViewController.h"
 #import "noticeViewController.h"
 #import "addbabyViewController.h"
 #import "StoreHomePageViewController.h"
@@ -36,12 +37,10 @@
 #import "FlowerBasketViewController.h"
 #import "RcRootTabbarViewController.h"
 #import "RootTabbarViewController.h"
-#import "MyTabBarController.h"
 #import "AFNetworking.h"
 #import "ClassAlbumViewController.h"
-//#import "ClassSubjectViewController.h"
 #import "ClassTelephoneViewController.h"
-#import "ClassHomeworkViewController.h"
+#import "XXEHomeworkViewController.h"
 #import "SchoolRecipesViewController.h"
 #import "LogoTabBarController.h"
 #import "AuthenticationViewController.h"
@@ -63,7 +62,6 @@
 
 #import "XXENewCourseView.h"
 
-#import "AppDelegate.h"
 
 @interface HomepageViewController ()<UIScrollViewDelegate, ZJCircularBtnDelegate, UIAlertViewDelegate>
 {
@@ -99,7 +97,6 @@
 
     UIScrollView * _scrollView;
 
-    MyTabBarController *_tbBar;
     NSString *coin_able;
     NSString *fbasket_able;
     //孩子 得到的小红花
@@ -162,6 +159,9 @@
     //宝贝 性别 数组
     NSMutableArray *babySexArray;
     
+    //判断当前孩子是否申请过班级:当学校信息为空且examine_condit=0的时候才给提示
+    NSMutableArray *examine_conditArray;
+    
     //请求参数
     NSString *parameterXid;
     NSString *parameterUser_Id;
@@ -169,10 +169,9 @@
 }
 
 
-
 @property(nonatomic,strong) WJCommboxView *schoolNameCombox;
 @property (nonatomic,strong) WJCommboxView *gradeAndClassbox;
-@property(nonatomic ,strong)RcRootTabbarViewController *tabVC;
+
 //学校id
 @property (nonatomic, copy) NSString *schoolId;
 //年级
@@ -186,8 +185,6 @@
 @property (nonatomic, strong) UIView *dimBackgroundView;
 @property (nonatomic, strong) NSMutableArray *pictureArray;
 
-@property(nonatomic ,strong)UIView *systemNotificationBadgeView;
-@property(nonatomic ,strong)UIView *chatBadgeView;
 
 @end
 
@@ -213,12 +210,6 @@
      [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
-//    if (self.tabVC != nil) {
-//        self.tabVC = nil;
-//    }
-    
-//    self.tabVC = [[RcRootTabbarViewController alloc] init];
-    
     flower = @"";
     fbasket_able = @"";
     coin_able = @"";
@@ -242,14 +233,6 @@
     [_schoolNameCombox.listTableView reloadData];
     [_gradeAndClassbox.listTableView reloadData];
     [self initNewCourseView];
-    
-    if ([RCIMClient sharedRCIMClient].getTotalUnreadCount != 0) {
-        self.chatBadgeView.hidden = NO;
-    }else {
-        self.chatBadgeView.hidden = YES;
-    }
-    
-    [self createData];
 
 }
 - (void)dealloc{
@@ -294,31 +277,20 @@
 //    NSLog(@"%@ == %@ == %@", [DEFAULTS objectForKey:@"SCHOOL_ID"], [DEFAULTS objectForKey:@"CLASS"], [DEFAULTS objectForKey:@"BABYID"]);
 }
 
-////创建通知
-//-(void)creatNotification{
-//    UILocalNotification *n = [[UILocalNotification alloc] init];
-//    n.fireDate = [NSDate dateWithTimeIntervalSinceNow:100000000000000];
-//    n.repeatInterval = 0;
-//    n.alertBody = @"生日快乐！";
-////@"生日快乐";
-//    n.applicationIconBadgeNumber = [UIApplication sharedApplication].scheduledLocalNotifications.count + 1;
-//    n.userInfo = @{@"notiId":@"1"};
-//    [[UIApplication sharedApplication] scheduleLocalNotification:n];
-//    
-//}
+//创建通知
+-(void)creatNotification{
+    UILocalNotification *n = [[UILocalNotification alloc] init];
+    n.fireDate = [NSDate dateWithTimeIntervalSinceNow:100000000000000];
+    n.repeatInterval = 0;
+    n.alertBody = @"生日快乐！";
+//@"生日快乐";
+    n.applicationIconBadgeNumber = [UIApplication sharedApplication].scheduledLocalNotifications.count + 1;
+    n.userInfo = @{@"notiId":@"1"};
+    [[UIApplication sharedApplication] scheduleLocalNotification:n];
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(remoteNotification:) name:kRemoteNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(systemMessage:) name:kSystemMessage object:nil];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatNotification:) name:kChatNotification object:nil];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatRemoteNotification:) name:kChatRemoteNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didReceiveMessageNotification:)name:RCKitDispatchMessageNotification object:nil];
     
     if ([XXEUserInfo user].login){
         parameterXid = [XXEUserInfo user].xid;
@@ -330,13 +302,11 @@
 
     buttonPicArray = [[NSArray alloc] initWithObjects:@"实时监控icon98x134", @"相册icon98x134", @"课程表icon98x134", @"通讯录icon98x134", @"聊天icon98x134", @"点评icon98x134", @"作业icon98x134", @"食谱icon98x134", @"猩天地icon98x134", @"猩猩商城icon98x134", @"", @"", nil];
     
-    self.tabVC = [[RcRootTabbarViewController alloc] init];
-    
     //设置 背景图片
     [self settingBackgroundImageView];
     
     //创建 通知
-//    [self creatNotification];
+    [self creatNotification];
     
     [self createLabels];
     
@@ -345,51 +315,6 @@
 //    融云的初始化
    [self connectionFromRongServer];
     
-}
-
-
-- (void)remoteNotification:(NSNotification *)notification {
-    //    NSString *type = notification.userInfo[@"type"];
-    //    if ([type isEqualToString:@"1"] || [type isEqualToString:@"2"] ||[type isEqualToString:@"4"] ) {
-    //    }else if ([type isEqualToString:@"3"]) {
-    //
-    //    }
-    [self pushToXXENotificationViewController];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRemoteNotification object:nil];
-}
-
-- (void)systemMessage:(NSNotification *)notification {
-    self.systemNotificationBadgeView.hidden = NO;
-    //    [[NSNotificationCenter defaultCenter] removeObserver:self name:kSystemMessage object:nil];
-}
-
-- (void)chatNotification:(NSNotification *)notification {
-    //    [self pushToChatVC];
-    
-    //    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatNotification object:nil];
-}
-
-- (void)chatRemoteNotification:(NSNotification *)notification {
-//    [self pushToChatVC];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kChatRemoteNotification object:nil];
-}
-
-- (void)didReceiveMessageNotification:(NSNotification *)notification {
-    //获取数据
-    [self createData];
-}
-
-- (void)pushToXXENotificationViewController {
-    
-    if (self.systemNotificationBadgeView) {
-        self.systemNotificationBadgeView.hidden = YES;
-    }
-    
-    noticeViewController * forVC = [[noticeViewController alloc]init];
-    forVC.hidesBottomBarWhenPushed =YES;
-    [self.navigationController pushViewController:forVC animated:YES];
 }
 
 //MARK: - 新手教程
@@ -493,10 +418,8 @@
     downBackgroundImageView.userInteractionEnabled = YES;
 
     [self.view addSubview:downBackgroundImageView];
-    
     //创建 十个 按钮
-    [self createButtons];
-
+    [self  createButtons];
     
 }
 
@@ -557,9 +480,6 @@
     
 //    NSLog(@"params === %@", params);
     
-    //远程推送跳转
-    AppDelegate *appdelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    
     [WZYHttpTool post:urlStr params:params success:^(id responseObj) {
         //
 //        NSLog(@"首页  数据 ==== %@", responseObj);
@@ -568,7 +488,7 @@
             NSDictionary *dict =[responseObj objectForKey:@"data"];
             
 //            NSLog(@"首页 === %@", dict);
-                        //星币//花篮  //红花 //等级
+        //星币//花篮  //红花 //等级
             
             if ([dict[@"coin_able"]  length] >= 5) {
             
@@ -614,11 +534,14 @@
             
                         //孩子 性别
                         babySexArray = [[NSMutableArray alloc] init];
-            
+                        //
+                        examine_conditArray = [[NSMutableArray alloc] init];
 //            NSLog(@"baby_infoArr === %@", baby_infoArr);
             
                        if (baby_infoArr.count != 0) {
                            for (NSDictionary *dic in baby_infoArr) {
+                               
+                            [examine_conditArray addObject:dic[@"examine_condit"]];
                                
                                //baby_id
                                [baby_idArray addObject:dic[@"baby_id"]];
@@ -671,16 +594,10 @@
                         [self updateLabelInfo];
 
                         [self updateBayInfomaion:offSet];
-                        
-                        if ([appdelegate.userInfo[@"aps"][@"sound"] isEqualToString:@"sound"]) {
-                            [self pushToXXENotificationViewController];
-                        }else if ([appdelegate.userInfo[@"aps"][@"sound"] isEqualToString:@"default"]){
-                            //            [self pushToChatVC];
-                        }
-                        appdelegate.userInfo = nil;
+                    
                     });
         
-        
+       
         
     } failure:^(NSError *error) {
         //
@@ -732,12 +649,6 @@
     
     //scrollView
     _scrollView.contentSize =CGSizeMake(120 * kWidth / 375 *(image.count+1), 0);
-    
-    if (_scrollView.subviews.count != 0) {
-        for (UIView *view in _scrollView.subviews) {
-            [view removeFromSuperview];
-        }
-    }
     
     for (int a =0; a<(image.count+1); a++) {
         //添加➕号
@@ -937,6 +848,8 @@
     commboxIDArray = [[NSMutableArray alloc] init];
     
 //    NSLog(@"%@", school_infoArray);
+    
+    
     if (school_infoArray.count != 0) {
         if ([school_infoArray[index] count] == 0) {
             commboxSchoolArray = [NSMutableArray arrayWithCapacity:0];
@@ -954,10 +867,15 @@
 //            _gradeAndClassbox.dataArray = commboxGradeAndClassArray;
             
             logoImageView.image = [UIImage imageNamed:@"schoollogo(1)172x172"];
+
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请完善该宝贝学校信息" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-            
-            [alert show];
+            if ([examine_conditArray count] != 0) {
+                if ([examine_conditArray[index] integerValue] == 0) {
+                    
+                    [self showPrefectBabySchoolInfoAlert];
+                }
+
+            }
             
         }else{
             for (NSDictionary *dic in school_infoArray[index]) {
@@ -994,6 +912,16 @@
     
 }
 
+#pragma mark ********* 
+- (void)showPrefectBabySchoolInfoAlert{
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请完善该宝贝学校信息" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    
+    [alert show];
+
+}
+
+
 #pragma mark -
 #pragma mark delegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -1007,11 +935,12 @@
 //            contentOffset.x = offSet;
 //            [_scrollView setContentOffset:contentOffset animated:NO];
 
-            
             break;
         case 1:
         {
             //确定
+            
+            
             ClassEditViewController *classEditVC = [[ClassEditViewController alloc] init];
             classEditVC.hidesBottomBarWhenPushed = YES;
             classEditVC.fromPerfectInfo = @"fromHomePage";
@@ -1325,38 +1254,16 @@
     /**
      *  通知
      */
-    UIImage *notificationIcon = [UIImage imageNamed:@"通知38x50"];
     hurnBtn = [HHControl createButtonWithFrame:CGRectMake(Width * 3 + Width / 2 - 25 * kWidth / 375 / 2, 5, 25 * kWidth / 375, 32 * kWidth / 375) backGruondImageName:@"通知38x50" Target:self Action:@selector(onClickhurn:) Title:nil];
     [middleBackgroundView addSubview:hurnBtn];
 
-    self.systemNotificationBadgeView = [[UIView alloc] init];
-    self.systemNotificationBadgeView.backgroundColor = [UIColor redColor];
-    self.systemNotificationBadgeView.layer.cornerRadius = 4;
-    self.systemNotificationBadgeView.layer.masksToBounds = YES;
-    [hurnBtn addSubview:self.systemNotificationBadgeView];
-    [self.systemNotificationBadgeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(hurnBtn).offset(notificationIcon.size.width / 2 + 6);
-        make.centerY.equalTo(hurnBtn).offset(-notificationIcon.size.height/2);
-        make.width.mas_equalTo(8);
-        make.height.mas_equalTo(8);
-    }];
-    self.systemNotificationBadgeView.hidden = YES;
+    
 }
 
 
 #pragma mark - createButtons---------------------------------------
 - (void)createButtons{
 
-//    int buttonCount;
-//    switch ([GlobalVariable shareInstance].appleVerify) {
-//        case AppleVerifyHave:
-//            buttonCount = 11;
-//            break;
-//        default:
-//            buttonCount =  12;
-//            break;
-//    }
-    
     //创建 十二宫格  三行、四列
     int totalLine = 4;
     int buttonCount = 12;
@@ -1380,19 +1287,7 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(buttonX, buttonY, buttonWidth, buttonHeight);
         button.backgroundColor = [UIColor whiteColor];
-        
-        switch ([GlobalVariable shareInstance].appleVerify) {
-            case AppleVerifyHave:
-                if (i != 9) {
-                    [button setImage: [UIImage imageNamed:buttonPicArray[i]] forState:UIControlStateNormal];
-                }
-                break;
-            default:
-                [button setImage: [UIImage imageNamed:buttonPicArray[i]] forState:UIControlStateNormal];
-                break;
-        }
-        
-        
+        [button setImage: [UIImage imageNamed:buttonPicArray[i]] forState:UIControlStateNormal];
         
         if (i == 0) {
             //实时监控
@@ -1411,26 +1306,6 @@
             
         }else if (i == 4){
             //聊天
-            
-            self.chatBadgeView = [[UIView alloc] init];
-            self.chatBadgeView.layer.cornerRadius = 4;
-            self.chatBadgeView.layer.masksToBounds = YES;
-            self.chatBadgeView.backgroundColor = [UIColor redColor];
-            [button addSubview:self.chatBadgeView];
-            [self.chatBadgeView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(button).offset(2.5 + 2);
-                make.trailing.equalTo(button).offset(-2.5 - 7);
-                make.width.mas_equalTo(8);
-                make.height.mas_equalTo(8);
-            }];
-            
-            if ([RCIMClient sharedRCIMClient].getTotalUnreadCount == 0) {
-                self.chatBadgeView.hidden = YES;
-            }else {
-                self.chatBadgeView.hidden = NO;
-            }
-            
-            
             [button addTarget:self action:@selector(onClickxt:) forControlEvents:UIControlEventTouchUpInside];
             
         }else if (i == 5){
@@ -1451,15 +1326,7 @@
             
         }else if (i == 9){
             //猩商城
-            
-            switch ([GlobalVariable shareInstance].appleVerify) {
-                case AppleVerifyHave:
-                    break;
-                default:
-                    [button addTarget:self action:@selector(onClickxs:) forControlEvents:UIControlEventTouchUpInside];
-                    break;
-            }
-
+            [button addTarget:self action:@selector(onClickxs:) forControlEvents:UIControlEventTouchUpInside];
             
         }
         
@@ -1469,7 +1336,7 @@
 
 }
 
-
+#pragma mark ========= 用账号 登录/注册 界面 ==========
 - (void)onClickRegister{
     
   LandingpageViewController *registerVC=[[LandingpageViewController alloc]init];
@@ -1477,13 +1344,22 @@
     [self.navigationController pushViewController:registerVC animated:NO];
 
 }
+
+#pragma mark ========= 作业 ============
 - (void)onClickAplace:(UIButton*)btn{
-    
-    ClassHomeworkViewController *classHomeVC =[[ClassHomeworkViewController alloc]init];
+    //XXEHomeworkViewController
+    XXEHomeworkViewController *classHomeVC =[[XXEHomeworkViewController alloc]init];
     classHomeVC.hidesBottomBarWhenPushed =YES;
+    classHomeVC.schoolId = _schoolId;
+    classHomeVC.classId = _classStr;
     [self.navigationController pushViewController:classHomeVC animated:NO];
+//    ClassHomeworkViewController *classHomeVC =[[ClassHomeworkViewController alloc]init];
+//    classHomeVC.hidesBottomBarWhenPushed =YES;
+//    [self.navigationController pushViewController:classHomeVC animated:NO];
     
 }
+
+#pragma mark ======= 食谱 ============
 - (void)tecentBtn:(UIButton*)btn{
 
     SchoolRecipesViewController *schoolRecipeVC =[[SchoolRecipesViewController alloc]init];
@@ -1500,12 +1376,15 @@
     
 }
 
+#pragma Mark ********* 实时监控 ***************
 - (void)onClicksj:(UIButton *)button
 {
     VideoMonitorViewController *videoMonitorVC =[VideoMonitorViewController new];
     videoMonitorVC.hidesBottomBarWhenPushed =YES;
     [self.navigationController pushViewController:videoMonitorVC animated:NO];
 }
+
+#pragma mark ======== 猩商城 =================
 - (void)onClickxs:(UIButton *)button
 {
     RootTabbarViewController *rootTabbarVC =[[RootTabbarViewController alloc]init];
@@ -1513,6 +1392,8 @@
     [self.navigationController pushViewController:rootTabbarVC animated:NO];
 
 }
+
+#pragma Mark ======== 班级相册 =============
 - (void)onClickbx:(UIButton *)button
 {
     ClassAlbumViewController *classAlbumVC =[[ClassAlbumViewController alloc]init];
@@ -1520,12 +1401,21 @@
     [self.navigationController pushViewController:classAlbumVC animated:NO];
 
 }
+
+#pragma Mark &&&&&&&&&& 猩天地 &&&&&&&&&&&&&&
 - (void)onClickfx:(UIButton *)button
 {
-    XingXingXingXingCommunityViewController *forVC = [[XingXingXingXingCommunityViewController alloc]init];
+    //XXEXingCommunityViewController
+    XXEXingCommunityViewController *forVC = [[XXEXingCommunityViewController alloc]init];
     forVC.hidesBottomBarWhenPushed =YES;
     [self.navigationController pushViewController:forVC animated:NO];
+    
+//    XingXingXingXingCommunityViewController *forVC = [[XingXingXingXingCommunityViewController alloc]init];
+//    forVC.hidesBottomBarWhenPushed =YES;
+//    [self.navigationController pushViewController:forVC animated:NO];
 }
+
+#pragma Mark ---------- 点评 --------------
 - (void)onClickld:(UIButton *)button
 {
     CommentsRootTabbarViewController *commentHomeVC =[[CommentsRootTabbarViewController alloc]init];
@@ -1534,9 +1424,9 @@
         
     }];
 }
-/**
- *  课程表
- */
+
+
+#pragma Mark *********** 课程表 *************
 - (void)onClicklt:(UIButton *)button
 {
     
@@ -1546,34 +1436,29 @@
 
 }
 
-//通讯录
+#pragma mark ############# 班级通讯录 ###############
 - (void)onClickwq:(UIButton*)button{
     ClassTelephoneViewController *classTeleVC =[[ClassTelephoneViewController alloc]init];
     classTeleVC.hidesBottomBarWhenPushed =YES;
     [self.navigationController pushViewController:classTeleVC animated:NO];
 }
+
+#pragma Mark $$$$$$$$$$$$$ 聊天 $$$$$$$$$$$$$$
 - (void)onClickxt:(UIButton *)button
 {
-    
-    NSLog(@"----聊天----");
-    //            [GlobalVariable shareInstance].chatBagdeType = ChatBadgeNone;
-    if ([XXEUserInfo user].login) {
-        if (self.tabVC == nil) {
-            self.tabVC = [[RcRootTabbarViewController alloc] init];
-        }
-        self.tabVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:self.tabVC animated:YES];
-    }else{
-        [SystemPopView showSystemPopViewWithTitle:@"请先登录" vc:self];
-    }
-    
-    
-    
-    
+
 //    NSLog(@"----====---  %@", [NSNumber numberWithBool:[XXEUserInfo user].login]);
-//    [self pushToXXENotificationViewController];
     
+    if ([XXEUserInfo user].login) {
+        RcRootTabbarViewController *classRoomVC =[[RcRootTabbarViewController alloc]init];
+        classRoomVC.hidesBottomBarWhenPushed =YES;
+        [self.navigationController pushViewController:classRoomVC animated:NO];
+    }else {
+        [SVProgressHUD showInfoWithStatus:@"请用账号登录"];
+    }
 }
+
+#pragma Mark &&&&&&&&&&& 小红花 &&&&&&&&&&&&&&&
 -(void)onClickflower:(UIButton *)button
 {
     flowerViewController * forVC=[[flowerViewController alloc]init];
@@ -1581,6 +1466,8 @@
     [self.navigationController pushViewController:forVC animated:NO];
 
 }
+
+#pragma mark =========== 花篮 =================
 -(void)oncliCkFlowers:(UIButton *)button
 {
     FlowerBasketViewController *flowerBasketVC =[[FlowerBasketViewController alloc]init];
@@ -1588,6 +1475,7 @@
     [self.navigationController pushViewController:flowerBasketVC animated:NO];
 }
 
+#pragma mark $$$$$$$$$$$ 猩币 签到 $$$$$$$$$$$$$
 -(void)onClickxingbi:(UIButton *)button
 {  
     CheckInViewController *storeHomeVC =[[CheckInViewController alloc]init];
@@ -1598,9 +1486,12 @@
 -(void)onClickhurn:(UIButton *)button
 {
     
-    [self pushToXXENotificationViewController];
+     noticeViewController * forVC = [[noticeViewController alloc]init];
+    forVC.hidesBottomBarWhenPushed =YES;
+    [self.navigationController pushViewController:forVC animated:NO];
 }
-//LOGO
+
+#pragma mark ========== LOGO =============
 -(void)onClickLOGO:(UIButton *)button
 {
     LogoTabBarController *logoViewController = [[LogoTabBarController alloc] init];

@@ -161,7 +161,8 @@ char* const buttonKey = "buttonKey";
         [cell.headImgV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",picURL,KTHead_imgMArr[indexPath.section][indexPath.row]]] placeholderImage:[UIImage imageNamed:@"人物头像占位图136x136@2x"]];
     }
     
-    
+    cell.headImgV.layer.cornerRadius = cell.headImgV.size.width / 2;
+    cell.headImgV.layer.masksToBounds = YES;
     cell.headImgV.userInteractionEnabled =YES;
     
     if (indexPath.section ==0) {
@@ -447,12 +448,12 @@ char* const buttonKey = "buttonKey";
 
 - (void)iconTap:(UITapGestureRecognizer*)tap{
    // NSLog(@">>>>>>>>>>>>>>tapViewTag>>>>>>>>>>>>>>>>>>>>>%ld",tap.view.tag);
-if ([XXEUserInfo user].login){
+   if ([XXEUserInfo user].login){
     KTClassTelephoneBabyViewController *telephoneBabyVC =[[KTClassTelephoneBabyViewController alloc]init];
     telephoneBabyVC.idKT =KTIDMArr[0][tap.view.tag-100];
     [self.navigationController pushViewController:telephoneBabyVC animated:NO];
 }else{
-[SVProgressHUD showInfoWithStatus:@"请用账号登录后查看"];
+    [SVProgressHUD showInfoWithStatus:@"请用账号登录后查看"];
  }
     
 }

@@ -9,8 +9,6 @@
 #import "XXETabBarViewController.h"
 #import "SchoolRecipesViewController.h"
 #import "ClassAlbumViewController.h"
-#import "ClassHomeworkViewController.h"
-//#import "ClassRoomHomePageViewController.h"
 #import "XXEChatPageViewController.h"
 #import "ClassSubjectViewController.h"
 #import "ClassTelephoneViewController.h"

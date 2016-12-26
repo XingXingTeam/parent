@@ -23,6 +23,11 @@
 #import "CheckInViewController.h"
 #import "ChangeEmailViewController.h"
 #import "LandingpageViewController.h"
+#import "XXENavigationViewController.h"
+//更换手机号
+#import "XXEMyselfInfoOldPhoneNumViewController.h"
+
+
 @interface MyInfomationViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,VPImageCropperDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 {
    //头像
@@ -42,31 +47,13 @@
     
     UITableView *_tableView;
     NSMutableArray *dataArray;
-    NSMutableArray *detailArray;
     UIImageView *imageView;
     NSArray *headArr;
     UIAlertView *_alertView;
     NSString *urlStr;
     NSString *babyid;
     NSMutableArray *myFieldArr;
-//netdata
-//    NSString *age;
-//    NSString *coin_total;
-//    NSString *continued;
-//    NSString *email;
-//    NSString *head_img;
-//    NSString *head_img_type;
-//    NSString *idKT;
-//    NSString *lv;
-//    NSString *next_get_coin;
-//    NSString *next_grade_coin;
-//    NSString *nickname;
-//    NSString *phone;
-//    NSString *reg_tm;
-//    NSString *reKT;
-//    NSString *sex;
-//    NSString *tname;
-//    NSString *xid;
+
     UITextField *nickNameTextFiled;//昵称
     UITextField *emailTextFiled;//邮箱
     
@@ -96,12 +83,11 @@
     self.title =@"我的资料";
       self.navigationController.navigationBar.barTintColor =UIColorFromRGB(0, 170, 42);
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
+//     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     dataArray = [[NSMutableArray alloc]init];
-    detailArray = [[NSMutableArray alloc]init];
     headArr =[NSArray arrayWithObjects:@"ID40x40",@"昵称40x44",@"姓名40x40",@"年龄40x46",@"关系40x46",@"联系方式40x40",@"邮箱40x40",nil];
     [dataArray addObject:headArr];
     NSArray *arr = [NSArray arrayWithObjects:@"猩猩ID:",@"昵称:",@"姓名:",@"年龄:",@"关系:",@"手机号:",@"电子邮箱:",nil];
-    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
     [dataArray addObject:arr];
     
@@ -140,7 +126,7 @@
     [WZYHttpTool post:urlStr params:pragm success:^(id responseObj) {
         
         
-//        NSLog(@"wd == %@", responseObj);
+//        NSLog(@"我的 == %@", responseObj);
         
         if([[NSString stringWithFormat:@"%@",responseObj[@"code"]]isEqualToString:@"1"] )
         {
@@ -334,8 +320,13 @@
             
             [[XXEUserInfo user]cleanUserInfo];
             [XXEUserInfo user].login = NO;
+            
+            
             LandingpageViewController *landVC =[[LandingpageViewController alloc]init];
-            [self presentViewController:landVC animated:YES completion:nil];
+            XXENavigationViewController *navi = [[XXENavigationViewController alloc] initWithRootViewController:landVC];
+            
+            [self presentViewController:navi animated:YES completion:nil];
+//            [self.navigationController pushViewController:navi animated:YES];
         }
             break;
             
@@ -440,8 +431,19 @@
     else if (indexPath.row ==5){
         // 手机号:
         NSLog(@"手机号");
-        ChangeTeleponeViewController *chengTeleVC =[[ChangeTeleponeViewController alloc]init];
-        [self.navigationController pushViewController:chengTeleVC animated:YES];
+        NSString *phone = [NSString stringWithFormat:@"%@", contentArray[5]];
+        
+        if ([phone isEqualToString:@""]) {
+//            [self showHudWithString:@"请绑定手机号" forSecond:1.5];
+            [SVProgressHUD showInfoWithStatus:@"请绑定手机号"];
+        }else{
+            XXEMyselfInfoOldPhoneNumViewController *oldPhoneNumVC = [[XXEMyselfInfoOldPhoneNumViewController alloc] init];
+            oldPhoneNumVC.phoneStr = contentArray[5];
+            [self.navigationController pushViewController:oldPhoneNumVC animated:YES];
+        }
+
+//        ChangeTeleponeViewController *chengTeleVC =[[ChangeTeleponeViewController alloc]init];
+//        [self.navigationController pushViewController:chengTeleVC animated:YES];
         
     }
     else if (indexPath.row ==6){
@@ -453,7 +455,7 @@
             if (![showText isEqualToString:@""]) {
                 
                 if ([contentArray count] != 0) {
-                    [contentArray insertObject:showText atIndex:6];
+                    [contentArray replaceObjectAtIndex:6 withObject:showText];
                     [_tableView reloadData];
                 }
             }

@@ -23,7 +23,7 @@
         
     _distanceLabel.textColor = [UIColor redColor];
     
-    self.buttomBackground.hidden = YES;
+    
     // Initialization code
 }
 

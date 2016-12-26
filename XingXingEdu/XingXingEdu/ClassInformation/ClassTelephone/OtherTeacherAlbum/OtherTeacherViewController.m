@@ -66,25 +66,23 @@
 - (void)initData{
    
     NSString *urlStr = @"http://www.xingxingedu.cn/Parent/class_teacher_album";
-//    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    NSString *class_idStr = [DEFAULTS objectForKey:@"CLASS_ID"];
     NSString *schoolIdStr = [DEFAULTS objectForKey:@"SCHOOL_ID"];
-    
-    //    NSLog(@"aaaa///////////class_idStr----%@; schoolIdStr------%@", class_idStr, schoolIdStr);
 
-    NSDictionary *parameters = @{@"appkey":APPKEY,
-                           @"backtype":BACKTYPE,
-                           @"xid":parameterXid,
-                           @"user_id":parameterUser_Id,
-                           @"user_type":USER_TYPE,
-                           @"school_id":schoolIdStr,                        @"class_id":class_idStr,
-                           @"teacher_id":[NSString stringWithFormat:@"%@",self.teacherID],
+    NSDictionary *parameters = @{
+                                 @"appkey":APPKEY,
+                                 @"backtype":BACKTYPE,
+                                 @"xid":parameterXid,
+                                 @"user_id":parameterUser_Id,
+                                 @"user_type":USER_TYPE,
+                                 @"school_id":schoolIdStr,
+                                 @"class_id":_class_idStr,
+                                 @"teacher_id":[NSString stringWithFormat:@"%@",self.teacherID],
                            };
-    NSLog(@"parameters ==== %@", parameters);
+//    NSLog(@"parameters ==== %@", parameters);
     [WZYHttpTool post:urlStr params:parameters success:^(id responseObj) {
         //
-        NSLog(@"获取 相册 照片 === %@", responseObj);
+//        NSLog(@"获取 相册 照片 === %@", responseObj);
         if ([responseObj[@"code"] integerValue] == 1) {
             NSArray *dataArr =responseObj[@"data"];
             for (int i=0 ; i<dataArr.count; i++) {
@@ -100,30 +98,6 @@
         //
         [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
     }];
-//    // 服务器返回的数据格式
-//    mgr.responseSerializer = [AFHTTPResponseSerializer serializer]; // 二进制数据
-//    [mgr POST:urlStr parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject)
-//     {
-//         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:nil];
-//         
-//         if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
-//         {
-//             NSArray *dataArr =dict[@"data"];
-//             for (int i=0 ; i<dataArr.count; i++) {
-//                 [albumIDMArr addObject:[dataArr[i] objectForKey:@"album_id"]];
-//                 [albmNameMArr addObject:[dataArr[i] objectForKey:@"album_name"]];
-//                 [albmPicMArr addObject:[dataArr[i] objectForKey:@"album_pic"]];
-//                 [dateTmMArr addObject:[dataArr[i] objectForKey:@"date_tm"]];
-//                 [picNumMArr addObject:[dataArr[i] objectForKey:@"pic_num"]];
-//             }
-//        
-//         }
-//         [_tableView reloadData];
-//         //@"网络不通，请检查网络！"
-//     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        // [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@",error]];
-//         
-//     }];
     
 
 

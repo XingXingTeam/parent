@@ -1,6 +1,0 @@
-framework module DFCommon {
-  umbrella header "DFCommon-umbrella.h"
-
-  export *
-  module * { export * }
-}

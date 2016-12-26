@@ -119,21 +119,6 @@
     checkInText.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, maxSize.height);
     [self.view addSubview:checkInText];
     
-    if ([GlobalVariable shareInstance].appleVerify == AppleVerifyHave) {
-        UILabel *explainLbl = [[UILabel alloc] init];
-        explainLbl.font = [UIFont systemFontOfSize:16 * kScreenRatioWidth];
-        explainLbl.textColor = UIColorFromHex(0x333333);
-        explainLbl.textAlignment = NSTextAlignmentCenter;
-        explainLbl.text = @"本活动与苹果公司无关";
-        [self.view addSubview:explainLbl];
-        [explainLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(self.view);
-            make.width.mas_equalTo(self.view);
-            make.top.mas_equalTo(checkInText.mas_bottom).offset(10);
-            make.height.mas_equalTo(20);
-        }];
-    }
-    
 }
 -(void)createHistoryButton {
     UIButton*rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,22,22)];

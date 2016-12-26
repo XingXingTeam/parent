@@ -134,10 +134,8 @@
 
 /*
  【聊天--请求好友列表】
- 
  接口:
  http://www.xingxingedu.cn/Global/friend_request_list
- 
  传参:
  */
     

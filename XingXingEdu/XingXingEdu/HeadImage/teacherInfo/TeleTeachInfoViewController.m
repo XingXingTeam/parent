@@ -394,7 +394,7 @@
          
          if([[NSString stringWithFormat:@"%@",dict[@"code"]]isEqualToString:@"1"] )
          {
-             [SVProgressHUD showSuccessWithStatus:@"收藏课程成功"];
+             [SVProgressHUD showSuccessWithStatus:@"收藏成功!"];
              UIButton*rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,22,22)];
              [rightButton setBackgroundImage:[UIImage imageNamed:@"commentInfo10.png"] forState:UIControlStateNormal];
              UIBarButtonItem*rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
@@ -402,11 +402,13 @@
              [rightButton addTarget:self action:@selector(collectbtn:)forControlEvents:UIControlEventTouchUpInside];
              isCollect=!isCollect;
              
+         }else{
+             [SVProgressHUD showErrorWithStatus:@"收藏失败!"];
          }
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          //         NSLog(@"请求失败:%@",error);
-         [SVProgressHUD showErrorWithStatus:@""];
+         [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
      }];
 }
 
@@ -441,11 +443,13 @@
              self.navigationItem.rightBarButtonItem= rightItem;
              [rightButton addTarget:self action:@selector(collectbtn:)forControlEvents:UIControlEventTouchUpInside];
              isCollect=!isCollect;
+         }else{
+             [SVProgressHUD showErrorWithStatus:@"取消收藏失败!"];
          }
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          //         NSLog(@"请求失败:%@",error);
-         [SVProgressHUD showErrorWithStatus:@""];
+         [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
          
      }];
 }

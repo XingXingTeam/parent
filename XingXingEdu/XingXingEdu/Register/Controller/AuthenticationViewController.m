@@ -107,14 +107,16 @@
     codeImage.image=[UIImage imageNamed:@"验证码46x46.png"];
     [codelabel addSubview:codeImage];
     
-    code =[HHControl createTextFielfFrame:CGRectMake(CGRectGetMaxX(codelabel.frame) + kmagr, CGRectGetMaxY(phone.frame) + kmagr*2, bgView.size.width*0.4, kmagrH) font:[UIFont systemFontOfSize:14]  placeholder:@"4位数字" ];
+    code =[HHControl createTextFielfFrame:CGRectMake(CGRectGetMaxX(codelabel.frame) + kmagr, CGRectGetMaxY(phone.frame) + kmagr*2, bgView.size.width*0.3, kmagrH) font:[UIFont systemFontOfSize:14]  placeholder:@"4位数字" ];
+//    code.backgroundColor = [UIColor greenColor];
     code.clearButtonMode = UITextFieldViewModeWhileEditing;
     //密文样式
     code.secureTextEntry=YES;
     code.keyboardType=UIKeyboardTypeNumberPad;
     
     
-    yzButton = [HHControl createButtonWithFrame:CGRectMake(CGRectGetMaxX(code.frame), CGRectGetMaxY(phone.frame) + kmagr*2, 100, kmagrH) backGruondImageName:@"" Target:self Action:@selector(getValidCode:) Title:@"获取验证码"];
+    yzButton = [HHControl createButtonWithFrame:CGRectMake(CGRectGetMaxX(code.frame), CGRectGetMaxY(phone.frame) + kmagr*2, 110, kmagrH) backGruondImageName:@"" Target:self Action:@selector(getValidCode:) Title:@"获取验证码"];
+//    yzButton.backgroundColor = [UIColor yellowColor];
     yzButton.titleLabel.font=[UIFont systemFontOfSize:13];
     [yzButton setTitleColor:[UIColor colorWithRed:248/255.0f green:144/255.0f blue:34/255.0f alpha:1] forState:UIControlStateNormal];
     [bgView addSubview:yzButton];

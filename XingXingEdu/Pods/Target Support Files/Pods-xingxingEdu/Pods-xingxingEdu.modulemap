@@ -1,6 +1,0 @@
-framework module Pods_xingxingEdu {
-  umbrella header "Pods-xingxingEdu-umbrella.h"
-
-  export *
-  module * { export * }
-}

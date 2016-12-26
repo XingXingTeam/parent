@@ -65,7 +65,13 @@
     self.navigationItem.title=@"聊天首页";
     _table.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     
-//    self.tabBarController.navigationItem.title=@"聊天";
+    UIButton*rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0,0,22,22)];
+    [rightButton setImage:[UIImage imageNamed:@"rcim3.png"]forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(showMenu:)forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem*rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightButton];
+    self.tabBarController.navigationItem.rightBarButtonItem= rightItem;
+    
+    self.tabBarController.navigationItem.title=@"聊天";
     
     //    [self addFriend];
     
@@ -91,6 +97,66 @@
     [_table.header endRefreshing];
     
 }
+
+
+#pragma mark - 加号 (发起群聊、添加好友)//////////////////////////////
+/**
+ *  加号 (发起群聊、添加好友)
+ */
+-(void)showMenu:(UIButton *)button{
+    
+    NSArray *menuItems =
+    @[
+      
+//      [KxMenuItem menuItem:@"发起群聊"
+//                     image:[UIImage imageNamed:@"faqiqunliao"]
+//                    target:self
+//                    action:@selector(pushGroupChat:)],
+      
+      [KxMenuItem menuItem:@"添加好友"
+                     image:[UIImage imageNamed:@"tianjiahaoyou"]
+                    target:self
+                    action:@selector(pushAddFriend:)],
+//      
+//      [KxMenuItem menuItem:@"通讯录"
+//                     image:[UIImage imageNamed:@"contact_icon"]
+//                    target:self
+//                    action:@selector(pushAddressBook:)],
+//      
+//      [KxMenuItem menuItem:@"公众账号"
+//                     image:[UIImage imageNamed:@"public_account"]
+//                    target:self
+//                    action:@selector(pushPublicService:)],
+//      
+//      [KxMenuItem menuItem:@"添加公众号"
+//                     image:[UIImage imageNamed:@"add_public_account"]
+//                    target:self
+//                    action:@selector(pushAddPublicService:)],
+      ];
+    
+    CGRect targetFrame = self.tabBarController.navigationItem.rightBarButtonItem.customView.frame;
+    targetFrame.origin.y = targetFrame.origin.y + 15;
+    [KxMenu showMenuInView:self.tabBarController.navigationController.navigationBar.superview
+                  fromRect:targetFrame
+                 menuItems:menuItems];
+}
+
+//发起群聊
+- (void)pushGroupChat:(UIButton *)button{
+    NSLog(@"--------发起群聊----------");
+
+}
+
+
+//添加 好友
+- (void)pushAddFriend:(UIButton *)button{
+
+    NSLog(@"-------- 添加 好友-------");
+    //[RCAddFriendViewController alloc]
+    RCAddFriendViewController *RCAddFriendVC = [[RCAddFriendViewController alloc] init];
+    [self.navigationController pushViewController:RCAddFriendVC animated:YES];
+}
+
 
 - (void)fetchNetData{
     
