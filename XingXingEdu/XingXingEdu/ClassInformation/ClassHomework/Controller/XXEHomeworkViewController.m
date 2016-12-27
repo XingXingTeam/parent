@@ -221,7 +221,7 @@
     
     placeholderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth / 2 - myImageWidth / 2, (kHeight - 64 - 49) / 2 - myImageHeight / 2, myImageWidth, myImageHeight)];
     placeholderImageView.image = myImage;
-    [self.view addSubview:placeholderImageView];
+    [_myTableView addSubview:placeholderImageView];
 }
 
 //去除 占位图

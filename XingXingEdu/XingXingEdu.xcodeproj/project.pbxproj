@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040402931E124FD2009C6816 /* XXESinglePicEnlargeBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 040402921E124FD2009C6816 /* XXESinglePicEnlargeBrowser.m */; };
 		04048EE11E10F5FE007AD6D0 /* XXEWhoCanSeeMyNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04048EE01E10F5FE007AD6D0 /* XXEWhoCanSeeMyNameViewController.m */; };
 		0404F7C31DF7AA8F00A37B57 /* XXERedFlowerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404F7C21DF7AA8F00A37B57 /* XXERedFlowerModel.m */; };
 		0404F7CA1DF807BC00A37B57 /* XXECollectionRedFlowerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0404F7C91DF807BC00A37B57 /* XXECollectionRedFlowerModel.m */; };
@@ -1657,6 +1658,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040402911E124FD2009C6816 /* XXESinglePicEnlargeBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXESinglePicEnlargeBrowser.h; sourceTree = "<group>"; };
+		040402921E124FD2009C6816 /* XXESinglePicEnlargeBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXESinglePicEnlargeBrowser.m; sourceTree = "<group>"; };
 		04048EDF1E10F5FE007AD6D0 /* XXEWhoCanSeeMyNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXEWhoCanSeeMyNameViewController.h; sourceTree = "<group>"; };
 		04048EE01E10F5FE007AD6D0 /* XXEWhoCanSeeMyNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XXEWhoCanSeeMyNameViewController.m; sourceTree = "<group>"; };
 		0404F7C11DF7AA8F00A37B57 /* XXERedFlowerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XXERedFlowerModel.h; sourceTree = "<group>"; };
@@ -7492,6 +7495,8 @@
 				689551B11D06E370009241A5 /* WZYTextView.m */,
 				689551B21D06E370009241A5 /* WZYTool.h */,
 				689551B31D06E370009241A5 /* WZYTool.m */,
+				040402911E124FD2009C6816 /* XXESinglePicEnlargeBrowser.h */,
+				040402921E124FD2009C6816 /* XXESinglePicEnlargeBrowser.m */,
 			);
 			name = WZYTool;
 			path = XingXingEdu/WZYTool;
@@ -9742,6 +9747,7 @@
 				043A7F6D1DF95198003C4BF0 /* XXEStoreGoodsOrderDetailViewController.m in Sources */,
 				04D5B1111D6B1DE900ABA89A /* AlbumCollectionViewCell.m in Sources */,
 				0463C3671DEC3D930035BEF6 /* MLClickColorLinkLabel.m in Sources */,
+				040402931E124FD2009C6816 /* XXESinglePicEnlargeBrowser.m in Sources */,
 				68926B1B1CE96F1A00201E80 /* HZQDatePickerView.m in Sources */,
 				04D5B1CC1D6B240900ABA89A /* WZYRequestCommentModel.m in Sources */,
 				04D5B1551D6B1F8900ABA89A /* HeaderFooterCollectionReusableView.m in Sources */,

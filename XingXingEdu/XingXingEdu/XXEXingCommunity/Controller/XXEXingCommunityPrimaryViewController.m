@@ -36,7 +36,7 @@
     
     [super viewWillAppear:animated];
     //    self.navigationController.navigationBar.topItem.title = @"小红花";
-    if (_dataSourceArray.count == 0) {
+    if (_dataSourceArray.count != 0) {
         [_dataSourceArray removeAllObjects];
     }
     page = 1;

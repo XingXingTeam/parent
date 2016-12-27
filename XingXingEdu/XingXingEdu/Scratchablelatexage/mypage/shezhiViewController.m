@@ -18,6 +18,8 @@
 #import "FGGImageCacheCleaner.h"
 #import "MBProgressHUD.h"
 
+
+
 @interface shezhiViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
     UITableView *_tableView;
@@ -26,7 +28,7 @@
     UIButton *aboutusBtn;
     UIButton *hereBtn;
     MBProgressHUD *HUD;
-    
+    AFNetworkReachabilityManager *networkManager;
 }
 
 @property (nonatomic,retain)UILabel *remindLabel;
@@ -49,14 +51,25 @@
 
 @implementation shezhiViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    //判断网络监听
+//    [self judgeNetMonitoring];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title =@"系统设置";
     self.view.backgroundColor = UIColorFromRGB(229 , 232, 233);
     
     dataArr =[[NSMutableArray alloc]init];
-    NSArray *arr =@[@"消息提醒",@"消息提醒音",@"非WIFI网络播放提醒",@"关于我们",@"分享",@"去app评分",@"清楚缓存",@"反馈问题送猩币"];
+//    NSArray *arr =@[@"消息提醒",@"消息提醒音",@"非WIFI网络播放提醒",@"关于我们",@"分享",@"去app评分",@"清楚缓存",@"反馈问题送猩币"];
+    NSArray *arr = [[NSMutableArray alloc]initWithObjects:@"关于我们", @"分享", @"去AppleStore评分", @"清除缓存", @"反馈问题送猩币", nil];
     [dataArr addObjectsFromArray:arr];
+
+    //设置监听网络状态
+    [self settingNetMonitoring];
     
     [self createTableView];
     
@@ -84,79 +97,142 @@
         NSArray *nib =[[NSBundle mainBundle] loadNibNamed:KPATA owner:[SettingCell class] options:nil];
         cell =(SettingCell*)[nib objectAtIndex:0];
     }
-  
-    if (indexPath.row>2) {
-        cell.switchBtn.hidden =YES;
-        cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;
-      cell.titleLbl.text =dataArr[indexPath.row];
-    }
-    else if (indexPath.row<=2){
-          cell.accessoryType =UITableViewCellAccessoryNone;
-         cell.titleLbl.text =dataArr[indexPath.row];
-    }
+     cell.titleLbl.text =dataArr[indexPath.row];
+    cell.switchBtn.tag = indexPath.row + 100;
+    cell.switchBtn.hidden = YES;
+    cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
+//    if (indexPath.row>2) {
+//      cell.switchBtn.hidden =YES;
+//      cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;
+//      
+//    }
+//    else if (indexPath.row<=2){
+//        cell.accessoryType =UITableViewCellAccessoryNone;
+//        cell.switchBtn.tag =100+indexPath.row;
+//        [cell.switchBtn addTarget:self action:@selector(switchBtn:) forControlEvents:UIControlEventValueChanged];
+//        [cell.switchBtn setOn:[dataArr[indexPath.row] integerValue] ==0 ? YES:NO];
+//    }
   
   
     return cell;
 
 }
 
+
+//- (void)switchBtn:(UISwitch *)switchBtn{
+//
+//    if (switchBtn.tag == 100) {
+//        //消息提醒
+//        
+//    }else if(switchBtn.tag == 101){
+//        //消息提醒音
+//    
+//    }else if (switchBtn.tag == 102){
+//        //网络状态监听 提醒
+//        NSString* netStateStr =[NSString stringWithFormat:@"%@", switchBtn.isOn == YES ? @"1":@"2"];
+////        NSLog(@"netStateStr === %@", netStateStr);
+//        
+//        if ([netStateStr integerValue] == 1) {
+//            [networkManager stopMonitoring];
+//        }else if ([netStateStr integerValue] == 2){
+//            [networkManager startMonitoring];
+//        
+//        }
+//        
+//    }
+//}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"%ld",indexPath.row);
     [self  performSelector:@selector(deselect) withObject:nil afterDelay:0.5f];
     switch (indexPath.row) {
-        case 0:
-        {
-        //@"消息提醒"
-            
-        }
-            break;
-        case 1:
-        {
-            //@"消息提醒音"
-            
-        }
-            break;
-        case 2:
-        {
-          //@"非WIFI网络播放提醒"
-            
-        }
-            break;
-        case 3:
-        {
-//            NSLog(@"关于我们");
+//        case 0:
+//        {
+//        //@"消息提醒"
+//            
+//        }
+//            break;
+//        case 1:
+//        {
+//            //@"消息提醒音"
+//            
+//        }
+//            break;
+//        case 2:
+//        {
+//          //@"非WIFI网络播放提醒"
+//            
+//        }
+//            break;
+//        case 3:
+//        {
+////            NSLog(@"关于我们");
+//            AboutMainViewController *aboutMainVC =[[AboutMainViewController alloc]init];
+//            [self.navigationController pushViewController:aboutMainVC animated:YES];
+//    
+//        }
+//            break;
+//        case 4:
+//        {
+//             NSLog(@"分享");
+//         [CoreUmengShare show:self text:@"为了孩子的未来,这里有你想要的一切,快点点击下载吧！https://itunes.apple.com/cn/app/jie-dian-qian-zhuan-ye-ban/id1112373854?mt=8&v0=WWW-GCCN-ITSTOP100-FREEAPPS&l=&ign-mpt=uo%3D4" image:[UIImage imageNamed:@"猩猩教室.png"]];
+//            
+//        }
+//            break;
+//        case 5:
+//        {
+//              NSLog(@"去app评分");
+//        }
+//            break;
+//        case 6:
+//        {
+////              NSLog(@"清除缓存");
+//            [self createAlertView];
+//            
+//        }
+//            break;
+//        case 7:
+//        {
+//              NSLog(@"反馈问题送猩币");
+//            ProbromBackViewController *probromBackVC =[[ProbromBackViewController alloc]init];
+//            [self.navigationController pushViewController:probromBackVC animated:YES];
+//        }
+//            break;
+            case 0:
+            {
+            //            NSLog(@"关于我们");
             AboutMainViewController *aboutMainVC =[[AboutMainViewController alloc]init];
             [self.navigationController pushViewController:aboutMainVC animated:YES];
-    
             
-        }
+            }
             break;
-        case 4:
-        {
-             NSLog(@"分享");
-         [CoreUmengShare show:self text:@"为了孩子的未来,这里有你想要的一切,快点点击下载吧！https://itunes.apple.com/cn/app/jie-dian-qian-zhuan-ye-ban/id1112373854?mt=8&v0=WWW-GCCN-ITSTOP100-FREEAPPS&l=&ign-mpt=uo%3D4" image:[UIImage imageNamed:@"猩猩教室.png"]];
+            case 1:
+            {
+//            NSLog(@"分享");
+            [CoreUmengShare show:self text:@"为了孩子的未来,这里有你想要的一切,快点点击下载吧！https://itunes.apple.com/cn/app/jie-dian-qian-zhuan-ye-ban/id1112373854?mt=8&v0=WWW-GCCN-ITSTOP100-FREEAPPS&l=&ign-mpt=uo%3D4" image:[UIImage imageNamed:@"猩猩教室.png"]];
             
-        }
-            break;
-        case 5:
-        {
-              NSLog(@"去app评分");
-        }
-            break;
-        case 6:
-        {
-//              NSLog(@"清除缓存");
-            [self createAlertView];
+                }
+                break;
+                case 2:
+                {
+//                    NSLog(@"去app评分");
+                }
+                break;
+                case 3:
+                {
+            //              NSLog(@"清除缓存");
+                [self createAlertView];
             
-        }
-            break;
-        case 7:
-        {
-              NSLog(@"反馈问题送猩币");
-            ProbromBackViewController *probromBackVC =[[ProbromBackViewController alloc]init];
-            [self.navigationController pushViewController:probromBackVC animated:YES];
-        }
-            break;
+                    }
+                break;
+                case 4:
+                {
+//                          NSLog(@"反馈问题送猩币");
+                ProbromBackViewController *probromBackVC =[[ProbromBackViewController alloc]init];
+                [self.navigationController pushViewController:probromBackVC animated:YES];
+                }
+                break;
+
         default:
             break;
     }
@@ -254,11 +330,42 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma Mark ======== 设置网络状态 监听 ========
+- (void)settingNetMonitoring{
+    //1/创建网络监听管理者对象
+    networkManager = [AFNetworkReachabilityManager sharedManager];
+    //2/设置监听 种类
+    typedef NS_ENUM(NSInteger, AFNetworkReachabilityStatus) {
+        AFNetworkReachabilityStatusUnknown = -1,//未识别的网络
+        AFNetworkReachabilityStatusNotReachable = 0,//不可达网络
+        AFNetworkReachabilityStatusReachableViaWWAN,//2G,3G,4G.....
+        AFNetworkReachabilityStatusReachableViaWiFi,//WiFi 网络
+    };
+    //3/设置网络监听
+    [networkManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        //
+        switch (status) {
+            case AFNetworkReachabilityStatusUnknown:
+                NSLog(@"未识别网络!");
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+                NSLog(@"不可用网络!");
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                NSLog(@"2G/3G/4G...网络!");
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                NSLog(@"WiFi网络!");
+                break;
+                
+            default:
+                break;
+        }
+    }];
 
-//
-//
-//
-//
+}
+
+
 ////退出登录按钮
 //-(void)onClickexit:(UIButton*)Btn
 //{
@@ -347,6 +454,21 @@
 
 }
 
+
+//- (void)judgeNetMonitoring{
+//最初 是打开状态
+    
+//    UISwitch *netSwitch =(UISwitch*)[self.view viewWithTag:102];
+//    UISwitch *swi =(UISwitch*)[self.view viewWithTag:103];
+//    UISwitch *swic =(UISwitch*)[self.view viewWithTag:104];
+//    UISwitch *swich =(UISwitch*)[self.view viewWithTag:105];
+//    NSString* netStateStr1 =[NSString stringWithFormat:@"%@", netSwitch.isOn == YES ? @"2":@"1"];
+//    NSString* str =[NSString stringWithFormat:@"%@", swi.isOn == YES ? @"2":@"1"];
+//    NSString* stri =[NSString stringWithFormat:@"%@", swic.isOn == YES ? @"2":@"1"];
+//    NSString* strin =[NSString stringWithFormat:@"%@", swich.isOn == YES ? @"2":@"1"];
+//    [DEFAULTS setObject:netStateStr1 forKey:<#(nonnull NSString *)#>]
+
+//}
 
 
 @end
