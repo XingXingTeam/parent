@@ -50,6 +50,7 @@
     //饭菜 组成
     NSMutableArray *contentArray;
     NSMutableArray *contentDataSource;
+    UIImageView *placeholderImageView;
     
     //删除 食谱 的 section
     NSInteger deleteSection;
@@ -66,17 +67,10 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden =NO;
-    self.navigationController.navigationBar.barTintColor =UIColorFromRGB(0, 170, 42);
-    [self.navigationController.navigationBar setTintColor:UIColorFromRGB(255, 255, 255)];
-    
-    if ([XXEUserInfo user].login){
-        parameterXid = [XXEUserInfo user].xid;
-        parameterUser_Id = [XXEUserInfo user].user_id;
-    }else{
-        parameterXid = XID;
-        parameterUser_Id = USER_ID;
-    }
+//    self.navigationController.navigationBarHidden =NO;
+//    self.navigationController.navigationBar.barTintColor =UIColorFromRGB(0, 170, 42);
+//    [self.navigationController.navigationBar setTintColor:UIColorFromRGB(255, 255, 255)];
+//    [_myTableView setContentOffset:CGPointZero animated:NO];
     [self fetchNetData];
     
 }
@@ -84,7 +78,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title =@"食谱";
-    self.view.backgroundColor = UIColorFromRGB(34, 56, 67);
+    self.edgesForExtendedLayout=UIRectEdgeNone;
+    self.navigationController.navigationBarHidden =NO;
+    self.view.backgroundColor = UIColorFromRGB(229, 232, 233);
+    if ([XXEUserInfo user].login){
+        parameterXid = [XXEUserInfo user].xid;
+        parameterUser_Id = [XXEUserInfo user].user_id;
+    }else{
+        parameterXid = XID;
+        parameterUser_Id = USER_ID;
+    }
 
     [self createTableView];
 }
@@ -117,7 +120,7 @@
         iconImageViewDataSource = [[NSMutableArray alloc] init];
         contentDataSource = [[NSMutableArray alloc] init];
         
-        NSLog(@"hhhh %@", responseObj);
+//        NSLog(@"hhhh %@", responseObj);
         
         if([[NSString stringWithFormat:@"%@",responseObj[@"code"]]isEqualToString:@"1"] )
         {
@@ -181,15 +184,12 @@
                 [contentDataSource addObject:contentArray];
                 
             }
-            
-            
-        }else{
-            
         }
         [self customContent];
     } failure:^(NSError *error) {
         
-        NSLog(@"%@", error);
+//        NSLog(@"%@", error);
+        [SVProgressHUD showErrorWithStatus:@"获取数据失败!"];
         
     }];
     
@@ -197,34 +197,61 @@
 
 // 有数据 和 无数据 进行判断
 - (void)customContent{
+    // 如果 有占位图 先 移除
+    [self removePlaceholderImageView];
+    
+//    NSLog(@"totalArray === %@", totalArray);
     
     if (totalArray.count == 0) {
-        
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
         // 1、无数据的时候
-        UIImage *myImage = [UIImage imageNamed:@"all_placeholder"];
-        CGFloat myImageWidth = myImage.size.width;
-        CGFloat myImageHeight = myImage.size.height;
-        
-        UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth / 2 - myImageWidth / 2, (kHeight - 64 - 49) / 2 - myImageHeight / 2, myImageWidth, myImageHeight)];
-        myImageView.image = myImage;
-        [self.view addSubview:myImageView];
+        [self createPlaceholderView];
         
     }else{
-        //2、有数据的时候
-        //        NSLog(@"%ld", historyRecipeArray.count);
-        //滚动到 时间 为今天 的食谱 cell
-        [_myTableView setContentOffset:CGPointMake(0.0, historyRecipeArray.count  *(80 * 3 + 30) ) animated:NO];
+        //nowAndFutureArray
+        if ([nowAndFutureArray count] == 0 ) {
+            //暂无现在或将来的食谱数据
+            [SVProgressHUD showInfoWithStatus:@"暂无“现在”或“将来”的食谱数据"];
+            
+            [_myTableView setContentOffset:CGPointMake(0.0, (historyRecipeArray.count - 1) *(80 * 3 + 30) ) animated:NO];
+        }else{
+            //2、有数据的时候
+            NSLog(@"%ld", historyRecipeArray.count);
+            //滚动到 时间 为今天 的食谱 cell
+            [_myTableView setContentOffset:CGPointMake(0.0, historyRecipeArray.count  *(80 * 3 + 30) ) animated:NO];
+        
+        }
         
     }
     
     [_myTableView reloadData];
+    
 }
 
 
+//没有 数据 时,创建 占位图
+- (void)createPlaceholderView{
+    // 1、无数据的时候
+    UIImage *myImage = [UIImage imageNamed:@"人物"];
+    CGFloat myImageWidth = myImage.size.width;
+    CGFloat myImageHeight = myImage.size.height;
+    
+    placeholderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth / 2 - myImageWidth / 2, (kHeight - 64 - 49) / 2 - myImageHeight / 2, myImageWidth, myImageHeight)];
+    placeholderImageView.image = myImage;
+    [_myTableView addSubview:placeholderImageView];
+}
+
+//去除 占位图
+- (void)removePlaceholderImageView{
+    if (placeholderImageView != nil) {
+        [placeholderImageView removeFromSuperview];
+    }
+}
+
+
+
 - (void)createTableView{
-    _myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kWidth, kHeight) style:UITableViewStyleGrouped];
+    _myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kWidth, kHeight - 64) style:UITableViewStyleGrouped];
     _myTableView.dataSource =self;
     _myTableView.delegate =self;
     [self.view addSubview:_myTableView];
@@ -292,9 +319,8 @@
         
     }else{
         [SVProgressHUD showInfoWithStatus:@"请用账号登录后查看"];
-         }
-    
-    
+    }
+
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section==0) {
@@ -302,16 +328,11 @@
     }
     return 15;
 }
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
 
 

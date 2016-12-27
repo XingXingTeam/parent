@@ -22,6 +22,8 @@
 @interface WZYRequestCommentViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
 
+    UIImageView *placeholderImageView;
+    
     UIButton *arrowButton;
     NSString *parameterXid;
     NSString *parameterUser_Id;
@@ -137,7 +139,7 @@
             }
             
            
-            NSLog(@"%@", _teacherModelArray);
+//            NSLog(@"%@", _teacherModelArray);
             
             [_dataModelArray addObject:_teacherModelArray];
             [_dataModelArray addObject:_managerModelArray];
@@ -145,16 +147,12 @@
             [_showArray addObject:@YES];
             [_showArray addObject:@YES];
             
-        }else{
-            
-            [SVProgressHUD showErrorWithStatus:@"获取信息失败!"];
-        
         }
         
 //        NSLog(@"%@", _dataModelArray);
         
-        [_myTableView reloadData];
-        
+//        [_myTableView reloadData];
+        [self customContent];
     } failure:^(NSError *error) {
         //
         NSLog(@"%@", error);
@@ -162,6 +160,45 @@
     }];
 
 }
+
+// 有数据 和 无数据 进行判断
+- (void)customContent{
+    // 如果 有占位图 先 移除
+    [self removePlaceholderImageView];
+    
+    if (_dataModelArray.count == 0) {
+        _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        // 1、无数据的时候
+        [self createPlaceholderView];
+        
+    }else{
+        //2、有数据的时候
+    }
+    
+    [_myTableView reloadData];
+    
+}
+
+
+//没有 数据 时,创建 占位图
+- (void)createPlaceholderView{
+    // 1、无数据的时候
+    UIImage *myImage = [UIImage imageNamed:@"人物"];
+    CGFloat myImageWidth = myImage.size.width;
+    CGFloat myImageHeight = myImage.size.height;
+    
+    placeholderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kWidth / 2 - myImageWidth / 2, (kHeight - 64 - 49) / 2 - myImageHeight / 2, myImageWidth, myImageHeight)];
+    placeholderImageView.image = myImage;
+    [_myTableView addSubview:placeholderImageView];
+}
+
+//去除 占位图
+- (void)removePlaceholderImageView{
+    if (placeholderImageView != nil) {
+        [placeholderImageView removeFromSuperview];
+    }
+}
+
 
 
 - (void)createTableView{
@@ -186,12 +223,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
-    if ([_showArray[section] boolValue] == 1) {
-        return [_dataModelArray[section] count];
+    if ([_showArray count] != 0) {
+        if ([_showArray[section] boolValue] == 1) {
+            return [_dataModelArray[section] count];
+        }else{
+            return 0;
+        }
     }else{
         return 0;
     }
-
 }
 
 
@@ -237,36 +277,39 @@
     [view addGestureRecognizer:viewPress];
     
     arrowButton = [[UIButton alloc]initWithFrame:CGRectMake(10, (44-24)/2, 17.5, 20)];
-    NSNumber *flagN = self.showArray[section];
     
-    if ([flagN boolValue]) {
-        [arrowButton setBackgroundImage:[UIImage imageNamed:@"ico_list"] forState:UIControlStateNormal];
-        CGAffineTransform currentTransform =arrowButton.transform;
-        CGAffineTransform newTransform =CGAffineTransformRotate(currentTransform, M_PI/2);
-        arrowButton.transform =newTransform;
+    if ([_showArray count] != 0) {
+        NSNumber *flagN = self.showArray[section];
         
-    }else
-    {
-        [arrowButton setBackgroundImage:[UIImage imageNamed:@"ico_list"] forState:UIControlStateNormal ];
+        if ([flagN boolValue]) {
+            [arrowButton setBackgroundImage:[UIImage imageNamed:@"ico_list"] forState:UIControlStateNormal];
+            CGAffineTransform currentTransform =arrowButton.transform;
+            CGAffineTransform newTransform =CGAffineTransformRotate(currentTransform, M_PI/2);
+            arrowButton.transform =newTransform;
+            
+        }else{
+            [arrowButton setBackgroundImage:[UIImage imageNamed:@"ico_list"] forState:UIControlStateNormal ];
+            
+        }
+        arrowButton.tag = 300+section;
         
-    }
-    arrowButton.tag = 300+section;
-
-    [view addSubview:arrowButton];
-    
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(40, 5, 200, 30)];
-
+        [view addSubview:arrowButton];
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(40, 5, 200, 30)];
+        
         if (section == 0) {
             label.text = @"老师";
         }else if (section == 1){
             label.text = @"管理人员";
         }
-    
-    label.textColor = [UIColor lightGrayColor];
-    label.font = [UIFont boldSystemFontOfSize:20];
-    [view addSubview:label];
-    
-    return view;
+        
+        label.textColor = [UIColor lightGrayColor];
+        label.font = [UIFont boldSystemFontOfSize:20];
+        [view addSubview:label];
+        
+        return view;
+    }
+
+    return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     

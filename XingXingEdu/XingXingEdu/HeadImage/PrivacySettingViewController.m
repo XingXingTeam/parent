@@ -96,6 +96,7 @@
     [nameArr addObjectsFromArray:array];
 
 }
+
 - (void)createTableView{
 
     _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kWidth, kHeight) style:UITableViewStyleGrouped];
@@ -201,10 +202,10 @@
 - (void)viewWillDisappear:(BOOL)animated{
     UILabel *lab =(UILabel*)[self.view viewWithTag:100];
     UILabel *label =(UILabel*)[self.view viewWithTag:101];
-   // NSLog(@">>>>>>>>>>>>>>>>%@<<<<<<<<<<<<<<<<<<<<<<%@",lab.text,label.text);
+   // NSLog(@">>>>>>>>>>>>>>>>%@<<<<<<<<<<<%@",lab.text,label.text);
    NSString *reallyName =[KTDict objectForKey:[NSString stringWithFormat:@"%@",lab.text]];
    NSString *phoneName =[KTDict objectForKey:[NSString stringWithFormat:@"%@",label.text]];
-   // NSLog(@">>>>>>>>>>>>>>>>%@<<<<<<<<<<<<<<<<<<<<<<%@",reallyName,phoneName);
+   // NSLog(@">>>>>>>>>>>>>>>>%@<<<<<<<<<%@",reallyName,phoneName);
       UISwitch *sw =(UISwitch*)[self.view viewWithTag:102];
       UISwitch *swi =(UISwitch*)[self.view viewWithTag:103];
       UISwitch *swic =(UISwitch*)[self.view viewWithTag:104];

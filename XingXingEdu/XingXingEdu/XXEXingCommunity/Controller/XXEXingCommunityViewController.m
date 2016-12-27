@@ -152,7 +152,7 @@
 -(void)showInfo:(NSTimer *)t{
     
     count++;
-    //    NSLog(@"程序运行了%i秒",count);
+//        NSLog(@"程序运行了%i秒",count);
     if (isExit) {
         [t invalidate];//停止定时器
         timer = nil;
@@ -164,7 +164,6 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:YES];
         });
-
         
     }
     

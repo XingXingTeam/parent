@@ -89,22 +89,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XingXingEdu/ClassInformation/Cookbook/SchoolRecipesViewController.m"
-            timestampString = "503831013.684812"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "-fetchNetData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "XingXingEdu/FriendCirclePage/Controller/XXEFriendMyCircleViewController.m"
             timestampString = "503911779.170953"
             startingColumnNumber = "9223372036854775807"
@@ -131,13 +115,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "XingXingEdu/XXEXingCommunity/Controller/XXEXingCommunityViewController.m"
-            timestampString = "504439855.307826"
+            filePath = "XingXingEdu/Scratchablelatexage/mypage/shezhiViewController.m"
+            timestampString = "504511536.547867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "370"
-            endingLineNumber = "370"
-            landmarkName = "-todaytopicVote:vote_type:"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
+            landmarkName = "-settingNetMonitoring"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

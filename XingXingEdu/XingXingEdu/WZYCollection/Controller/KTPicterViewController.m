@@ -8,6 +8,8 @@
 #define KPATA @"KTPicterCell"
 #import "KTPicterViewController.h"
 #import "KTPicterCell.h"
+#import "XXESinglePicEnlargeBrowser.h"
+
 @interface KTPicterViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UITableView *_tableView;
@@ -210,33 +212,38 @@
     
    
   [cell.bgImagV sd_setImageWithURL:[NSURL URLWithString:imageArray[indexPath.row]] placeholderImage:[UIImage imageNamed:@"Placeholder-figure"]];
-
+    cell.bgImagV .contentMode = UIViewContentModeScaleAspectFill;
+    cell.bgImagV .clipsToBounds = YES;
     cell.timeLbl.text = timeArray[indexPath.row];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickUserImage:)];
+    //单击 放大 图片
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickPicture:)];
     [cell.contentView addGestureRecognizer:tap];
     
-    
-    //添加 长按 取消 收藏 手势
+    //长按 取消收藏
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressClick:)];
     
     [cell.contentView addGestureRecognizer:longPress];
     
     return cell;
 }
+
+#pragma mark ======= 单击 图片 放大 ========
+- (void)onClickPicture:(UITapGestureRecognizer *)tap{
+    KTPicterCell *cell = (KTPicterCell *)[tap.view superview];
+    
+    [XXESinglePicEnlargeBrowser enlargeImage:cell.bgImagV];
+    
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSLog(@"选中 某一行");
     
 }
 
-- (void)onClickUserImage:(UITapGestureRecognizer *)tap{
 
-    NSLog(@"单击 图片");
-
-}
-
-
+#pragma mark ******** 长按 图片 取消收藏 **********
 - (void)longPressClick:(UILongPressGestureRecognizer *)longPress{
 
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"取消收藏" message:nil preferredStyle:UIAlertControllerStyleAlert];

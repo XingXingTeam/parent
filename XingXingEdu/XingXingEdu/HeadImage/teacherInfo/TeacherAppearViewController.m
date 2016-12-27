@@ -98,7 +98,7 @@
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(Kmarg, CGRectGetMaxY(teachAlbumLblL.frame) + Kmarg,kWidth -  Kmarg *2 , 120)];
     scrollView.backgroundColor = [UIColor whiteColor];
-    CGFloat imgW = kWidth/3;
+    CGFloat imgW = (kWidth - Kmarg * 2)/3;
     CGFloat imgH = scrollView.frame.size.height;
     CGFloat imgY = 0;
     
